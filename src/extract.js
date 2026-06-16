@@ -54,11 +54,55 @@ const RELEVANT_DEVICE_TERMS = [
   "channel length"
 ];
 
+const EXCLUDED_TOPICS = [
+  "phototransistor",
+  "photo transistor",
+  "memristor",
+  "memristive",
+  "memory",
+  "non-volatile",
+  "sensor",
+  "sensing",
+  "nanopore",
+  "excitonic",
+  "exciton",
+  "photodetector",
+  "optoelectronic",
+  "kelvin probe",
+  "kpfm"
+];
+
+const BENCHMARK_TERMS = [
+  "field-effect transistor",
+  "field effect transistor",
+  "fet",
+  "pfet",
+  "nfet",
+  "cmos",
+  "logic",
+  "on-state current",
+  "drive current",
+  "contact resistance",
+  "subthreshold swing",
+  "subthreshold slope",
+  "on/off",
+  "ion/ioff"
+];
+
 export function looksRelevant(text = "") {
   const lower = normalize(text).toLowerCase();
   const materialHit = RELEVANT_MATERIALS.some((term) => lower.includes(term));
   const deviceHit = RELEVANT_DEVICE_TERMS.some((term) => lower.includes(term));
   return materialHit && deviceHit;
+}
+
+export function isLogicFetBenchmarkCandidate(text = "") {
+  const lower = normalize(text).toLowerCase();
+  const benchmarkScore = BENCHMARK_TERMS.reduce((score, term) => score + (lower.includes(term) ? 1 : 0), 0);
+  const excludedScore = EXCLUDED_TOPICS.reduce((score, term) => score + (lower.includes(term) ? 1 : 0), 0);
+  if (excludedScore && benchmarkScore < 3) return false;
+  if (/\b(review|perspective|roadmap|outlook)\b/.test(lower) && benchmarkScore < 4) return false;
+  return benchmarkScore >= 2;
 }
 
 export function relevanceScore(text = "") {
@@ -69,6 +113,12 @@ export function relevanceScore(text = "") {
   }
   for (const term of RELEVANT_DEVICE_TERMS) {
     if (lower.includes(term)) score += 1;
+  }
+  for (const term of BENCHMARK_TERMS) {
+    if (lower.includes(term)) score += 1;
+  }
+  for (const term of EXCLUDED_TOPICS) {
+    if (lower.includes(term)) score -= 2;
   }
   if (/nature|ieee|electron devices|iedm|vlsi|nano letters/.test(lower)) score += 2;
   return score;
@@ -90,8 +140,20 @@ export function extractParams(rawText = "") {
     {
       name: "Ion",
       regex:
+        /(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,150}?((?:\d+(?:\.\d+)?)\s*(?:(?:×|x|\\times)\s*)?10\s*\^?\s*-?\d+|\d+(?:\.\d+)?)\s*(A\s*\/\s*m|A\s*per\s*m|A\s*m[-−]1|A\/m)/gi,
+      convert: (value) => value
+    },
+    {
+      name: "Ion",
+      regex:
         /(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,120}?(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
       convert: (value, unit) => convertCurrentToUa(value, unit)
+    },
+    {
+      name: "Ion",
+      regex:
+        /((?:\d+(?:\.\d+)?)\s*(?:(?:×|x|\\times)\s*)?10\s*\^?\s*-?\d+|\d+(?:\.\d+)?)\s*(A\s*\/\s*m|A\s*per\s*m|A\s*m[-−]1|A\/m)[^.;,\n]{0,140}?(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
+      convert: (value) => value
     }
   ], { mode: "max", min: 0, max: 50000, document });
   if (ion.note) notes.push(ion.note);
@@ -103,6 +165,24 @@ export function extractParams(rawText = "") {
       regex:
         /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
+    },
+    {
+      name: "Rc",
+      regex:
+        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,120}?(?:from|between)\s*~?(\d+(?:\.\d+)?)\s*(?:to|-|and)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
+      value: (match) => Math.min(Number(match[1]), Number(match[2])),
+      unit: (match) => match[3],
+      convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
+    },
+    {
+      name: "Rc",
+      regex:
+        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,120}?(?:from|between)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)\s*(?:to|-|and)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
+      value: (match) => Math.min(
+        convertResistanceToOhmUm(Number(match[1]), match[2]),
+        convertResistanceToOhmUm(Number(match[3]), match[4])
+      ),
+      convert: (value) => value
     },
     {
       name: "Rc",
@@ -137,7 +217,7 @@ export function extractParams(rawText = "") {
   const vds = pickValue(text, [
     {
       name: "VDS",
-      regex: /(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd|drain[-\s]?source voltage|drain voltage)[^.;,\n]{0,60}?(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd|drain[-\s]?(?:to[-\s]?)?source voltage|source[-\s]drain bias|drain voltage)[^.;,\n]{0,80}?(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     },
     {
@@ -196,8 +276,8 @@ function pickValue(text, patterns, options = {}) {
   for (const pattern of patterns) {
     let match;
     while ((match = pattern.regex.exec(text)) !== null) {
-      const value = Number(match[1]);
-      const unit = match[2] || "";
+      const value = pattern.value ? pattern.value(match) : parseNumericExpression(match[1]);
+      const unit = pattern.unit ? pattern.unit(match) : match[2] || "";
       if (!Number.isFinite(value)) continue;
       const converted = pattern.convert(value, unit);
       if (Number.isFinite(converted) && inRange(converted, options)) {
@@ -233,10 +313,14 @@ function pickSwitchRatio(text, document) {
     .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/g, (char) => SUPERSCRIPT_MAP[char] || char);
   const patterns = [
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
+    /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s+(\d{2})(?!\d)/gi,
     /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
+    /10\s+(\d{2})(?!\d)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*(?:orders of magnitude|decades)/gi,
     /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
-    /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi
+    /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s+(\d{2})(?!\d)/gi,
+    /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi,
+    /10\s+(\d{2})(?!\d)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi
   ];
 
   for (const regex of patterns) {
@@ -356,10 +440,26 @@ function confidence(values) {
 }
 
 function convertCurrentToUa(value, unit) {
-  const normalized = unit.toLowerCase();
+  const normalized = unit.toLowerCase().replace(/\s+/g, "");
+  if (normalized === "a/m" || normalized === "aperm" || normalized === "am-1") return value;
   if (normalized === "ma") return value * 1000;
   if (normalized === "a") return value * 1000000;
   return value;
+}
+
+function convertResistanceToOhmUm(value, unit = "") {
+  return unit.toLowerCase().startsWith("k") ? value * 1000 : value;
+}
+
+function parseNumericExpression(value = "") {
+  const compact = String(value)
+    .replace(/\\times/g, "×")
+    .replace(/[×x]\s*/gi, "×")
+    .replace(/\s+/g, " ")
+    .trim();
+  const scientific = compact.match(/^(\d+(?:\.\d+)?)\s*×?\s*10\s*\^?\s*(-?\d+)$/i);
+  if (scientific) return Number(scientific[1]) * 10 ** Number(scientific[2]);
+  return Number(compact);
 }
 
 function inferRcDefinition(text, rcValue) {
@@ -397,6 +497,9 @@ function normalize(text, options = {}) {
     .replace(/\bu\s*A\b/gi, "uA")
     .replace(/\bm\s*A\b/g, "mA")
     .replace(/\bA\s*\/\s*(μm|um)\b/gi, "A/μm")
+    .replace(/\bA\s*\/\s*m\b/gi, "A/m")
+    .replace(/\bA\s*per\s*m\b/gi, "A/m")
+    .replace(/\bA\s*m\s*[-−]1\b/gi, "A/m")
     .replace(/\b(μA|uA|mA)\s*\/\s*(μm|um)\b/gi, "$1/μm")
     .replace(/\bΩ\s*(?:·|-)?\s*(μm|um)\b/gi, "Ω μm")
     .replace(/\bohm\s*(?:·|-)?\s*(μm|um)\b/gi, "ohm μm")

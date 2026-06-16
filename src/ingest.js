@@ -1,5 +1,12 @@
 import { calculatePaper } from "./calculator.js";
-import { extractParams, inferDeviceType, inferMaterial, looksRelevant, relevanceScore } from "./extract.js";
+import {
+  extractParams,
+  inferDeviceType,
+  inferMaterial,
+  isLogicFetBenchmarkCandidate,
+  looksRelevant,
+  relevanceScore
+} from "./extract.js";
 import { readOpenFullText } from "./fulltext.js";
 import { getState, updateState, upsertPaper } from "./db.js";
 
@@ -25,6 +32,7 @@ export async function runIngestion(options = {}) {
   let fullTextAttempted = 0;
   let fullTextRead = 0;
   let fullTextHelped = 0;
+  let noParameterCount = 0;
 
   for (const query of queries) {
     const sourceRuns = [
@@ -43,6 +51,7 @@ export async function runIngestion(options = {}) {
         fullTextAttempted: 0,
         fullTextRead: 0,
         fullTextHelped: 0,
+        noParameters: 0,
         saved: 0,
         calculated: 0,
         needsReview: 0
@@ -63,7 +72,7 @@ export async function runIngestion(options = {}) {
         }
         seen.add(key);
         const combinedText = [paper.title, paper.abstract, paper.journal, paper.publisher].filter(Boolean).join(" ");
-        if (!looksRelevant(combinedText)) continue;
+        if (!looksRelevant(combinedText) || !isLogicFetBenchmarkCandidate(combinedText)) continue;
         sourceSummary.relevant += 1;
         relevantCount += 1;
 
@@ -89,6 +98,11 @@ export async function runIngestion(options = {}) {
         if (helpedByFullText) {
           fullTextHelped += 1;
           sourceSummary.fullTextHelped += 1;
+        }
+        if (!options.saveEmptyCandidates && extractedFieldCount(extraction.params) === 0) {
+          noParameterCount += 1;
+          sourceSummary.noParameters += 1;
+          continue;
         }
         const draft = {
           ...paper,
@@ -141,6 +155,7 @@ export async function runIngestion(options = {}) {
     fullTextAttempted,
     fullTextRead,
     fullTextHelped,
+    noParameters: noParameterCount,
     addedOrUpdated: results.length,
     calculated: results.filter((item) => item.metrics.canCalculateGamma).length,
     needsReview: results.filter((item) => !item.metrics.canCalculateGamma).length,
@@ -384,6 +399,10 @@ function extractionAddsFields(before = {}, after = {}) {
   const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
   return fields.some((field) => isBlank(before[field]) && !isBlank(after[field])) ||
     (before.rcDefinition === "unknown" && after.rcDefinition && after.rcDefinition !== "unknown");
+}
+
+function extractedFieldCount(params = {}) {
+  return ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"].filter((field) => !isBlank(params[field])).length;
 }
 
 function formatFullTextSources(result = {}) {

@@ -54,6 +54,8 @@ http://localhost:5177
 
 PDF 解析目前做成可选能力：如果运行环境安装了 `pdf-parse`，系统会尝试解析开放 PDF；如果未安装，会在溯源中记录“PDF detected; optional pdf-parse parser is not installed”。这不是数据抓取失败，而是为了避免 `pdf-parse@1.1.1` 约 33 MB、770 个文件的包在 Render 构建中长时间解包，影响网站部署稳定性。
 
+自动检索默认只保留至少抽取到一个公式字段的候选论文。明显偏向存储器、传感、光电、KPFM 或综述/展望而缺少逻辑 FET benchmark 信息的结果会被过滤；看似相关但完全没有 `Ion`、`Rc`、`VDS`、`SS` 或开关比的条目会计入“无公式参数跳过”，不再塞进候选库。
+
 仓库的 `.github/workflows/scheduled-ingest.yml` 会定时调用：
 
 ```text

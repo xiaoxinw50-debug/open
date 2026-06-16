@@ -472,6 +472,7 @@ function formatIngestSummary(summary) {
     `相关命中：${summary.relevant ?? "-"} 条`,
     `开放全文读取：${summary.fullTextRead ?? "-"} / ${summary.fullTextAttempted ?? "-"} 篇`,
     `全文补充参数：${summary.fullTextHelped ?? "-"} 篇`,
+    `无公式参数跳过：${summary.noParameters ?? "-"} 条`,
     `入库/更新：${summary.addedOrUpdated ?? "-"} 条`,
     `可直接计算：${summary.calculated ?? "-"} 条`,
     `待补参数：${summary.needsReview ?? "-"} 条`
