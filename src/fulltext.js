@@ -4,6 +4,7 @@ const DEFAULT_MAX_CHARS_PER_SOURCE = 350000;
 const DEFAULT_MAX_SOURCES = 4;
 const MIN_TEXT_CHARS = 1200;
 const USER_AGENT = "SwitchMarginSite/0.1 (open full-text parameter extraction; mailto:example@example.com)";
+let pdfParserPromise = null;
 
 export async function readOpenFullText(paper = {}, options = {}) {
   const candidates = await fullTextCandidates(paper, options);
@@ -24,7 +25,7 @@ export async function readOpenFullText(paper = {}, options = {}) {
           source: result.source,
           url: candidate.url,
           chars: text.length,
-          text: `\n\n===== ${result.source} =====\n${text}`
+          text: `\n\n===== ${result.source} =====\n\n${text}`
         });
         usedChars += text.length;
         if (sources.length >= maxSources || usedChars >= maxChars) break;
@@ -128,7 +129,7 @@ function uniqueCandidates(candidates) {
 
 async function fetchTextCandidate(candidate, options) {
   if (/\.pdf($|\?)/i.test(candidate.url)) {
-    throw new Error("PDF detected; PDF full-text parsing is not enabled in this deployment");
+    return fetchPdfCandidate(candidate, options);
   }
 
   const response = await fetch(candidate.url, {
@@ -143,7 +144,7 @@ async function fetchTextCandidate(candidate, options) {
 
   const contentType = response.headers.get("content-type") || "";
   if (/pdf/i.test(contentType)) {
-    throw new Error("PDF response; PDF full-text parsing is not enabled in this deployment");
+    return fetchPdfCandidate(candidate, options, response);
   }
 
   const maxChars = Number(options.maxCharsPerSource || DEFAULT_MAX_CHARS_PER_SOURCE);
@@ -152,12 +153,63 @@ async function fetchTextCandidate(candidate, options) {
   return { source: candidate.source, text };
 }
 
+async function fetchPdfCandidate(candidate, options, existingResponse = null) {
+  const pdfParse = await getPdfParser();
+  if (!pdfParse) {
+    throw new Error("PDF detected; optional pdf-parse parser is not installed");
+  }
+
+  const response =
+    existingResponse ||
+    (await fetch(candidate.url, {
+      redirect: "follow",
+      headers: {
+        "User-Agent": USER_AGENT,
+        Accept: "application/pdf,*/*;q=0.5"
+      },
+      signal: AbortSignal.timeout(Number(options.timeoutMs || DEFAULT_TIMEOUT_MS))
+    }));
+  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+
+  const maxChars = Number(options.maxCharsPerSource || DEFAULT_MAX_CHARS_PER_SOURCE);
+  const maxBytes = Number(options.maxPdfBytes || 18 * 1024 * 1024);
+  const contentLength = Number(response.headers.get("content-length") || 0);
+  if (contentLength && contentLength > maxBytes) {
+    throw new Error(`PDF too large (${contentLength} bytes)`);
+  }
+
+  const buffer = Buffer.from(await response.arrayBuffer());
+  if (buffer.length > maxBytes) throw new Error(`PDF too large (${buffer.length} bytes)`);
+  const parsed = await pdfParse(buffer);
+  const text = normalizePdfText(parsed.text || "").slice(0, maxChars);
+  return { source: `${candidate.source} PDF`, text };
+}
+
+async function getPdfParser() {
+  if (!pdfParserPromise) {
+    pdfParserPromise = import("pdf-parse")
+      .then((module) => module.default || module)
+      .catch(() => null);
+  }
+  return pdfParserPromise;
+}
+
+function normalizePdfText(text = "") {
+  return text
+    .replace(/\r/g, "\n")
+    .replace(/[ \t\f\v]+/g, " ")
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 export function htmlToText(html = "") {
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
-    .replace(/<\/(p|div|section|article|h[1-6]|li|tr)>/gi, "\n")
+    .replace(/<\/(p|div|section|article|h[1-6]|li|figcaption|caption)>/gi, "\n\n")
+    .replace(/<\/(tr|th|td)>/gi, "\n")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/g, " ")
     .replace(/&mu;|&#956;|&#x3bc;/gi, "μ")
@@ -167,7 +219,9 @@ export function htmlToText(html = "") {
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, "\"")
     .replace(/&#39;/g, "'")
-    .replace(/\s+/g, " ")
+    .replace(/[ \t\f\v]+/g, " ")
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
     .trim();
 }
 

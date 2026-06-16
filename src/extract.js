@@ -75,7 +75,8 @@ export function relevanceScore(text = "") {
 }
 
 export function extractParams(rawText = "") {
-  const text = normalize(rawText);
+  const document = prepareDocument(rawText);
+  const text = document.text;
   const notes = [];
   const evidence = {};
 
@@ -92,7 +93,7 @@ export function extractParams(rawText = "") {
         /(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,120}?(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
       convert: (value, unit) => convertCurrentToUa(value, unit)
     }
-  ], { mode: "max", min: 0, max: 50000 });
+  ], { mode: "max", min: 0, max: 50000, document });
   if (ion.note) notes.push(ion.note);
   if (ion.evidence) evidence.ionUaPerUm = ion.evidence;
 
@@ -109,7 +110,7 @@ export function extractParams(rawText = "") {
         /(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)[^.;,\n]{0,100}?(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)/gi,
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
     }
-  ], { mode: "min", min: 0, max: 200000 });
+  ], { mode: "min", min: 0, max: 200000, document });
   if (rc.note) notes.push(rc.note);
   if (rc.evidence) evidence.rcOhmUm = rc.evidence;
   const rcDefinition = inferRcDefinition(text, rc.value);
@@ -129,7 +130,7 @@ export function extractParams(rawText = "") {
         /(\d+(?:\.\d+)?)\s*mV\s*(?:\/|·|\sper\s)?\s*dec(?:ade)?(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,90}?(?:subthreshold swing|subthreshold slope|SS)/gi,
       convert: (value) => value
     }
-  ], { mode: "min", min: 20, max: 2000 });
+  ], { mode: "min", min: 20, max: 2000, document });
   if (ss.note) notes.push(ss.note);
   if (ss.evidence) evidence.ssMvDec = ss.evidence;
 
@@ -144,11 +145,11 @@ export function extractParams(rawText = "") {
       regex: /(?:at|under|with)\s+(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     }
-  ], { mode: "first", min: 0, max: 20 });
+  ], { mode: "first", min: 0, max: 20, document });
   if (vds.note) notes.push(vds.note);
   if (vds.evidence) evidence.vdsV = vds.evidence;
 
-  const logRatio = pickSwitchRatio(text);
+  const logRatio = pickSwitchRatio(text, document);
   if (logRatio.note) notes.push(logRatio.note);
   if (logRatio.evidence) evidence.logSwitchRatio = logRatio.evidence;
 
@@ -202,9 +203,10 @@ function pickValue(text, patterns, options = {}) {
       if (Number.isFinite(converted) && inRange(converted, options)) {
         candidates.push({
           value: converted,
-          raw: match[0].replace(/\s+/g, " ").slice(0, 160),
+          raw: compactSnippet(match[0]),
           name: pattern.name,
-          index: match.index
+          index: match.index,
+          end: match.index + match[0].length
         });
       }
     }
@@ -220,15 +222,11 @@ function pickValue(text, patterns, options = {}) {
   return {
     value: picked.value,
     note: `自动识别 ${picked.name}: ${picked.raw}`,
-    evidence: {
-      value: picked.value,
-      snippet: picked.raw,
-      candidates: sorted.slice(0, 4).map((item) => item.raw)
-    }
+    evidence: buildEvidence(picked, sorted, options.document)
   };
 }
 
-function pickSwitchRatio(text) {
+function pickSwitchRatio(text, document) {
   const candidates = [];
   const plain = text
     .replace(/10\s*([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g, (_match, power) => `10^${power.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, (char) => SUPERSCRIPT_MAP[char] || char)}`)
@@ -248,7 +246,9 @@ function pickSwitchRatio(text) {
       if (Number.isFinite(value) && value > 0 && value < 20) {
         candidates.push({
           value,
-          raw: match[0].replace(/\s+/g, " ").slice(0, 160)
+          raw: compactSnippet(match[0]),
+          index: match.index,
+          end: match.index + match[0].length
         });
       }
     }
@@ -259,12 +259,89 @@ function pickSwitchRatio(text) {
   return {
     value: picked.value,
     note: `自动识别开关比对数: ${picked.raw}`,
-    evidence: {
-      value: picked.value,
-      snippet: picked.raw,
-      candidates: candidates.slice(0, 4).map((item) => item.raw)
-    }
+    evidence: buildEvidence(picked, candidates, document)
   };
+}
+
+function prepareDocument(rawText = "") {
+  const normalized = normalize(rawText, { preserveBreaks: true });
+  const rawParagraphs = normalized
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+  const paragraphs = [];
+  let currentSource = "metadata";
+  let paragraphNumber = 0;
+
+  for (const paragraph of rawParagraphs) {
+    const sourceMatch = paragraph.match(/^=+\s*(.*?)\s*=+$/);
+    if (sourceMatch) {
+      currentSource = sourceMatch[1] || currentSource;
+      continue;
+    }
+    paragraphNumber += 1;
+    paragraphs.push({
+      number: paragraphNumber,
+      source: currentSource,
+      text: paragraph
+    });
+  }
+
+  let cursor = 0;
+  const ranges = paragraphs.map((paragraph) => {
+    const start = cursor;
+    const end = start + paragraph.text.length;
+    cursor = end + 2;
+    return { ...paragraph, start, end };
+  });
+
+  return {
+    text: ranges.map((paragraph) => paragraph.text).join("\n\n"),
+    paragraphs: ranges
+  };
+}
+
+function buildEvidence(picked, candidates, document) {
+  const location = locatePosition(picked.index, picked.end, document);
+  return {
+    value: picked.value,
+    snippet: picked.raw,
+    highlighted: picked.raw,
+    paragraph: location?.paragraph ?? null,
+    source: location?.source || "",
+    charStart: picked.index,
+    charEnd: picked.end,
+    paragraphCharStart: location?.paragraphCharStart ?? null,
+    paragraphCharEnd: location?.paragraphCharEnd ?? null,
+    paragraphText: location?.paragraphText || "",
+    candidates: candidates.slice(0, 4).map((item) => {
+      const candidateLocation = locatePosition(item.index, item.end, document);
+      return {
+        snippet: item.raw,
+        paragraph: candidateLocation?.paragraph ?? null,
+        source: candidateLocation?.source || "",
+        charStart: item.index,
+        charEnd: item.end
+      };
+    })
+  };
+}
+
+function locatePosition(start, end, document = {}) {
+  if (!Number.isFinite(start)) return null;
+  const paragraph = (document.paragraphs || []).find((item) => start >= item.start && start <= item.end);
+  if (!paragraph) return null;
+  return {
+    paragraph: paragraph.number,
+    source: paragraph.source,
+    paragraphText: paragraph.text,
+    paragraphCharStart: Math.max(0, start - paragraph.start),
+    paragraphCharEnd: Math.max(0, Math.min(end, paragraph.end) - paragraph.start)
+  };
+}
+
+function compactSnippet(value = "") {
+  return value.replace(/\s+/g, " ").trim().slice(0, 180);
 }
 
 function inRange(value, options = {}) {
@@ -304,8 +381,8 @@ function inferRcDefinition(text, rcValue) {
   return "unknown";
 }
 
-function normalize(text) {
-  return text
+function normalize(text, options = {}) {
+  const normalized = text
     .replace(/<[^>]+>/g, " ")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
@@ -323,6 +400,15 @@ function normalize(text) {
     .replace(/\b(μA|uA|mA)\s*\/\s*(μm|um)\b/gi, "$1/μm")
     .replace(/\bΩ\s*(?:·|-)?\s*(μm|um)\b/gi, "Ω μm")
     .replace(/\bohm\s*(?:·|-)?\s*(μm|um)\b/gi, "ohm μm")
-    .replace(/\s+/g, " ")
     .trim();
+
+  if (options.preserveBreaks) {
+    return normalized
+      .replace(/[ \t\f\v]+/g, " ")
+      .replace(/[ \t]*\n[ \t]*/g, "\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  }
+
+  return normalized.replace(/\s+/g, " ").trim();
 }

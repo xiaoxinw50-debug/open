@@ -380,12 +380,47 @@ function evidenceLine(paper) {
     .map(([key, label]) => {
       const item = evidence[key];
       if (!item?.snippet) return "";
-      return `${label}: ${item.snippet}`;
+      return evidenceMarkup(label, item);
     })
     .filter(Boolean)
     .slice(0, 3);
   if (!entries.length) return "";
-  return `<div class="evidence">字段证据：${escapeHtml(entries.join(" | "))}</div>`;
+  return `<div class="evidence"><strong>字段证据</strong>${entries.join("")}</div>`;
+}
+
+function evidenceMarkup(label, item) {
+  const position = [
+    item.source ? `来源 ${item.source}` : "",
+    item.paragraph ? `第 ${item.paragraph} 段` : "",
+    Number.isFinite(item.charStart) && Number.isFinite(item.charEnd) ? `全文字符 ${item.charStart}-${item.charEnd}` : "",
+    Number.isFinite(item.paragraphCharStart) && Number.isFinite(item.paragraphCharEnd)
+      ? `段内字符 ${item.paragraphCharStart}-${item.paragraphCharEnd}`
+      : ""
+  ]
+    .filter(Boolean)
+    .join(" · ");
+  const context = highlightedContext(item);
+  return `
+    <div class="evidence-item">
+      <span class="evidence-label">${escapeHtml(label)}</span>
+      <span class="evidence-pos">${escapeHtml(position || "位置待定")}</span>
+      <div class="evidence-context">${context || `<mark>${escapeHtml(item.snippet)}</mark>`}</div>
+    </div>
+  `;
+}
+
+function highlightedContext(item) {
+  if (!item.paragraphText || !Number.isFinite(item.paragraphCharStart) || !Number.isFinite(item.paragraphCharEnd)) {
+    return "";
+  }
+  const text = item.paragraphText;
+  const start = Math.max(0, Math.min(item.paragraphCharStart, text.length));
+  const end = Math.max(start, Math.min(item.paragraphCharEnd, text.length));
+  const windowStart = Math.max(0, start - 90);
+  const windowEnd = Math.min(text.length, end + 90);
+  const prefix = windowStart > 0 ? "..." : "";
+  const suffix = windowEnd < text.length ? "..." : "";
+  return `${escapeHtml(prefix + text.slice(windowStart, start))}<mark>${escapeHtml(text.slice(start, end))}</mark>${escapeHtml(text.slice(end, windowEnd) + suffix)}`;
 }
 
 function actions(paper) {

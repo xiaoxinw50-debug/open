@@ -462,6 +462,40 @@ tbody tr:hover {
   border-left: 3px solid rgba(158, 17, 23, 0.42);
 }
 
+.evidence strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #831015;
+}
+
+.evidence-item {
+  margin-top: 7px;
+}
+
+.evidence-label {
+  display: inline-block;
+  min-width: 56px;
+  font-weight: 900;
+  color: #241818;
+}
+
+.evidence-pos {
+  color: #806163;
+}
+
+.evidence-context {
+  margin-top: 3px;
+  color: #3f3333;
+}
+
+.evidence mark {
+  background: #ffe08a;
+  border-radius: 4px;
+  color: #211616;
+  font-weight: 900;
+  padding: 0 0.18em;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

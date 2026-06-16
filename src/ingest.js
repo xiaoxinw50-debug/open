@@ -81,7 +81,7 @@ export async function runIngestion(options = {}) {
           if (fullTextResult.ok) {
             fullTextRead += 1;
             sourceSummary.fullTextRead += 1;
-            extractionText = `${combinedText}\n${fullTextResult.text}`;
+            extractionText = `${combinedText}\n\n${fullTextResult.text}`;
           }
         }
         const extraction = extractParams(extractionText);
