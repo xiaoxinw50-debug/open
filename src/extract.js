@@ -120,7 +120,7 @@ export function isLogicFetBenchmarkCandidate(text = "") {
   const excludedScore = EXCLUDED_TOPICS.reduce((score, term) => score + (lower.includes(term) ? 1 : 0), 0);
   if (HARD_EXCLUDED_TOPICS.some((term) => lower.includes(term))) return false;
   if (excludedScore && benchmarkScore < 3) return false;
-  if (/\b(review|perspective|roadmap|outlook)\b/.test(lower) && benchmarkScore < 4) return false;
+  if (/\b(review|perspective|roadmap|outlook|prospect|prospects)\b|challenges and prospects/.test(lower)) return false;
   return benchmarkScore >= 2;
 }
 
