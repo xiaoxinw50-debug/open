@@ -588,6 +588,28 @@ tbody tr:hover {
   font-size: 0.8rem;
 }
 
+.quick-rc {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 2px;
+  color: #6b4a4c;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.quick-rc .mini {
+  padding: 0.35rem 0.52rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+}
+
+.quick-rc .mini.ghost {
+  color: #6b4a4c;
+}
+
 .empty {
   text-align: center;
   color: var(--muted);

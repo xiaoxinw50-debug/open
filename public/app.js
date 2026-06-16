@@ -37,6 +37,7 @@ function bindTabs() {
   $("#quick-ingest-btn").addEventListener("click", runIngest);
   $("#copy-ranking-json").addEventListener("click", copyRankingJson);
   $("#download-ranking-csv").addEventListener("click", downloadRankingCsv);
+  document.addEventListener("click", handleRowAction);
   $("#include-low-value").addEventListener("change", async (event) => {
     state.includeLowValue = event.target.checked;
     await Promise.all([loadPapers(), loadDiagnostics()]);
@@ -203,7 +204,6 @@ function renderRanking() {
     `;
     body.appendChild(tr);
   });
-  bindRowActions();
 }
 
 function renderCandidates() {
@@ -228,7 +228,6 @@ function renderCandidates() {
     `;
     body.appendChild(tr);
   });
-  bindRowActions();
 }
 
 function renderChart() {
@@ -454,22 +453,34 @@ function gammaCell(paper) {
   `;
 }
 
-function bindRowActions() {
-  $$("[data-edit]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const paper = state.papers.find((item) => item.id === button.dataset.edit);
-      if (paper) fillForm(paper);
-      switchView("manual");
-    });
-  });
+async function handleRowAction(event) {
+  const editButton = event.target.closest("[data-edit]");
+  if (editButton) {
+    const paper = state.papers.find((item) => item.id === editButton.dataset.edit);
+    if (paper) fillForm(paper);
+    switchView("manual");
+    return;
+  }
 
-  $$("[data-delete]").forEach((button) => {
-    button.addEventListener("click", async () => {
-      if (!confirm("确认删除这条记录？")) return;
-      await api(`/api/papers/${encodeURIComponent(button.dataset.delete)}`, { method: "DELETE" });
-      await loadAll();
+  const deleteButton = event.target.closest("[data-delete]");
+  if (deleteButton) {
+    if (!confirm("确认删除这条记录？")) return;
+    await api(`/api/papers/${encodeURIComponent(deleteButton.dataset.delete)}`, { method: "DELETE" });
+    await loadAll();
+    return;
+  }
+
+  const rcButton = event.target.closest("[data-rc-id]");
+  if (rcButton) {
+    const paper = state.papers.find((item) => item.id === rcButton.dataset.rcId);
+    const label = rcButton.dataset.rcValue === "single" ? "单侧接触" : "源漏总等效";
+    if (!paper || !confirm(`确认将这篇论文的 Rc 口径标记为“${label}”？`)) return;
+    await api(`/api/papers/${encodeURIComponent(paper.id)}/rc-definition`, {
+      method: "PATCH",
+      body: JSON.stringify({ rcDefinition: rcButton.dataset.rcValue })
     });
-  });
+    await loadAll();
+  }
 }
 
 function fillForm(paper) {
@@ -629,8 +640,22 @@ function highlightedContext(item) {
 function actions(paper) {
   return `
     <div class="row-actions">
+      ${rcReviewActions(paper)}
       <button class="secondary" data-edit="${escapeAttr(paper.id)}">编辑</button>
       <button class="ghost" data-delete="${escapeAttr(paper.id)}">删除</button>
+    </div>
+  `;
+}
+
+function rcReviewActions(paper) {
+  const hasRc = paper.params?.rcOhmUm !== null && paper.params?.rcOhmUm !== undefined;
+  const rcUnknown = !paper.params?.rcDefinition || paper.params.rcDefinition === "unknown";
+  if (!hasRc || !rcUnknown) return "";
+  return `
+    <div class="quick-rc">
+      <span>确认 Rc</span>
+      <button class="mini" data-rc-id="${escapeAttr(paper.id)}" data-rc-value="total">总等效</button>
+      <button class="mini ghost" data-rc-id="${escapeAttr(paper.id)}" data-rc-value="single">单侧</button>
     </div>
   `;
 }

@@ -63,6 +63,38 @@ app.patch("/api/papers/:id", async (req, res, next) => {
   }
 });
 
+app.patch("/api/papers/:id/rc-definition", async (req, res, next) => {
+  try {
+    const rcDefinition = req.body?.rcDefinition;
+    if (!["single", "total", "unknown"].includes(rcDefinition)) {
+      return res.status(400).json({ error: "rcDefinition must be single, total, or unknown" });
+    }
+    const existing = await getPaper(req.params.id);
+    if (!existing) return res.status(404).json({ error: "paper not found" });
+
+    const notes = appendAuditNote(
+      existing.params?.notes || "",
+      `人工确认 Rc 口径为${rcDefinition === "single" ? "单侧接触" : rcDefinition === "total" ? "源漏总等效" : "未确定"}`
+    );
+    const nextPaper = {
+      ...existing,
+      params: {
+        ...(existing.params || {}),
+        rcDefinition,
+        notes
+      }
+    };
+    const metrics = calculatePaper(nextPaper);
+    const saved = await updatePaper(req.params.id, {
+      status: metrics.canCalculateGamma ? "calculated" : existing.status,
+      params: nextPaper.params
+    });
+    res.json(saved);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.delete("/api/papers/:id", async (req, res, next) => {
   try {
     const deleted = await deletePaper(req.params.id);
@@ -419,6 +451,15 @@ function numericOrNull(value) {
   return Number.isFinite(n) ? n : null;
 }
 
+function appendAuditNote(notes = "", note = "") {
+  const parts = String(notes)
+    .split("；")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  if (note && !parts.includes(note)) parts.push(note);
+  return parts.join("；");
+}
+
 function toRankingRow(paper) {
   const params = paper.params || {};
   const metrics = paper.metrics || calculatePaper(paper);
@@ -509,7 +550,7 @@ function buildDiagnosticsRecommendations({ missingDistribution, weakCoreCount, r
     recommendations.push(`优先补 Ion/Rc：${weakCoreCount} 篇候选缺少至少一个核心排序字段，通常要看器件表、接触工程图或输出曲线。`);
   }
   if (rcDefinitionMissingCount > 0) {
-    recommendations.push(`优先核对 Rc 口径：${rcDefinitionMissingCount} 篇缺少单侧/总等效说明，这会直接影响接触压降。`);
+    recommendations.push(`优先核对 Rc 口径：${rcDefinitionMissingCount} 篇缺少单侧/总等效说明，这会直接影响接触压降；可在表格操作列快速标记。`);
   }
   if (top) {
     recommendations.push(`当前最大瓶颈是 ${top.field}，影响 ${top.count} 篇非严格样本。`);
