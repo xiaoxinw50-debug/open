@@ -18,7 +18,8 @@ export async function runIngestion(options = {}) {
   for (const query of queries) {
     const sourceRuns = [
       fetchOpenAlex(query, fromDate, maxPerQuery),
-      fetchCrossref(query, fromDate, maxPerQuery)
+      fetchCrossref(query, fromDate, maxPerQuery),
+      fetchArxiv(query, maxPerQuery)
     ];
     const settled = await Promise.allSettled(sourceRuns);
     for (const item of settled) {
@@ -149,6 +150,54 @@ async function fetchCrossref(query, fromDate, maxPerQuery) {
   });
 }
 
+async function fetchArxiv(query, maxPerQuery) {
+  const url = new URL("https://export.arxiv.org/api/query");
+  url.searchParams.set("search_query", arxivQuery(query));
+  url.searchParams.set("start", "0");
+  url.searchParams.set("max_results", String(Math.min(maxPerQuery, 25)));
+  url.searchParams.set("sortBy", "submittedDate");
+  url.searchParams.set("sortOrder", "descending");
+
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": USER_AGENT,
+      Accept: "application/atom+xml"
+    }
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText} for ${url.hostname}`);
+  }
+
+  const xml = await response.text();
+  return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map((match) => {
+    const entry = match[1];
+    const title = stripXml(getXml(entry, "title"));
+    const abstract = stripXml(getXml(entry, "summary"));
+    const authors = [...entry.matchAll(/<author>\s*<name>([\s\S]*?)<\/name>\s*<\/author>/g)]
+      .slice(0, 4)
+      .map((author) => stripXml(author[1]))
+      .filter(Boolean)
+      .join(", ");
+    const published = getXml(entry, "published");
+    const id = stripXml(getXml(entry, "id"));
+    const arxivId = id.split("/").pop() || id;
+    return {
+      id: `arxiv-${arxivId.replace(/[^a-zA-Z0-9.]+/g, "-")}`,
+      title,
+      abstract,
+      authors,
+      year: yearFromDate(published),
+      journal: "arXiv",
+      doi: "",
+      url: id,
+      publisher: "arXiv",
+      sourceName: "arXiv",
+      sourceType: "auto-arxiv",
+      sourceTrace: `arXiv ${arxivId}`
+    };
+  });
+}
+
 async function fetchJson(url) {
   const response = await fetch(url, {
     headers: {
@@ -198,4 +247,21 @@ function strip(value = "") {
     .replace(/&amp;/g, "&")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function arxivQuery(query) {
+  return query
+    .split(/\s+/)
+    .filter((term) => term.length > 1 && !/^(and|or|the|for|with)$/i.test(term))
+    .slice(0, 8)
+    .map((term) => `all:${term.replace(/[^a-zA-Z0-9-]/g, "")}`)
+    .join("+AND+");
+}
+
+function getXml(entry, tag) {
+  return entry.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`))?.[1] || "";
+}
+
+function stripXml(value = "") {
+  return strip(value.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1"));
 }

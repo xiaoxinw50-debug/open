@@ -8,7 +8,9 @@ import { withMetrics } from "./calculator.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, "..");
-const DATA_DIR = path.join(ROOT, "data");
+const DATA_DIR = process.env.SWITCH_MARGIN_DATA_DIR
+  ? path.resolve(process.env.SWITCH_MARGIN_DATA_DIR)
+  : path.join(ROOT, "data");
 const PAPERS_PATH = path.join(DATA_DIR, "papers.json");
 const STATE_PATH = path.join(DATA_DIR, "ingest-state.json");
 
@@ -17,14 +19,18 @@ const DEFAULT_STATE = {
   lastRunSummary: null,
   lookbackDays: 180,
   autoIngestEnabled: true,
-  ingestIntervalHours: 12,
-  maxPerQuery: 18,
+  ingestIntervalHours: 6,
+  maxPerQuery: 30,
   queries: [
+    "2D semiconductor transistor",
     "two-dimensional semiconductor transistor contact resistance",
     "2D semiconductor logic transistor subthreshold swing",
     "MoS2 transistor contact resistance short channel",
     "WSe2 pFET contact resistance",
-    "transition metal dichalcogenide CMOS transistor"
+    "transition metal dichalcogenide CMOS transistor",
+    "IEEE Electron Device Letters 2D semiconductor transistor",
+    "IEDM two-dimensional semiconductor transistor",
+    "Nature Electronics 2D semiconductor pFET"
   ]
 };
 
@@ -126,7 +132,19 @@ export async function deletePaper(id) {
 
 export async function getState() {
   const state = await readJson(STATE_PATH, DEFAULT_STATE);
-  return { ...DEFAULT_STATE, ...state };
+  return {
+    ...DEFAULT_STATE,
+    ...state,
+    lookbackDays: Number(process.env.INGEST_LOOKBACK_DAYS || state.lookbackDays || DEFAULT_STATE.lookbackDays),
+    maxPerQuery: Number(process.env.INGEST_MAX_PER_QUERY || state.maxPerQuery || DEFAULT_STATE.maxPerQuery),
+    ingestIntervalHours: Number(
+      process.env.INGEST_INTERVAL_HOURS || state.ingestIntervalHours || DEFAULT_STATE.ingestIntervalHours
+    ),
+    autoIngestEnabled:
+      process.env.AUTO_INGEST_ENABLED === undefined
+        ? Boolean(state.autoIngestEnabled ?? DEFAULT_STATE.autoIngestEnabled)
+        : process.env.AUTO_INGEST_ENABLED !== "false"
+  };
 }
 
 export async function updateState(patch) {

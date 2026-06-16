@@ -138,23 +138,35 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`Switch margin site running at http://localhost:${PORT}`);
 });
 
+setTimeout(() => {
+  if (process.env.AUTO_INGEST_ON_START !== "false") {
+    runScheduledIngestion("startup", true);
+  }
+}, Number(process.env.STARTUP_INGEST_DELAY_MS || 15000));
+
 setInterval(async () => {
+  runScheduledIngestion("interval", false);
+}, Number(process.env.SCHEDULE_CHECK_INTERVAL_MS || 10 * 60 * 1000));
+
+async function runScheduledIngestion(reason, force) {
   const state = await getState();
   if (!state.autoIngestEnabled || ingestRunning) return;
 
   const lastRunAt = state.lastRunAt ? new Date(state.lastRunAt).getTime() : 0;
   const intervalMs = Math.max(Number(state.ingestIntervalHours || 12), 1) * 60 * 60 * 1000;
-  if (Date.now() - lastRunAt < intervalMs) return;
+  if (!force && Date.now() - lastRunAt < intervalMs) return;
 
   ingestRunning = true;
   try {
-    await runIngestion();
+    console.log(`starting ${reason} ingestion`);
+    const summary = await runIngestion();
+    console.log(`${reason} ingestion finished`, summary);
   } catch (error) {
     console.error("scheduled ingestion failed", error);
   } finally {
     ingestRunning = false;
   }
-}, 10 * 60 * 1000);
+}
 
 function sortPapers(papers, sort) {
   const list = papers.slice();

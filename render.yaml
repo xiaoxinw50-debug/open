@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: switch-margin-site
+    runtime: node
+    plan: starter
+    branch: main
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: SWITCH_MARGIN_DATA_DIR
+        value: /var/data
+      - key: AUTO_INGEST_ENABLED
+        value: "true"
+      - key: AUTO_INGEST_ON_START
+        value: "true"
+      - key: INGEST_INTERVAL_HOURS
+        value: "6"
+      - key: INGEST_LOOKBACK_DAYS
+        value: "180"
+      - key: INGEST_MAX_PER_QUERY
+        value: "30"
+    disk:
+      name: switch-margin-data
+      mountPath: /var/data
+      sizeGB: 1

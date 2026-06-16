@@ -31,9 +31,22 @@ npm start
 http://localhost:5177
 ```
 
+## Render 部署
+
+仓库包含 `render.yaml`。在 Render 中选择 Blueprint 并连接本仓库即可部署。
+
+默认配置：
+
+- Web Service: `switch-margin-site`
+- Build Command: `npm ci`
+- Start Command: `npm start`
+- Health Check: `/api/health`
+- Data Dir: `/var/data`
+- Auto Ingestion: 启动后自动抓取一次，之后每 6 小时抓取一次
+
 ## 自动检索逻辑
 
-后台会从 OpenAlex 与 Crossref 检索近期相关论文，按标题、摘要、期刊和关键词筛选二维半导体逻辑器件相关条目。若摘要或开放文本中能识别出 `Ion`、`Rc`、`SS`、`VDS`、开关比等参数，则自动计算；若参数不完整，则进入“待补参数”候选库。
+后台会从 OpenAlex、Crossref 与 arXiv 检索近期相关论文，按标题、摘要、期刊和关键词筛选二维半导体逻辑器件相关条目。若摘要或开放文本中能识别出 `Ion`、`Rc`、`SS`、`VDS`、开关比等参数，则自动计算；若参数不完整，则进入“待补参数”候选库。
 
 这一步不会伪造数据。遇到 IEEE、Nature 等只给元数据或摘要、不开放全文的论文，网站会先入库，等待人工补齐参数来源、图号和口径。
 
