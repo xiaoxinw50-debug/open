@@ -72,6 +72,20 @@ const EXCLUDED_TOPICS = [
   "kpfm"
 ];
 
+const HARD_EXCLUDED_TOPICS = [
+  "phototransistor",
+  "photo transistor",
+  "photodetector",
+  "memristor",
+  "memristive",
+  "non-volatile memories",
+  "nonvolatile memories",
+  "sensor",
+  "sensing",
+  "kpfm",
+  "kelvin probe"
+];
+
 const BENCHMARK_TERMS = [
   "field-effect transistor",
   "field effect transistor",
@@ -85,7 +99,11 @@ const BENCHMARK_TERMS = [
   "contact resistance",
   "subthreshold swing",
   "subthreshold slope",
+  "on-current",
   "on/off",
+  "on-off",
+  "on/off ratio",
+  "current ratio",
   "ion/ioff"
 ];
 
@@ -100,6 +118,7 @@ export function isLogicFetBenchmarkCandidate(text = "") {
   const lower = normalize(text).toLowerCase();
   const benchmarkScore = BENCHMARK_TERMS.reduce((score, term) => score + (lower.includes(term) ? 1 : 0), 0);
   const excludedScore = EXCLUDED_TOPICS.reduce((score, term) => score + (lower.includes(term) ? 1 : 0), 0);
+  if (HARD_EXCLUDED_TOPICS.some((term) => lower.includes(term))) return false;
   if (excludedScore && benchmarkScore < 3) return false;
   if (/\b(review|perspective|roadmap|outlook)\b/.test(lower) && benchmarkScore < 4) return false;
   return benchmarkScore >= 2;
@@ -217,12 +236,22 @@ export function extractParams(rawText = "") {
   const vds = pickValue(text, [
     {
       name: "VDS",
-      regex: /(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd|drain[-\s]?(?:to[-\s]?)?source voltage|source[-\s]drain bias|drain voltage)[^.;,\n]{0,80}?(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:V\s*(?:[_{]\s*)?(?:DS|D|D\s*S)\}?|Vds|Vd|drain[-\s]?(?:to[-\s]?)?source voltage|source[-\s]drain bias|drain voltage)[^.;,\n]{0,80}?(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     },
     {
       name: "VDS",
-      regex: /(?:at|under|with)\s+(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:at|under|with)\s+(?:V\s*(?:[_{]\s*)?(?:DS|D|D\s*S)\}?|Vds|Vd)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
+      convert: (value) => Math.abs(value)
+    },
+    {
+      name: "VDS",
+      regex: /(?:at|under|with)\s+(-?\d+(?:\.\d+)?)\s*V\s+(?:drain|source[-\s]drain|drain[-\s]source|VDS|Vd)\s*bias/gi,
+      convert: (value) => Math.abs(value)
+    },
+    {
+      name: "VDS",
+      regex: /(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current)[^.;,\n]{0,130}?\s+at\s+(-?\d+(?:\.\d+)?)\s*V\s*bias/gi,
       convert: (value) => Math.abs(value)
     }
   ], { mode: "first", min: 0, max: 20, document });
@@ -314,13 +343,17 @@ function pickSwitchRatio(text, document) {
   const patterns = [
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s+(\d{2})(?!\d)/gi,
+    /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10([3-9]|1[0-5])\b/gi,
     /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /10\s+(\d{2})(?!\d)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
+    /\b10([3-9]|1[0-5])\b[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*(?:orders of magnitude|decades)/gi,
     /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
     /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s+(\d{2})(?!\d)/gi,
+    /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10([3-9]|1[0-5])\b/gi,
     /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi,
-    /10\s+(\d{2})(?!\d)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi
+    /10\s+(\d{2})(?!\d)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi,
+    /\b10([3-9]|1[0-5])\b[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi
   ];
 
   for (const regex of patterns) {
@@ -484,6 +517,7 @@ function inferRcDefinition(text, rcValue) {
 function normalize(text, options = {}) {
   const normalized = text
     .replace(/<[^>]+>/g, " ")
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&amp;/g, "&")

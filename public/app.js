@@ -92,7 +92,7 @@ async function loadSettings() {
 async function loadStats() {
   const stats = await api("/api/stats");
   $("#stat-total").textContent = stats.total;
-  $("#stat-calculated").textContent = stats.calculated;
+  $("#stat-calculated").textContent = Number(stats.calculated || 0) + Number(stats.estimable || 0);
   $("#stat-review").textContent = stats.needsReview;
 }
 

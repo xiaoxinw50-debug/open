@@ -24,6 +24,14 @@ const DEFAULT_STATE = {
   fullTextEnabled: true,
   fullTextMaxPerRun: 18,
   queries: [
+    "2D transistor on-current contact resistance subthreshold swing on/off ratio",
+    "2D semiconductor FET contact resistance on-current on/off ratio",
+    "MoS2 transistor contact resistance on-current subthreshold swing",
+    "WSe2 pFET contact resistance on-current on/off ratio",
+    "MoTe2 pFET contact resistance on-current on/off ratio",
+    "Nature Electronics 2D transistor contact resistance on-current",
+    "Nature Communications 2D FET contact resistance on-current on/off ratio",
+    "IEEE Electron Device Letters 2D FET contact resistance subthreshold swing",
     "2D semiconductor transistor",
     "2D transistor",
     "atomically thin transistor",
@@ -147,9 +155,11 @@ export async function deletePaper(id) {
 
 export async function getState() {
   const state = await readJson(STATE_PATH, DEFAULT_STATE);
+  const queries = mergeQueries(state.queries, DEFAULT_STATE.queries);
   return {
     ...DEFAULT_STATE,
     ...state,
+    queries,
     lookbackDays: Number(process.env.INGEST_LOOKBACK_DAYS || state.lookbackDays || DEFAULT_STATE.lookbackDays),
     maxPerQuery: Number(process.env.INGEST_MAX_PER_QUERY || state.maxPerQuery || DEFAULT_STATE.maxPerQuery),
     fullTextEnabled:
@@ -167,6 +177,11 @@ export async function getState() {
         ? Boolean(state.autoIngestEnabled ?? DEFAULT_STATE.autoIngestEnabled)
         : process.env.AUTO_INGEST_ENABLED !== "false"
   };
+}
+
+function mergeQueries(savedQueries = [], defaultQueries = []) {
+  const saved = Array.isArray(savedQueries) ? savedQueries : [];
+  return [...new Set([...defaultQueries, ...saved].map((query) => String(query).trim()).filter(Boolean))];
 }
 
 export async function updateState(patch) {
