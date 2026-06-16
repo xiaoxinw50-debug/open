@@ -21,6 +21,8 @@ const DEFAULT_STATE = {
   autoIngestEnabled: true,
   ingestIntervalHours: 6,
   maxPerQuery: 30,
+  fullTextEnabled: true,
+  fullTextMaxPerRun: 18,
   queries: [
     "2D semiconductor transistor",
     "2D transistor",
@@ -150,6 +152,13 @@ export async function getState() {
     ...state,
     lookbackDays: Number(process.env.INGEST_LOOKBACK_DAYS || state.lookbackDays || DEFAULT_STATE.lookbackDays),
     maxPerQuery: Number(process.env.INGEST_MAX_PER_QUERY || state.maxPerQuery || DEFAULT_STATE.maxPerQuery),
+    fullTextEnabled:
+      process.env.FULLTEXT_ENABLED === undefined
+        ? Boolean(state.fullTextEnabled ?? DEFAULT_STATE.fullTextEnabled)
+        : process.env.FULLTEXT_ENABLED !== "false",
+    fullTextMaxPerRun: Number(
+      process.env.FULLTEXT_MAX_PER_RUN || state.fullTextMaxPerRun || DEFAULT_STATE.fullTextMaxPerRun
+    ),
     ingestIntervalHours: Number(
       process.env.INGEST_INTERVAL_HOURS || state.ingestIntervalHours || DEFAULT_STATE.ingestIntervalHours
     ),

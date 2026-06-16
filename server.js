@@ -91,6 +91,8 @@ app.patch("/api/state", async (req, res, next) => {
     if (req.body.maxPerQuery !== undefined) patch.maxPerQuery = Number(req.body.maxPerQuery);
     if (req.body.autoIngestEnabled !== undefined) patch.autoIngestEnabled = Boolean(req.body.autoIngestEnabled);
     if (req.body.ingestIntervalHours !== undefined) patch.ingestIntervalHours = Number(req.body.ingestIntervalHours);
+    if (req.body.fullTextEnabled !== undefined) patch.fullTextEnabled = Boolean(req.body.fullTextEnabled);
+    if (req.body.fullTextMaxPerRun !== undefined) patch.fullTextMaxPerRun = Number(req.body.fullTextMaxPerRun);
     res.json(await updateState(patch));
   } catch (error) {
     next(error);

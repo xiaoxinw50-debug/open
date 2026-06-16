@@ -82,14 +82,14 @@ export function extractParams(rawText = "") {
     {
       name: "Ion",
       regex:
-        /(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(mA|μA|uA)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?/gi,
-      convert: (value, unit) => (unit.toLowerCase() === "ma" ? value * 1000 : value)
+        /(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?/gi,
+      convert: (value, unit) => convertCurrentToUa(value, unit)
     },
     {
       name: "Ion",
       regex:
-        /(\d+(?:\.\d+)?)\s*(mA|μA|uA)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,100}?(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
-      convert: (value, unit) => (unit.toLowerCase() === "ma" ? value * 1000 : value)
+        /(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,100}?(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
+      convert: (value, unit) => convertCurrentToUa(value, unit)
     }
   ]);
   if (ion.note) notes.push(ion.note);
@@ -247,6 +247,13 @@ function confidence(values) {
   return Math.round((hit / values.length) * 100) / 100;
 }
 
+function convertCurrentToUa(value, unit) {
+  const normalized = unit.toLowerCase();
+  if (normalized === "ma") return value * 1000;
+  if (normalized === "a") return value * 1000000;
+  return value;
+}
+
 function inferRcDefinition(text, rcValue) {
   if (rcValue === null || rcValue === undefined) return "unknown";
   const lower = normalize(text).toLowerCase();
@@ -274,6 +281,13 @@ function normalize(text) {
     .replace(/&amp;/g, "&")
     .replace(/[−–—]/g, "-")
     .replace(/µ/g, "μ")
+    .replace(/\bμ\s*A\b/gi, "μA")
+    .replace(/\bu\s*A\b/gi, "uA")
+    .replace(/\bm\s*A\b/g, "mA")
+    .replace(/\bA\s*\/\s*μ\s*m\b/g, "A/μm")
+    .replace(/\b(μA|uA|mA)\s*\/\s*μ\s*m\b/gi, "$1/μm")
+    .replace(/\bΩ\s*μ\s*m\b/g, "Ω μm")
+    .replace(/\bohm\s*μ\s*m\b/gi, "ohm μm")
     .replace(/\s+/g, " ")
     .trim();
 }

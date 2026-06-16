@@ -22,3 +22,9 @@ services:
         value: "180"
       - key: INGEST_MAX_PER_QUERY
         value: "30"
+      - key: FULLTEXT_ENABLED
+        value: "true"
+      - key: FULLTEXT_MAX_PER_RUN
+        value: "18"
+      - key: FULLTEXT_TIMEOUT_MS
+        value: "9000"

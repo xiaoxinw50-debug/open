@@ -224,7 +224,9 @@ function renderSettings() {
   form.lookbackDays.value = state.settings.lookbackDays;
   form.maxPerQuery.value = state.settings.maxPerQuery;
   form.ingestIntervalHours.value = state.settings.ingestIntervalHours;
+  form.fullTextMaxPerRun.value = state.settings.fullTextMaxPerRun ?? 18;
   form.autoIngestEnabled.checked = Boolean(state.settings.autoIngestEnabled);
+  form.fullTextEnabled.checked = Boolean(state.settings.fullTextEnabled);
   form.queries.value = (state.settings.queries || []).join("\n");
   if (state.settings.lastRunSummary) {
     log(`上次检索：\n${formatIngestSummary(state.settings.lastRunSummary)}`);
@@ -323,6 +325,8 @@ function formToSettings(form) {
     maxPerQuery: numberOrNull(form.maxPerQuery.value),
     ingestIntervalHours: numberOrNull(form.ingestIntervalHours.value),
     autoIngestEnabled: form.autoIngestEnabled.checked,
+    fullTextEnabled: form.fullTextEnabled.checked,
+    fullTextMaxPerRun: numberOrNull(form.fullTextMaxPerRun.value),
     queries: form.queries.value
       .split(/\n+/)
       .map((line) => line.trim())
@@ -408,6 +412,8 @@ function formatIngestSummary(summary) {
     `原始抓取：${summary.fetchedRaw ?? "-"} 条`,
     `重复跳过：${summary.duplicates ?? "-"} 条`,
     `相关命中：${summary.relevant ?? "-"} 条`,
+    `开放全文读取：${summary.fullTextRead ?? "-"} / ${summary.fullTextAttempted ?? "-"} 篇`,
+    `全文补充参数：${summary.fullTextHelped ?? "-"} 篇`,
     `入库/更新：${summary.addedOrUpdated ?? "-"} 条`,
     `可直接计算：${summary.calculated ?? "-"} 条`,
     `待补参数：${summary.needsReview ?? "-"} 条`

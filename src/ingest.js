@@ -1,5 +1,6 @@
 import { calculatePaper } from "./calculator.js";
 import { extractParams, inferDeviceType, inferMaterial, looksRelevant, relevanceScore } from "./extract.js";
+import { readOpenFullText } from "./fulltext.js";
 import { getState, updateState, upsertPaper } from "./db.js";
 
 const USER_AGENT = "SwitchMarginSite/0.1 (local research tool; mailto:example@example.com)";
@@ -8,6 +9,9 @@ export async function runIngestion(options = {}) {
   const state = await getState();
   const lookbackDays = Number(options.lookbackDays || state.lookbackDays || 180);
   const maxPerQuery = Number(options.maxPerQuery || state.maxPerQuery || 18);
+  const fullTextEnabled = options.fullTextEnabled ?? state.fullTextEnabled ?? true;
+  const fullTextMaxPerRun = Number(options.fullTextMaxPerRun || state.fullTextMaxPerRun || process.env.FULLTEXT_MAX_PER_RUN || 18);
+  const fullTextTimeoutMs = Number(options.fullTextTimeoutMs || process.env.FULLTEXT_TIMEOUT_MS || 9000);
   const queries = Array.isArray(options.queries) && options.queries.length ? options.queries : state.queries;
   const fromDate = dateDaysAgo(lookbackDays);
   const startedAt = new Date().toISOString();
@@ -18,6 +22,9 @@ export async function runIngestion(options = {}) {
   let fetchedRaw = 0;
   let relevantCount = 0;
   let duplicateCount = 0;
+  let fullTextAttempted = 0;
+  let fullTextRead = 0;
+  let fullTextHelped = 0;
 
   for (const query of queries) {
     const sourceRuns = [
@@ -33,6 +40,9 @@ export async function runIngestion(options = {}) {
         fetched: 0,
         duplicates: 0,
         relevant: 0,
+        fullTextAttempted: 0,
+        fullTextRead: 0,
+        fullTextHelped: 0,
         saved: 0,
         calculated: 0,
         needsReview: 0
@@ -57,7 +67,28 @@ export async function runIngestion(options = {}) {
         sourceSummary.relevant += 1;
         relevantCount += 1;
 
-        const extraction = extractParams(combinedText);
+        const metadataExtraction = extractParams(combinedText);
+        let extractionText = combinedText;
+        let fullTextResult = null;
+        if (fullTextEnabled && fullTextAttempted < fullTextMaxPerRun) {
+          fullTextAttempted += 1;
+          sourceSummary.fullTextAttempted += 1;
+          fullTextResult = await readOpenFullText(paper, {
+            timeoutMs: fullTextTimeoutMs,
+            unpaywallEmail: options.unpaywallEmail
+          });
+          if (fullTextResult.ok) {
+            fullTextRead += 1;
+            sourceSummary.fullTextRead += 1;
+            extractionText = `${combinedText}\n${fullTextResult.text}`;
+          }
+        }
+        const extraction = extractParams(extractionText);
+        const helpedByFullText = fullTextResult?.ok && extractionAddsFields(metadataExtraction.params, extraction.params);
+        if (helpedByFullText) {
+          fullTextHelped += 1;
+          sourceSummary.fullTextHelped += 1;
+        }
         const draft = {
           ...paper,
           id: paper.id,
@@ -68,7 +99,12 @@ export async function runIngestion(options = {}) {
           params: extraction.params,
           sourceTrace: [
             paper.sourceTrace,
-            `自动检索 ${paper.sourceName}；参数抽取置信度 ${extraction.extractionConfidence}`
+            `自动检索 ${paper.sourceName}；参数抽取置信度 ${extraction.extractionConfidence}`,
+            fullTextResult?.ok
+              ? `已读取开放全文 ${fullTextResult.source}，${fullTextResult.chars} 字符${helpedByFullText ? "；全文补充了参数" : ""}`
+              : fullTextResult
+                ? `未读到开放全文：${fullTextResult.errors.slice(0, 2).join("；")}`
+                : ""
           ]
             .filter(Boolean)
             .join(" | ")
@@ -100,6 +136,10 @@ export async function runIngestion(options = {}) {
     fetchedRaw,
     duplicates: duplicateCount,
     relevant: relevantCount,
+    fullTextEnabled,
+    fullTextAttempted,
+    fullTextRead,
+    fullTextHelped,
     addedOrUpdated: results.length,
     calculated: results.filter((item) => item.metrics.canCalculateGamma).length,
     needsReview: results.filter((item) => !item.metrics.canCalculateGamma).length,
@@ -140,6 +180,7 @@ async function fetchOpenAlex(query, fromDate, maxPerQuery) {
       doi,
       url: work.doi || work.id,
       publisher: work.primary_location?.source?.host_organization_name || "",
+      fullTextUrls: openAlexFullTextUrls(work),
       sourceName: "OpenAlex",
       sourceType: "auto-openalex",
       sourceTrace: `OpenAlex ${work.id || ""}`
@@ -175,6 +216,7 @@ async function fetchCrossref(query, fromDate, maxPerQuery) {
       doi: item.DOI || "",
       url: item.URL || (item.DOI ? `https://doi.org/${item.DOI}` : ""),
       publisher: item.publisher || "",
+      fullTextUrls: crossrefFullTextUrls(item),
       sourceName: "Crossref",
       sourceType: "auto-crossref",
       sourceTrace: `Crossref DOI ${item.DOI || "unknown"}`
@@ -223,6 +265,7 @@ async function fetchArxiv(query, maxPerQuery) {
       doi: "",
       url: id,
       publisher: "arXiv",
+      fullTextUrls: arxivFullTextUrls(arxivId),
       sourceName: "arXiv",
       sourceType: "auto-arxiv",
       sourceTrace: `arXiv ${arxivId}`
@@ -295,6 +338,55 @@ function arxivQuery(query) {
   const unique = [...new Set(selected.length ? selected : ["2D", "semiconductor", "transistor"])];
 
   return unique.map((term) => `all:${term}`).join(" AND ");
+}
+
+function openAlexFullTextUrls(work) {
+  const urls = [];
+  const locations = [work.primary_location, ...(work.locations || [])].filter(Boolean);
+  for (const location of locations) {
+    if (location.landing_page_url) urls.push({ url: location.landing_page_url, source: "OpenAlex landing" });
+    if (location.pdf_url) urls.push({ url: location.pdf_url, source: "OpenAlex PDF" });
+  }
+  if (work.open_access?.oa_url) urls.push({ url: work.open_access.oa_url, source: "OpenAlex OA" });
+  return uniqueUrlObjects(urls);
+}
+
+function crossrefFullTextUrls(item) {
+  const urls = [];
+  for (const link of item.link || []) {
+    if (!link.URL) continue;
+    const type = link["content-type"] || "";
+    urls.push({ url: link.URL, source: /pdf/i.test(type) ? "Crossref PDF" : "Crossref full text" });
+  }
+  return uniqueUrlObjects(urls);
+}
+
+function arxivFullTextUrls(arxivId) {
+  return uniqueUrlObjects([
+    { url: `https://arxiv.org/html/${arxivId}`, source: "arXiv HTML" },
+    { url: `https://ar5iv.labs.arxiv.org/html/${arxivId}`, source: "ar5iv HTML" }
+  ]);
+}
+
+function uniqueUrlObjects(items) {
+  const seen = new Set();
+  return items.filter((item) => {
+    if (!item.url || !/^https?:\/\//i.test(item.url)) return false;
+    const key = item.url.replace(/#.*$/, "");
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function extractionAddsFields(before = {}, after = {}) {
+  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
+  return fields.some((field) => isBlank(before[field]) && !isBlank(after[field])) ||
+    (before.rcDefinition === "unknown" && after.rcDefinition && after.rcDefinition !== "unknown");
+}
+
+function isBlank(value) {
+  return value === null || value === undefined || value === "";
 }
 
 function getXml(entry, tag) {

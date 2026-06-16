@@ -5,6 +5,8 @@
   "autoIngestEnabled": true,
   "ingestIntervalHours": 6,
   "maxPerQuery": 30,
+  "fullTextEnabled": true,
+  "fullTextMaxPerRun": 18,
   "queries": [
     "2D semiconductor transistor",
     "2D transistor",
