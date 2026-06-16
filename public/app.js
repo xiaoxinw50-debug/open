@@ -7,7 +7,8 @@ const state = {
   ingestPollTimer: null,
   activeView: "ranking",
   sort: "gamma",
-  includeLowValue: false
+  includeLowValue: false,
+  reviewFilter: "all"
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -38,6 +39,7 @@ function bindTabs() {
   $("#copy-ranking-json").addEventListener("click", copyRankingJson);
   $("#download-ranking-csv").addEventListener("click", downloadRankingCsv);
   document.addEventListener("click", handleRowAction);
+  document.addEventListener("click", handleReviewFilter);
   $("#include-low-value").addEventListener("change", async (event) => {
     state.includeLowValue = event.target.checked;
     await Promise.all([loadPapers(), loadDiagnostics()]);
@@ -208,18 +210,20 @@ function renderRanking() {
 
 function renderCandidates() {
   const rows = state.papers
-    .filter((paper) => paper.metrics.gammaMode === "missing")
+    .filter((paper) => paper.metrics.gammaMode !== "strict")
+    .filter(matchesReviewFilter)
     .slice()
-    .sort((a, b) => (b.metrics.dataCompleteness || 0) - (a.metrics.dataCompleteness || 0) || (b.year || 0) - (a.year || 0));
+    .sort(reviewSort);
   const body = $("#candidate-body");
   body.innerHTML = "";
-  if (!rows.length) return renderEmpty(body, 7);
+  if (!rows.length) return renderEmpty(body, 8);
 
   rows.forEach((paper) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${paper.year || "-"}</td>
       <td>${paperLink(paper)}${metaLine(paper)}</td>
+      <td>${reviewModeCell(paper)}</td>
       <td>${escapeHtml(paper.sourceType || "-")}<div class="meta">${escapeHtml(paper.journal || "")}</div></td>
       <td>${paper.metrics.missingFields.map((item) => `<span class="pill warn">${escapeHtml(item)}</span>`).join(" ")}</td>
       <td>${partialMetrics(paper)}</td>
@@ -230,12 +234,39 @@ function renderCandidates() {
   });
 }
 
+function matchesReviewFilter(paper) {
+  const missing = paper.metrics.missingFields || [];
+  if (state.reviewFilter === "rc") return missing.includes("Rc口径");
+  if (state.reviewFilter === "core") return missing.includes("Ion") || missing.includes("Rc");
+  if (state.reviewFilter === "missing") return paper.metrics.gammaMode === "missing";
+  return true;
+}
+
+function reviewSort(a, b) {
+  const arc = a.metrics.missingFields.includes("Rc口径") ? 1 : 0;
+  const brc = b.metrics.missingFields.includes("Rc口径") ? 1 : 0;
+  if (arc !== brc) return brc - arc;
+  const modeRank = { estimated: 0, missing: 1 };
+  const am = modeRank[a.metrics.gammaMode] ?? 2;
+  const bm = modeRank[b.metrics.gammaMode] ?? 2;
+  if (am !== bm) return am - bm;
+  return (b.metrics.dataCompleteness || 0) - (a.metrics.dataCompleteness || 0) || (b.year || 0) - (a.year || 0);
+}
+
+function reviewModeCell(paper) {
+  const isEstimated = paper.metrics.gammaMode === "estimated";
+  return `
+    <span class="pill ${isEstimated ? "warn" : ""}">${isEstimated ? "估算" : "缺参"}</span>
+    <div class="meta">${escapeHtml(paper.metrics.reliabilityLabel || paper.metrics.partialStage || "")}</div>
+  `;
+}
+
 function renderChart() {
   const target = $("#chart");
   const rows = state.papers
     .filter((paper) => paper.metrics.displayGamma2d !== null)
     .slice()
-    .sort((a, b) => b.metrics.displayGamma2d - a.metrics.displayGamma2d)
+    .sort(compareDisplayGamma)
     .slice(0, 8);
   target.innerHTML = "";
   if (!rows.length) return;
@@ -251,6 +282,14 @@ function renderChart() {
     `;
     target.appendChild(row);
   });
+}
+
+function compareDisplayGamma(a, b) {
+  const modeRank = { strict: 0, estimated: 1, missing: 2 };
+  const am = modeRank[a.metrics.gammaMode] ?? 3;
+  const bm = modeRank[b.metrics.gammaMode] ?? 3;
+  if (am !== bm) return am - bm;
+  return (b.metrics.displayGamma2d ?? -Infinity) - (a.metrics.displayGamma2d ?? -Infinity);
 }
 
 function renderDiagnostics() {
@@ -481,6 +520,14 @@ async function handleRowAction(event) {
     });
     await loadAll();
   }
+}
+
+function handleReviewFilter(event) {
+  const button = event.target.closest("[data-review-filter]");
+  if (!button) return;
+  state.reviewFilter = button.dataset.reviewFilter || "all";
+  $$(".review-filter").forEach((item) => item.classList.toggle("is-active", item === button));
+  renderCandidates();
 }
 
 function fillForm(paper) {

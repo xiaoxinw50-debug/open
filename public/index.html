@@ -54,7 +54,7 @@
       <section class="toolbar">
         <div class="tabs" role="tablist" aria-label="页面切换">
           <button class="tab is-active" data-view="ranking">排序总览</button>
-          <button class="tab" data-view="candidates">候选论文</button>
+          <button class="tab" data-view="candidates">待审核论文</button>
           <button class="tab" data-view="manual">手动计算</button>
           <button class="tab" data-view="ingest">自动检索</button>
         </div>
@@ -119,8 +119,8 @@
       <section id="candidates" class="view">
         <div class="section-heading">
           <div>
-            <h2>待补参数候选库</h2>
-            <p>这里放自动检索到但暂时不能严谨计算的论文。补齐参数和 Rc 口径后即可进入排序。</p>
+            <h2>待审核论文</h2>
+            <p>这里集中显示估算样本和缺参样本。优先处理只差 Rc 口径的论文，其次补 Ion/Rc、SS、VDS 和开关比。</p>
           </div>
           <label class="checkbox compact-toggle">
             <input id="include-low-value" type="checkbox" />
@@ -128,12 +128,19 @@
           </label>
         </div>
         <div id="diagnostics-card" class="diagnostics-card"></div>
+        <div class="review-filters" aria-label="待审核筛选">
+          <button class="review-filter is-active" data-review-filter="all">全部待审核</button>
+          <button class="review-filter" data-review-filter="rc">只看缺 Rc 口径</button>
+          <button class="review-filter" data-review-filter="core">只看缺 Ion/Rc</button>
+          <button class="review-filter" data-review-filter="missing">只看不能计算</button>
+        </div>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>年份</th>
                 <th>论文</th>
+                <th>状态</th>
                 <th>来源</th>
                 <th>缺失字段</th>
                 <th>已算部分</th>

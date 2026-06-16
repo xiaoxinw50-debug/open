@@ -790,6 +790,29 @@ tbody tr:hover {
   line-height: 1.6;
 }
 
+.review-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -2px 0 16px;
+}
+
+.review-filter {
+  padding: 0.52rem 0.82rem;
+  border-radius: 999px;
+  background: #fff8f5;
+  border: 1px solid var(--line);
+  box-shadow: none;
+  color: #5d494a;
+  font-size: 0.84rem;
+}
+
+.review-filter.is-active {
+  background: #211717;
+  border-color: #211717;
+  color: white;
+}
+
 .form-actions {
   display: flex;
   gap: 12px;
