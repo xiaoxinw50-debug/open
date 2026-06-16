@@ -116,7 +116,7 @@ function renderRanking() {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="metric">${index + 1}</td>
-      <td>${paperLink(paper)}${metaLine(paper)}<div class="meta">${escapeHtml(paper.sourceTrace || "")}</div></td>
+      <td>${paperLink(paper)}${metaLine(paper)}<div class="meta">${escapeHtml(paper.sourceTrace || "")}</div>${evidenceLine(paper)}</td>
       <td>${escapeHtml([paper.material, paper.deviceType].filter(Boolean).join(" / ") || "-")}</td>
       <td>${num(paper.params.ionUaPerUm)}<div class="meta">μA/μm</div></td>
       <td>${num(paper.params.rcOhmUm)}<div class="meta">Ω·μm，${rcLabel(paper.params.rcDefinition)}</div></td>
@@ -145,7 +145,7 @@ function renderCandidates() {
       <td>${paperLink(paper)}${metaLine(paper)}</td>
       <td>${escapeHtml(paper.sourceType || "-")}<div class="meta">${escapeHtml(paper.journal || "")}</div></td>
       <td>${paper.metrics.missingFields.map((item) => `<span class="pill warn">${escapeHtml(item)}</span>`).join(" ")}</td>
-      <td><span class="meta">${escapeHtml(paper.params.notes || paper.sourceTrace || "")}</span></td>
+      <td><span class="meta">${escapeHtml(paper.params.notes || paper.sourceTrace || "")}</span>${evidenceLine(paper)}</td>
       <td>${actions(paper)}</td>
     `;
     body.appendChild(tr);
@@ -196,6 +196,7 @@ function renderRankingOutput() {
     VDS_V: row.vdsV,
     SS_mV_dec: row.ssMvDec,
     log10_Ion_Ioff: row.logSwitchRatio,
+    evidence: row.evidence,
     Vdrop_V: row.contactDropV,
     Veff_V: row.effectiveVoltageV,
     Vsw_V: row.switchCostV,
@@ -365,6 +366,28 @@ function metaLine(paper) {
   return `<div class="meta">${escapeHtml([paper.authors, paper.journal, paper.year].filter(Boolean).join(" · "))}</div>`;
 }
 
+function evidenceLine(paper) {
+  const evidence = paper.params?.evidence || paper.evidence || {};
+  const labels = {
+    ionUaPerUm: "Ion",
+    rcOhmUm: "Rc",
+    rcDefinition: "Rc口径",
+    vdsV: "VDS",
+    ssMvDec: "SS",
+    logSwitchRatio: "开关比"
+  };
+  const entries = Object.entries(labels)
+    .map(([key, label]) => {
+      const item = evidence[key];
+      if (!item?.snippet) return "";
+      return `${label}: ${item.snippet}`;
+    })
+    .filter(Boolean)
+    .slice(0, 3);
+  if (!entries.length) return "";
+  return `<div class="evidence">字段证据：${escapeHtml(entries.join(" | "))}</div>`;
+}
+
 function actions(paper) {
   return `
     <div class="row-actions">
@@ -480,7 +503,8 @@ function downloadRankingCsv() {
     "missingFields",
     "dataCompleteness",
     "dataTrace",
-    "sourceTrace"
+    "sourceTrace",
+    "evidence"
   ];
   const csv = [
     fields.join(","),
@@ -513,7 +537,12 @@ async function copyText(text) {
 }
 
 function csvValue(value) {
-  const normalized = Array.isArray(value) ? value.join("; ") : value ?? "";
+  const normalized =
+    value && typeof value === "object"
+      ? JSON.stringify(value)
+      : Array.isArray(value)
+        ? value.join("; ")
+        : value ?? "";
   return `"${String(normalized).replace(/"/g, '""')}"`;
 }
 

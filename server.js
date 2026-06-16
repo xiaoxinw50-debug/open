@@ -262,6 +262,7 @@ function toRankingRow(paper) {
     relevanceScore: paper.relevanceScore ?? null,
     sourceTrace: paper.sourceTrace || "",
     dataTrace: params.notes || "",
+    evidence: params.evidence || {},
     ionUaPerUm: params.ionUaPerUm ?? null,
     ionMAPerUm: metrics.ionMAPerUm,
     rcOhmUm: params.rcOhmUm ?? null,

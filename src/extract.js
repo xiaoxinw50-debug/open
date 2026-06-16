@@ -77,73 +77,80 @@ export function relevanceScore(text = "") {
 export function extractParams(rawText = "") {
   const text = normalize(rawText);
   const notes = [];
+  const evidence = {};
 
   const ion = pickValue(text, [
     {
       name: "Ion",
       regex:
-        /(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?/gi,
+        /(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,130}?(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?/gi,
       convert: (value, unit) => convertCurrentToUa(value, unit)
     },
     {
       name: "Ion",
       regex:
-        /(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,100}?(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
+        /(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,120}?(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
       convert: (value, unit) => convertCurrentToUa(value, unit)
     }
-  ]);
+  ], { mode: "max", min: 0, max: 50000 });
   if (ion.note) notes.push(ion.note);
+  if (ion.evidence) evidence.ionUaPerUm = ion.evidence;
 
   const rc = pickValue(text, [
     {
       name: "Rc",
       regex:
-        /(?:contact resistance|R\s*c|Rc)[^.;,\n]{0,90}?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*)?\s*μ?m/gi,
+        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
     },
     {
       name: "Rc",
       regex:
-        /(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*)?\s*μ?m[^.;,\n]{0,80}?(?:contact resistance|R\s*c|Rc)/gi,
+        /(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)[^.;,\n]{0,100}?(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)/gi,
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
     }
-  ]);
+  ], { mode: "min", min: 0, max: 200000 });
   if (rc.note) notes.push(rc.note);
+  if (rc.evidence) evidence.rcOhmUm = rc.evidence;
   const rcDefinition = inferRcDefinition(text, rc.value);
   if (rcDefinition !== "unknown") notes.push(`自动识别 Rc 口径: ${rcDefinition === "single" ? "单侧接触" : "源漏总等效"}`);
+  if (rcDefinition !== "unknown") evidence.rcDefinition = { value: rcDefinition, snippet: "由全文语境自动判断，仍建议人工复核" };
 
   const ss = pickValue(text, [
     {
       name: "SS",
       regex:
-        /(?:subthreshold swing|subthreshold slope|SS)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*mV\s*(?:\/|·|\sper\s)?\s*dec(?:ade)?/gi,
+        /(?:subthreshold swing|subthreshold slope|SS)[^.;,\n]{0,90}?(\d+(?:\.\d+)?)\s*mV\s*(?:\/|·|\sper\s)?\s*dec(?:ade)?(?:\^-?1|[-−]1|⁻¹)?/gi,
       convert: (value) => value
     },
     {
       name: "SS",
       regex:
-        /(\d+(?:\.\d+)?)\s*mV\s*(?:\/|·|\sper\s)?\s*dec(?:ade)?[^.;,\n]{0,80}?(?:subthreshold swing|subthreshold slope|SS)/gi,
+        /(\d+(?:\.\d+)?)\s*mV\s*(?:\/|·|\sper\s)?\s*dec(?:ade)?(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,90}?(?:subthreshold swing|subthreshold slope|SS)/gi,
       convert: (value) => value
     }
-  ]);
+  ], { mode: "min", min: 20, max: 2000 });
   if (ss.note) notes.push(ss.note);
+  if (ss.evidence) evidence.ssMvDec = ss.evidence;
 
   const vds = pickValue(text, [
     {
       name: "VDS",
-      regex: /(?:V\s*DS|V\s*D|Vds|Vd|drain[-\s]?source voltage|drain voltage)[^.;,\n]{0,50}?(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd|drain[-\s]?source voltage|drain voltage)[^.;,\n]{0,60}?(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     },
     {
       name: "VDS",
-      regex: /(?:at|under|with)\s+(?:V\s*DS|V\s*D|Vds|Vd)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:at|under|with)\s+(?:V\s*(?:[_{]\s*)?(?:DS|D)\}?|Vds|Vd)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     }
-  ]);
+  ], { mode: "first", min: 0, max: 20 });
   if (vds.note) notes.push(vds.note);
+  if (vds.evidence) evidence.vdsV = vds.evidence;
 
   const logRatio = pickSwitchRatio(text);
   if (logRatio.note) notes.push(logRatio.note);
+  if (logRatio.evidence) evidence.logSwitchRatio = logRatio.evidence;
 
   return {
     params: {
@@ -153,7 +160,8 @@ export function extractParams(rawText = "") {
       vdsV: vds.value,
       ssMvDec: ss.value,
       logSwitchRatio: logRatio.value,
-      notes: notes.join("；")
+      notes: notes.join("；"),
+      evidence
     },
     extractionNotes: notes,
     extractionConfidence: confidence([ion.value, rc.value, ss.value, vds.value, logRatio.value])
@@ -182,7 +190,7 @@ export function inferDeviceType(text = "") {
   return "";
 }
 
-function pickValue(text, patterns) {
+function pickValue(text, patterns, options = {}) {
   const candidates = [];
   for (const pattern of patterns) {
     let match;
@@ -191,21 +199,32 @@ function pickValue(text, patterns) {
       const unit = match[2] || "";
       if (!Number.isFinite(value)) continue;
       const converted = pattern.convert(value, unit);
-      if (Number.isFinite(converted)) {
+      if (Number.isFinite(converted) && inRange(converted, options)) {
         candidates.push({
           value: converted,
           raw: match[0].replace(/\s+/g, " ").slice(0, 160),
-          name: pattern.name
+          name: pattern.name,
+          index: match.index
         });
       }
     }
   }
 
   if (!candidates.length) return { value: null, note: "" };
-  const picked = candidates.sort((a, b) => b.value - a.value)[0];
+  const sorted = candidates.slice().sort((a, b) => {
+    if (options.mode === "min") return a.value - b.value || a.index - b.index;
+    if (options.mode === "first") return a.index - b.index;
+    return b.value - a.value || a.index - b.index;
+  });
+  const picked = sorted[0];
   return {
     value: picked.value,
-    note: `自动识别 ${picked.name}: ${picked.raw}`
+    note: `自动识别 ${picked.name}: ${picked.raw}`,
+    evidence: {
+      value: picked.value,
+      snippet: picked.raw,
+      candidates: sorted.slice(0, 4).map((item) => item.raw)
+    }
   };
 }
 
@@ -218,7 +237,8 @@ function pickSwitchRatio(text) {
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
     /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*(?:orders of magnitude|decades)/gi,
-    /(?:Ion\/Ioff|I\s*on\s*\/\s*I\s*off)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi
+    /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
+    /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi
   ];
 
   for (const regex of patterns) {
@@ -238,8 +258,19 @@ function pickSwitchRatio(text) {
   const picked = candidates.sort((a, b) => b.value - a.value)[0];
   return {
     value: picked.value,
-    note: `自动识别开关比对数: ${picked.raw}`
+    note: `自动识别开关比对数: ${picked.raw}`,
+    evidence: {
+      value: picked.value,
+      snippet: picked.raw,
+      candidates: candidates.slice(0, 4).map((item) => item.raw)
+    }
   };
+}
+
+function inRange(value, options = {}) {
+  if (options.min !== undefined && value < options.min) return false;
+  if (options.max !== undefined && value > options.max) return false;
+  return true;
 }
 
 function confidence(values) {
@@ -280,14 +311,18 @@ function normalize(text) {
     .replace(/&gt;/g, ">")
     .replace(/&amp;/g, "&")
     .replace(/[−–—]/g, "-")
+    .replace(/Ω/g, "Ω")
     .replace(/µ/g, "μ")
+    .replace(/\bμ\s*m\b/gi, "μm")
+    .replace(/\bu\s*m\b/gi, "um")
+    .replace(/\bm\s*V\b/g, "mV")
     .replace(/\bμ\s*A\b/gi, "μA")
     .replace(/\bu\s*A\b/gi, "uA")
     .replace(/\bm\s*A\b/g, "mA")
-    .replace(/\bA\s*\/\s*μ\s*m\b/g, "A/μm")
-    .replace(/\b(μA|uA|mA)\s*\/\s*μ\s*m\b/gi, "$1/μm")
-    .replace(/\bΩ\s*μ\s*m\b/g, "Ω μm")
-    .replace(/\bohm\s*μ\s*m\b/gi, "ohm μm")
+    .replace(/\bA\s*\/\s*(μm|um)\b/gi, "A/μm")
+    .replace(/\b(μA|uA|mA)\s*\/\s*(μm|um)\b/gi, "$1/μm")
+    .replace(/\bΩ\s*(?:·|-)?\s*(μm|um)\b/gi, "Ω μm")
+    .replace(/\bohm\s*(?:·|-)?\s*(μm|um)\b/gi, "ohm μm")
     .replace(/\s+/g, " ")
     .trim();
 }

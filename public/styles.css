@@ -453,6 +453,15 @@ tbody tr:hover {
   margin-top: 4px;
 }
 
+.evidence {
+  color: #4f3030;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin-top: 7px;
+  padding-left: 10px;
+  border-left: 3px solid rgba(158, 17, 23, 0.42);
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

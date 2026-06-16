@@ -75,7 +75,8 @@ export async function runIngestion(options = {}) {
           sourceSummary.fullTextAttempted += 1;
           fullTextResult = await readOpenFullText(paper, {
             timeoutMs: fullTextTimeoutMs,
-            unpaywallEmail: options.unpaywallEmail
+            unpaywallEmail: options.unpaywallEmail,
+            maxSources: options.fullTextMaxSources
           });
           if (fullTextResult.ok) {
             fullTextRead += 1;
@@ -101,7 +102,7 @@ export async function runIngestion(options = {}) {
             paper.sourceTrace,
             `自动检索 ${paper.sourceName}；参数抽取置信度 ${extraction.extractionConfidence}`,
             fullTextResult?.ok
-              ? `已读取开放全文 ${fullTextResult.source}，${fullTextResult.chars} 字符${helpedByFullText ? "；全文补充了参数" : ""}`
+              ? `已整体读取开放全文 ${fullTextResult.sources?.length || 1} 个来源，${fullTextResult.chars} 字符：${formatFullTextSources(fullTextResult)}${helpedByFullText ? "；全文补充了参数" : ""}`
               : fullTextResult
                 ? `未读到开放全文：${fullTextResult.errors.slice(0, 2).join("；")}`
                 : ""
@@ -383,6 +384,15 @@ function extractionAddsFields(before = {}, after = {}) {
   const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
   return fields.some((field) => isBlank(before[field]) && !isBlank(after[field])) ||
     (before.rcDefinition === "unknown" && after.rcDefinition && after.rcDefinition !== "unknown");
+}
+
+function formatFullTextSources(result = {}) {
+  const sources = result.sources?.length
+    ? result.sources
+    : [{ source: result.source || "open text", chars: result.chars || 0 }];
+  return sources
+    .map((item) => `${item.source}(${item.chars} 字符)`)
+    .join("、");
 }
 
 function isBlank(value) {

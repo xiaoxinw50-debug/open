@@ -205,9 +205,18 @@ function mergePaper(existing, incoming) {
     ...incoming,
     status,
     params: { ...newParams, ...removeNullish(keepParams) },
-    sourceTrace: [existing.sourceTrace, incoming.sourceTrace].filter(Boolean).join(" | "),
+    sourceTrace: mergeTrace(existing.sourceTrace, incoming.sourceTrace),
     updatedAt: new Date().toISOString()
   };
+}
+
+function mergeTrace(...values) {
+  const parts = values
+    .filter(Boolean)
+    .flatMap((value) => String(value).split(/\s+\|\s+/))
+    .map((value) => value.trim())
+    .filter(Boolean);
+  return [...new Set(parts)].join(" | ");
 }
 
 function removeNullish(obj) {

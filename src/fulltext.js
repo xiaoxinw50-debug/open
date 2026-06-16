@@ -1,30 +1,56 @@
 const DEFAULT_TIMEOUT_MS = 9000;
-const DEFAULT_MAX_CHARS = 250000;
+const DEFAULT_MAX_CHARS = 900000;
+const DEFAULT_MAX_CHARS_PER_SOURCE = 350000;
+const DEFAULT_MAX_SOURCES = 4;
 const MIN_TEXT_CHARS = 1200;
 const USER_AGENT = "SwitchMarginSite/0.1 (open full-text parameter extraction; mailto:example@example.com)";
 
 export async function readOpenFullText(paper = {}, options = {}) {
   const candidates = await fullTextCandidates(paper, options);
   const errors = [];
+  const sources = [];
+  const maxSources = Number(options.maxSources || DEFAULT_MAX_SOURCES);
+  const maxChars = Number(options.maxChars || DEFAULT_MAX_CHARS);
+  let usedChars = 0;
 
   for (const candidate of candidates) {
     try {
       const result = await fetchTextCandidate(candidate, options);
       if (result.text.length >= MIN_TEXT_CHARS) {
-        return {
-          ok: true,
+        const remaining = maxChars - usedChars;
+        if (remaining <= 0) break;
+        const text = result.text.slice(0, remaining);
+        sources.push({
           source: result.source,
           url: candidate.url,
-          chars: result.text.length,
-          text: result.text,
-          attempted: candidates.length,
-          errors
-        };
+          chars: text.length,
+          text: `\n\n===== ${result.source} =====\n${text}`
+        });
+        usedChars += text.length;
+        if (sources.length >= maxSources || usedChars >= maxChars) break;
+        continue;
       }
       errors.push(`${candidate.source}: text too short (${result.text.length})`);
     } catch (error) {
       errors.push(`${candidate.source}: ${error.message}`);
     }
+  }
+
+  if (sources.length) {
+    const text = sources
+      .map((source) => source.text || "")
+      .join("\n\n")
+      .trim();
+    return {
+      ok: true,
+      source: sources.map((item) => item.source).join(" + "),
+      url: sources[0].url,
+      chars: text.length,
+      text,
+      attempted: candidates.length,
+      sources: sources.map(({ text: _text, ...source }) => source),
+      errors
+    };
   }
 
   return {
@@ -44,6 +70,9 @@ async function fullTextCandidates(paper, options) {
   for (const item of paper.fullTextUrls || []) {
     addCandidate(candidates, item.url || item, item.source || "open-location");
   }
+
+  if (paper.url) addCandidate(candidates, paper.url, "paper URL");
+  if (paper.doi) addCandidate(candidates, `https://doi.org/${paper.doi}`, "DOI landing");
 
   const arxivId = getArxivId(paper);
   if (arxivId) {
@@ -117,8 +146,8 @@ async function fetchTextCandidate(candidate, options) {
     throw new Error("PDF response; PDF full-text parsing is not enabled in this deployment");
   }
 
-  const maxChars = Number(options.maxChars || DEFAULT_MAX_CHARS);
-  const raw = (await response.text()).slice(0, maxChars * 2);
+  const maxChars = Number(options.maxCharsPerSource || DEFAULT_MAX_CHARS_PER_SOURCE);
+  const raw = await response.text();
   const text = htmlToText(raw).slice(0, maxChars);
   return { source: candidate.source, text };
 }
