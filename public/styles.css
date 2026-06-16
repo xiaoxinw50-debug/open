@@ -453,6 +453,30 @@ tbody tr:hover {
   margin-top: 4px;
 }
 
+.partial-stage {
+  color: #3f3030;
+  font-weight: 800;
+  max-width: 280px;
+}
+
+.partial-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.partial-values span {
+  border: 1px solid rgba(158, 17, 23, 0.24);
+  border-radius: 999px;
+  background: #fff5f1;
+  color: #771017;
+  font-family: "Times New Roman", serif;
+  font-size: 0.86rem;
+  font-weight: 900;
+  padding: 0.22rem 0.55rem;
+}
+
 .evidence {
   color: #4f3030;
   font-size: 0.82rem;

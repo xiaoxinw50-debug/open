@@ -133,10 +133,13 @@ function renderRanking() {
 }
 
 function renderCandidates() {
-  const rows = state.papers.filter((paper) => !paper.metrics.canCalculateGamma);
+  const rows = state.papers
+    .filter((paper) => !paper.metrics.canCalculateGamma)
+    .slice()
+    .sort((a, b) => (b.metrics.dataCompleteness || 0) - (a.metrics.dataCompleteness || 0) || (b.year || 0) - (a.year || 0));
   const body = $("#candidate-body");
   body.innerHTML = "";
-  if (!rows.length) return renderEmpty(body, 6);
+  if (!rows.length) return renderEmpty(body, 7);
 
   rows.forEach((paper) => {
     const tr = document.createElement("tr");
@@ -145,6 +148,7 @@ function renderCandidates() {
       <td>${paperLink(paper)}${metaLine(paper)}</td>
       <td>${escapeHtml(paper.sourceType || "-")}<div class="meta">${escapeHtml(paper.journal || "")}</div></td>
       <td>${paper.metrics.missingFields.map((item) => `<span class="pill warn">${escapeHtml(item)}</span>`).join(" ")}</td>
+      <td>${partialMetrics(paper)}</td>
       <td><span class="meta">${escapeHtml(paper.params.notes || paper.sourceTrace || "")}</span>${evidenceLine(paper)}</td>
       <td>${actions(paper)}</td>
     `;
@@ -199,10 +203,14 @@ function renderRankingOutput() {
     evidence: row.evidence,
     Vdrop_V: row.contactDropV,
     Veff_V: row.effectiveVoltageV,
+    trial_Vdrop_V: row.trialContactDropV,
+    trial_Veff_V: row.trialEffectiveVoltageV,
     Vsw_V: row.switchCostV,
     Pi_2D: row.pi2d,
     Gamma_2D: row.gamma2d,
+    trial_Gamma_2D: row.trialGamma2d,
     judgment: row.marginClass,
+    partial_stage: row.partialStage,
     missing: row.missingFields
   }));
 
@@ -252,6 +260,22 @@ function renderPreview(paper) {
 
 function previewItem(title, value, note) {
   return `<div class="preview-item"><span>${title}</span><b>${value}</b><small>${note}</small></div>`;
+}
+
+function partialMetrics(paper) {
+  const m = paper.metrics || {};
+  const rows = [
+    m.pi2d !== null ? `Π₂D ${num(m.pi2d)}` : "",
+    m.trialContactDropV !== null ? `Vdrop* ${num(m.trialContactDropV)} V` : "",
+    m.trialEffectiveVoltageV !== null ? `Veff* ${num(m.trialEffectiveVoltageV)} V` : "",
+    m.switchCostV !== null ? `Vsw ${num(m.switchCostV)} V` : "",
+    m.trialGamma2d !== null ? `Γ₂D* ${num(m.trialGamma2d)}` : ""
+  ].filter(Boolean);
+  return `
+    <div class="partial-stage">${escapeHtml(m.partialStage || "待补参数")}</div>
+    ${rows.length ? `<div class="partial-values">${rows.map((row) => `<span>${escapeHtml(row)}</span>`).join("")}</div>` : ""}
+    ${m.trialRcAssumption ? `<div class="meta">${escapeHtml(m.trialRcAssumption)}</div>` : ""}
+  `;
 }
 
 function bindRowActions() {
@@ -525,6 +549,7 @@ function downloadRankingCsv() {
     "rcOhmUm",
     "rcDefinition",
     "rcEffectiveOhmUm",
+    "trialRcEffectiveOhmUm",
     "vdsV",
     "ssMvDec",
     "logSwitchRatio",
@@ -532,11 +557,18 @@ function downloadRankingCsv() {
     "pi2d",
     "contactDropV",
     "effectiveVoltageV",
+    "trialContactDropV",
+    "trialEffectiveVoltageV",
     "switchCostV",
     "gamma2d",
+    "trialGamma2d",
+    "trialRcAssumption",
     "marginClass",
     "canCalculateGamma",
+    "canTrialGamma",
+    "availableFields",
     "missingFields",
+    "partialStage",
     "dataCompleteness",
     "dataTrace",
     "sourceTrace",

@@ -53,14 +53,26 @@ export function calculatePaper(paper = {}) {
 
   const effectiveRcKOhmUm =
     rcKOhmUm !== null && rcMultiplier !== null ? rcKOhmUm * rcMultiplier : null;
+  const trialRcMultiplier =
+    rcMultiplier !== null ? rcMultiplier : ionMAPerUm !== null && rcKOhmUm !== null ? 1 : null;
+  const trialRcAssumption =
+    rcMultiplier === null && trialRcMultiplier === 1 ? "Rc口径未知，试算按源漏总等效接触电阻处理" : "";
+  const trialEffectiveRcKOhmUm =
+    rcKOhmUm !== null && trialRcMultiplier !== null ? rcKOhmUm * trialRcMultiplier : null;
 
   const contactDropV =
     ionMAPerUm !== null && effectiveRcKOhmUm !== null
       ? ionMAPerUm * effectiveRcKOhmUm
       : null;
+  const trialContactDropV =
+    ionMAPerUm !== null && trialEffectiveRcKOhmUm !== null
+      ? ionMAPerUm * trialEffectiveRcKOhmUm
+      : null;
 
   const effectiveVoltageV =
     vdsV !== null && contactDropV !== null ? Math.abs(vdsV) - contactDropV : null;
+  const trialEffectiveVoltageV =
+    vdsV !== null && trialContactDropV !== null ? Math.abs(vdsV) - trialContactDropV : null;
 
   const switchCostV =
     ssVDec !== null && logSwitchRatio !== null ? ssVDec * logSwitchRatio : null;
@@ -68,6 +80,10 @@ export function calculatePaper(paper = {}) {
   const gamma2d =
     effectiveVoltageV !== null && switchCostV !== null && switchCostV > 0
       ? effectiveVoltageV / switchCostV
+      : null;
+  const trialGamma2d =
+    gamma2d === null && trialEffectiveVoltageV !== null && switchCostV !== null && switchCostV > 0
+      ? trialEffectiveVoltageV / switchCostV
       : null;
 
   const required = [
@@ -89,6 +105,17 @@ export function calculatePaper(paper = {}) {
   }
 
   const dataCompleteness = round((required.length - missingFields.length) / required.length, 2);
+  const availableFields = required.filter(([, value]) => value !== null).map(([name]) => name);
+  const partialStage = getPartialStage({
+    gamma2d,
+    trialGamma2d,
+    pi2d,
+    trialContactDropV,
+    trialEffectiveVoltageV,
+    switchCostV,
+    missingFields,
+    trialRcAssumption
+  });
 
   return {
     pi2d: round(pi2d, 4),
@@ -98,14 +125,33 @@ export function calculatePaper(paper = {}) {
     effectiveRcKOhmUm: round(effectiveRcKOhmUm, 5),
     contactDropV: round(contactDropV, 4),
     effectiveVoltageV: round(effectiveVoltageV, 4),
+    trialEffectiveRcKOhmUm: round(trialEffectiveRcKOhmUm, 5),
+    trialContactDropV: round(trialContactDropV, 4),
+    trialEffectiveVoltageV: round(trialEffectiveVoltageV, 4),
     switchCostV: round(switchCostV, 4),
     logSwitchRatio: round(logSwitchRatio, 3),
     gamma2d: round(gamma2d, 3),
+    trialGamma2d: round(trialGamma2d, 3),
+    trialRcAssumption,
     marginClass,
     canCalculateGamma,
+    canTrialGamma: trialGamma2d !== null,
+    availableFields,
     missingFields,
-    dataCompleteness
+    dataCompleteness,
+    partialStage
   };
+}
+
+function getPartialStage(metrics) {
+  if (metrics.gamma2d !== null) return "严格 Γ₂D 已计算";
+  if (metrics.trialGamma2d !== null) return `可试算 Γ₂D：${metrics.trialRcAssumption}`;
+  if (metrics.trialEffectiveVoltageV !== null) return "已得到 Ion、Rc、VDS，可试算接触压降；仍缺 SS 或开关比，不能计算 Γ₂D";
+  if (metrics.pi2d !== null && metrics.switchCostV !== null) return "已得到 Ion/Rc 与 SS/开关比；仍缺 VDS 或 Rc口径，不能计算 Γ₂D";
+  if (metrics.pi2d !== null) return "已得到 Ion 和 Rc，可计算 Π₂D；仍缺 VDS、SS 或开关比";
+  if (metrics.switchCostV !== null) return "已得到 SS 和开关比，可计算开关电压代价；仍缺 Ion 或 Rc";
+  if (metrics.missingFields.length < 6) return `已有部分字段，仍缺：${metrics.missingFields.join("、")}`;
+  return "公式字段尚未抽到，需要人工补充或读取图表/补充材料";
 }
 
 export function withMetrics(paper) {

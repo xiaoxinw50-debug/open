@@ -268,6 +268,7 @@ function toRankingRow(paper) {
     rcOhmUm: params.rcOhmUm ?? null,
     rcDefinition: params.rcDefinition || "unknown",
     rcEffectiveOhmUm: metrics.effectiveRcKOhmUm == null ? null : metrics.effectiveRcKOhmUm * 1000,
+    trialRcEffectiveOhmUm: metrics.trialEffectiveRcKOhmUm == null ? null : metrics.trialEffectiveRcKOhmUm * 1000,
     vdsV: params.vdsV ?? null,
     ssMvDec: params.ssMvDec ?? null,
     logSwitchRatio: metrics.logSwitchRatio,
@@ -275,12 +276,19 @@ function toRankingRow(paper) {
     pi2d: metrics.pi2d,
     contactDropV: metrics.contactDropV,
     effectiveVoltageV: metrics.effectiveVoltageV,
+    trialContactDropV: metrics.trialContactDropV,
+    trialEffectiveVoltageV: metrics.trialEffectiveVoltageV,
     switchCostV: metrics.switchCostV,
     gamma2d: metrics.gamma2d,
+    trialGamma2d: metrics.trialGamma2d,
+    trialRcAssumption: metrics.trialRcAssumption,
     marginClass: metrics.marginClass,
     canCalculateGamma: metrics.canCalculateGamma,
+    canTrialGamma: metrics.canTrialGamma,
+    availableFields: metrics.availableFields,
     missingFields: metrics.missingFields,
-    dataCompleteness: metrics.dataCompleteness
+    dataCompleteness: metrics.dataCompleteness,
+    partialStage: metrics.partialStage
   };
 }
 
