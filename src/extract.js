@@ -107,6 +107,12 @@ const BENCHMARK_TERMS = [
   "ion/ioff"
 ];
 
+const CURRENT_SYMBOL = String.raw`(?:I\s*(?:[_\{\}\\\s]*(?:rm|mathrm|text)?[_\{\}\\\s]*)?on\}?|I\s+on|Ion)`;
+const OFF_CURRENT_SYMBOL = String.raw`(?:I\s*(?:[_\{\}\\\s]*(?:rm|mathrm|text)?[_\{\}\\\s]*)?off\}?|I\s+off|Ioff)`;
+const SCI_NUMBER = String.raw`(?:\d+(?:\.\d+)?(?:[eE][+-]?\d+|\s*(?:(?:×|x|\\times)\s*)+\s*10\s*(?:\^|\*\*)?\s*-?\d+|\s+10\s*-?\d+)?|\d+(?:\.\d+)?)`;
+const CURRENT_PER_WIDTH_UNIT = String.raw`(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?`;
+const CURRENT_PER_M_UNIT = String.raw`(A\s*\/\s*m|A\s*per\s*m|A\s*m[-−]1|A\/m)`;
+
 export function looksRelevant(text = "") {
   const lower = normalize(text).toLowerCase();
   const materialHit = RELEVANT_MATERIALS.some((term) => lower.includes(term));
@@ -152,31 +158,68 @@ export function extractParams(rawText = "") {
   const ion = pickValue(text, [
     {
       name: "Ion",
-      regex:
-        /(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,130}?(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?/gi,
+      regex: new RegExp(
+        String.raw`(?:${CURRENT_SYMBOL}|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,150}?(${SCI_NUMBER})\s*${CURRENT_PER_WIDTH_UNIT}`,
+        "gi"
+      ),
       convert: (value, unit) => convertCurrentToUa(value, unit)
     },
     {
       name: "Ion",
-      regex:
-        /(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,150}?((?:\d+(?:\.\d+)?)\s*(?:(?:×|x|\\times)\s*)?10\s*\^?\s*-?\d+|\d+(?:\.\d+)?)\s*(A\s*\/\s*m|A\s*per\s*m|A\s*m[-−]1|A\/m)/gi,
+      regex: new RegExp(
+        String.raw`(?:${CURRENT_SYMBOL}|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,170}?(${SCI_NUMBER})\s*${CURRENT_PER_M_UNIT}`,
+        "gi"
+      ),
       convert: (value) => value
     },
     {
       name: "Ion",
-      regex:
-        /(\d+(?:\.\d+)?)\s*(mA|μA|uA|A)\s*(?:\/|·|\sper\s)?\s*(?:μm|um)(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,120}?(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
+      regex: new RegExp(
+        String.raw`(${SCI_NUMBER})\s*${CURRENT_PER_WIDTH_UNIT}[^.;,\n]{0,140}?(?:${CURRENT_SYMBOL}|on[-\s]?(?:state\s*)?current|drive current|current density)`,
+        "gi"
+      ),
       convert: (value, unit) => convertCurrentToUa(value, unit)
     },
     {
       name: "Ion",
-      regex:
-        /((?:\d+(?:\.\d+)?)\s*(?:(?:×|x|\\times)\s*)?10\s*\^?\s*-?\d+|\d+(?:\.\d+)?)\s*(A\s*\/\s*m|A\s*per\s*m|A\s*m[-−]1|A\/m)[^.;,\n]{0,140}?(?:I\s*(?:[_{]\s*)?on\}?|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
+      regex: new RegExp(
+        String.raw`(${SCI_NUMBER})\s*${CURRENT_PER_M_UNIT}[^.;,\n]{0,160}?(?:${CURRENT_SYMBOL}|on[-\s]?(?:state\s*)?current|drive current|current density)`,
+        "gi"
+      ),
       convert: (value) => value
     }
   ], { mode: "max", min: 0, max: 50000, document });
   if (ion.note) notes.push(ion.note);
   if (ion.evidence) evidence.ionUaPerUm = ion.evidence;
+
+  const ioff = pickValue(text, [
+    {
+      name: "Ioff",
+      regex: new RegExp(
+        String.raw`(?:${OFF_CURRENT_SYMBOL}|off[-\s]?(?:state\s*)?current|leakage current)[^.;,\n]{0,150}?(${SCI_NUMBER})\s*${CURRENT_PER_WIDTH_UNIT}`,
+        "gi"
+      ),
+      convert: (value, unit) => convertCurrentToUa(value, unit)
+    },
+    {
+      name: "Ioff",
+      regex: new RegExp(
+        String.raw`(?:${OFF_CURRENT_SYMBOL}|off[-\s]?(?:state\s*)?current|leakage current)[^.;,\n]{0,170}?(${SCI_NUMBER})\s*${CURRENT_PER_M_UNIT}`,
+        "gi"
+      ),
+      convert: (value) => value
+    },
+    {
+      name: "Ioff",
+      regex: new RegExp(
+        String.raw`(${SCI_NUMBER})\s*${CURRENT_PER_WIDTH_UNIT}[^.;,\n]{0,150}?(?:${OFF_CURRENT_SYMBOL}|off[-\s]?(?:state\s*)?current|leakage current)`,
+        "gi"
+      ),
+      convert: (value, unit) => convertCurrentToUa(value, unit)
+    }
+  ], { mode: "min", min: 1e-12, max: 10000, document });
+  if (ioff.note) notes.push(ioff.note);
+  if (ioff.evidence) evidence.ioffUaPerUm = ioff.evidence;
 
   const rc = pickValue(text, [
     {
@@ -258,7 +301,7 @@ export function extractParams(rawText = "") {
   if (vds.note) notes.push(vds.note);
   if (vds.evidence) evidence.vdsV = vds.evidence;
 
-  const logRatio = pickSwitchRatio(text, document);
+  const logRatio = pickSwitchRatio(text, document, { ion, ioff });
   if (logRatio.note) notes.push(logRatio.note);
   if (logRatio.evidence) evidence.logSwitchRatio = logRatio.evidence;
 
@@ -270,6 +313,7 @@ export function extractParams(rawText = "") {
       vdsV: vds.value,
       ssMvDec: ss.value,
       logSwitchRatio: logRatio.value,
+      ioffUaPerUm: ioff.value,
       notes: notes.join("；"),
       evidence
     },
@@ -335,25 +379,30 @@ function pickValue(text, patterns, options = {}) {
   };
 }
 
-function pickSwitchRatio(text, document) {
+function pickSwitchRatio(text, document, context = {}) {
   const candidates = [];
   const plain = text
     .replace(/10\s*([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g, (_match, power) => `10^${power.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, (char) => SUPERSCRIPT_MAP[char] || char)}`)
     .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/g, (char) => SUPERSCRIPT_MAP[char] || char);
+  const ratioSymbol = String.raw`(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?|${CURRENT_SYMBOL}\s*\/\s*${OFF_CURRENT_SYMBOL})`;
   const patterns = [
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s+(\d{2})(?!\d)/gi,
+    /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s+([3-9]|1[0-5])\b/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10([3-9]|1[0-5])\b/gi,
     /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /10\s+(\d{2})(?!\d)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
+    /10\s+([3-9]|1[0-5])\b[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /\b10([3-9]|1[0-5])\b[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*(?:orders of magnitude|decades)/gi,
-    /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
-    /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10\s+(\d{2})(?!\d)/gi,
-    /(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)[^.;,\n]{0,90}?10([3-9]|1[0-5])\b/gi,
-    /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi,
-    /10\s+(\d{2})(?!\d)[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi,
-    /\b10([3-9]|1[0-5])\b[^.;,\n]{0,90}?(?:Ion\/Ioff|I\s*(?:[_{]\s*)?on\}?\s*\/\s*I\s*(?:[_{]\s*)?off\}?)/gi
+    new RegExp(String.raw`${ratioSymbol}[^.;,\n]{0,90}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)`, "gi"),
+    new RegExp(String.raw`${ratioSymbol}[^.;,\n]{0,90}?10\s+(\d{2})(?!\d)`, "gi"),
+    new RegExp(String.raw`${ratioSymbol}[^.;,\n]{0,90}?10\s+([3-9]|1[0-5])\b`, "gi"),
+    new RegExp(String.raw`${ratioSymbol}[^.;,\n]{0,90}?10([3-9]|1[0-5])\b`, "gi"),
+    new RegExp(String.raw`10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,90}?${ratioSymbol}`, "gi"),
+    new RegExp(String.raw`10\s+(\d{2})(?!\d)[^.;,\n]{0,90}?${ratioSymbol}`, "gi"),
+    new RegExp(String.raw`10\s+([3-9]|1[0-5])\b[^.;,\n]{0,90}?${ratioSymbol}`, "gi"),
+    new RegExp(String.raw`\b10([3-9]|1[0-5])\b[^.;,\n]{0,90}?${ratioSymbol}`, "gi")
   ];
 
   for (const regex of patterns) {
@@ -371,12 +420,27 @@ function pickSwitchRatio(text, document) {
     }
   }
 
+  const derived = deriveSwitchRatioFromCurrents(context.ion, context.ioff);
+  if (derived) candidates.push(derived);
   if (!candidates.length) return { value: null, note: "" };
   const picked = candidates.sort((a, b) => b.value - a.value)[0];
   return {
     value: picked.value,
-    note: `自动识别开关比对数: ${picked.raw}`,
+    note: picked.derived ? `由 Ion/Ioff 自动计算开关比对数: ${picked.raw}` : `自动识别开关比对数: ${picked.raw}`,
     evidence: buildEvidence(picked, candidates, document)
+  };
+}
+
+function deriveSwitchRatioFromCurrents(ion = {}, ioff = {}) {
+  if (!Number.isFinite(ion.value) || !Number.isFinite(ioff.value) || ion.value <= 0 || ioff.value <= 0) return null;
+  const value = Math.log10(ion.value / ioff.value);
+  if (!Number.isFinite(value) || value <= 0 || value > 20) return null;
+  return {
+    value,
+    raw: `Ion ${roundForSnippet(ion.value)} μA/μm / Ioff ${roundForSnippet(ioff.value)} μA/μm`,
+    index: ion.evidence?.charStart ?? ion.index ?? 0,
+    end: ioff.evidence?.charEnd ?? ioff.end ?? ion.end ?? 0,
+    derived: true
   };
 }
 
@@ -488,11 +552,21 @@ function parseNumericExpression(value = "") {
   const compact = String(value)
     .replace(/\\times/g, "×")
     .replace(/[×x]\s*/gi, "×")
+    .replace(/(?:×\s*){2,}/g, "×")
+    .replace(/\s*(?:\^|\*\*)\s*/g, "^")
     .replace(/\s+/g, " ")
     .trim();
+  if (/^\d+(?:\.\d+)?[eE][+-]?\d+$/.test(compact)) return Number(compact);
   const scientific = compact.match(/^(\d+(?:\.\d+)?)\s*×?\s*10\s*\^?\s*(-?\d+)$/i);
   if (scientific) return Number(scientific[1]) * 10 ** Number(scientific[2]);
   return Number(compact);
+}
+
+function roundForSnippet(value) {
+  if (!Number.isFinite(value)) return "-";
+  if (value === 0) return "0";
+  if (Math.abs(value) >= 1000 || Math.abs(value) < 0.001) return value.toExponential(3);
+  return Number(value.toPrecision(4)).toString();
 }
 
 function inferRcDefinition(text, rcValue) {

@@ -25,6 +25,10 @@ export function getLogSwitchRatio(params = {}) {
   const ratio = toNumber(params.onOffRatio);
   if (ratio && ratio > 1) return Math.log10(ratio);
 
+  const ion = toNumber(params.ionUaPerUm);
+  const ioff = toNumber(params.ioffUaPerUm);
+  if (ion && ioff && ion > 0 && ioff > 0 && ion > ioff) return Math.log10(ion / ioff);
+
   return null;
 }
 
@@ -122,6 +126,14 @@ export function calculatePaper(paper = {}) {
   }
 
   const dataCompleteness = round((required.length - missingFields.length) / required.length, 2);
+  const gammaMode = gamma2d !== null ? "strict" : estimate.gamma2d !== null ? "estimated" : "missing";
+  const dataQualityScore = getDataQualityScore({
+    gammaMode,
+    missingFields,
+    estimateAssumptions: estimate.assumptions,
+    trialGamma2d
+  });
+  const reliabilityLabel = getReliabilityLabel(gammaMode, dataQualityScore, trialGamma2d);
   const availableFields = required.filter(([, value]) => value !== null).map(([name]) => name);
   const partialStage = getPartialStage({
     gamma2d,
@@ -149,7 +161,7 @@ export function calculatePaper(paper = {}) {
     logSwitchRatio: round(logSwitchRatio, 3),
     gamma2d: round(gamma2d, 3),
     displayGamma2d: round(gamma2d ?? estimate.gamma2d, 3),
-    gammaMode: gamma2d !== null ? "strict" : estimate.gamma2d !== null ? "estimated" : "missing",
+    gammaMode,
     estimatedGamma2d: round(estimate.gamma2d, 3),
     estimatedContactDropV: round(estimate.contactDropV, 4),
     estimatedEffectiveVoltageV: round(estimate.effectiveVoltageV, 4),
@@ -163,8 +175,28 @@ export function calculatePaper(paper = {}) {
     availableFields,
     missingFields,
     dataCompleteness,
+    dataQualityScore,
+    reliabilityLabel,
     partialStage
   };
+}
+
+function getDataQualityScore({ gammaMode, missingFields, estimateAssumptions, trialGamma2d }) {
+  if (gammaMode === "strict") return 1;
+  if (gammaMode === "estimated") {
+    const assumptionPenalty = Math.min((estimateAssumptions || []).length * 0.16, 0.55);
+    const missingPenalty = Math.min((missingFields || []).length * 0.06, 0.25);
+    return round(Math.max(0.35, 0.82 - assumptionPenalty - missingPenalty), 2);
+  }
+  if (trialGamma2d !== null) return 0.55;
+  return round(Math.max(0, 1 - ((missingFields || []).length / 6)), 2);
+}
+
+function getReliabilityLabel(gammaMode, dataQualityScore, trialGamma2d) {
+  if (gammaMode === "strict") return "严格计算";
+  if (gammaMode === "estimated") return `估算排序，可信度 ${Math.round((dataQualityScore || 0) * 100)}%`;
+  if (trialGamma2d !== null) return "Rc口径试算，需人工确认";
+  return `待补参数，完整度 ${Math.round((dataQualityScore || 0) * 100)}%`;
 }
 
 function getPartialStage(metrics) {

@@ -62,7 +62,7 @@
           <label>
             排序
             <select id="sort-select">
-              <option value="gamma">Γ₂D 从高到低</option>
+              <option value="gamma">严格优先，Γ₂D 从高到低</option>
               <option value="pi">Π₂D 从高到低</option>
               <option value="year">年份从新到旧</option>
               <option value="relevance">相关性</option>
@@ -76,7 +76,7 @@
         <div class="section-heading">
           <div>
             <h2>已计算样本排序</h2>
-            <p>排序值只作为器件层辅助判读，必须和原始参数、接触口径、测试偏压一起看。</p>
+            <p>排序默认先列严格计算样本，再列估算样本；估算值必须和假设条件、原始参数、接触口径、测试偏压一起看。</p>
           </div>
           <button id="quick-ingest-btn">检索新论文</button>
         </div>
@@ -172,6 +172,7 @@
           <label>SS (mV/dec) <input name="ssMvDec" type="number" step="0.001" /></label>
           <label>log10(Ion/Ioff) <input name="logSwitchRatio" type="number" step="0.001" /></label>
           <label>开关比 <input name="onOffRatio" type="number" step="1" placeholder="可选，和上一项二选一" /></label>
+          <label>Ioff (μA/μm) <input name="ioffUaPerUm" type="number" step="0.000001" placeholder="可选，用于反推开关比" /></label>
           <label class="wide">参数来源/图号/备注 <textarea name="notes" rows="3"></textarea></label>
           <label class="wide">数据溯源说明 <textarea name="sourceTrace" rows="3"></textarea></label>
           <div class="form-actions wide">

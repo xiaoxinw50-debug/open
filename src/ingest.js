@@ -246,6 +246,7 @@ export async function runIngestion(options = {}, onProgress = null) {
           material: inferMaterial(combinedText),
           deviceType: inferDeviceType(combinedText),
           relevanceScore: relevanceScore(combinedText),
+          extractionConfidence: extraction.extractionConfidence,
           status: "needs_review",
           params: extraction.params,
           sourceTrace: [
@@ -550,7 +551,7 @@ function uniqueUrlObjects(items) {
 }
 
 function extractionAddsFields(before = {}, after = {}) {
-  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
+  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio", "ioffUaPerUm"];
   return fields.some((field) => isBlank(before[field]) && !isBlank(after[field])) ||
     (before.rcDefinition === "unknown" && after.rcDefinition && after.rcDefinition !== "unknown");
 }
@@ -558,7 +559,7 @@ function extractionAddsFields(before = {}, after = {}) {
 function mergeExtractions(metadataExtraction = {}, fullTextExtraction = {}) {
   const metadataParams = metadataExtraction.params || {};
   const fullTextParams = fullTextExtraction.params || {};
-  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
+  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio", "ioffUaPerUm"];
   const usedFullTextFields = [];
   const params = {
     ...fullTextParams,
@@ -618,6 +619,7 @@ function noteMatchesUsedField(note = "", fields = []) {
     vdsV: "VDS",
     ssMvDec: "SS",
     logSwitchRatio: "开关比",
+    ioffUaPerUm: "Ioff",
     rcDefinition: "Rc 口径"
   };
   return fields.some((field) => note.includes(labels[field]));

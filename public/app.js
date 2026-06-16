@@ -261,6 +261,7 @@ function renderRankingOutput() {
     VDS_V: row.vdsV,
     SS_mV_dec: row.ssMvDec,
     log10_Ion_Ioff: row.logSwitchRatio,
+    Ioff_ua_per_um: row.ioffUaPerUm,
     evidence: row.evidence,
     Vdrop_V: row.contactDropV,
     Veff_V: row.effectiveVoltageV,
@@ -275,6 +276,9 @@ function renderRankingOutput() {
     estimate_assumptions: row.estimateAssumptions,
     trial_Gamma_2D: row.trialGamma2d,
     judgment: row.marginClass,
+    reliability: row.reliabilityLabel,
+    data_quality_score: row.dataQualityScore,
+    extraction_confidence: row.extractionConfidence,
     partial_stage: row.partialStage,
     missing: row.missingFields
   }));
@@ -375,6 +379,7 @@ function gammaCell(paper) {
   return `
     <span class="metric">${num(value)}</span>
     <span class="pill ${isEstimated ? "warn" : "good"}">${isEstimated ? "估算" : "严格"}</span>
+    <div class="quality-note">${escapeHtml(m.reliabilityLabel || "")}</div>
     <div class="meta">Π₂D ${num(m.pi2d)} · Vdrop ${num(vdrop)} V · Vsw ${num(vsw)} V</div>
     ${assumptions.length ? `<div class="estimate-note">${assumptions.map(escapeHtml).join("；")}</div>` : ""}
   `;
@@ -416,6 +421,7 @@ function fillForm(paper) {
   form.ssMvDec.value = paper.params.ssMvDec ?? "";
   form.logSwitchRatio.value = paper.params.logSwitchRatio ?? "";
   form.onOffRatio.value = paper.params.onOffRatio ?? "";
+  form.ioffUaPerUm.value = paper.params.ioffUaPerUm ?? "";
   form.notes.value = paper.params.notes || "";
   form.sourceTrace.value = paper.sourceTrace || "";
 }
@@ -441,6 +447,7 @@ function formToPaper(form) {
       ssMvDec: numberOrNull(form.ssMvDec.value),
       logSwitchRatio: numberOrNull(form.logSwitchRatio.value),
       onOffRatio: numberOrNull(form.onOffRatio.value),
+      ioffUaPerUm: numberOrNull(form.ioffUaPerUm.value),
       notes: form.notes.value.trim()
     }
   };
@@ -500,7 +507,8 @@ function evidenceLine(paper) {
     rcDefinition: "Rc口径",
     vdsV: "VDS",
     ssMvDec: "SS",
-    logSwitchRatio: "开关比"
+    logSwitchRatio: "开关比",
+    ioffUaPerUm: "Ioff"
   };
   const entries = Object.entries(labels)
     .map(([key, label]) => {
@@ -687,6 +695,7 @@ function downloadRankingCsv() {
     "ssMvDec",
     "logSwitchRatio",
     "onOffRatio",
+    "ioffUaPerUm",
     "pi2d",
     "contactDropV",
     "effectiveVoltageV",
@@ -701,6 +710,9 @@ function downloadRankingCsv() {
     "estimatedEffectiveVoltageV",
     "estimatedSwitchCostV",
     "estimateAssumptions",
+    "dataQualityScore",
+    "reliabilityLabel",
+    "extractionConfidence",
     "trialGamma2d",
     "trialRcAssumption",
     "marginClass",

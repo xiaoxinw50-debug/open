@@ -315,6 +315,10 @@ function sortPapers(papers, sort) {
     return list.sort((a, b) => (b.metrics.pi2d ?? -Infinity) - (a.metrics.pi2d ?? -Infinity));
   }
   return list.sort((a, b) => {
+    const modeRank = { strict: 0, estimated: 1, missing: 2 };
+    const am = modeRank[a.metrics.gammaMode] ?? 3;
+    const bm = modeRank[b.metrics.gammaMode] ?? 3;
+    if (am !== bm) return am - bm;
     const ag = a.metrics.displayGamma2d;
     const bg = b.metrics.displayGamma2d;
     if (ag === null && bg === null) return (b.year || 0) - (a.year || 0);
@@ -339,7 +343,9 @@ function normalizePaperInput(body = {}) {
       ssMvDec: numericOrNull(params.ssMvDec),
       logSwitchRatio: numericOrNull(params.logSwitchRatio),
       onOffRatio: numericOrNull(params.onOffRatio),
-      notes: params.notes || ""
+      ioffUaPerUm: numericOrNull(params.ioffUaPerUm),
+      notes: params.notes || "",
+      evidence: params.evidence || {}
     }
   };
   const metrics = calculatePaper(paper);
@@ -368,6 +374,7 @@ function toRankingRow(paper) {
     deviceType: paper.deviceType || "",
     status: paper.status || "",
     sourceType: paper.sourceType || "",
+    extractionConfidence: paper.extractionConfidence ?? null,
     relevanceScore: paper.relevanceScore ?? null,
     sourceTrace: paper.sourceTrace || "",
     dataTrace: params.notes || "",
@@ -382,6 +389,7 @@ function toRankingRow(paper) {
     ssMvDec: params.ssMvDec ?? null,
     logSwitchRatio: metrics.logSwitchRatio,
     onOffRatio: params.onOffRatio ?? null,
+    ioffUaPerUm: params.ioffUaPerUm ?? null,
     pi2d: metrics.pi2d,
     contactDropV: metrics.contactDropV,
     effectiveVoltageV: metrics.effectiveVoltageV,
@@ -404,6 +412,8 @@ function toRankingRow(paper) {
     availableFields: metrics.availableFields,
     missingFields: metrics.missingFields,
     dataCompleteness: metrics.dataCompleteness,
+    dataQualityScore: metrics.dataQualityScore,
+    reliabilityLabel: metrics.reliabilityLabel,
     partialStage: metrics.partialStage
   };
 }
