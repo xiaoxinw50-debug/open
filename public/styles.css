@@ -614,6 +614,160 @@ tbody tr:hover {
   margin-right: 8px;
 }
 
+.compact-toggle {
+  min-width: 210px;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff8f5;
+  color: #3f3030;
+}
+
+.diagnostics-card {
+  margin: 0 0 20px;
+  border: 1px solid rgba(239, 216, 212, 0.98);
+  border-radius: 20px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 244, 240, 0.9)),
+    #fffdfc;
+}
+
+.diagnostics-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+
+.diagnostics-head strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+}
+
+.diagnostics-head p {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 8px 0 0;
+}
+
+.diagnostics-rate {
+  min-width: 112px;
+  border-radius: 18px;
+  padding: 12px;
+  text-align: center;
+  background: #1d1616;
+  color: white;
+}
+
+.diagnostics-rate b {
+  display: block;
+  font-family: "Times New Roman", serif;
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.diagnostics-rate span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.diagnostics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.diagnostics-grid div {
+  border: 1px solid rgba(158, 17, 23, 0.12);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.diagnostics-grid b {
+  display: block;
+  color: var(--accent-dark);
+  font-family: "Times New Roman", serif;
+  font-size: 1.42rem;
+  line-height: 1;
+}
+
+.diagnostics-grid span,
+.diagnostics-grid small {
+  display: block;
+}
+
+.diagnostics-grid span {
+  margin-top: 5px;
+  color: #2d2222;
+  font-weight: 900;
+}
+
+.diagnostics-grid small {
+  margin-top: 3px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.diagnostics-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  gap: 18px;
+}
+
+.diagnostics-body h3 {
+  margin: 0 0 10px;
+  color: #2d2222;
+  font-size: 1rem;
+}
+
+.missing-bars {
+  display: grid;
+  gap: 8px;
+}
+
+.missing-bar {
+  display: grid;
+  grid-template-columns: 82px 1fr 32px;
+  gap: 8px;
+  align-items: center;
+}
+
+.missing-bar span,
+.missing-bar b {
+  color: #3c3030;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.missing-bar div {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eed9d4;
+}
+
+.missing-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8e080d, #c85f35);
+}
+
+.recommendations {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #4e3b3c;
+  line-height: 1.6;
+}
+
 .form-actions {
   display: flex;
   gap: 12px;
@@ -873,8 +1027,14 @@ tbody tr:hover {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .diagnostics-grid,
+  .diagnostics-body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .progress-detail,
-  .progress-head {
+  .progress-head,
+  .diagnostics-head {
     flex-direction: column;
   }
 }
@@ -910,7 +1070,9 @@ tbody tr:hover {
   .form-grid,
   .settings-card,
   .preview-grid,
-  .progress-grid {
+  .progress-grid,
+  .diagnostics-grid,
+  .diagnostics-body {
     grid-template-columns: 1fr;
   }
 

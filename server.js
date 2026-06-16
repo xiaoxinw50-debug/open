@@ -158,6 +158,66 @@ app.get("/api/stats", async (_req, res, next) => {
   }
 });
 
+app.get("/api/diagnostics", async (req, res, next) => {
+  try {
+    const includeLowValue = req.query.includeLowValue === "1" || req.query.includeLowValue === "true";
+    const allPapers = await listPapers();
+    const hidden = allPapers.filter(isLowValueAutoCandidate);
+    const papers = includeLowValue ? allPapers : allPapers.filter((paper) => !isLowValueAutoCandidate(paper));
+    const strict = papers.filter((paper) => paper.metrics.gammaMode === "strict");
+    const estimated = papers.filter((paper) => paper.metrics.gammaMode === "estimated");
+    const missing = papers.filter((paper) => paper.metrics.gammaMode === "missing");
+    const notStrict = papers.filter((paper) => !paper.metrics.canCalculateGamma);
+    const missingDistribution = fieldDistribution(notStrict);
+    const availableDistribution = availableFieldDistribution(papers);
+    const weakCoreCount = notStrict.filter((paper) =>
+      paper.metrics.missingFields.includes("Ion") || paper.metrics.missingFields.includes("Rc")
+    ).length;
+    const rcDefinitionMissingCount = notStrict.filter((paper) => paper.metrics.missingFields.includes("Rc口径")).length;
+
+    res.json({
+      generatedAt: new Date().toISOString(),
+      includeLowValue,
+      totalStored: allPapers.length,
+      visible: papers.length,
+      hiddenLowValue: hidden.length,
+      modeCounts: {
+        strict: strict.length,
+        estimated: estimated.length,
+        missing: missing.length
+      },
+      strictRate: papers.length ? roundRatio(strict.length / papers.length) : 0,
+      rankableRate: papers.length ? roundRatio((strict.length + estimated.length) / papers.length) : 0,
+      weakCoreCount,
+      rcDefinitionMissingCount,
+      missingDistribution,
+      availableDistribution,
+      recommendations: buildDiagnosticsRecommendations({
+        missingDistribution,
+        weakCoreCount,
+        rcDefinitionMissingCount,
+        hiddenLowValue: hidden.length,
+        totalVisible: papers.length
+      }),
+      examples: missing
+        .slice()
+        .sort((a, b) => (b.metrics.dataCompleteness || 0) - (a.metrics.dataCompleteness || 0) || (b.year || 0) - (a.year || 0))
+        .slice(0, 5)
+        .map((paper) => ({
+          id: paper.id,
+          title: paper.title,
+          year: paper.year,
+          sourceType: paper.sourceType,
+          missingFields: paper.metrics.missingFields,
+          availableFields: paper.metrics.availableFields,
+          partialStage: paper.metrics.partialStage
+        }))
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get("/api/rankings", async (req, res, next) => {
   try {
     const sort = req.query.sort?.toString() || "gamma";
@@ -416,6 +476,55 @@ function toRankingRow(paper) {
     reliabilityLabel: metrics.reliabilityLabel,
     partialStage: metrics.partialStage
   };
+}
+
+function fieldDistribution(papers) {
+  const counts = new Map();
+  for (const paper of papers) {
+    for (const field of paper.metrics.missingFields || []) {
+      counts.set(field, (counts.get(field) || 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([field, count]) => ({ field, count }))
+    .sort((a, b) => b.count - a.count || a.field.localeCompare(b.field, "zh-CN"));
+}
+
+function availableFieldDistribution(papers) {
+  const counts = new Map();
+  for (const paper of papers) {
+    for (const field of paper.metrics.availableFields || []) {
+      counts.set(field, (counts.get(field) || 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([field, count]) => ({ field, count }))
+    .sort((a, b) => b.count - a.count || a.field.localeCompare(b.field, "zh-CN"));
+}
+
+function buildDiagnosticsRecommendations({ missingDistribution, weakCoreCount, rcDefinitionMissingCount, hiddenLowValue, totalVisible }) {
+  const top = missingDistribution[0];
+  const recommendations = [];
+  if (weakCoreCount > 0) {
+    recommendations.push(`优先补 Ion/Rc：${weakCoreCount} 篇候选缺少至少一个核心排序字段，通常要看器件表、接触工程图或输出曲线。`);
+  }
+  if (rcDefinitionMissingCount > 0) {
+    recommendations.push(`优先核对 Rc 口径：${rcDefinitionMissingCount} 篇缺少单侧/总等效说明，这会直接影响接触压降。`);
+  }
+  if (top) {
+    recommendations.push(`当前最大瓶颈是 ${top.field}，影响 ${top.count} 篇非严格样本。`);
+  }
+  if (hiddenLowValue > 0) {
+    recommendations.push(`已隐藏 ${hiddenLowValue} 条低价值自动候选；需要排查检索噪声时可临时显示。`);
+  }
+  if (!totalVisible) {
+    recommendations.push("当前没有可见样本，需要先运行自动检索或手动录入基准论文。");
+  }
+  return recommendations;
+}
+
+function roundRatio(value) {
+  return Math.round(value * 1000) / 1000;
 }
 
 function isAuthorizedIngest(req) {

@@ -2,10 +2,12 @@ const state = {
   papers: [],
   rankingOutput: null,
   settings: null,
+  diagnostics: null,
   ingestProgress: null,
   ingestPollTimer: null,
   activeView: "ranking",
-  sort: "gamma"
+  sort: "gamma",
+  includeLowValue: false
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -35,6 +37,10 @@ function bindTabs() {
   $("#quick-ingest-btn").addEventListener("click", runIngest);
   $("#copy-ranking-json").addEventListener("click", copyRankingJson);
   $("#download-ranking-csv").addEventListener("click", downloadRankingCsv);
+  $("#include-low-value").addEventListener("change", async (event) => {
+    state.includeLowValue = event.target.checked;
+    await Promise.all([loadPapers(), loadDiagnostics()]);
+  });
 }
 
 function bindForms() {
@@ -69,14 +75,21 @@ function bindForms() {
 }
 
 async function loadAll() {
-  await Promise.all([loadPapers(), loadRankingOutput(), loadSettings(), loadStats(), loadIngestProgress()]);
+  await Promise.all([loadPapers(), loadRankingOutput(), loadSettings(), loadStats(), loadDiagnostics(), loadIngestProgress()]);
 }
 
 async function loadPapers() {
-  state.papers = await api(`/api/papers?sort=${encodeURIComponent(state.sort)}`);
+  const lowValueFlag = state.includeLowValue ? "&includeLowValue=1" : "";
+  state.papers = await api(`/api/papers?sort=${encodeURIComponent(state.sort)}${lowValueFlag}`);
   renderRanking();
   renderCandidates();
   renderChart();
+}
+
+async function loadDiagnostics() {
+  const lowValueFlag = state.includeLowValue ? "?includeLowValue=1" : "";
+  state.diagnostics = await api(`/api/diagnostics${lowValueFlag}`);
+  renderDiagnostics();
 }
 
 async function loadRankingOutput() {
@@ -239,6 +252,62 @@ function renderChart() {
     `;
     target.appendChild(row);
   });
+}
+
+function renderDiagnostics() {
+  const target = $("#diagnostics-card");
+  if (!target || !state.diagnostics) return;
+  const d = state.diagnostics;
+  const missing = (d.missingDistribution || []).slice(0, 6);
+  const recommendations = d.recommendations || [];
+  target.innerHTML = `
+    <div class="diagnostics-head">
+      <div>
+        <span class="progress-label">数据诊断</span>
+        <strong>为什么有些论文不能严格计算</strong>
+        <p>严格 Γ₂D 需要 Ion、Rc、Rc 口径、VDS、SS 和开关比同时具备；估算排序只作为辅助线索。</p>
+      </div>
+      <div class="diagnostics-rate">
+        <b>${Math.round((d.rankableRate || 0) * 100)}%</b>
+        <span>可排序率</span>
+      </div>
+    </div>
+    <div class="diagnostics-grid">
+      ${diagnosticItem("严格", d.modeCounts?.strict ?? 0, "六项字段齐全")}
+      ${diagnosticItem("估算", d.modeCounts?.estimated ?? 0, "已有 Ion/Rc，可辅助排序")}
+      ${diagnosticItem("待补", d.modeCounts?.missing ?? 0, "缺少核心字段")}
+      ${diagnosticItem("隐藏", d.hiddenLowValue ?? 0, "低价值自动候选")}
+    </div>
+    <div class="diagnostics-body">
+      <div>
+        <h3>缺失字段排行</h3>
+        <div class="missing-bars">
+          ${missing.length ? missing.map((item) => missingBar(item, d.visible)).join("") : "<span class=\"meta\">暂无缺失字段。</span>"}
+        </div>
+      </div>
+      <div>
+        <h3>下一步优先处理</h3>
+        <ul class="recommendations">
+          ${recommendations.map((item) => `<li>${escapeHtml(item)}</li>`).join("") || "<li>当前数据结构较完整。</li>"}
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function diagnosticItem(label, value, note) {
+  return `<div><b>${Number(value || 0)}</b><span>${escapeHtml(label)}</span><small>${escapeHtml(note)}</small></div>`;
+}
+
+function missingBar(item, total) {
+  const width = Math.max(6, total ? (item.count / total) * 100 : 0);
+  return `
+    <div class="missing-bar">
+      <span>${escapeHtml(item.field)}</span>
+      <div><i style="width:${width}%"></i></div>
+      <b>${item.count}</b>
+    </div>
+  `;
 }
 
 function renderRankingOutput() {
