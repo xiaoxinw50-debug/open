@@ -477,6 +477,15 @@ tbody tr:hover {
   padding: 0.22rem 0.55rem;
 }
 
+.estimate-note {
+  max-width: 310px;
+  margin-top: 6px;
+  color: #7e5515;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
 .evidence {
   color: #4f3030;
   font-size: 0.82rem;

@@ -137,6 +137,7 @@ app.get("/api/stats", async (_req, res, next) => {
   try {
     const papers = await listPapers();
     const calculated = papers.filter((paper) => paper.metrics.canCalculateGamma);
+    const estimable = papers.filter((paper) => paper.metrics.gammaMode === "estimated");
     const needsReview = papers.filter((paper) => !paper.metrics.canCalculateGamma);
     const top = calculated
       .slice()
@@ -144,6 +145,7 @@ app.get("/api/stats", async (_req, res, next) => {
     res.json({
       total: papers.length,
       calculated: calculated.length,
+      estimable: estimable.length,
       needsReview: needsReview.length,
       top: top ? { title: top.title, gamma2d: top.metrics.gamma2d } : null
     });
@@ -155,9 +157,14 @@ app.get("/api/stats", async (_req, res, next) => {
 app.get("/api/rankings", async (req, res, next) => {
   try {
     const sort = req.query.sort?.toString() || "gamma";
-    const include = req.query.include?.toString() || "calculated";
+    const include = req.query.include?.toString() || "rankable";
     const papers = await listPapers();
-    const filtered = include === "all" ? papers : papers.filter((paper) => paper.metrics.canCalculateGamma);
+    const filtered =
+      include === "all"
+        ? papers
+        : include === "strict"
+          ? papers.filter((paper) => paper.metrics.canCalculateGamma)
+          : papers.filter((paper) => paper.metrics.gammaMode !== "missing");
     const rows = sortPapers(filtered, sort).map(toRankingRow);
 
     res.json({
@@ -167,6 +174,7 @@ app.get("/api/rankings", async (req, res, next) => {
       totalPapers: papers.length,
       returned: rows.length,
       calculated: papers.filter((paper) => paper.metrics.canCalculateGamma).length,
+      estimable: papers.filter((paper) => paper.metrics.gammaMode === "estimated").length,
       needsReview: papers.filter((paper) => !paper.metrics.canCalculateGamma).length,
       rows: rows.map((row, index) => ({ rank: index + 1, ...row }))
     });
@@ -301,8 +309,8 @@ function sortPapers(papers, sort) {
     return list.sort((a, b) => (b.metrics.pi2d ?? -Infinity) - (a.metrics.pi2d ?? -Infinity));
   }
   return list.sort((a, b) => {
-    const ag = a.metrics.gamma2d;
-    const bg = b.metrics.gamma2d;
+    const ag = a.metrics.displayGamma2d;
+    const bg = b.metrics.displayGamma2d;
     if (ag === null && bg === null) return (b.year || 0) - (a.year || 0);
     if (ag === null) return 1;
     if (bg === null) return -1;
@@ -375,6 +383,13 @@ function toRankingRow(paper) {
     trialEffectiveVoltageV: metrics.trialEffectiveVoltageV,
     switchCostV: metrics.switchCostV,
     gamma2d: metrics.gamma2d,
+    displayGamma2d: metrics.displayGamma2d,
+    gammaMode: metrics.gammaMode,
+    estimatedGamma2d: metrics.estimatedGamma2d,
+    estimatedContactDropV: metrics.estimatedContactDropV,
+    estimatedEffectiveVoltageV: metrics.estimatedEffectiveVoltageV,
+    estimatedSwitchCostV: metrics.estimatedSwitchCostV,
+    estimateAssumptions: metrics.estimateAssumptions,
     trialGamma2d: metrics.trialGamma2d,
     trialRcAssumption: metrics.trialRcAssumption,
     marginClass: metrics.marginClass,

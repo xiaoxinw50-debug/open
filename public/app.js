@@ -168,7 +168,7 @@ function renderIngestProgress() {
 }
 
 function renderRanking() {
-  const rows = state.papers.filter((paper) => paper.metrics.canCalculateGamma);
+  const rows = state.papers.filter((paper) => paper.metrics.gammaMode !== "missing");
   const body = $("#ranking-body");
   body.innerHTML = "";
   if (!rows.length) return renderEmpty(body, 11);
@@ -184,7 +184,7 @@ function renderRanking() {
       <td>${num(paper.params.vdsV)}<div class="meta">V</div></td>
       <td>${num(paper.params.ssMvDec)}<div class="meta">mV/dec</div></td>
       <td>${num(paper.metrics.logSwitchRatio)}<div class="meta">dec</div></td>
-      <td><span class="metric">${num(paper.metrics.gamma2d)}</span><div class="meta">Π₂D ${num(paper.metrics.pi2d)} · Vdrop ${num(paper.metrics.contactDropV)} V · Vsw ${num(paper.metrics.switchCostV)} V</div></td>
+      <td>${gammaCell(paper)}</td>
       <td>${classPill(paper.metrics.marginClass)}</td>
       <td>${actions(paper)}</td>
     `;
@@ -195,7 +195,7 @@ function renderRanking() {
 
 function renderCandidates() {
   const rows = state.papers
-    .filter((paper) => !paper.metrics.canCalculateGamma)
+    .filter((paper) => paper.metrics.gammaMode === "missing")
     .slice()
     .sort((a, b) => (b.metrics.dataCompleteness || 0) - (a.metrics.dataCompleteness || 0) || (b.year || 0) - (a.year || 0));
   const body = $("#candidate-body");
@@ -269,6 +269,10 @@ function renderRankingOutput() {
     Vsw_V: row.switchCostV,
     Pi_2D: row.pi2d,
     Gamma_2D: row.gamma2d,
+    display_Gamma_2D: row.displayGamma2d,
+    gamma_mode: row.gammaMode,
+    estimated_Gamma_2D: row.estimatedGamma2d,
+    estimate_assumptions: row.estimateAssumptions,
     trial_Gamma_2D: row.trialGamma2d,
     judgment: row.marginClass,
     partial_stage: row.partialStage,
@@ -336,6 +340,21 @@ function partialMetrics(paper) {
     <div class="partial-stage">${escapeHtml(m.partialStage || "待补参数")}</div>
     ${rows.length ? `<div class="partial-values">${rows.map((row) => `<span>${escapeHtml(row)}</span>`).join("")}</div>` : ""}
     ${m.trialRcAssumption ? `<div class="meta">${escapeHtml(m.trialRcAssumption)}</div>` : ""}
+  `;
+}
+
+function gammaCell(paper) {
+  const m = paper.metrics || {};
+  const isEstimated = m.gammaMode === "estimated";
+  const value = isEstimated ? m.estimatedGamma2d : m.gamma2d;
+  const vdrop = isEstimated ? m.estimatedContactDropV : m.contactDropV;
+  const vsw = isEstimated ? m.estimatedSwitchCostV : m.switchCostV;
+  const assumptions = Array.isArray(m.estimateAssumptions) ? m.estimateAssumptions : [];
+  return `
+    <span class="metric">${num(value)}</span>
+    <span class="pill ${isEstimated ? "warn" : "good"}">${isEstimated ? "估算" : "严格"}</span>
+    <div class="meta">Π₂D ${num(m.pi2d)} · Vdrop ${num(vdrop)} V · Vsw ${num(vsw)} V</div>
+    ${assumptions.length ? `<div class="estimate-note">${assumptions.map(escapeHtml).join("；")}</div>` : ""}
   `;
 }
 
@@ -518,7 +537,13 @@ function actions(paper) {
 }
 
 function classPill(label) {
-  const klass = label === "裕量较充足" ? "good" : label === "接近边界" ? "warn" : label === "裕量不足" ? "bad" : "";
+  const klass = label.includes("裕量较充足")
+    ? "good"
+    : label.includes("接近边界")
+      ? "warn"
+      : label.includes("裕量不足")
+        ? "bad"
+        : "";
   return `<span class="pill ${klass}">${escapeHtml(label)}</span>`;
 }
 
@@ -647,6 +672,13 @@ function downloadRankingCsv() {
     "trialEffectiveVoltageV",
     "switchCostV",
     "gamma2d",
+    "displayGamma2d",
+    "gammaMode",
+    "estimatedGamma2d",
+    "estimatedContactDropV",
+    "estimatedEffectiveVoltageV",
+    "estimatedSwitchCostV",
+    "estimateAssumptions",
     "trialGamma2d",
     "trialRcAssumption",
     "marginClass",
