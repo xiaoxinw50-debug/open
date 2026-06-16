@@ -1,5 +1,6 @@
 const state = {
   papers: [],
+  rankingOutput: null,
   settings: null,
   activeView: "ranking",
   sort: "gamma"
@@ -25,11 +26,13 @@ function bindTabs() {
 
   $("#sort-select").addEventListener("change", async (event) => {
     state.sort = event.target.value;
-    await loadPapers();
+    await Promise.all([loadPapers(), loadRankingOutput()]);
   });
 
   $("#refresh-btn").addEventListener("click", loadAll);
   $("#quick-ingest-btn").addEventListener("click", runIngest);
+  $("#copy-ranking-json").addEventListener("click", copyRankingJson);
+  $("#download-ranking-csv").addEventListener("click", downloadRankingCsv);
 }
 
 function bindForms() {
@@ -64,7 +67,7 @@ function bindForms() {
 }
 
 async function loadAll() {
-  await Promise.all([loadPapers(), loadSettings(), loadStats()]);
+  await Promise.all([loadPapers(), loadRankingOutput(), loadSettings(), loadStats()]);
 }
 
 async function loadPapers() {
@@ -72,6 +75,11 @@ async function loadPapers() {
   renderRanking();
   renderCandidates();
   renderChart();
+}
+
+async function loadRankingOutput() {
+  state.rankingOutput = await api(`/api/rankings?sort=${encodeURIComponent(state.sort)}&include=all`);
+  renderRankingOutput();
 }
 
 async function loadSettings() {
@@ -102,7 +110,7 @@ function renderRanking() {
   const rows = state.papers.filter((paper) => paper.metrics.canCalculateGamma);
   const body = $("#ranking-body");
   body.innerHTML = "";
-  if (!rows.length) return renderEmpty(body, 9);
+  if (!rows.length) return renderEmpty(body, 11);
 
   rows.forEach((paper, index) => {
     const tr = document.createElement("tr");
@@ -112,8 +120,10 @@ function renderRanking() {
       <td>${escapeHtml([paper.material, paper.deviceType].filter(Boolean).join(" / ") || "-")}</td>
       <td>${num(paper.params.ionUaPerUm)}<div class="meta">μA/μm</div></td>
       <td>${num(paper.params.rcOhmUm)}<div class="meta">Ω·μm，${rcLabel(paper.params.rcDefinition)}</div></td>
+      <td>${num(paper.params.vdsV)}<div class="meta">V</div></td>
       <td>${num(paper.params.ssMvDec)}<div class="meta">mV/dec</div></td>
-      <td><span class="metric">${num(paper.metrics.gamma2d)}</span><div class="meta">Π₂D ${num(paper.metrics.pi2d)}</div></td>
+      <td>${num(paper.metrics.logSwitchRatio)}<div class="meta">dec</div></td>
+      <td><span class="metric">${num(paper.metrics.gamma2d)}</span><div class="meta">Π₂D ${num(paper.metrics.pi2d)} · Vdrop ${num(paper.metrics.contactDropV)} V · Vsw ${num(paper.metrics.switchCostV)} V</div></td>
       <td>${classPill(paper.metrics.marginClass)}</td>
       <td>${actions(paper)}</td>
     `;
@@ -164,6 +174,48 @@ function renderChart() {
     `;
     target.appendChild(row);
   });
+}
+
+function renderRankingOutput() {
+  const target = $("#ranking-output");
+  if (!state.rankingOutput) {
+    target.textContent = "暂无输出数据";
+    return;
+  }
+
+  const rows = state.rankingOutput.rows.slice(0, 12).map((row) => ({
+    rank: row.rank,
+    title: row.title,
+    year: row.year,
+    journal: row.journal,
+    material: row.material,
+    deviceType: row.deviceType,
+    Ion_ua_per_um: row.ionUaPerUm,
+    Rc_ohm_um: row.rcOhmUm,
+    Rc_definition: row.rcDefinition,
+    VDS_V: row.vdsV,
+    SS_mV_dec: row.ssMvDec,
+    log10_Ion_Ioff: row.logSwitchRatio,
+    Vdrop_V: row.contactDropV,
+    Veff_V: row.effectiveVoltageV,
+    Vsw_V: row.switchCostV,
+    Pi_2D: row.pi2d,
+    Gamma_2D: row.gamma2d,
+    judgment: row.marginClass,
+    missing: row.missingFields
+  }));
+
+  target.textContent = JSON.stringify(
+    {
+      generatedAt: state.rankingOutput.generatedAt,
+      sort: state.rankingOutput.sort,
+      totalPapers: state.rankingOutput.totalPapers,
+      returned: state.rankingOutput.returned,
+      previewRows: rows
+    },
+    null,
+    2
+  );
 }
 
 function renderSettings() {
@@ -346,6 +398,87 @@ function numberOrNull(value) {
 
 function log(text) {
   $("#ingest-log").textContent = text;
+}
+
+async function copyRankingJson() {
+  if (!state.rankingOutput) await loadRankingOutput();
+  const text = JSON.stringify(state.rankingOutput, null, 2);
+  await copyText(text);
+  $("#copy-ranking-json").textContent = "已复制";
+  setTimeout(() => {
+    $("#copy-ranking-json").textContent = "复制 JSON";
+  }, 1400);
+}
+
+function downloadRankingCsv() {
+  if (!state.rankingOutput) return;
+  const fields = [
+    "rank",
+    "title",
+    "authors",
+    "year",
+    "journal",
+    "doi",
+    "url",
+    "material",
+    "deviceType",
+    "status",
+    "sourceType",
+    "relevanceScore",
+    "ionUaPerUm",
+    "ionMAPerUm",
+    "rcOhmUm",
+    "rcDefinition",
+    "rcEffectiveOhmUm",
+    "vdsV",
+    "ssMvDec",
+    "logSwitchRatio",
+    "onOffRatio",
+    "pi2d",
+    "contactDropV",
+    "effectiveVoltageV",
+    "switchCostV",
+    "gamma2d",
+    "marginClass",
+    "canCalculateGamma",
+    "missingFields",
+    "dataCompleteness",
+    "dataTrace",
+    "sourceTrace"
+  ];
+  const csv = [
+    fields.join(","),
+    ...state.rankingOutput.rows.map((row) => fields.map((field) => csvValue(row[field])).join(","))
+  ].join("\n");
+  const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `switch-margin-ranking-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+function csvValue(value) {
+  const normalized = Array.isArray(value) ? value.join("; ") : value ?? "";
+  return `"${String(normalized).replace(/"/g, '""')}"`;
 }
 
 function escapeHtml(value = "") {

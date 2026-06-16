@@ -130,6 +130,29 @@ app.get("/api/stats", async (_req, res, next) => {
   }
 });
 
+app.get("/api/rankings", async (req, res, next) => {
+  try {
+    const sort = req.query.sort?.toString() || "gamma";
+    const include = req.query.include?.toString() || "calculated";
+    const papers = await listPapers();
+    const filtered = include === "all" ? papers : papers.filter((paper) => paper.metrics.canCalculateGamma);
+    const rows = sortPapers(filtered, sort).map(toRankingRow);
+
+    res.json({
+      generatedAt: new Date().toISOString(),
+      sort,
+      include,
+      totalPapers: papers.length,
+      returned: rows.length,
+      calculated: papers.filter((paper) => paper.metrics.canCalculateGamma).length,
+      needsReview: papers.filter((paper) => !paper.metrics.canCalculateGamma).length,
+      rows: rows.map((row, index) => ({ rank: index + 1, ...row }))
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use((error, _req, res, _next) => {
   console.error(error);
   res.status(500).json({ error: error.message || "internal server error" });
@@ -217,6 +240,45 @@ function numericOrNull(value) {
   if (value === "" || value === null || value === undefined) return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function toRankingRow(paper) {
+  const params = paper.params || {};
+  const metrics = paper.metrics || calculatePaper(paper);
+  return {
+    id: paper.id,
+    title: paper.title || "",
+    authors: paper.authors || "",
+    year: paper.year ?? null,
+    journal: paper.journal || "",
+    doi: paper.doi || "",
+    url: paper.url || "",
+    material: paper.material || "",
+    deviceType: paper.deviceType || "",
+    status: paper.status || "",
+    sourceType: paper.sourceType || "",
+    relevanceScore: paper.relevanceScore ?? null,
+    sourceTrace: paper.sourceTrace || "",
+    dataTrace: params.notes || "",
+    ionUaPerUm: params.ionUaPerUm ?? null,
+    ionMAPerUm: metrics.ionMAPerUm,
+    rcOhmUm: params.rcOhmUm ?? null,
+    rcDefinition: params.rcDefinition || "unknown",
+    rcEffectiveOhmUm: metrics.effectiveRcKOhmUm == null ? null : metrics.effectiveRcKOhmUm * 1000,
+    vdsV: params.vdsV ?? null,
+    ssMvDec: params.ssMvDec ?? null,
+    logSwitchRatio: metrics.logSwitchRatio,
+    onOffRatio: params.onOffRatio ?? null,
+    pi2d: metrics.pi2d,
+    contactDropV: metrics.contactDropV,
+    effectiveVoltageV: metrics.effectiveVoltageV,
+    switchCostV: metrics.switchCostV,
+    gamma2d: metrics.gamma2d,
+    marginClass: metrics.marginClass,
+    canCalculateGamma: metrics.canCalculateGamma,
+    missingFields: metrics.missingFields,
+    dataCompleteness: metrics.dataCompleteness
+  };
 }
 
 function isAuthorizedIngest(req) {

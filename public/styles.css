@@ -413,7 +413,7 @@ textarea:focus {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 940px;
+  min-width: 1120px;
 }
 
 th {
@@ -572,6 +572,54 @@ tbody tr:hover {
   white-space: pre-wrap;
 }
 
+.output-panel {
+  margin-top: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fffdfc;
+  overflow: hidden;
+}
+
+.output-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  padding: 18px;
+  border-bottom: 1px solid var(--line);
+  background: #fff7f4;
+}
+
+.output-head h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+}
+
+.output-head p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.output-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.output-code {
+  margin: 0;
+  max-height: 360px;
+  overflow: auto;
+  padding: 18px;
+  color: #231a1b;
+  background: #fffdfc;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+
 @media (max-width: 920px) {
   .topbar {
     grid-template-columns: auto 1fr;
@@ -583,7 +631,8 @@ tbody tr:hover {
   }
 
   .toolbar,
-  .section-heading {
+  .section-heading,
+  .output-head {
     align-items: stretch;
     flex-direction: column;
   }

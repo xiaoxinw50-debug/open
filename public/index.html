@@ -89,7 +89,9 @@
                 <th>器件</th>
                 <th>I<sub>on</sub></th>
                 <th>R<sub>c</sub></th>
+                <th>V<sub>DS</sub></th>
                 <th>SS</th>
+                <th>log<sub>10</sub>(I<sub>on</sub>/I<sub>off</sub>)</th>
                 <th>Γ₂D</th>
                 <th>判读</th>
                 <th>操作</th>
@@ -97,6 +99,19 @@
             </thead>
             <tbody id="ranking-body"></tbody>
           </table>
+        </div>
+        <div class="output-panel">
+          <div class="output-head">
+            <div>
+              <h3>排序结果与参数值输出</h3>
+              <p>输出内容包括排名、论文信息、原始参数、接触压降、有效电压余量、开关代价和 Γ₂D。CSV 可直接进入 Excel/WPS。</p>
+            </div>
+            <div class="output-actions">
+              <button id="copy-ranking-json" class="secondary">复制 JSON</button>
+              <button id="download-ranking-csv" class="secondary">下载 CSV</button>
+            </div>
+          </div>
+          <pre id="ranking-output" class="output-code"></pre>
         </div>
       </section>
 
