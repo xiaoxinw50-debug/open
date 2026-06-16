@@ -41,8 +41,9 @@ http://localhost:5177
 - Build Command: `npm ci`
 - Start Command: `npm start`
 - Health Check: `/api/health`
-- Data Dir: `/var/data`
 - Auto Ingestion: 启动后自动抓取一次，之后每 6 小时抓取一次
+
+当前 Blueprint 使用 Render 免费 Web Service，便于先上线验证。免费实例可能休眠，文件存储也不是长期数据库；若要稳定保存长期自动抓取结果，建议后续升级为付费实例并挂载持久磁盘或接入数据库。
 
 ## 自动检索逻辑
 

@@ -2,7 +2,7 @@ services:
   - type: web
     name: switch-margin-site
     runtime: node
-    plan: starter
+    plan: free
     branch: main
     buildCommand: npm ci
     startCommand: npm start
@@ -12,8 +12,6 @@ services:
         value: 22
       - key: NODE_ENV
         value: production
-      - key: SWITCH_MARGIN_DATA_DIR
-        value: /var/data
       - key: AUTO_INGEST_ENABLED
         value: "true"
       - key: AUTO_INGEST_ON_START
@@ -24,7 +22,3 @@ services:
         value: "180"
       - key: INGEST_MAX_PER_QUERY
         value: "30"
-    disk:
-      name: switch-margin-data
-      mountPath: /var/data
-      sizeGB: 1
