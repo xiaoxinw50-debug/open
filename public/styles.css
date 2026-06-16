@@ -504,7 +504,7 @@ tbody tr:hover {
 
 .rc-scenarios {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   max-width: 330px;
   margin-top: 10px;
   border: 1px solid rgba(158, 17, 23, 0.16);
@@ -518,7 +518,37 @@ tbody tr:hover {
   font-size: 0.82rem;
 }
 
-.rc-scenarios div {
+.rc-scenario-block {
+  display: grid;
+  gap: 5px;
+  border-top: 1px solid rgba(158, 17, 23, 0.12);
+  padding-top: 7px;
+}
+
+.rc-scenario-block.is-estimated {
+  border-radius: 11px;
+  border: 1px dashed rgba(126, 85, 21, 0.35);
+  padding: 8px;
+  background: rgba(255, 248, 231, 0.58);
+}
+
+.rc-scenarios .rc-scenario-title {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.rc-scenarios .rc-scenario-title span {
+  color: #2e2021;
+}
+
+.rc-scenarios .rc-scenario-title small {
+  color: #7c6a69;
+  line-height: 1.4;
+}
+
+.rc-scenario-block > div:not(.rc-scenario-title) {
   display: grid;
   grid-template-columns: 54px 72px 1fr;
   gap: 8px;

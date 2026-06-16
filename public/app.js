@@ -460,15 +460,27 @@ function partialMetrics(paper) {
 function rcScenarioMarkup(metrics) {
   const scenarios = metrics.rcDefinitionScenarios;
   if (!scenarios || !(metrics.missingFields || []).includes("Rc口径")) return "";
-  const total = scenarios.total || {};
-  const single = scenarios.single || {};
+  const strict = scenarios.strict || { total: scenarios.total, single: scenarios.single, sensitivityLabel: scenarios.sensitivityLabel };
+  const estimated = scenarios.estimated || null;
   return `
     <div class="rc-scenarios">
       <strong>Rc口径敏感性</strong>
+      ${scenarioPairMarkup("严格", strict, "使用已抽取 VDS/SS/开关比")}
+      ${estimated && (!strict.total?.gamma2d || !strict.single?.gamma2d) ? scenarioPairMarkup("估算", estimated, `默认假设：${(estimated.assumptions || []).join("；") || "无"}`) : ""}
+    </div>
+  `;
+}
+
+function scenarioPairMarkup(label, scenario, note) {
+  const total = scenario?.total || {};
+  const single = scenario?.single || {};
+  return `
+    <section class="rc-scenario-block ${label === "估算" ? "is-estimated" : ""}">
+      <div class="rc-scenario-title"><span>${escapeHtml(label)}</span><small>${escapeHtml(note)}</small></div>
       <div><span>总等效</span><b>Γ ${num(total.gamma2d)}</b><small>Vdrop ${num(total.contactDropV)} V</small></div>
       <div><span>单侧</span><b>Γ ${num(single.gamma2d)}</b><small>Vdrop ${num(single.contactDropV)} V</small></div>
-      <p>${escapeHtml(scenarios.sensitivityLabel || "")}</p>
-    </div>
+      <p>${escapeHtml(scenario?.sensitivityLabel || "")}</p>
+    </section>
   `;
 }
 

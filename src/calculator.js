@@ -90,7 +90,9 @@ export function calculatePaper(paper = {}) {
     ionMAPerUm,
     rcKOhmUm,
     vdsV,
-    switchCostV
+    switchCostV,
+    ssMvDec,
+    logSwitchRatio
   });
 
   const gamma2d =
@@ -188,8 +190,43 @@ export function calculatePaper(paper = {}) {
   };
 }
 
-function calculateRcDefinitionScenarios({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV }) {
+function calculateRcDefinitionScenarios({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, ssMvDec, logSwitchRatio }) {
   if (ionMAPerUm === null || rcKOhmUm === null) return null;
+  const strict = calculateRcScenarioPair({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV });
+  const estimatedVds = vdsV ?? ESTIMATE_DEFAULTS.vdsV;
+  const estimatedSsMvDec = ssMvDec ?? ESTIMATE_DEFAULTS.ssMvDec;
+  const estimatedLogRatio = logSwitchRatio ?? ESTIMATE_DEFAULTS.logSwitchRatio;
+  const estimatedSwitchCostV = (estimatedSsMvDec / 1000) * estimatedLogRatio;
+  const estimated = calculateRcScenarioPair({
+    ionMAPerUm,
+    rcKOhmUm,
+    vdsV: estimatedVds,
+    switchCostV: estimatedSwitchCostV
+  });
+  const assumptions = [];
+  if (vdsV === null) assumptions.push(`VDS 暂按 ${ESTIMATE_DEFAULTS.vdsV} V`);
+  if (ssMvDec === null) assumptions.push(`SS 暂按 ${ESTIMATE_DEFAULTS.ssMvDec} mV/dec`);
+  if (logSwitchRatio === null) assumptions.push(`log10(Ion/Ioff) 暂按 ${ESTIMATE_DEFAULTS.logSwitchRatio}`);
+  return {
+    strict: {
+      ...strict,
+      sensitivityLabel: getRcSensitivityLabel(strict.gammaDelta, strict.effectiveVoltageDelta, false)
+    },
+    estimated: {
+      ...estimated,
+      assumptions,
+      sensitivityLabel: getRcSensitivityLabel(estimated.gammaDelta, estimated.effectiveVoltageDelta, assumptions.length > 0)
+    },
+    // Backward-compatible aliases for older consumers.
+    total: strict.total,
+    single: strict.single,
+    gammaDelta: strict.gammaDelta,
+    effectiveVoltageDelta: strict.effectiveVoltageDelta,
+    sensitivityLabel: strict.sensitivityLabel
+  };
+}
+
+function calculateRcScenarioPair({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV }) {
   const total = calculateRcScenario({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, multiplier: 1 });
   const single = calculateRcScenario({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, multiplier: 2 });
   const gammaDelta =
@@ -202,8 +239,7 @@ function calculateRcDefinitionScenarios({ ionMAPerUm, rcKOhmUm, vdsV, switchCost
     total,
     single,
     gammaDelta: round(gammaDelta, 3),
-    effectiveVoltageDelta: round(effectiveVoltageDelta, 4),
-    sensitivityLabel: getRcSensitivityLabel(gammaDelta, effectiveVoltageDelta)
+    effectiveVoltageDelta: round(effectiveVoltageDelta, 4)
   };
 }
 
@@ -223,15 +259,16 @@ function calculateRcScenario({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, multipli
   };
 }
 
-function getRcSensitivityLabel(gammaDelta, effectiveVoltageDelta) {
+function getRcSensitivityLabel(gammaDelta, effectiveVoltageDelta, estimated = false) {
+  const prefix = estimated ? "按默认假设估算：" : "";
   if (gammaDelta !== null) {
-    if (gammaDelta >= 0.3) return "Rc口径对 Γ₂D 影响较大，必须查原文确认";
-    if (gammaDelta >= 0.1) return "Rc口径对 Γ₂D 有明显影响，建议优先确认";
-    return "Rc口径对 Γ₂D 影响较小，但仍需确认";
+    if (gammaDelta >= 0.3) return `${prefix}Rc口径对 Γ₂D 影响较大，必须查原文确认`;
+    if (gammaDelta >= 0.1) return `${prefix}Rc口径对 Γ₂D 有明显影响，建议优先确认`;
+    return `${prefix}Rc口径对 Γ₂D 影响较小，但仍需确认`;
   }
   if (effectiveVoltageDelta !== null) {
-    if (effectiveVoltageDelta >= 0.1) return "Rc口径会明显改变有效电压余量";
-    return "Rc口径会改变接触压降，需确认";
+    if (effectiveVoltageDelta >= 0.1) return `${prefix}Rc口径会明显改变有效电压余量`;
+    return `${prefix}Rc口径会改变接触压降，需确认`;
   }
   return "已有 Ion/Rc，可比较 Rc 口径影响；仍缺 VDS 或开关代价";
 }
