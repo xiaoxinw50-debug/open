@@ -80,7 +80,7 @@ async function loadPapers() {
 }
 
 async function loadRankingOutput() {
-  state.rankingOutput = await api(`/api/rankings?sort=${encodeURIComponent(state.sort)}&include=all`);
+  state.rankingOutput = await api(`/api/rankings?sort=${encodeURIComponent(state.sort)}`);
   renderRankingOutput();
 }
 

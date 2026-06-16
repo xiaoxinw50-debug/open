@@ -24,8 +24,10 @@ app.get("/api/papers", async (req, res, next) => {
   try {
     const status = req.query.status?.toString();
     const sort = req.query.sort?.toString() || "gamma";
+    const includeLowValue = req.query.includeLowValue === "1" || req.query.includeLowValue === "true";
     const papers = await listPapers();
-    const filtered = status ? papers.filter((paper) => paper.status === status) : papers;
+    const visible = includeLowValue ? papers : papers.filter((paper) => !isLowValueAutoCandidate(paper));
+    const filtered = status ? visible.filter((paper) => paper.status === status) : visible;
     res.json(sortPapers(filtered, sort));
   } catch (error) {
     next(error);
@@ -135,10 +137,11 @@ app.post("/api/ingest/run", async (req, res, next) => {
 
 app.get("/api/stats", async (_req, res, next) => {
   try {
-    const papers = await listPapers();
+    const allPapers = await listPapers();
+    const papers = allPapers.filter((paper) => !isLowValueAutoCandidate(paper));
     const calculated = papers.filter((paper) => paper.metrics.canCalculateGamma);
     const estimable = papers.filter((paper) => paper.metrics.gammaMode === "estimated");
-    const needsReview = papers.filter((paper) => !paper.metrics.canCalculateGamma);
+    const needsReview = papers.filter((paper) => paper.metrics.gammaMode === "missing");
     const top = calculated
       .slice()
       .sort((a, b) => (b.metrics.gamma2d ?? -Infinity) - (a.metrics.gamma2d ?? -Infinity))[0];
@@ -147,6 +150,7 @@ app.get("/api/stats", async (_req, res, next) => {
       calculated: calculated.length,
       estimable: estimable.length,
       needsReview: needsReview.length,
+      hiddenLowValue: allPapers.length - papers.length,
       top: top ? { title: top.title, gamma2d: top.metrics.gamma2d } : null
     });
   } catch (error) {
@@ -159,6 +163,7 @@ app.get("/api/rankings", async (req, res, next) => {
     const sort = req.query.sort?.toString() || "gamma";
     const include = req.query.include?.toString() || "rankable";
     const papers = await listPapers();
+    const visiblePapers = papers.filter((paper) => !isLowValueAutoCandidate(paper));
     const filtered =
       include === "all"
         ? papers
@@ -175,7 +180,8 @@ app.get("/api/rankings", async (req, res, next) => {
       returned: rows.length,
       calculated: papers.filter((paper) => paper.metrics.canCalculateGamma).length,
       estimable: papers.filter((paper) => paper.metrics.gammaMode === "estimated").length,
-      needsReview: papers.filter((paper) => !paper.metrics.canCalculateGamma).length,
+      needsReview: visiblePapers.filter((paper) => paper.metrics.gammaMode === "missing").length,
+      hiddenLowValue: papers.length - visiblePapers.length,
       rows: rows.map((row, index) => ({ rank: index + 1, ...row }))
     });
   } catch (error) {
@@ -407,4 +413,18 @@ function isAuthorizedIngest(req) {
   if (!token) return true;
   const provided = req.get("x-ingest-token") || req.query.token;
   return provided === token;
+}
+
+function isLowValueAutoCandidate(paper = {}) {
+  if (!String(paper.sourceType || "").startsWith("auto")) return false;
+  const metrics = paper.metrics || calculatePaper(paper);
+  if (metrics.gammaMode !== "missing") return false;
+  const params = paper.params || {};
+  const hasCore = params.ionUaPerUm !== null && params.ionUaPerUm !== undefined ||
+    params.rcOhmUm !== null && params.rcOhmUm !== undefined;
+  if (hasCore) return false;
+  const fields = metrics.availableFields || [];
+  if (fields.length <= 1) return true;
+  const text = `${paper.title || ""} ${paper.abstract || ""} ${paper.journal || ""}`.toLowerCase();
+  return /review|perspective|outlook|prospect|phototransistor|photodetector|memrist|memory|sensor|sensing|non-volatile|nonvolatile/.test(text);
 }

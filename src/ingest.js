@@ -209,7 +209,8 @@ export async function runIngestion(options = {}, onProgress = null) {
           fullTextHelped += 1;
           sourceSummary.fullTextHelped += 1;
         }
-        if (!options.saveEmptyCandidates && extractedFieldCount(extraction.params) === 0) {
+        const fieldCount = extractedFieldCount(extraction.params);
+        if (!options.saveEmptyCandidates && fieldCount === 0) {
           noParameterCount += 1;
           sourceSummary.noParameters += 1;
           completedUnits += 1;
@@ -219,6 +220,21 @@ export async function runIngestion(options = {}, onProgress = null) {
             event: {
               type: "no_parameters",
               text: `无公式参数：${paper.title || "Untitled"}`,
+              time: new Date().toISOString()
+            }
+          });
+          continue;
+        }
+        if (!options.saveWeakCandidates && !hasCoreRankingField(extraction.params)) {
+          noParameterCount += 1;
+          sourceSummary.noParameters += 1;
+          completedUnits += 1;
+          report({
+            phase: "skipped",
+            message: "缺少 Ion/Rc 核心字段，已跳过",
+            event: {
+              type: "weak_candidate",
+              text: `缺少 Ion/Rc：${paper.title || "Untitled"}`,
               time: new Date().toISOString()
             }
           });
@@ -609,6 +625,10 @@ function noteMatchesUsedField(note = "", fields = []) {
 
 function extractedFieldCount(params = {}) {
   return ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"].filter((field) => !isBlank(params[field])).length;
+}
+
+function hasCoreRankingField(params = {}) {
+  return !isBlank(params.ionUaPerUm) || !isBlank(params.rcOhmUm);
 }
 
 function shouldAttemptFullText(params = {}, combinedText = "", attempted = 0) {
