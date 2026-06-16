@@ -86,6 +86,12 @@ export function calculatePaper(paper = {}) {
 
   const switchCostV =
     ssVDec !== null && logSwitchRatio !== null ? ssVDec * logSwitchRatio : null;
+  const rcDefinitionScenarios = calculateRcDefinitionScenarios({
+    ionMAPerUm,
+    rcKOhmUm,
+    vdsV,
+    switchCostV
+  });
 
   const gamma2d =
     effectiveVoltageV !== null && switchCostV !== null && switchCostV > 0
@@ -169,6 +175,7 @@ export function calculatePaper(paper = {}) {
     estimateAssumptions: estimate.assumptions,
     trialGamma2d: round(trialGamma2d, 3),
     trialRcAssumption,
+    rcDefinitionScenarios,
     marginClass,
     canCalculateGamma,
     canTrialGamma: trialGamma2d !== null,
@@ -179,6 +186,54 @@ export function calculatePaper(paper = {}) {
     reliabilityLabel,
     partialStage
   };
+}
+
+function calculateRcDefinitionScenarios({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV }) {
+  if (ionMAPerUm === null || rcKOhmUm === null) return null;
+  const total = calculateRcScenario({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, multiplier: 1 });
+  const single = calculateRcScenario({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, multiplier: 2 });
+  const gammaDelta =
+    total.gamma2d !== null && single.gamma2d !== null ? Math.abs(total.gamma2d - single.gamma2d) : null;
+  const effectiveVoltageDelta =
+    total.effectiveVoltageV !== null && single.effectiveVoltageV !== null
+      ? Math.abs(total.effectiveVoltageV - single.effectiveVoltageV)
+      : null;
+  return {
+    total,
+    single,
+    gammaDelta: round(gammaDelta, 3),
+    effectiveVoltageDelta: round(effectiveVoltageDelta, 4),
+    sensitivityLabel: getRcSensitivityLabel(gammaDelta, effectiveVoltageDelta)
+  };
+}
+
+function calculateRcScenario({ ionMAPerUm, rcKOhmUm, vdsV, switchCostV, multiplier }) {
+  const effectiveRcKOhmUm = rcKOhmUm * multiplier;
+  const contactDropV = ionMAPerUm * effectiveRcKOhmUm;
+  const effectiveVoltageV = vdsV !== null ? Math.abs(vdsV) - contactDropV : null;
+  const gamma2d = effectiveVoltageV !== null && switchCostV !== null && switchCostV > 0
+    ? effectiveVoltageV / switchCostV
+    : null;
+  return {
+    rcDefinition: multiplier === 1 ? "total" : "single",
+    effectiveRcKOhmUm: round(effectiveRcKOhmUm, 5),
+    contactDropV: round(contactDropV, 4),
+    effectiveVoltageV: round(effectiveVoltageV, 4),
+    gamma2d: round(gamma2d, 3)
+  };
+}
+
+function getRcSensitivityLabel(gammaDelta, effectiveVoltageDelta) {
+  if (gammaDelta !== null) {
+    if (gammaDelta >= 0.3) return "Rc口径对 Γ₂D 影响较大，必须查原文确认";
+    if (gammaDelta >= 0.1) return "Rc口径对 Γ₂D 有明显影响，建议优先确认";
+    return "Rc口径对 Γ₂D 影响较小，但仍需确认";
+  }
+  if (effectiveVoltageDelta !== null) {
+    if (effectiveVoltageDelta >= 0.1) return "Rc口径会明显改变有效电压余量";
+    return "Rc口径会改变接触压降，需确认";
+  }
+  return "已有 Ion/Rc，可比较 Rc 口径影响；仍缺 VDS 或开关代价";
 }
 
 function getDataQualityScore({ gammaMode, missingFields, estimateAssumptions, trialGamma2d }) {

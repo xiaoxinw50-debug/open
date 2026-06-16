@@ -507,6 +507,7 @@ function toRankingRow(paper) {
     estimateAssumptions: metrics.estimateAssumptions,
     trialGamma2d: metrics.trialGamma2d,
     trialRcAssumption: metrics.trialRcAssumption,
+    rcDefinitionScenarios: metrics.rcDefinitionScenarios,
     marginClass: metrics.marginClass,
     canCalculateGamma: metrics.canCalculateGamma,
     canTrialGamma: metrics.canTrialGamma,

@@ -382,6 +382,7 @@ function renderRankingOutput() {
     estimated_Gamma_2D: row.estimatedGamma2d,
     estimate_assumptions: row.estimateAssumptions,
     trial_Gamma_2D: row.trialGamma2d,
+    Rc_definition_scenarios: row.rcDefinitionScenarios,
     judgment: row.marginClass,
     reliability: row.reliabilityLabel,
     data_quality_score: row.dataQualityScore,
@@ -450,8 +451,24 @@ function partialMetrics(paper) {
   return `
     <div class="partial-stage">${escapeHtml(m.partialStage || "待补参数")}</div>
     ${rows.length ? `<div class="partial-values">${rows.map((row) => `<span>${escapeHtml(row)}</span>`).join("")}</div>` : ""}
+    ${rcScenarioMarkup(m)}
     <div class="missing-advice">${escapeHtml(missingAdvice(m.missingFields || []))}</div>
     ${m.trialRcAssumption ? `<div class="meta">${escapeHtml(m.trialRcAssumption)}</div>` : ""}
+  `;
+}
+
+function rcScenarioMarkup(metrics) {
+  const scenarios = metrics.rcDefinitionScenarios;
+  if (!scenarios || !(metrics.missingFields || []).includes("Rc口径")) return "";
+  const total = scenarios.total || {};
+  const single = scenarios.single || {};
+  return `
+    <div class="rc-scenarios">
+      <strong>Rc口径敏感性</strong>
+      <div><span>总等效</span><b>Γ ${num(total.gamma2d)}</b><small>Vdrop ${num(total.contactDropV)} V</small></div>
+      <div><span>单侧</span><b>Γ ${num(single.gamma2d)}</b><small>Vdrop ${num(single.contactDropV)} V</small></div>
+      <p>${escapeHtml(scenarios.sensitivityLabel || "")}</p>
+    </div>
   `;
 }
 
@@ -851,6 +868,7 @@ function downloadRankingCsv() {
     "estimatedEffectiveVoltageV",
     "estimatedSwitchCostV",
     "estimateAssumptions",
+    "rcDefinitionScenarios",
     "dataQualityScore",
     "reliabilityLabel",
     "extractionConfidence",
