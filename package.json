@@ -1,0 +1,17 @@
+{
+  "name": "switch-margin-site",
+  "version": "0.1.0",
+  "description": "二维半导体逻辑器件开关裕量因子计算、论文自动检索与排序网站",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check src/calculator.js && node --check src/db.js && node --check src/extract.js && node --check src/ingest.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
