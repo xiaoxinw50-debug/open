@@ -14,6 +14,7 @@ app.use(express.json({ limit: "2mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 let ingestRunning = false;
+let ingestProgress = makeIdleProgress();
 
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true, now: new Date().toISOString() });
@@ -83,6 +84,10 @@ app.get("/api/state", async (_req, res, next) => {
   }
 });
 
+app.get("/api/ingest/progress", (_req, res) => {
+  res.json(ingestProgress);
+});
+
 app.patch("/api/state", async (req, res, next) => {
   try {
     const patch = {};
@@ -101,12 +106,27 @@ app.patch("/api/state", async (req, res, next) => {
 
 app.post("/api/ingest/run", async (req, res, next) => {
   if (!isAuthorizedIngest(req)) return res.status(403).json({ error: "invalid ingestion token" });
-  if (ingestRunning) return res.status(409).json({ error: "ingestion already running" });
+  if (ingestRunning) return res.status(409).json({ error: "ingestion already running", progress: ingestProgress });
   ingestRunning = true;
+  resetIngestProgress("manual");
   try {
-    const summary = await runIngestion(req.body || {});
+    const summary = await runIngestion(req.body || {}, updateIngestProgress);
+    updateIngestProgress({
+      running: false,
+      phase: "finished",
+      message: "检索完成",
+      finishedAt: summary.finishedAt,
+      summary
+    });
     res.json(summary);
   } catch (error) {
+    updateIngestProgress({
+      running: false,
+      phase: "failed",
+      message: error.message || "检索失败",
+      error: error.message || String(error),
+      finishedAt: new Date().toISOString()
+    });
     next(error);
   } finally {
     ingestRunning = false;
@@ -183,15 +203,90 @@ async function runScheduledIngestion(reason, force) {
   if (!force && Date.now() - lastRunAt < intervalMs) return;
 
   ingestRunning = true;
+  resetIngestProgress(reason);
   try {
     console.log(`starting ${reason} ingestion`);
-    const summary = await runIngestion();
+    const summary = await runIngestion({}, updateIngestProgress);
+    updateIngestProgress({
+      running: false,
+      phase: "finished",
+      message: "后台检索完成",
+      finishedAt: summary.finishedAt,
+      summary
+    });
     console.log(`${reason} ingestion finished`, summary);
   } catch (error) {
+    updateIngestProgress({
+      running: false,
+      phase: "failed",
+      message: error.message || "后台检索失败",
+      error: error.message || String(error),
+      finishedAt: new Date().toISOString()
+    });
     console.error("scheduled ingestion failed", error);
   } finally {
     ingestRunning = false;
   }
+}
+
+function makeIdleProgress() {
+  return {
+    runId: null,
+    running: false,
+    reason: null,
+    phase: "idle",
+    message: "尚未开始检索",
+    startedAt: null,
+    finishedAt: null,
+    updatedAt: new Date().toISOString(),
+    percent: 0,
+    totalUnits: 0,
+    completedUnits: 0,
+    currentQuery: "",
+    currentSource: "",
+    currentPaper: "",
+    counters: {},
+    recent: [],
+    summary: null,
+    error: null
+  };
+}
+
+function resetIngestProgress(reason) {
+  const now = new Date().toISOString();
+  ingestProgress = {
+    ...makeIdleProgress(),
+    runId: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    running: true,
+    reason,
+    phase: "starting",
+    message: "准备开始检索",
+    startedAt: now,
+    updatedAt: now
+  };
+}
+
+function updateIngestProgress(patch = {}) {
+  const recent = patch.recent
+    ? patch.recent.slice(0, 8)
+    : patch.event
+      ? [patch.event, ...(ingestProgress.recent || [])].slice(0, 8)
+      : ingestProgress.recent || [];
+  const completedUnits = patch.completedUnits ?? ingestProgress.completedUnits ?? 0;
+  const totalUnits = patch.totalUnits ?? ingestProgress.totalUnits ?? 0;
+  const computedPercent =
+    totalUnits > 0 ? Math.max(0, Math.min(100, Math.round((completedUnits / totalUnits) * 100))) : ingestProgress.percent || 0;
+  const percent = patch.percent ?? Math.max(ingestProgress.percent || 0, computedPercent);
+
+  ingestProgress = {
+    ...ingestProgress,
+    ...patch,
+    recent,
+    completedUnits,
+    totalUnits,
+    percent,
+    updatedAt: new Date().toISOString()
+  };
 }
 
 function sortPapers(papers, sort) {

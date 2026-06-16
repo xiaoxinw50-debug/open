@@ -203,6 +203,32 @@
             <button type="button" id="run-ingest-btn">立即检索</button>
           </div>
         </form>
+        <div id="ingest-progress" class="progress-card">
+          <div class="progress-head">
+            <div>
+              <span class="progress-label">当前状态</span>
+              <strong id="progress-phase">尚未开始</strong>
+              <p id="progress-message">等待检索任务。</p>
+            </div>
+            <div class="progress-percent"><span id="progress-percent">0</span>%</div>
+          </div>
+          <div class="progress-track" aria-label="检索进度">
+            <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+          </div>
+          <div class="progress-grid">
+            <div><b id="progress-fetched">0</b><span>原始抓取</span></div>
+            <div><b id="progress-relevant">0</b><span>相关命中</span></div>
+            <div><b id="progress-fulltext">0</b><span>全文读取</span></div>
+            <div><b id="progress-saved">0</b><span>入库/更新</span></div>
+            <div><b id="progress-calculated">0</b><span>可计算</span></div>
+            <div><b id="progress-review">0</b><span>待补参数</span></div>
+          </div>
+          <div class="progress-detail">
+            <span id="progress-current">当前处理：-</span>
+            <span id="progress-updated">更新时间：-</span>
+          </div>
+          <div id="progress-events" class="progress-events"></div>
+        </div>
         <pre id="ingest-log" class="log"></pre>
       </section>
     </main>

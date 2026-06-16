@@ -12,7 +12,7 @@ import { getState, updateState, upsertPaper } from "./db.js";
 
 const USER_AGENT = "SwitchMarginSite/0.1 (local research tool; mailto:example@example.com)";
 
-export async function runIngestion(options = {}) {
+export async function runIngestion(options = {}, onProgress = null) {
   const state = await getState();
   const lookbackDays = Number(options.lookbackDays || state.lookbackDays || 180);
   const maxPerQuery = Number(options.maxPerQuery || state.maxPerQuery || 18);
@@ -33,8 +33,45 @@ export async function runIngestion(options = {}) {
   let fullTextRead = 0;
   let fullTextHelped = 0;
   let noParameterCount = 0;
+  let completedUnits = 0;
+  let totalUnits = queries.length * 3;
+
+  const report = (patch = {}) => {
+    if (typeof onProgress !== "function") return;
+    onProgress({
+      totalUnits,
+      completedUnits,
+      counters: {
+        fetchedRaw,
+        duplicates: duplicateCount,
+        relevant: relevantCount,
+        fullTextAttempted,
+        fullTextRead,
+        fullTextHelped,
+        noParameters: noParameterCount,
+        addedOrUpdated: results.length,
+        calculated: results.filter((item) => item.metrics.canCalculateGamma).length,
+        needsReview: results.filter((item) => !item.metrics.canCalculateGamma).length,
+        errors: errors.length
+      },
+      ...patch
+    });
+  };
+
+  report({
+    phase: "searching",
+    message: `开始检索 ${queries.length} 个关键词`,
+    percent: 1
+  });
 
   for (const query of queries) {
+    report({
+      phase: "searching",
+      message: `正在检索关键词：${query}`,
+      currentQuery: query,
+      currentSource: "",
+      currentPaper: ""
+    });
     const sourceRuns = [
       { name: "OpenAlex", promise: fetchOpenAlex(query, fromDate, maxPerQuery) },
       { name: "Crossref", promise: fetchCrossref(query, fromDate, maxPerQuery) },
@@ -58,21 +95,75 @@ export async function runIngestion(options = {}) {
       };
       if (item.status === "rejected") {
         errors.push(`${query}: ${item.reason?.message || item.reason}`);
+        completedUnits += 1;
+        report({
+          phase: "source_error",
+          message: `${sourceRuns[sourceIndex].name} 检索失败`,
+          currentQuery: query,
+          currentSource: sourceRuns[sourceIndex].name,
+          event: {
+            type: "error",
+            text: `${query} / ${sourceRuns[sourceIndex].name}: ${item.reason?.message || item.reason}`,
+            time: new Date().toISOString()
+          }
+        });
         querySummary.sources.push(sourceSummary);
         continue;
       }
       sourceSummary.fetched = item.value.length;
       fetchedRaw += item.value.length;
+      totalUnits += item.value.length;
+      completedUnits += 1;
+      report({
+        phase: "filtering",
+        message: `${query} / ${sourceRuns[sourceIndex].name} 抓取 ${item.value.length} 条，开始筛选`,
+        currentQuery: query,
+        currentSource: sourceRuns[sourceIndex].name,
+        event: {
+          type: "source",
+          text: `${query} / ${sourceRuns[sourceIndex].name}: 抓取 ${item.value.length} 条`,
+          time: new Date().toISOString()
+        }
+      });
       for (const paper of item.value) {
+        report({
+          phase: "filtering",
+          message: `筛选论文：${paper.title || "Untitled"}`,
+          currentQuery: query,
+          currentSource: sourceRuns[sourceIndex].name,
+          currentPaper: paper.title || ""
+        });
         const key = paper.doi || paper.openAlexId || paper.title;
         if (!key || seen.has(key)) {
           sourceSummary.duplicates += 1;
           duplicateCount += 1;
+          completedUnits += 1;
+          report({
+            phase: "skipped",
+            message: "重复论文已跳过",
+            event: {
+              type: "duplicate",
+              text: `重复跳过：${paper.title || key || "Untitled"}`,
+              time: new Date().toISOString()
+            }
+          });
           continue;
         }
         seen.add(key);
         const combinedText = [paper.title, paper.abstract, paper.journal, paper.publisher].filter(Boolean).join(" ");
-        if (!looksRelevant(combinedText) || !isLogicFetBenchmarkCandidate(combinedText)) continue;
+        if (!looksRelevant(combinedText) || !isLogicFetBenchmarkCandidate(combinedText)) {
+          completedUnits += 1;
+          report({
+            phase: "skipped",
+            message: "相关性不足，已跳过",
+            event: {
+              type: "irrelevant",
+              text: `相关性不足：${paper.title || "Untitled"}`,
+              time: new Date().toISOString()
+            }
+          });
+          continue;
+        }
         sourceSummary.relevant += 1;
         relevantCount += 1;
 
@@ -82,6 +173,11 @@ export async function runIngestion(options = {}) {
         if (fullTextEnabled && fullTextAttempted < fullTextMaxPerRun) {
           fullTextAttempted += 1;
           sourceSummary.fullTextAttempted += 1;
+          report({
+            phase: "reading_fulltext",
+            message: `读取开放全文：${paper.title || "Untitled"}`,
+            currentPaper: paper.title || ""
+          });
           fullTextResult = await readOpenFullText(paper, {
             timeoutMs: fullTextTimeoutMs,
             unpaywallEmail: options.unpaywallEmail,
@@ -91,6 +187,15 @@ export async function runIngestion(options = {}) {
             fullTextRead += 1;
             sourceSummary.fullTextRead += 1;
             extractionText = `${combinedText}\n\n${fullTextResult.text}`;
+            report({
+              phase: "extracting",
+              message: `已读取全文，抽取参数：${paper.title || "Untitled"}`,
+              event: {
+                type: "fulltext",
+                text: `全文读取成功：${paper.title || "Untitled"}（${fullTextResult.chars} 字符）`,
+                time: new Date().toISOString()
+              }
+            });
           }
         }
         const extraction = extractParams(extractionText);
@@ -102,6 +207,16 @@ export async function runIngestion(options = {}) {
         if (!options.saveEmptyCandidates && extractedFieldCount(extraction.params) === 0) {
           noParameterCount += 1;
           sourceSummary.noParameters += 1;
+          completedUnits += 1;
+          report({
+            phase: "skipped",
+            message: "未抽到公式参数，已跳过",
+            event: {
+              type: "no_parameters",
+              text: `无公式参数：${paper.title || "Untitled"}`,
+              time: new Date().toISOString()
+            }
+          });
           continue;
         }
         const draft = {
@@ -137,6 +252,17 @@ export async function runIngestion(options = {}) {
         sourceSummary.saved += 1;
         if (saved.metrics.canCalculateGamma) sourceSummary.calculated += 1;
         else sourceSummary.needsReview += 1;
+        completedUnits += 1;
+        report({
+          phase: saved.metrics.canCalculateGamma ? "calculated" : "needs_review",
+          message: saved.metrics.canCalculateGamma ? "已补齐并计算 Γ₂D" : "已入库，等待补齐参数",
+          currentPaper: saved.title || "",
+          event: {
+            type: saved.metrics.canCalculateGamma ? "calculated" : "needs_review",
+            text: `${saved.metrics.canCalculateGamma ? "可计算" : "待补参数"}：${saved.title || "Untitled"}`,
+            time: new Date().toISOString()
+          }
+        });
       }
       querySummary.sources.push(sourceSummary);
     }
@@ -162,6 +288,13 @@ export async function runIngestion(options = {}) {
     errors,
     byQuery: querySummaries
   };
+  report({
+    phase: "finished",
+    message: "检索完成",
+    finishedAt: summary.finishedAt,
+    summary,
+    percent: 100
+  });
   await updateState({ lastRunAt: summary.finishedAt, lastRunSummary: summary });
   return summary;
 }

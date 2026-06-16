@@ -2,6 +2,8 @@ const state = {
   papers: [],
   rankingOutput: null,
   settings: null,
+  ingestProgress: null,
+  ingestPollTimer: null,
   activeView: "ranking",
   sort: "gamma"
 };
@@ -67,7 +69,7 @@ function bindForms() {
 }
 
 async function loadAll() {
-  await Promise.all([loadPapers(), loadRankingOutput(), loadSettings(), loadStats()]);
+  await Promise.all([loadPapers(), loadRankingOutput(), loadSettings(), loadStats(), loadIngestProgress()]);
 }
 
 async function loadPapers() {
@@ -97,13 +99,72 @@ async function loadStats() {
 async function runIngest() {
   switchView("ingest");
   log("正在检索 OpenAlex、Crossref 与 arXiv。若网络或出版商接口较慢，请等待。");
+  startIngestPolling();
   try {
     const summary = await api("/api/ingest/run", { method: "POST", body: JSON.stringify({}) });
     log(formatIngestSummary(summary));
     await loadAll();
   } catch (error) {
     log(`检索失败：${error.message}`);
+    await loadIngestProgress();
+  } finally {
+    setTimeout(stopIngestPollingIfIdle, 1400);
   }
+}
+
+async function loadIngestProgress() {
+  state.ingestProgress = await api("/api/ingest/progress");
+  renderIngestProgress();
+  if (state.ingestProgress.running) startIngestPolling();
+}
+
+function startIngestPolling() {
+  if (state.ingestPollTimer) return;
+  state.ingestPollTimer = setInterval(async () => {
+    try {
+      await loadIngestProgress();
+      stopIngestPollingIfIdle();
+    } catch (error) {
+      console.warn("ingest progress polling failed", error);
+    }
+  }, 1000);
+}
+
+function stopIngestPollingIfIdle() {
+  if (!state.ingestPollTimer || state.ingestProgress?.running) return;
+  clearInterval(state.ingestPollTimer);
+  state.ingestPollTimer = null;
+}
+
+function renderIngestProgress() {
+  const progress = state.ingestProgress;
+  if (!progress) return;
+  const counters = progress.counters || {};
+  const percent = Math.max(0, Math.min(100, Number(progress.percent || 0)));
+  $("#progress-phase").textContent = phaseLabel(progress.phase, progress.running);
+  $("#progress-message").textContent = progress.message || "等待检索任务。";
+  $("#progress-percent").textContent = Math.round(percent);
+  $("#progress-bar").style.width = `${percent}%`;
+  $("#ingest-progress").classList.toggle("is-running", Boolean(progress.running));
+  $("#ingest-progress").classList.toggle("is-failed", progress.phase === "failed");
+  $("#progress-fetched").textContent = counters.fetchedRaw ?? 0;
+  $("#progress-relevant").textContent = counters.relevant ?? 0;
+  $("#progress-fulltext").textContent = `${counters.fullTextRead ?? 0}/${counters.fullTextAttempted ?? 0}`;
+  $("#progress-saved").textContent = counters.addedOrUpdated ?? 0;
+  $("#progress-calculated").textContent = counters.calculated ?? 0;
+  $("#progress-review").textContent = counters.needsReview ?? 0;
+
+  const currentParts = [
+    progress.currentQuery ? `关键词：${progress.currentQuery}` : "",
+    progress.currentSource ? `来源：${progress.currentSource}` : "",
+    progress.currentPaper ? `论文：${progress.currentPaper}` : ""
+  ].filter(Boolean);
+  $("#progress-current").textContent = `当前处理：${currentParts.join(" / ") || "-"}`;
+  $("#progress-updated").textContent = `更新时间：${formatTime(progress.updatedAt)}`;
+  $("#progress-events").innerHTML = (progress.recent || [])
+    .slice(0, 6)
+    .map((event) => `<div class="progress-event ${escapeAttr(event.type || "")}"><span>${escapeHtml(formatTime(event.time))}</span>${escapeHtml(event.text || "")}</div>`)
+    .join("");
 }
 
 function renderRanking() {
@@ -474,6 +535,31 @@ function num(value) {
   if (Math.abs(number) >= 100) return number.toFixed(1);
   if (Math.abs(number) >= 10) return number.toFixed(2);
   return number.toFixed(3);
+}
+
+function phaseLabel(phase, running) {
+  const labels = {
+    idle: "空闲",
+    starting: "准备中",
+    searching: "检索中",
+    filtering: "筛选中",
+    reading_fulltext: "读取全文",
+    extracting: "抽取参数",
+    skipped: "跳过样本",
+    calculated: "已计算",
+    needs_review: "待补参数",
+    source_error: "来源错误",
+    finished: "已完成",
+    failed: "失败"
+  };
+  return `${labels[phase] || phase || "未知"}${running ? " · 运行中" : ""}`;
+}
+
+function formatTime(value) {
+  if (!value) return "-";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "-";
+  return date.toLocaleTimeString("zh-CN", { hour12: false });
 }
 
 function numberOrNull(value) {
