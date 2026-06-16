@@ -170,7 +170,10 @@ export async function runIngestion(options = {}, onProgress = null) {
         const metadataExtraction = extractParams(combinedText);
         let extractionText = combinedText;
         let fullTextResult = null;
-        if (fullTextEnabled && fullTextAttempted < fullTextMaxPerRun) {
+        const shouldReadFullText = fullTextEnabled &&
+          fullTextAttempted < fullTextMaxPerRun &&
+          shouldAttemptFullText(metadataExtraction.params, combinedText, fullTextAttempted);
+        if (shouldReadFullText) {
           fullTextAttempted += 1;
           sourceSummary.fullTextAttempted += 1;
           report({
@@ -181,7 +184,8 @@ export async function runIngestion(options = {}, onProgress = null) {
           fullTextResult = await readOpenFullText(paper, {
             timeoutMs: fullTextTimeoutMs,
             unpaywallEmail: options.unpaywallEmail,
-            maxSources: options.fullTextMaxSources
+            maxSources: options.fullTextMaxSources,
+            maxCandidates: options.fullTextMaxCandidates
           });
           if (fullTextResult.ok) {
             fullTextRead += 1;
@@ -198,7 +202,8 @@ export async function runIngestion(options = {}, onProgress = null) {
             });
           }
         }
-        const extraction = extractParams(extractionText);
+        const fullTextExtraction = extractParams(extractionText);
+        const extraction = mergeExtractions(metadataExtraction, fullTextExtraction);
         const helpedByFullText = fullTextResult?.ok && extractionAddsFields(metadataExtraction.params, extraction.params);
         if (helpedByFullText) {
           fullTextHelped += 1;
@@ -534,8 +539,100 @@ function extractionAddsFields(before = {}, after = {}) {
     (before.rcDefinition === "unknown" && after.rcDefinition && after.rcDefinition !== "unknown");
 }
 
+function mergeExtractions(metadataExtraction = {}, fullTextExtraction = {}) {
+  const metadataParams = metadataExtraction.params || {};
+  const fullTextParams = fullTextExtraction.params || {};
+  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
+  const usedFullTextFields = [];
+  const params = {
+    ...fullTextParams,
+    ...metadataParams,
+    evidence: {
+      ...(fullTextParams.evidence || {}),
+      ...(metadataParams.evidence || {})
+    }
+  };
+
+  for (const field of fields) {
+    if (isBlank(metadataParams[field]) && !isBlank(fullTextParams[field])) {
+      params[field] = fullTextParams[field];
+      usedFullTextFields.push(field);
+      if (fullTextParams.evidence?.[field]) params.evidence[field] = fullTextParams.evidence[field];
+    } else {
+      params[field] = metadataParams[field] ?? null;
+    }
+  }
+
+  if ((metadataParams.rcDefinition || "unknown") === "unknown" && fullTextParams.rcDefinition && fullTextParams.rcDefinition !== "unknown") {
+    params.rcDefinition = fullTextParams.rcDefinition;
+    usedFullTextFields.push("rcDefinition");
+    if (fullTextParams.evidence?.rcDefinition) params.evidence.rcDefinition = fullTextParams.evidence.rcDefinition;
+  } else {
+    params.rcDefinition = metadataParams.rcDefinition || "unknown";
+  }
+
+  const metadataNotes = splitNotes(metadataParams.notes);
+  const fullTextNotes = splitNotes(fullTextParams.notes).filter((note) => noteMatchesUsedField(note, usedFullTextFields));
+  params.notes = [...new Set([...metadataNotes, ...fullTextNotes])].join("；");
+
+  return {
+    params,
+    extractionNotes: [...(metadataExtraction.extractionNotes || []), ...(fullTextExtraction.extractionNotes || [])],
+    extractionConfidence: confidenceForParams(params)
+  };
+}
+
+function confidenceForParams(params = {}) {
+  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"];
+  const hit = fields.filter((field) => !isBlank(params[field])).length;
+  return Math.round((hit / fields.length) * 100) / 100;
+}
+
+function splitNotes(notes = "") {
+  return String(notes)
+    .split("；")
+    .map((note) => note.trim())
+    .filter(Boolean);
+}
+
+function noteMatchesUsedField(note = "", fields = []) {
+  const labels = {
+    ionUaPerUm: "Ion",
+    rcOhmUm: "Rc",
+    vdsV: "VDS",
+    ssMvDec: "SS",
+    logSwitchRatio: "开关比",
+    rcDefinition: "Rc 口径"
+  };
+  return fields.some((field) => note.includes(labels[field]));
+}
+
 function extractedFieldCount(params = {}) {
   return ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio"].filter((field) => !isBlank(params[field])).length;
+}
+
+function shouldAttemptFullText(params = {}, combinedText = "", attempted = 0) {
+  const fieldCount = extractedFieldCount(params);
+  if (fieldCount > 0) return true;
+  if (attempted < 3 && looksParameterRich(combinedText)) return true;
+  return false;
+}
+
+function looksParameterRich(text = "") {
+  const lower = text.toLowerCase();
+  const hits = [
+    "on-current",
+    "on-state current",
+    "drive current",
+    "contact resistance",
+    "subthreshold swing",
+    "subthreshold slope",
+    "on/off ratio",
+    "current ratio",
+    "vds",
+    "drain-to-source"
+  ].filter((term) => lower.includes(term)).length;
+  return hits >= 2;
 }
 
 function formatFullTextSources(result = {}) {

@@ -221,21 +221,21 @@ function renderCandidates() {
 function renderChart() {
   const target = $("#chart");
   const rows = state.papers
-    .filter((paper) => paper.metrics.gamma2d !== null)
+    .filter((paper) => paper.metrics.displayGamma2d !== null)
     .slice()
-    .sort((a, b) => b.metrics.gamma2d - a.metrics.gamma2d)
+    .sort((a, b) => b.metrics.displayGamma2d - a.metrics.displayGamma2d)
     .slice(0, 8);
   target.innerHTML = "";
   if (!rows.length) return;
 
-  const max = Math.max(...rows.map((paper) => paper.metrics.gamma2d), 1);
+  const max = Math.max(...rows.map((paper) => paper.metrics.displayGamma2d), 1);
   rows.forEach((paper) => {
     const row = document.createElement("div");
     row.className = "bar-row";
     row.innerHTML = `
       <div class="bar-label" title="${escapeAttr(paper.title)}">${escapeHtml(paper.authors || paper.title)}</div>
-      <div class="bar-track"><div class="bar" style="width:${Math.max(4, (paper.metrics.gamma2d / max) * 100)}%"></div></div>
-      <div class="bar-value">${num(paper.metrics.gamma2d)}</div>
+      <div class="bar-track"><div class="bar" style="width:${Math.max(4, (paper.metrics.displayGamma2d / max) * 100)}%"></div></div>
+      <div class="bar-value">${num(paper.metrics.displayGamma2d)}${paper.metrics.gammaMode === "estimated" ? "*" : ""}</div>
     `;
     target.appendChild(row);
   });
@@ -339,8 +339,30 @@ function partialMetrics(paper) {
   return `
     <div class="partial-stage">${escapeHtml(m.partialStage || "待补参数")}</div>
     ${rows.length ? `<div class="partial-values">${rows.map((row) => `<span>${escapeHtml(row)}</span>`).join("")}</div>` : ""}
+    <div class="missing-advice">${escapeHtml(missingAdvice(m.missingFields || []))}</div>
     ${m.trialRcAssumption ? `<div class="meta">${escapeHtml(m.trialRcAssumption)}</div>` : ""}
   `;
+}
+
+function missingAdvice(missingFields) {
+  if (!missingFields.length) return "字段齐全。";
+  const advice = [];
+  if (missingFields.includes("Ion") || missingFields.includes("Rc")) {
+    advice.push("缺 Ion/Rc：通常需要正文器件表、输出曲线或接触工程图。");
+  }
+  if (missingFields.includes("VDS")) {
+    advice.push("缺 VDS：常在 I-V 图注或测试条件段。");
+  }
+  if (missingFields.includes("SS")) {
+    advice.push("缺 SS：常在转移曲线图注、统计图或补充表。");
+  }
+  if (missingFields.includes("开关比对数")) {
+    advice.push("缺开关比：常写作 on/off ratio 或 Ion/Ioff。");
+  }
+  if (missingFields.includes("Rc口径")) {
+    advice.push("缺 Rc 口径：需确认单侧接触还是源漏总等效。");
+  }
+  return advice.join(" ");
 }
 
 function gammaCell(paper) {

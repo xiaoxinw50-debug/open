@@ -12,11 +12,23 @@ export async function readOpenFullText(paper = {}, options = {}) {
   const sources = [];
   const maxSources = Number(options.maxSources || DEFAULT_MAX_SOURCES);
   const maxChars = Number(options.maxChars || DEFAULT_MAX_CHARS);
+  const maxCandidates = Number(options.maxCandidates || 10);
   let usedChars = 0;
+  const visited = new Set();
 
-  for (const candidate of candidates) {
+  for (let index = 0; index < candidates.length && index < maxCandidates; index += 1) {
+    const candidate = candidates[index];
+    const candidateKey = candidate.url.replace(/#.*$/, "");
+    if (visited.has(candidateKey)) continue;
+    visited.add(candidateKey);
     try {
       const result = await fetchTextCandidate(candidate, options);
+      if (result.discoveredLinks?.length) {
+        for (const link of result.discoveredLinks) {
+          addCandidate(candidates, link.url, link.source);
+        }
+        dedupeCandidatesInPlace(candidates);
+      }
       if (result.text.length >= MIN_TEXT_CHARS) {
         const remaining = maxChars - usedChars;
         if (remaining <= 0) break;
@@ -84,7 +96,7 @@ async function fullTextCandidates(paper, options) {
   const unpaywall = await getUnpaywallCandidate(paper.doi, options);
   for (const item of unpaywall) addCandidate(candidates, item.url, item.source);
 
-  return uniqueCandidates(candidates).slice(0, Number(options.maxCandidates || 5));
+  return prioritizeCandidates(uniqueCandidates(candidates)).slice(0, Number(options.maxCandidates || 8));
 }
 
 async function getUnpaywallCandidate(doi, options) {
@@ -127,6 +139,25 @@ function uniqueCandidates(candidates) {
   });
 }
 
+function dedupeCandidatesInPlace(candidates) {
+  const next = prioritizeCandidates(uniqueCandidates(candidates));
+  candidates.splice(0, candidates.length, ...next);
+}
+
+function prioritizeCandidates(candidates) {
+  return candidates.slice().sort((a, b) => candidatePriority(b) - candidatePriority(a));
+}
+
+function candidatePriority(candidate = {}) {
+  const text = `${candidate.source || ""} ${candidate.url || ""}`.toLowerCase();
+  let score = 0;
+  if (/supp|support|si|esm|extended|additional/.test(text)) score += 8;
+  if (/\.pdf($|\?)/.test(text)) score += 3;
+  if (/arxiv|ar5iv/.test(text)) score += 2;
+  if (/landing|doi/.test(text)) score -= 1;
+  return score;
+}
+
 async function fetchTextCandidate(candidate, options) {
   if (/\.pdf($|\?)/i.test(candidate.url)) {
     return fetchPdfCandidate(candidate, options);
@@ -149,8 +180,9 @@ async function fetchTextCandidate(candidate, options) {
 
   const maxChars = Number(options.maxCharsPerSource || DEFAULT_MAX_CHARS_PER_SOURCE);
   const raw = await response.text();
+  const discoveredLinks = extractSupplementLinks(raw, response.url || candidate.url);
   const text = htmlToText(raw).slice(0, maxChars);
-  return { source: candidate.source, text };
+  return { source: candidate.source, text, discoveredLinks };
 }
 
 async function fetchPdfCandidate(candidate, options, existingResponse = null) {
@@ -223,6 +255,42 @@ export function htmlToText(html = "") {
     .replace(/[ \t]*\n[ \t]*/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
+}
+
+function extractSupplementLinks(html = "", baseUrl = "") {
+  const links = [];
+  const anchorRegex = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+  while ((match = anchorRegex.exec(html)) !== null) {
+    const href = decodeHtml(match[1] || "");
+    const label = htmlToText(match[2] || "").slice(0, 160);
+    const combined = `${href} ${label}`.toLowerCase();
+    if (!/(supplement|supporting|additional|extended data|esm|\.pdf|\.docx?|\.xlsx?|\.csv)/i.test(combined)) continue;
+    const url = resolveUrl(href, baseUrl);
+    if (!url) continue;
+    links.push({
+      url,
+      source: /pdf/i.test(combined) ? `discovered PDF: ${label || "supplement"}` : `discovered supplement: ${label || "link"}`
+    });
+  }
+  return uniqueCandidates(links).slice(0, 8);
+}
+
+function resolveUrl(href = "", baseUrl = "") {
+  try {
+    return new URL(href, baseUrl).toString();
+  } catch {
+    return "";
+  }
+}
+
+function decodeHtml(value = "") {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#39;/g, "'");
 }
 
 function getArxivId(paper = {}) {
