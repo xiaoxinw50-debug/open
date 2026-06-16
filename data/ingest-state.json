@@ -1,15 +1,19 @@
 {
-  "lastRunAt": "2026-06-16T03:39:59.327Z",
+  "lastRunAt": "2026-06-16T03:59:39.387Z",
   "lastRunSummary": {
-    "startedAt": "2026-06-16T03:39:51.732Z",
-    "finishedAt": "2026-06-16T03:39:59.327Z",
-    "fromDate": "2026-05-17",
+    "startedAt": "2026-06-16T03:59:26.820Z",
+    "finishedAt": "2026-06-16T03:59:39.387Z",
+    "fromDate": "2025-12-18",
     "queries": [
-      "two-dimensional semiconductor transistor contact resistance"
+      "two-dimensional semiconductor transistor contact resistance",
+      "2D semiconductor logic transistor subthreshold swing",
+      "MoS2 transistor contact resistance short channel",
+      "WSe2 pFET contact resistance",
+      "transition metal dichalcogenide CMOS transistor"
     ],
-    "addedOrUpdated": 0,
+    "addedOrUpdated": 17,
     "calculated": 0,
-    "needsReview": 0,
+    "needsReview": 17,
     "errors": []
   },
   "lookbackDays": 180,
