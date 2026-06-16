@@ -14,25 +14,48 @@ export async function runIngestion(options = {}) {
   const seen = new Set();
   const results = [];
   const errors = [];
+  const querySummaries = [];
+  let fetchedRaw = 0;
+  let relevantCount = 0;
+  let duplicateCount = 0;
 
   for (const query of queries) {
     const sourceRuns = [
-      fetchOpenAlex(query, fromDate, maxPerQuery),
-      fetchCrossref(query, fromDate, maxPerQuery),
-      fetchArxiv(query, maxPerQuery)
+      { name: "OpenAlex", promise: fetchOpenAlex(query, fromDate, maxPerQuery) },
+      { name: "Crossref", promise: fetchCrossref(query, fromDate, maxPerQuery) },
+      { name: "arXiv", promise: fetchArxiv(query, maxPerQuery) }
     ];
-    const settled = await Promise.allSettled(sourceRuns);
-    for (const item of settled) {
+    const querySummary = { query, sources: [] };
+    const settled = await Promise.allSettled(sourceRuns.map((source) => source.promise));
+    for (const [sourceIndex, item] of settled.entries()) {
+      const sourceSummary = {
+        source: sourceRuns[sourceIndex].name,
+        fetched: 0,
+        duplicates: 0,
+        relevant: 0,
+        saved: 0,
+        calculated: 0,
+        needsReview: 0
+      };
       if (item.status === "rejected") {
         errors.push(`${query}: ${item.reason?.message || item.reason}`);
+        querySummary.sources.push(sourceSummary);
         continue;
       }
+      sourceSummary.fetched = item.value.length;
+      fetchedRaw += item.value.length;
       for (const paper of item.value) {
         const key = paper.doi || paper.openAlexId || paper.title;
-        if (!key || seen.has(key)) continue;
+        if (!key || seen.has(key)) {
+          sourceSummary.duplicates += 1;
+          duplicateCount += 1;
+          continue;
+        }
         seen.add(key);
         const combinedText = [paper.title, paper.abstract, paper.journal, paper.publisher].filter(Boolean).join(" ");
         if (!looksRelevant(combinedText)) continue;
+        sourceSummary.relevant += 1;
+        relevantCount += 1;
 
         const extraction = extractParams(combinedText);
         const draft = {
@@ -60,8 +83,13 @@ export async function runIngestion(options = {}) {
 
         const saved = await upsertPaper(draft);
         results.push(saved);
+        sourceSummary.saved += 1;
+        if (saved.metrics.canCalculateGamma) sourceSummary.calculated += 1;
+        else sourceSummary.needsReview += 1;
       }
+      querySummary.sources.push(sourceSummary);
     }
+    querySummaries.push(querySummary);
   }
 
   const summary = {
@@ -69,10 +97,14 @@ export async function runIngestion(options = {}) {
     finishedAt: new Date().toISOString(),
     fromDate,
     queries,
+    fetchedRaw,
+    duplicates: duplicateCount,
+    relevant: relevantCount,
     addedOrUpdated: results.length,
     calculated: results.filter((item) => item.metrics.canCalculateGamma).length,
     needsReview: results.filter((item) => !item.metrics.canCalculateGamma).length,
-    errors
+    errors,
+    byQuery: querySummaries
   };
   await updateState({ lastRunAt: summary.finishedAt, lastRunSummary: summary });
   return summary;
@@ -250,12 +282,19 @@ function strip(value = "") {
 }
 
 function arxivQuery(query) {
-  return query
+  const sourceOrVenueTerms = /^(nature|electronics|ieee|edl|electron|device|devices|letters|iedm|vlsi|conference)$/i;
+  const terms = query
     .split(/\s+/)
-    .filter((term) => term.length > 1 && !/^(and|or|the|for|with)$/i.test(term))
-    .slice(0, 8)
-    .map((term) => `all:${term.replace(/[^a-zA-Z0-9-]/g, "")}`)
-    .join("+AND+");
+    .map((term) => term.replace(/[^a-zA-Z0-9-]/g, ""))
+    .filter((term) => term.length > 1 && !/^(and|or|the|for|with|of|in|on)$/i.test(term))
+    .filter((term) => !sourceOrVenueTerms.test(term));
+
+  const deviceTerms = terms.filter((term) => /^(transistor|fet|pfet|nfet|cmos|cfet|contact|resistance|semiconductor)$/i.test(term));
+  const materialTerms = terms.filter((term) => /^(2d|two-dimensional|atomically|thin|van|der|waals|monolayer|mos2|wse2|mote2|tmd)$/i.test(term));
+  const selected = [...materialTerms.slice(0, 3), ...deviceTerms.slice(0, 3)];
+  const unique = [...new Set(selected.length ? selected : ["2D", "semiconductor", "transistor"])];
+
+  return unique.map((term) => `all:${term}`).join(" AND ");
 }
 
 function getXml(entry, tag) {

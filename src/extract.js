@@ -22,6 +22,17 @@ const RELEVANT_MATERIALS = [
   "bi2o2se",
   "tmd",
   "tmc",
+  "atomically thin",
+  "van der waals",
+  "monolayer",
+  "nanosheet",
+  "nanoribbon",
+  "2d electronics",
+  "2d material",
+  "2d materials",
+  "ultrathin semiconductor",
+  "layered semiconductor",
+  "transition-metal dichalcogenide",
   "transition metal dichalcogenide",
   "two-dimensional semiconductor",
   "2d semiconductor",
@@ -31,6 +42,7 @@ const RELEVANT_MATERIALS = [
 const RELEVANT_DEVICE_TERMS = [
   "transistor",
   "field-effect",
+  "field effect",
   "fet",
   "pfet",
   "nfet",
@@ -70,13 +82,13 @@ export function extractParams(rawText = "") {
     {
       name: "Ion",
       regex:
-        /(?:I\s*on|Ion|on[-\s]?current|drive current|current density)[^.;,\n]{0,90}?(\d+(?:\.\d+)?)\s*(mA|μA|uA)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?/gi,
+        /(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density|normalized current)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(mA|μA|uA)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?/gi,
       convert: (value, unit) => (unit.toLowerCase() === "ma" ? value * 1000 : value)
     },
     {
       name: "Ion",
       regex:
-        /(\d+(?:\.\d+)?)\s*(mA|μA|uA)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,80}?(?:I\s*on|Ion|on[-\s]?current|drive current)/gi,
+        /(\d+(?:\.\d+)?)\s*(mA|μA|uA)\s*(?:\/|·|\sper\s)?\s*μ?m(?:\^-?1|[-−]1|⁻¹)?[^.;,\n]{0,100}?(?:I\s*on|Ion|on[-\s]?(?:state\s*)?current|drive current|current density)/gi,
       convert: (value, unit) => (unit.toLowerCase() === "ma" ? value * 1000 : value)
     }
   ]);
@@ -97,6 +109,8 @@ export function extractParams(rawText = "") {
     }
   ]);
   if (rc.note) notes.push(rc.note);
+  const rcDefinition = inferRcDefinition(text, rc.value);
+  if (rcDefinition !== "unknown") notes.push(`自动识别 Rc 口径: ${rcDefinition === "single" ? "单侧接触" : "源漏总等效"}`);
 
   const ss = pickValue(text, [
     {
@@ -117,12 +131,12 @@ export function extractParams(rawText = "") {
   const vds = pickValue(text, [
     {
       name: "VDS",
-      regex: /(?:V\s*DS|Vds|drain[-\s]?source voltage)[^.;,\n]{0,40}?(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:V\s*DS|V\s*D|Vds|Vd|drain[-\s]?source voltage|drain voltage)[^.;,\n]{0,50}?(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     },
     {
       name: "VDS",
-      regex: /(?:at|under)\s+(?:V\s*DS|Vds)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
+      regex: /(?:at|under|with)\s+(?:V\s*DS|V\s*D|Vds|Vd)\s*=?\s*(-?\d+(?:\.\d+)?)\s*V/gi,
       convert: (value) => Math.abs(value)
     }
   ]);
@@ -135,7 +149,7 @@ export function extractParams(rawText = "") {
     params: {
       ionUaPerUm: ion.value,
       rcOhmUm: rc.value,
-      rcDefinition: rc.value === null ? "unknown" : "unknown",
+      rcDefinition,
       vdsV: vds.value,
       ssMvDec: ss.value,
       logSwitchRatio: logRatio.value,
@@ -197,11 +211,14 @@ function pickValue(text, patterns) {
 
 function pickSwitchRatio(text) {
   const candidates = [];
-  const plain = text.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/g, (char) => SUPERSCRIPT_MAP[char] || char);
+  const plain = text
+    .replace(/10\s*([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g, (_match, power) => `10^${power.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, (char) => SUPERSCRIPT_MAP[char] || char)}`)
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/g, (char) => SUPERSCRIPT_MAP[char] || char);
   const patterns = [
     /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi,
     /10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)[^.;,\n]{0,80}?(?:on\/off|on-off|current ratio|switching ratio)/gi,
-    /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*(?:orders of magnitude|decades)/gi
+    /(?:on\/off|on-off|current ratio|switching ratio)[^.;,\n]{0,80}?(\d+(?:\.\d+)?)\s*(?:orders of magnitude|decades)/gi,
+    /(?:Ion\/Ioff|I\s*on\s*\/\s*I\s*off)[^.;,\n]{0,80}?10\s*(?:\^|\*\*)\s*(\d+(?:\.\d+)?)/gi
   ];
 
   for (const regex of patterns) {
@@ -228,6 +245,25 @@ function pickSwitchRatio(text) {
 function confidence(values) {
   const hit = values.filter((value) => value !== null && value !== undefined).length;
   return Math.round((hit / values.length) * 100) / 100;
+}
+
+function inferRcDefinition(text, rcValue) {
+  if (rcValue === null || rcValue === undefined) return "unknown";
+  const lower = normalize(text).toLowerCase();
+  if (
+    /(?:per|each|single|one[-\s]?side|one)\s+(?:contact|electrode)/.test(lower) ||
+    /(?:contact|electrode)[-\s]?specific/.test(lower) ||
+    /single[-\s]?contact/.test(lower)
+  ) {
+    return "single";
+  }
+  if (
+    /(?:total|source[-\s]?drain|source\s+and\s+drain|two[-\s]?contact|both\s+contacts)\s+(?:contact\s+)?resistance/.test(lower) ||
+    /r\s*c\s*,?\s*(?:total|tot)/.test(lower)
+  ) {
+    return "total";
+  }
+  return "unknown";
 }
 
 function normalize(text) {

@@ -7,13 +7,26 @@
   "maxPerQuery": 30,
   "queries": [
     "2D semiconductor transistor",
+    "2D transistor",
+    "atomically thin transistor",
+    "van der Waals transistor",
+    "monolayer semiconductor FET",
+    "2D FET contact resistance",
     "two-dimensional semiconductor transistor contact resistance",
     "2D semiconductor logic transistor subthreshold swing",
+    "two-dimensional CMOS transistor",
+    "2D CFET transistor",
+    "back end of line 2D transistor",
     "MoS2 transistor contact resistance short channel",
+    "MoS2 FET contact resistance",
     "WSe2 pFET contact resistance",
+    "WSe2 transistor p-type contact",
+    "MoTe2 pFET transistor",
     "transition metal dichalcogenide CMOS transistor",
+    "TMD transistor contact resistance",
     "IEEE Electron Device Letters 2D semiconductor transistor",
     "IEDM two-dimensional semiconductor transistor",
+    "VLSI 2D semiconductor transistor",
     "Nature Electronics 2D semiconductor pFET"
   ]
 }

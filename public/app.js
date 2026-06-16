@@ -99,7 +99,7 @@ async function runIngest() {
   log("正在检索 OpenAlex、Crossref 与 arXiv。若网络或出版商接口较慢，请等待。");
   try {
     const summary = await api("/api/ingest/run", { method: "POST", body: JSON.stringify({}) });
-    log(JSON.stringify(summary, null, 2));
+    log(formatIngestSummary(summary));
     await loadAll();
   } catch (error) {
     log(`检索失败：${error.message}`);
@@ -227,7 +227,7 @@ function renderSettings() {
   form.autoIngestEnabled.checked = Boolean(state.settings.autoIngestEnabled);
   form.queries.value = (state.settings.queries || []).join("\n");
   if (state.settings.lastRunSummary) {
-    log(`上次检索：\n${JSON.stringify(state.settings.lastRunSummary, null, 2)}`);
+    log(`上次检索：\n${formatIngestSummary(state.settings.lastRunSummary)}`);
   }
 }
 
@@ -398,6 +398,36 @@ function numberOrNull(value) {
 
 function log(text) {
   $("#ingest-log").textContent = text;
+}
+
+function formatIngestSummary(summary) {
+  const lines = [
+    `开始：${summary.startedAt || "-"}`,
+    `完成：${summary.finishedAt || "-"}`,
+    `检索范围：${summary.fromDate || "-"} 至今`,
+    `原始抓取：${summary.fetchedRaw ?? "-"} 条`,
+    `重复跳过：${summary.duplicates ?? "-"} 条`,
+    `相关命中：${summary.relevant ?? "-"} 条`,
+    `入库/更新：${summary.addedOrUpdated ?? "-"} 条`,
+    `可直接计算：${summary.calculated ?? "-"} 条`,
+    `待补参数：${summary.needsReview ?? "-"} 条`
+  ];
+
+  if (summary.errors?.length) {
+    lines.push("", "接口错误：", ...summary.errors.map((error) => `- ${error}`));
+  }
+
+  if (summary.byQuery?.length) {
+    lines.push("", "分关键词/来源明细：");
+    for (const item of summary.byQuery) {
+      const saved = item.sources?.reduce((sum, source) => sum + Number(source.saved || 0), 0) || 0;
+      const fetched = item.sources?.reduce((sum, source) => sum + Number(source.fetched || 0), 0) || 0;
+      const relevant = item.sources?.reduce((sum, source) => sum + Number(source.relevant || 0), 0) || 0;
+      lines.push(`- ${item.query}: 抓取 ${fetched}，相关 ${relevant}，入库 ${saved}`);
+    }
+  }
+
+  return lines.join("\n");
 }
 
 async function copyRankingJson() {
