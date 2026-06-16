@@ -98,6 +98,7 @@ app.patch("/api/state", async (req, res, next) => {
 });
 
 app.post("/api/ingest/run", async (req, res, next) => {
+  if (!isAuthorizedIngest(req)) return res.status(403).json({ error: "invalid ingestion token" });
   if (ingestRunning) return res.status(409).json({ error: "ingestion already running" });
   ingestRunning = true;
   try {
@@ -216,4 +217,11 @@ function numericOrNull(value) {
   if (value === "" || value === null || value === undefined) return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function isAuthorizedIngest(req) {
+  const token = process.env.INGEST_TOKEN;
+  if (!token) return true;
+  const provided = req.get("x-ingest-token") || req.query.token;
+  return provided === token;
 }

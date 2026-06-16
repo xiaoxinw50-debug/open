@@ -88,7 +88,7 @@ async function loadStats() {
 
 async function runIngest() {
   switchView("ingest");
-  log("正在检索 OpenAlex 与 Crossref。若网络或出版商接口较慢，请等待。");
+  log("正在检索 OpenAlex、Crossref 与 arXiv。若网络或出版商接口较慢，请等待。");
   try {
     const summary = await api("/api/ingest/run", { method: "POST", body: JSON.stringify({}) });
     log(JSON.stringify(summary, null, 2));

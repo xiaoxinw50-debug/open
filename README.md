@@ -42,12 +42,21 @@ http://localhost:5177
 - Start Command: `npm start`
 - Health Check: `/api/health`
 - Auto Ingestion: 启动后自动抓取一次，之后每 6 小时抓取一次
+- GitHub Actions: 每 6 小时访问线上抓取接口，用于唤醒免费 Render 实例并补充新论文
 
 当前 Blueprint 使用 Render 免费 Web Service，便于先上线验证。免费实例可能休眠，文件存储也不是长期数据库；若要稳定保存长期自动抓取结果，建议后续升级为付费实例并挂载持久磁盘或接入数据库。
 
 ## 自动检索逻辑
 
 后台会从 OpenAlex、Crossref 与 arXiv 检索近期相关论文，按标题、摘要、期刊和关键词筛选二维半导体逻辑器件相关条目。若摘要或开放文本中能识别出 `Ion`、`Rc`、`SS`、`VDS`、开关比等参数，则自动计算；若参数不完整，则进入“待补参数”候选库。
+
+仓库的 `.github/workflows/scheduled-ingest.yml` 会定时调用：
+
+```text
+POST https://switch-margin-site.onrender.com/api/ingest/run
+```
+
+如需限制外部调用，可同时在 Render 和 GitHub Secrets 中设置同一个 `INGEST_TOKEN`。设置后，GitHub Actions 会通过 `x-ingest-token` 请求头触发检索。
 
 这一步不会伪造数据。遇到 IEEE、Nature 等只给元数据或摘要、不开放全文的论文，网站会先入库，等待人工补齐参数来源、图号和口径。
 
