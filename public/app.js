@@ -557,9 +557,9 @@ function provenanceSummary(paper) {
 }
 
 function sourceLabel(source) {
-  if (source === "derived") return "派生值";
-  if (source === "estimated") return "估算值";
-  return "原文/核对值";
+  if (source === "derived") return "派生";
+  if (source === "estimated") return "估算";
+  return "原文";
 }
 
 async function handleRowAction(event) {
