@@ -1069,6 +1069,13 @@ tbody tr:hover {
   font-weight: 900;
 }
 
+.row-action-link.primary {
+  border-color: rgba(158, 17, 23, 0.22);
+  background: linear-gradient(180deg, #aa1118, #7c070c);
+  color: white;
+  box-shadow: 0 10px 22px rgba(124, 7, 12, 0.14);
+}
+
 .inline-status {
   color: #6d5556;
   font-size: 0.86rem;

@@ -14,6 +14,7 @@ const state = {
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
+const PENDING_IMPORT_KEY = "switch-margin-pending-import";
 
 document.addEventListener("DOMContentLoaded", async () => {
   bindTabs();
@@ -51,12 +52,10 @@ function bindTabs() {
 function bindForms() {
   $("#paper-form").addEventListener("submit", async (event) => {
     event.preventDefault();
-    const payload = formToPaper(event.currentTarget);
-    const method = payload.id ? "PATCH" : "POST";
-    const url = payload.id ? `/api/papers/${encodeURIComponent(payload.id)}` : "/api/papers";
-    await api(url, { method, body: JSON.stringify(payload) });
+    await savePaperFromForm(event.currentTarget);
     event.currentTarget.reset();
     state.manualExtraction = null;
+    clearPendingImport();
     $("#extract-text-status").textContent = "尚未导入文本";
     $("#calc-preview").classList.remove("is-visible");
     await loadAll();
@@ -65,6 +64,7 @@ function bindForms() {
 
   $("#paper-form").addEventListener("reset", () => {
     state.manualExtraction = null;
+    clearPendingImport();
     $("#extract-text-status").textContent = "尚未导入文本";
   });
 
@@ -119,6 +119,11 @@ function buildImportBookmarklet() {
 async function receiveAuthenticatedImport(payload) {
   switchView("manual");
   const form = $("#paper-form");
+  const pending = getPendingImport();
+  if (pending?.id) {
+    const paper = await api(`/api/papers/${encodeURIComponent(pending.id)}`);
+    fillForm(paper);
+  }
   if (!form.title.value && payload.title) form.title.value = payload.title;
   if (!form.url.value && payload.url) form.url.value = payload.url;
   form.fullTextImport.value = payload.text;
@@ -126,8 +131,10 @@ async function receiveAuthenticatedImport(payload) {
     form.sourceTrace.value,
     `已登录浏览器页面导入：${payload.url || "未知 URL"}`
   );
-  $("#extract-text-status").textContent = `已从当前登录页面导入 ${payload.text.length} 字符，正在抽取参数...`;
-  await extractTextToForm();
+  $("#extract-text-status").textContent = pending?.id
+    ? `已导入待处理论文“${pending.title || pending.id}”的全文文本，正在抽取并自动保存...`
+    : `已从当前登录页面导入 ${payload.text.length} 字符，正在抽取参数...`;
+  await extractTextToForm({ autoSave: Boolean(pending?.id), pending });
 }
 
 function openPaperLoginFromForm() {
@@ -696,6 +703,14 @@ async function handleRowAction(event) {
       body: JSON.stringify({ rcDefinition: rcButton.dataset.rcValue })
     });
     await loadAll();
+    return;
+  }
+
+  const loginImportButton = event.target.closest("[data-login-import]");
+  if (loginImportButton) {
+    const paper = state.papers.find((item) => item.id === loginImportButton.dataset.loginImport);
+    if (!paper) return;
+    startPendingLoginImport(paper);
   }
 }
 
@@ -768,7 +783,7 @@ function formToPaper(form) {
   };
 }
 
-async function extractTextToForm() {
+async function extractTextToForm(options = {}) {
   const form = $("#paper-form");
   const text = form.fullTextImport.value.trim();
   const status = $("#extract-text-status");
@@ -818,6 +833,19 @@ async function extractTextToForm() {
     : "未抽到可用字段，请粘贴包含单位和上下文的段落或表格。";
   const preview = await api("/api/calculate", { method: "POST", body: JSON.stringify(formToPaper(form)) });
   renderPreview(preview);
+  if (options.autoSave && extraction.fieldCount > 0) {
+    const saved = await savePaperFromForm(form);
+    clearPendingImport();
+    $("#extract-text-status").textContent = `已抽取 ${extraction.fieldCount} 个字段，并已自动保存到“${saved.title || options.pending?.title || "当前论文"}”。`;
+    await loadAll();
+  }
+}
+
+async function savePaperFromForm(form) {
+  const payload = formToPaper(form);
+  const method = payload.id ? "PATCH" : "POST";
+  const url = payload.id ? `/api/papers/${encodeURIComponent(payload.id)}` : "/api/papers";
+  return api(url, { method, body: JSON.stringify(payload) });
 }
 
 function fillEmptyNumber(input, value) {
@@ -942,11 +970,18 @@ function actions(paper) {
   return `
     <div class="row-actions">
       ${rcReviewActions(paper)}
+      ${loginImportAction(paper)}
       ${openPaperAction(paper)}
       <button class="secondary" data-edit="${escapeAttr(paper.id)}">编辑</button>
       <button class="ghost" data-delete="${escapeAttr(paper.id)}">删除</button>
     </div>
   `;
+}
+
+function loginImportAction(paper) {
+  const url = paperAccessUrl(paper);
+  if (!url) return "";
+  return `<button class="row-action-link primary" data-login-import="${escapeAttr(paper.id)}">登录导入</button>`;
 }
 
 function openPaperAction(paper) {
@@ -959,6 +994,35 @@ function paperAccessUrl(paper = {}) {
   if (paper.url && /^https?:\/\//i.test(paper.url)) return paper.url;
   if (paper.doi) return `https://doi.org/${String(paper.doi).replace(/^https?:\/\/doi\.org\//i, "")}`;
   return "";
+}
+
+function startPendingLoginImport(paper) {
+  const url = paperAccessUrl(paper);
+  if (!url) return;
+  const pending = {
+    id: paper.id,
+    title: paper.title || "",
+    url,
+    startedAt: new Date().toISOString()
+  };
+  localStorage.setItem(PENDING_IMPORT_KEY, JSON.stringify(pending));
+  switchView("manual");
+  $("#extract-text-status").textContent = `已进入自动导入模式：${paper.title || paper.id}。登录打开全文后，点击书签栏“导入到 Γ₂D”。`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function getPendingImport() {
+  try {
+    const pending = JSON.parse(localStorage.getItem(PENDING_IMPORT_KEY) || "null");
+    if (!pending?.id) return null;
+    return pending;
+  } catch {
+    return null;
+  }
+}
+
+function clearPendingImport() {
+  localStorage.removeItem(PENDING_IMPORT_KEY);
 }
 
 function rcReviewActions(paper) {
