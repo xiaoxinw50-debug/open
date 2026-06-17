@@ -1046,6 +1046,29 @@ tbody tr:hover {
   white-space: nowrap;
 }
 
+.bookmarklet-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.row-action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #edc8c2;
+  border-radius: 13px;
+  padding: 0.45rem 0.65rem;
+  background: #fff7f5;
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: none;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
 .inline-status {
   color: #6d5556;
   font-size: 0.86rem;

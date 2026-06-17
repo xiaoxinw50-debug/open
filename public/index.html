@@ -199,9 +199,12 @@
             <div class="bookmarklet-card">
               <div>
                 <strong>已登录账号页面导入</strong>
-                <span>把下面按钮拖到浏览器书签栏；以后在已登录的论文全文页点击它，可把当前页面可见文本发送回本网站。</span>
+                <span>先打开原文页并登录；把“导入到 Γ₂D”拖到浏览器书签栏，以后在已登录全文页点击书签即可导入当前页面文本。</span>
               </div>
-              <a id="import-bookmarklet" class="bookmarklet-link" href="#">导入到 Γ₂D</a>
+              <div class="bookmarklet-actions">
+                <button type="button" id="open-paper-login-btn" class="secondary">打开原文/登录</button>
+                <a id="import-bookmarklet" class="bookmarklet-link" href="#">导入到 Γ₂D</a>
+              </div>
             </div>
             <textarea name="fullTextImport" rows="7" placeholder="粘贴相关正文、图注、表格文字或补充材料文本。建议包含参数附近的上下文，而不只是一个孤立数字。"></textarea>
             <div class="form-actions">

@@ -75,6 +75,7 @@ function bindForms() {
   });
 
   $("#extract-text-btn").addEventListener("click", extractTextToForm);
+  $("#open-paper-login-btn").addEventListener("click", openPaperLoginFromForm);
 
   $("#ingest-form").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -124,6 +125,20 @@ async function receiveAuthenticatedImport(payload) {
   );
   $("#extract-text-status").textContent = `已从当前登录页面导入 ${payload.text.length} 字符，正在抽取参数...`;
   await extractTextToForm();
+}
+
+function openPaperLoginFromForm() {
+  const form = $("#paper-form");
+  const url = paperAccessUrl({
+    url: form.url.value.trim(),
+    doi: form.doi.value.trim()
+  });
+  if (!url) {
+    $("#extract-text-status").textContent = "请先填写论文 URL 或 DOI，再打开原文登录。";
+    return;
+  }
+  $("#extract-text-status").textContent = "已打开原文页；登录后点击书签栏里的“导入到 Γ₂D”。";
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 async function loadAll() {
@@ -884,10 +899,23 @@ function actions(paper) {
   return `
     <div class="row-actions">
       ${rcReviewActions(paper)}
+      ${openPaperAction(paper)}
       <button class="secondary" data-edit="${escapeAttr(paper.id)}">编辑</button>
       <button class="ghost" data-delete="${escapeAttr(paper.id)}">删除</button>
     </div>
   `;
+}
+
+function openPaperAction(paper) {
+  const url = paperAccessUrl(paper);
+  if (!url) return "";
+  return `<a class="row-action-link" href="${escapeAttr(url)}" target="_blank" rel="noreferrer">打开原文/登录</a>`;
+}
+
+function paperAccessUrl(paper = {}) {
+  if (paper.url && /^https?:\/\//i.test(paper.url)) return paper.url;
+  if (paper.doi) return `https://doi.org/${String(paper.doi).replace(/^https?:\/\/doi\.org\//i, "")}`;
+  return "";
 }
 
 function rcReviewActions(paper) {
