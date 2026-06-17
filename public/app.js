@@ -87,6 +87,9 @@ function bindForms() {
   });
 
   $("#run-ingest-btn").addEventListener("click", runIngest);
+  $("#login-search-nature").addEventListener("click", () => openLoginSearch("nature"));
+  $("#login-search-ieee").addEventListener("click", () => openLoginSearch("ieee"));
+  $("#login-search-all").addEventListener("click", runLoginAssistedSearch);
 }
 
 function bindAuthenticatedImport() {
@@ -190,6 +193,46 @@ async function runIngest() {
   } finally {
     setTimeout(stopIngestPollingIfIdle, 1400);
   }
+}
+
+async function runLoginAssistedSearch() {
+  switchView("ingest");
+  const opened = openLoginSearch("all");
+  $("#login-search-status").textContent = opened
+    ? "已打开 Nature/IEEE 登录检索页，并开始站内自动检索。登录后打开全文，再点书签栏“导入到 Γ₂D”。"
+    : "请先填写登录检索关键词或上方检索关键词。";
+  if (opened) await runIngest();
+}
+
+function openLoginSearch(target) {
+  const query = loginSearchQuery();
+  if (!query) {
+    $("#login-search-status").textContent = "请先填写登录检索关键词，或在上方关键词框保留至少一行关键词。";
+    return false;
+  }
+  const urls = publisherSearchUrls(query);
+  if (target === "nature" || target === "all") window.open(urls.nature, "_blank", "noopener,noreferrer");
+  if (target === "ieee" || target === "all") window.open(urls.ieee, "_blank", "noopener,noreferrer");
+  $("#login-search-status").textContent = `已跳转登录搜索：${query}`;
+  return true;
+}
+
+function loginSearchQuery() {
+  const explicit = $("#login-search-query")?.value.trim();
+  if (explicit) return explicit;
+  const first = $("#ingest-form")?.queries?.value
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)[0];
+  return first || "";
+}
+
+function publisherSearchUrls(query) {
+  const encoded = encodeURIComponent(query);
+  return {
+    nature: `https://www.nature.com/search?q=${encoded}`,
+    ieee: `https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=${encoded}`
+  };
 }
 
 async function loadIngestProgress() {

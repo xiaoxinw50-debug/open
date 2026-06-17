@@ -243,6 +243,22 @@
             <button type="button" id="run-ingest-btn">立即检索</button>
           </div>
         </form>
+        <div class="login-search-card">
+          <div>
+            <h3>账号登录辅助搜索</h3>
+            <p>服务器会继续自动检索开放全文；若 Nature/IEEE 需要你的学校账号，先从这里跳转登录并搜索。打开全文后，点击书签栏“导入到 Γ₂D”即可把当前页面文本送回网站抽取。</p>
+          </div>
+          <label class="login-search-input">
+            登录检索关键词
+            <input id="login-search-query" type="text" placeholder="默认使用上方第一行关键词" />
+          </label>
+          <div class="login-search-actions">
+            <button type="button" id="login-search-nature" class="secondary">跳转 Nature 登录搜索</button>
+            <button type="button" id="login-search-ieee" class="secondary">跳转 IEEE 登录搜索</button>
+            <button type="button" id="login-search-all">打开登录搜索并启动自动检索</button>
+          </div>
+          <span id="login-search-status" class="inline-status">登录页打开后，在出版商页面完成登录和筛选。</span>
+        </div>
         <div id="ingest-progress" class="progress-card">
           <div class="progress-head">
             <div>
