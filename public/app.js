@@ -195,11 +195,11 @@ function renderRanking() {
       <td class="metric">${index + 1}</td>
       <td>${paperLink(paper)}${metaLine(paper)}<div class="meta">${escapeHtml(paper.sourceTrace || "")}</div>${evidenceLine(paper)}</td>
       <td>${escapeHtml([paper.material, paper.deviceType].filter(Boolean).join(" / ") || "-")}</td>
-      <td>${num(paper.params.ionUaPerUm)}<div class="meta">μA/μm</div></td>
-      <td>${num(paper.params.rcOhmUm)}<div class="meta">Ω·μm，${rcLabel(paper.params.rcDefinition)}</div></td>
-      <td>${num(paper.params.vdsV)}<div class="meta">V</div></td>
-      <td>${num(paper.params.ssMvDec)}<div class="meta">mV/dec</div></td>
-      <td>${num(paper.metrics.logSwitchRatio)}<div class="meta">dec</div></td>
+      <td>${num(paper.params.ionUaPerUm)}${sourceBadge(paper, "ionUaPerUm")}<div class="meta">μA/μm</div></td>
+      <td>${num(paper.params.rcOhmUm)}${sourceBadge(paper, "rcOhmUm")}<div class="meta">Ω·μm，${rcLabel(paper.params.rcDefinition)} ${sourceBadge(paper, "rcDefinition")}</div></td>
+      <td>${num(paper.params.vdsV)}${sourceBadge(paper, "vdsV")}<div class="meta">V</div></td>
+      <td>${num(paper.params.ssMvDec)}${sourceBadge(paper, "ssMvDec")}<div class="meta">mV/dec</div></td>
+      <td>${num(paper.metrics.logSwitchRatio)}${sourceBadge(paper, "logSwitchRatio")}<div class="meta">dec</div></td>
       <td>${gammaCell(paper)}</td>
       <td>${classPill(paper.metrics.marginClass)}</td>
       <td>${actions(paper)}</td>
@@ -370,6 +370,7 @@ function renderRankingOutput() {
     log10_Ion_Ioff: row.logSwitchRatio,
     Ioff_ua_per_um: row.ioffUaPerUm,
     evidence: row.evidence,
+    field_provenance: row.fieldProvenance,
     Vdrop_V: row.contactDropV,
     Veff_V: row.effectiveVoltageV,
     trial_Vdrop_V: row.trialContactDropV,
@@ -451,6 +452,7 @@ function partialMetrics(paper) {
   return `
     <div class="partial-stage">${escapeHtml(m.partialStage || "待补参数")}</div>
     ${rows.length ? `<div class="partial-values">${rows.map((row) => `<span>${escapeHtml(row)}</span>`).join("")}</div>` : ""}
+    ${provenanceSummary(paper)}
     ${rcScenarioMarkup(m)}
     <div class="missing-advice">${escapeHtml(missingAdvice(m.missingFields || []))}</div>
     ${m.trialRcAssumption ? `<div class="meta">${escapeHtml(m.trialRcAssumption)}</div>` : ""}
@@ -519,6 +521,45 @@ function gammaCell(paper) {
     <div class="meta">Π₂D ${num(m.pi2d)} · Vdrop ${num(vdrop)} V · Vsw ${num(vsw)} V</div>
     ${assumptions.length ? `<div class="estimate-note">${assumptions.map(escapeHtml).join("；")}</div>` : ""}
   `;
+}
+
+function sourceBadge(paper, field) {
+  const item = paper.metrics?.fieldProvenance?.[field] || paper.fieldProvenance?.[field];
+  if (!item?.source) return "";
+  const source = ["original", "derived", "estimated"].includes(item.source) ? item.source : "original";
+  const label = sourceLabel(source);
+  const detail = [
+    item.label ? `${item.label}: ${label}` : label,
+    item.note || "",
+    item.derivedFrom?.length ? `来源字段：${item.derivedFrom.join(", ")}` : ""
+  ].filter(Boolean).join("；");
+  return `<span class="source-badge ${escapeAttr(source)}" title="${escapeAttr(detail)}">${escapeHtml(label)}</span>`;
+}
+
+function provenanceSummary(paper) {
+  const fp = paper.metrics?.fieldProvenance || paper.fieldProvenance || {};
+  const labels = {
+    ionUaPerUm: "Ion",
+    rcOhmUm: "Rc",
+    rcDefinition: "Rc口径",
+    vdsV: "VDS",
+    ssMvDec: "SS",
+    logSwitchRatio: "开关比"
+  };
+  const items = Object.entries(labels)
+    .map(([field, label]) => {
+      const item = fp[field];
+      return item?.source ? `${label}${sourceLabel(item.source)}` : "";
+    })
+    .filter(Boolean);
+  if (!items.length) return "";
+  return `<div class="provenance-summary">${items.map(escapeHtml).join(" · ")}</div>`;
+}
+
+function sourceLabel(source) {
+  if (source === "derived") return "派生值";
+  if (source === "estimated") return "估算值";
+  return "原文/核对值";
 }
 
 async function handleRowAction(event) {
@@ -895,7 +936,9 @@ function downloadRankingCsv() {
     "dataCompleteness",
     "dataTrace",
     "sourceTrace",
-    "evidence"
+    "evidence",
+    "provenance",
+    "fieldProvenance"
   ];
   const csv = [
     fields.join(","),

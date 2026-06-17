@@ -154,6 +154,7 @@ export function extractParams(rawText = "") {
   const text = document.text;
   const notes = [];
   const evidence = {};
+  const provenance = {};
 
   const ion = pickValue(text, [
     {
@@ -191,6 +192,7 @@ export function extractParams(rawText = "") {
   ], { mode: "max", min: 0, max: 50000, document });
   if (ion.note) notes.push(ion.note);
   if (ion.evidence) evidence.ionUaPerUm = ion.evidence;
+  if (ion.value !== null) provenance.ionUaPerUm = "original";
 
   const ioff = pickValue(text, [
     {
@@ -220,6 +222,7 @@ export function extractParams(rawText = "") {
   ], { mode: "min", min: 1e-12, max: 10000, document });
   if (ioff.note) notes.push(ioff.note);
   if (ioff.evidence) evidence.ioffUaPerUm = ioff.evidence;
+  if (ioff.value !== null) provenance.ioffUaPerUm = "original";
 
   const rc = pickValue(text, [
     {
@@ -255,9 +258,11 @@ export function extractParams(rawText = "") {
   ], { mode: "min", min: 0, max: 200000, document });
   if (rc.note) notes.push(rc.note);
   if (rc.evidence) evidence.rcOhmUm = rc.evidence;
+  if (rc.value !== null) provenance.rcOhmUm = "original";
   const rcDefinition = inferRcDefinition(text, rc.value);
   if (rcDefinition !== "unknown") notes.push(`自动识别 Rc 口径: ${rcDefinition === "single" ? "单侧接触" : "源漏总等效"}`);
   if (rcDefinition !== "unknown") evidence.rcDefinition = { value: rcDefinition, snippet: "由全文语境自动判断，仍建议人工复核" };
+  if (rcDefinition !== "unknown") provenance.rcDefinition = "original";
 
   const ss = pickValue(text, [
     {
@@ -275,6 +280,7 @@ export function extractParams(rawText = "") {
   ], { mode: "min", min: 20, max: 2000, document });
   if (ss.note) notes.push(ss.note);
   if (ss.evidence) evidence.ssMvDec = ss.evidence;
+  if (ss.value !== null) provenance.ssMvDec = "original";
 
   const vds = pickValue(text, [
     {
@@ -300,10 +306,12 @@ export function extractParams(rawText = "") {
   ], { mode: "first", min: 0, max: 20, document });
   if (vds.note) notes.push(vds.note);
   if (vds.evidence) evidence.vdsV = vds.evidence;
+  if (vds.value !== null) provenance.vdsV = "original";
 
   const logRatio = pickSwitchRatio(text, document, { ion, ioff });
   if (logRatio.note) notes.push(logRatio.note);
   if (logRatio.evidence) evidence.logSwitchRatio = logRatio.evidence;
+  if (logRatio.value !== null) provenance.logSwitchRatio = logRatio.derived ? "derived" : "original";
 
   return {
     params: {
@@ -315,7 +323,8 @@ export function extractParams(rawText = "") {
       logSwitchRatio: logRatio.value,
       ioffUaPerUm: ioff.value,
       notes: notes.join("；"),
-      evidence
+      evidence,
+      provenance
     },
     extractionNotes: notes,
     extractionConfidence: confidence([ion.value, rc.value, ss.value, vds.value, logRatio.value])
@@ -427,7 +436,8 @@ function pickSwitchRatio(text, document, context = {}) {
   return {
     value: picked.value,
     note: picked.derived ? `由 Ion/Ioff 自动计算开关比对数: ${picked.raw}` : `自动识别开关比对数: ${picked.raw}`,
-    evidence: buildEvidence(picked, candidates, document)
+    evidence: buildEvidence(picked, candidates, document),
+    derived: Boolean(picked.derived)
   };
 }
 

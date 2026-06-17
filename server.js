@@ -81,7 +81,11 @@ app.patch("/api/papers/:id/rc-definition", async (req, res, next) => {
       params: {
         ...(existing.params || {}),
         rcDefinition,
-        notes
+        notes,
+        provenance: {
+          ...(existing.params?.provenance || {}),
+          rcDefinition: "original"
+        }
       }
     };
     const metrics = calculatePaper(nextPaper);
@@ -437,7 +441,8 @@ function normalizePaperInput(body = {}) {
       onOffRatio: numericOrNull(params.onOffRatio),
       ioffUaPerUm: numericOrNull(params.ioffUaPerUm),
       notes: params.notes || "",
-      evidence: params.evidence || {}
+      evidence: params.evidence || {},
+      provenance: params.provenance || {}
     }
   };
   const metrics = calculatePaper(paper);
@@ -480,6 +485,8 @@ function toRankingRow(paper) {
     sourceTrace: paper.sourceTrace || "",
     dataTrace: params.notes || "",
     evidence: params.evidence || {},
+    provenance: params.provenance || {},
+    fieldProvenance: metrics.fieldProvenance || {},
     ionUaPerUm: params.ionUaPerUm ?? null,
     ionMAPerUm: metrics.ionMAPerUm,
     rcOhmUm: params.rcOhmUm ?? null,

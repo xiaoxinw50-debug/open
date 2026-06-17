@@ -567,6 +567,10 @@ function mergeExtractions(metadataExtraction = {}, fullTextExtraction = {}) {
     evidence: {
       ...(fullTextParams.evidence || {}),
       ...(metadataParams.evidence || {})
+    },
+    provenance: {
+      ...(fullTextParams.provenance || {}),
+      ...(metadataParams.provenance || {})
     }
   };
 
@@ -575,6 +579,7 @@ function mergeExtractions(metadataExtraction = {}, fullTextExtraction = {}) {
       params[field] = fullTextParams[field];
       usedFullTextFields.push(field);
       if (fullTextParams.evidence?.[field]) params.evidence[field] = fullTextParams.evidence[field];
+      if (fullTextParams.provenance?.[field]) params.provenance[field] = fullTextParams.provenance[field];
     } else {
       params[field] = metadataParams[field] ?? null;
     }
@@ -584,6 +589,7 @@ function mergeExtractions(metadataExtraction = {}, fullTextExtraction = {}) {
     params.rcDefinition = fullTextParams.rcDefinition;
     usedFullTextFields.push("rcDefinition");
     if (fullTextParams.evidence?.rcDefinition) params.evidence.rcDefinition = fullTextParams.evidence.rcDefinition;
+    if (fullTextParams.provenance?.rcDefinition) params.provenance.rcDefinition = fullTextParams.provenance.rcDefinition;
   } else {
     params.rcDefinition = metadataParams.rcDefinition || "unknown";
   }

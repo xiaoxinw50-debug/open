@@ -655,6 +655,44 @@ tbody tr:hover {
   font-size: 1.05rem;
 }
 
+.source-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.32rem;
+  padding: 0.12rem 0.34rem;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 900;
+  vertical-align: middle;
+  border: 1px solid rgba(35, 35, 35, 0.12);
+  background: #f3f0e9;
+  color: #3b3031;
+  white-space: nowrap;
+}
+
+.source-badge.original {
+  background: rgba(39, 108, 71, 0.12);
+  color: #1f5b39;
+}
+
+.source-badge.derived {
+  background: rgba(24, 101, 178, 0.12);
+  color: #174f88;
+}
+
+.source-badge.estimated {
+  background: rgba(215, 166, 76, 0.18);
+  color: #7e5515;
+}
+
+.provenance-summary {
+  margin-top: 0.46rem;
+  color: #4b3f40;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .row-actions {
   display: flex;
   gap: 7px;

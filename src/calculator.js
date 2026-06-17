@@ -19,17 +19,36 @@ export function round(value, digits = 3) {
 }
 
 export function getLogSwitchRatio(params = {}) {
+  return getLogSwitchRatioInfo(params).value;
+}
+
+export function getLogSwitchRatioInfo(params = {}) {
   const directLog = toNumber(params.logSwitchRatio);
-  if (directLog && directLog > 0) return directLog;
+  if (directLog && directLog > 0) {
+    const source = params.provenance?.logSwitchRatio || "original";
+    const derivedFrom = source === "derived"
+      ? params.provenance?.logSwitchRatioFrom ||
+        (toNumber(params.ionUaPerUm) !== null && toNumber(params.ioffUaPerUm) !== null
+          ? ["Ion", "Ioff"]
+          : toNumber(params.onOffRatio) !== null
+            ? ["onOffRatio"]
+            : [])
+      : [];
+    return { value: directLog, source, derivedFrom };
+  }
 
   const ratio = toNumber(params.onOffRatio);
-  if (ratio && ratio > 1) return Math.log10(ratio);
+  if (ratio && ratio > 1) {
+    return { value: Math.log10(ratio), source: "derived", derivedFrom: ["onOffRatio"] };
+  }
 
   const ion = toNumber(params.ionUaPerUm);
   const ioff = toNumber(params.ioffUaPerUm);
-  if (ion && ioff && ion > 0 && ioff > 0 && ion > ioff) return Math.log10(ion / ioff);
+  if (ion && ioff && ion > 0 && ioff > 0 && ion > ioff) {
+    return { value: Math.log10(ion / ioff), source: "derived", derivedFrom: ["Ion", "Ioff"] };
+  }
 
-  return null;
+  return { value: null, source: null, derivedFrom: [] };
 }
 
 export function getRcMultiplier(params = {}) {
@@ -46,8 +65,18 @@ export function calculatePaper(paper = {}) {
   const rcOhmUm = toNumber(params.rcOhmUm);
   const ssMvDec = toNumber(params.ssMvDec);
   const vdsV = toNumber(params.vdsV);
-  const logSwitchRatio = getLogSwitchRatio(params);
+  const logSwitchRatioInfo = getLogSwitchRatioInfo(params);
+  const logSwitchRatio = logSwitchRatioInfo.value;
   const rcMultiplier = getRcMultiplier(params);
+  const fieldProvenance = buildFieldProvenance(params, {
+    ionUaPerUm,
+    rcOhmUm,
+    vdsV,
+    ssMvDec,
+    logSwitchRatio,
+    logSwitchRatioInfo,
+    rcMultiplier
+  });
 
   const ionMAPerUm = ionUaPerUm === null ? null : ionUaPerUm / 1000;
   const rcKOhmUm = rcOhmUm === null ? null : rcOhmUm / 1000;
@@ -111,6 +140,12 @@ export function calculatePaper(paper = {}) {
     ssMvDec,
     logSwitchRatio
   });
+  if (estimate.gamma2d !== null) {
+    addEstimatedFieldProvenance(fieldProvenance, "rcDefinition", "Rc口径", rcMultiplier);
+    addEstimatedFieldProvenance(fieldProvenance, "vdsV", "VDS", vdsV);
+    addEstimatedFieldProvenance(fieldProvenance, "ssMvDec", "SS", ssMvDec);
+    addEstimatedFieldProvenance(fieldProvenance, "logSwitchRatio", "开关比对数", logSwitchRatio);
+  }
 
   const required = [
     ["Ion", ionUaPerUm],
@@ -167,6 +202,7 @@ export function calculatePaper(paper = {}) {
     trialEffectiveVoltageV: round(trialEffectiveVoltageV, 4),
     switchCostV: round(switchCostV, 4),
     logSwitchRatio: round(logSwitchRatio, 3),
+    fieldProvenance,
     gamma2d: round(gamma2d, 3),
     displayGamma2d: round(gamma2d ?? estimate.gamma2d, 3),
     gammaMode,
@@ -187,6 +223,66 @@ export function calculatePaper(paper = {}) {
     dataQualityScore,
     reliabilityLabel,
     partialStage
+  };
+}
+
+function buildFieldProvenance(params, values) {
+  const supplied = params.provenance || {};
+  const provenance = {};
+  const directFields = [
+    ["ionUaPerUm", "Ion", values.ionUaPerUm],
+    ["rcOhmUm", "Rc", values.rcOhmUm],
+    ["vdsV", "VDS", values.vdsV],
+    ["ssMvDec", "SS", values.ssMvDec],
+    ["rcDefinition", "Rc口径", values.rcMultiplier]
+  ];
+  for (const [key, label, value] of directFields) {
+    if (value !== null && value !== undefined) {
+      provenance[key] = {
+        source: supplied[key] || "original",
+        label,
+        note: sourceNote(supplied[key] || "original")
+      };
+    }
+  }
+  if (values.logSwitchRatio !== null && values.logSwitchRatio !== undefined) {
+    provenance.logSwitchRatio = {
+      source: supplied.logSwitchRatio || values.logSwitchRatioInfo.source || "original",
+      label: "开关比对数",
+      derivedFrom: supplied.logSwitchRatio === "derived" ? supplied.logSwitchRatioFrom || values.logSwitchRatioInfo.derivedFrom : values.logSwitchRatioInfo.derivedFrom,
+      note: sourceNote(supplied.logSwitchRatio || values.logSwitchRatioInfo.source || "original")
+    };
+  }
+  if (toNumber(params.ioffUaPerUm) !== null) {
+    provenance.ioffUaPerUm = {
+      source: supplied.ioffUaPerUm || "original",
+      label: "Ioff",
+      note: sourceNote(supplied.ioffUaPerUm || "original")
+    };
+  }
+  if (toNumber(params.onOffRatio) !== null) {
+    provenance.onOffRatio = {
+      source: supplied.onOffRatio || "original",
+      label: "开关比",
+      note: sourceNote(supplied.onOffRatio || "original")
+    };
+  }
+  return provenance;
+}
+
+function sourceNote(source) {
+  if (source === "derived") return "由其他原文值严格推出";
+  if (source === "estimated") return "默认假设估算，不进入严格计算";
+  return "原文值或人工核对值";
+}
+
+function addEstimatedFieldProvenance(provenance, key, label, currentValue) {
+  if (currentValue !== null && currentValue !== undefined) return;
+  if (provenance[key]) return;
+  provenance[key] = {
+    source: "estimated",
+    label,
+    note: sourceNote("estimated")
   };
 }
 
