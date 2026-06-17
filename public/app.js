@@ -323,6 +323,7 @@ function renderRanking() {
 }
 
 function renderCandidates() {
+  renderPendingImportCard();
   const rows = state.papers
     .filter((paper) => paper.metrics.gammaMode !== "strict")
     .filter(matchesReviewFilter)
@@ -357,6 +358,9 @@ function matchesReviewFilter(paper) {
 }
 
 function reviewSort(a, b) {
+  const alogin = loginImportPriority(a);
+  const blogin = loginImportPriority(b);
+  if (alogin !== blogin) return blogin - alogin;
   const arc = a.metrics.missingFields.includes("Rc口径") ? 1 : 0;
   const brc = b.metrics.missingFields.includes("Rc口径") ? 1 : 0;
   if (arc !== brc) return brc - arc;
@@ -365,6 +369,37 @@ function reviewSort(a, b) {
   const bm = modeRank[b.metrics.gammaMode] ?? 2;
   if (am !== bm) return am - bm;
   return (b.metrics.dataCompleteness || 0) - (a.metrics.dataCompleteness || 0) || (b.year || 0) - (a.year || 0);
+}
+
+function loginImportPriority(paper) {
+  if (!paperAccessUrl(paper)) return 0;
+  if (paper.metrics?.gammaMode === "strict") return 0;
+  const missing = paper.metrics?.missingFields || [];
+  if (missing.includes("Ion") || missing.includes("Rc") || missing.includes("SS") || missing.includes("VDS") || missing.includes("开关比对数")) {
+    return 2;
+  }
+  return 1;
+}
+
+function renderPendingImportCard() {
+  const target = $("#pending-import-card");
+  if (!target) return;
+  const pending = getPendingImport();
+  target.hidden = !pending;
+  if (!pending) {
+    target.innerHTML = "";
+    return;
+  }
+  target.innerHTML = `
+    <div>
+      <strong>正在等待登录导入</strong>
+      <p>${escapeHtml(pending.title || pending.id)}<br><span>${escapeHtml(pending.url || "")}</span></p>
+    </div>
+    <div class="pending-import-actions">
+      <a class="row-action-link primary" href="${escapeAttr(pending.url || "#")}" target="_blank" rel="noreferrer">继续打开原文</a>
+      <button class="ghost" data-cancel-pending-import>取消</button>
+    </div>
+  `;
 }
 
 function reviewModeCell(paper) {
@@ -711,6 +746,14 @@ async function handleRowAction(event) {
     const paper = state.papers.find((item) => item.id === loginImportButton.dataset.loginImport);
     if (!paper) return;
     startPendingLoginImport(paper);
+    return;
+  }
+
+  const cancelPendingButton = event.target.closest("[data-cancel-pending-import]");
+  if (cancelPendingButton) {
+    clearPendingImport();
+    renderPendingImportCard();
+    $("#extract-text-status").textContent = "已取消待登录导入。";
   }
 }
 
@@ -838,6 +881,9 @@ async function extractTextToForm(options = {}) {
     clearPendingImport();
     $("#extract-text-status").textContent = `已抽取 ${extraction.fieldCount} 个字段，并已自动保存到“${saved.title || options.pending?.title || "当前论文"}”。`;
     await loadAll();
+  } else if (options.autoSave) {
+    $("#extract-text-status").textContent = "已导入全文，但未抽到可用字段；待导入状态已保留。请选中图注/表格参数段后再次点击书签导入。";
+    renderPendingImportCard();
   }
 }
 
@@ -1006,6 +1052,7 @@ function startPendingLoginImport(paper) {
     startedAt: new Date().toISOString()
   };
   localStorage.setItem(PENDING_IMPORT_KEY, JSON.stringify(pending));
+  renderPendingImportCard();
   switchView("manual");
   $("#extract-text-status").textContent = `已进入自动导入模式：${paper.title || paper.id}。登录打开全文后，点击书签栏“导入到 Γ₂D”。`;
   window.open(url, "_blank", "noopener,noreferrer");

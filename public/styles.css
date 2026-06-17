@@ -958,6 +958,50 @@ tbody tr:hover {
   margin: -2px 0 16px;
 }
 
+.pending-import-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin: 0 0 16px;
+  border: 1px solid rgba(158, 17, 23, 0.22);
+  border-radius: 18px;
+  padding: 14px 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 239, 235, 0.92)),
+    #fffdfc;
+}
+
+.pending-import-card[hidden] {
+  display: none;
+}
+
+.pending-import-card strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.04rem;
+  margin-bottom: 4px;
+}
+
+.pending-import-card p {
+  margin: 0;
+  color: #4e3b3c;
+  line-height: 1.45;
+}
+
+.pending-import-card span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.pending-import-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .review-filter {
   padding: 0.52rem 0.82rem;
   border-radius: 999px;
