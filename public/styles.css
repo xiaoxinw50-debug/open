@@ -231,6 +231,51 @@ h2 {
   font-size: 0.92rem;
 }
 
+.source-legend {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.source-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.48rem 0.72rem;
+  border: 1px solid rgba(239, 216, 212, 0.95);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #4b3f40;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.source-legend b {
+  color: var(--ink);
+}
+
+.source-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.source-dot.original {
+  background: var(--ok);
+}
+
+.source-dot.derived {
+  background: #1865b2;
+}
+
+.source-dot.estimated {
+  background: var(--gold);
+}
+
 .formula sub,
 th sub,
 .formula-note sub {

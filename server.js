@@ -294,15 +294,23 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`Switch margin site running at http://localhost:${PORT}`);
 });
 
-setTimeout(() => {
-  if (process.env.AUTO_INGEST_ON_START !== "false") {
-    runScheduledIngestion("startup", true);
-  }
-}, Number(process.env.STARTUP_INGEST_DELAY_MS || 15000));
+if (process.env.AUTO_INGEST_SCHEDULE !== "false") {
+  setTimeout(() => {
+    if (process.env.AUTO_INGEST_ON_START !== "false") {
+      runScheduledIngestionSafe("startup", true);
+    }
+  }, Number(process.env.STARTUP_INGEST_DELAY_MS || 15000));
 
-setInterval(async () => {
-  runScheduledIngestion("interval", false);
-}, Number(process.env.SCHEDULE_CHECK_INTERVAL_MS || 10 * 60 * 1000));
+  setInterval(() => {
+    runScheduledIngestionSafe("interval", false);
+  }, Number(process.env.SCHEDULE_CHECK_INTERVAL_MS || 10 * 60 * 1000));
+}
+
+function runScheduledIngestionSafe(reason, force) {
+  runScheduledIngestion(reason, force).catch((error) => {
+    console.error("scheduled ingestion launcher failed", error);
+  });
+}
 
 async function runScheduledIngestion(reason, force) {
   const state = await getState();

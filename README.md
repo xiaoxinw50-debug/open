@@ -46,6 +46,12 @@ http://localhost:5177
 - Auto Ingestion: 启动后自动抓取一次，之后每 6 小时抓取一次
 - GitHub Actions: 每 6 小时访问线上抓取接口，用于唤醒免费 Render 实例并补充新论文
 
+本地调试若不希望后台自动检索改写 `data/*.json`，可以这样启动：
+
+```bash
+AUTO_INGEST_SCHEDULE=false npm start
+```
+
 当前 Blueprint 使用 Render 免费 Web Service，便于先上线验证。免费实例可能休眠，文件存储也不是长期数据库；若要稳定保存长期自动抓取结果，建议后续升级为付费实例并挂载持久磁盘或接入数据库。
 
 ## 自动检索逻辑
