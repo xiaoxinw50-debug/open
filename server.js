@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { calculatePaper, withMetrics } from "./src/calculator.js";
 import { deletePaper, getPaper, getState, listPapers, updatePaper, updateState, upsertPaper } from "./src/db.js";
+import { extractParams } from "./src/extract.js";
 import { runIngestion } from "./src/ingest.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -112,6 +113,19 @@ app.delete("/api/papers/:id", async (req, res, next) => {
 app.post("/api/calculate", (req, res) => {
   const paper = normalizePaperInput(req.body);
   res.json(withMetrics(paper));
+});
+
+app.post("/api/extract-text", (req, res) => {
+  const text = String(req.body?.text || "").trim();
+  if (text.length < 80) {
+    return res.status(400).json({ error: "text is too short for parameter extraction" });
+  }
+  const extraction = extractParams(text.slice(0, 900000));
+  res.json({
+    ...extraction,
+    fieldCount: extractedFieldCountForApi(extraction.params),
+    textLength: text.length
+  });
 });
 
 app.get("/api/state", async (_req, res, next) => {
@@ -462,6 +476,12 @@ function numericOrNull(value) {
   if (value === "" || value === null || value === undefined) return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function extractedFieldCountForApi(params = {}) {
+  const fields = ["ionUaPerUm", "rcOhmUm", "vdsV", "ssMvDec", "logSwitchRatio", "ioffUaPerUm"];
+  const count = fields.filter((field) => params[field] !== null && params[field] !== undefined).length;
+  return params.rcDefinition && params.rcDefinition !== "unknown" ? count + 1 : count;
 }
 
 function appendAuditNote(notes = "", note = "") {

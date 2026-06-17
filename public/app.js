@@ -8,7 +8,8 @@ const state = {
   activeView: "ranking",
   sort: "gamma",
   includeLowValue: false,
-  reviewFilter: "all"
+  reviewFilter: "all",
+  manualExtraction: null
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -54,9 +55,16 @@ function bindForms() {
     const url = payload.id ? `/api/papers/${encodeURIComponent(payload.id)}` : "/api/papers";
     await api(url, { method, body: JSON.stringify(payload) });
     event.currentTarget.reset();
+    state.manualExtraction = null;
+    $("#extract-text-status").textContent = "尚未导入文本";
     $("#calc-preview").classList.remove("is-visible");
     await loadAll();
     switchView("ranking");
+  });
+
+  $("#paper-form").addEventListener("reset", () => {
+    state.manualExtraction = null;
+    $("#extract-text-status").textContent = "尚未导入文本";
   });
 
   $("#preview-btn").addEventListener("click", async () => {
@@ -64,6 +72,8 @@ function bindForms() {
     const preview = await api("/api/calculate", { method: "POST", body: JSON.stringify(payload) });
     renderPreview(preview);
   });
+
+  $("#extract-text-btn").addEventListener("click", extractTextToForm);
 
   $("#ingest-form").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -601,6 +611,12 @@ function handleReviewFilter(event) {
 }
 
 function fillForm(paper) {
+  state.manualExtraction = {
+    params: {
+      evidence: paper.params?.evidence || {},
+      provenance: paper.params?.provenance || {}
+    }
+  };
   const form = $("#paper-form");
   form.id.value = paper.id || "";
   form.title.value = paper.title || "";
@@ -619,11 +635,14 @@ function fillForm(paper) {
   form.logSwitchRatio.value = paper.params.logSwitchRatio ?? "";
   form.onOffRatio.value = paper.params.onOffRatio ?? "";
   form.ioffUaPerUm.value = paper.params.ioffUaPerUm ?? "";
+  form.fullTextImport.value = "";
   form.notes.value = paper.params.notes || "";
   form.sourceTrace.value = paper.sourceTrace || "";
+  $("#extract-text-status").textContent = "可粘贴全文或图表文本继续补参";
 }
 
 function formToPaper(form) {
+  const extracted = state.manualExtraction?.params || {};
   return {
     id: form.id.value || undefined,
     title: form.title.value.trim(),
@@ -645,9 +664,77 @@ function formToPaper(form) {
       logSwitchRatio: numberOrNull(form.logSwitchRatio.value),
       onOffRatio: numberOrNull(form.onOffRatio.value),
       ioffUaPerUm: numberOrNull(form.ioffUaPerUm.value),
-      notes: form.notes.value.trim()
+      notes: form.notes.value.trim(),
+      evidence: extracted.evidence || {},
+      provenance: extracted.provenance || {}
     }
   };
+}
+
+async function extractTextToForm() {
+  const form = $("#paper-form");
+  const text = form.fullTextImport.value.trim();
+  const status = $("#extract-text-status");
+  if (text.length < 80) {
+    status.textContent = "文本太短：请粘贴参数附近的段落、图注或表格。";
+    return;
+  }
+  status.textContent = "正在抽取参数...";
+  const extraction = await api("/api/extract-text", {
+    method: "POST",
+    body: JSON.stringify({ text })
+  });
+  const previousParams = state.manualExtraction?.params || {};
+  state.manualExtraction = {
+    ...extraction,
+    params: {
+      ...(extraction.params || {}),
+      evidence: {
+        ...(previousParams.evidence || {}),
+        ...(extraction.params?.evidence || {})
+      },
+      provenance: {
+        ...(previousParams.provenance || {}),
+        ...(extraction.params?.provenance || {})
+      }
+    }
+  };
+  const params = extraction.params || {};
+  fillEmptyNumber(form.ionUaPerUm, params.ionUaPerUm);
+  fillEmptyNumber(form.rcOhmUm, params.rcOhmUm);
+  if ((form.rcDefinition.value === "unknown" || !form.rcDefinition.value) && params.rcDefinition && params.rcDefinition !== "unknown") {
+    form.rcDefinition.value = params.rcDefinition;
+  }
+  fillEmptyNumber(form.vdsV, params.vdsV);
+  fillEmptyNumber(form.ssMvDec, params.ssMvDec);
+  fillEmptyNumber(form.logSwitchRatio, params.logSwitchRatio);
+  fillEmptyNumber(form.ioffUaPerUm, params.ioffUaPerUm);
+
+  const extractedNotes = params.notes ? `文本导入抽取：${params.notes}` : "文本导入未抽到明确参数";
+  form.notes.value = appendTextNote(form.notes.value, extractedNotes);
+  form.sourceTrace.value = appendTextNote(
+    form.sourceTrace.value,
+    `人工导入全文/图表文本 ${extraction.textLength} 字符；抽取字段 ${extraction.fieldCount} 个`
+  );
+  status.textContent = extraction.fieldCount
+    ? `已抽取 ${extraction.fieldCount} 个字段，已回填空白参数。请核对数值和证据。`
+    : "未抽到可用字段，请粘贴包含单位和上下文的段落或表格。";
+  const preview = await api("/api/calculate", { method: "POST", body: JSON.stringify(formToPaper(form)) });
+  renderPreview(preview);
+}
+
+function fillEmptyNumber(input, value) {
+  if (value === null || value === undefined || value === "" || input.value) return;
+  input.value = Number(value);
+}
+
+function appendTextNote(current = "", note = "") {
+  const parts = String(current)
+    .split("；")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  if (note && !parts.includes(note)) parts.push(note);
+  return parts.join("；");
 }
 
 function formToSettings(form) {

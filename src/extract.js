@@ -228,13 +228,13 @@ export function extractParams(rawText = "") {
     {
       name: "Rc",
       regex:
-        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,110}?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
+        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;\n]{0,110}?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
     },
     {
       name: "Rc",
       regex:
-        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,120}?(?:from|between)\s*~?(\d+(?:\.\d+)?)\s*(?:to|-|and)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
+        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;\n]{0,120}?(?:from|between)\s*~?(\d+(?:\.\d+)?)\s*(?:to|-|and)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
       value: (match) => Math.min(Number(match[1]), Number(match[2])),
       unit: (match) => match[3],
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
@@ -242,7 +242,7 @@ export function extractParams(rawText = "") {
     {
       name: "Rc",
       regex:
-        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;,\n]{0,120}?(?:from|between)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)\s*(?:to|-|and)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
+        /(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)[^.;\n]{0,120}?(?:from|between)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)\s*(?:to|-|and)\s*~?(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)/gi,
       value: (match) => Math.min(
         convertResistanceToOhmUm(Number(match[1]), match[2]),
         convertResistanceToOhmUm(Number(match[3]), match[4])
@@ -252,7 +252,7 @@ export function extractParams(rawText = "") {
     {
       name: "Rc",
       regex:
-        /(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)[^.;,\n]{0,100}?(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)/gi,
+        /(\d+(?:\.\d+)?)\s*(k?Ω|kohm|ohm)\s*(?:·|\*|-)?\s*(?:μm|um)[^.;\n]{0,100}?(?:contact resistance|R\s*(?:[_{]\s*)?c\}?|Rc)/gi,
       convert: (value, unit) => (unit.toLowerCase().startsWith("k") ? value * 1000 : value)
     }
   ], { mode: "min", min: 0, max: 200000, document });

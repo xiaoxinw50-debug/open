@@ -191,6 +191,17 @@
           <label>log10(Ion/Ioff) <input name="logSwitchRatio" type="number" step="0.001" /></label>
           <label>开关比 <input name="onOffRatio" type="number" step="1" placeholder="可选，和上一项二选一" /></label>
           <label>Ioff (μA/μm) <input name="ioffUaPerUm" type="number" step="0.000001" placeholder="可选，用于反推开关比" /></label>
+          <div class="wide text-import-card">
+            <div>
+              <h3>全文不可自动获取时</h3>
+              <p>在 Safari、WPS 或学校数据库中打开论文/PDF，把器件参数段、图注、表格或补充材料文字粘贴到这里，系统会抽取 Ion、Rc、VDS、SS、开关比并回填表单。</p>
+            </div>
+            <textarea name="fullTextImport" rows="7" placeholder="粘贴相关正文、图注、表格文字或补充材料文本。建议包含参数附近的上下文，而不只是一个孤立数字。"></textarea>
+            <div class="form-actions">
+              <button type="button" id="extract-text-btn" class="secondary">从文本抽取并回填参数</button>
+              <span id="extract-text-status" class="inline-status">尚未导入文本</span>
+            </div>
+          </div>
           <label class="wide">参数来源/图号/备注 <textarea name="notes" rows="3"></textarea></label>
           <label class="wide">数据溯源说明 <textarea name="sourceTrace" rows="3"></textarea></label>
           <div class="form-actions wide">

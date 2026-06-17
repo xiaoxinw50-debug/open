@@ -981,6 +981,35 @@ tbody tr:hover {
   flex-wrap: wrap;
 }
 
+.text-import-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(158, 17, 23, 0.16);
+  border-radius: 20px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 242, 238, 0.86)),
+    #fffdfc;
+}
+
+.text-import-card h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+}
+
+.text-import-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.inline-status {
+  color: #6d5556;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
 .preview-card {
   margin-top: 18px;
   display: none;
