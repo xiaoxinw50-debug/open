@@ -18,6 +18,7 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 document.addEventListener("DOMContentLoaded", async () => {
   bindTabs();
   bindForms();
+  bindAuthenticatedImport();
   await loadAll();
 });
 
@@ -85,6 +86,44 @@ function bindForms() {
   });
 
   $("#run-ingest-btn").addEventListener("click", runIngest);
+}
+
+function bindAuthenticatedImport() {
+  const bookmarklet = $("#import-bookmarklet");
+  if (bookmarklet) {
+    bookmarklet.href = buildImportBookmarklet();
+    bookmarklet.addEventListener("click", (event) => {
+      event.preventDefault();
+      $("#extract-text-status").textContent = "请把“导入到 Γ₂D”拖到浏览器书签栏；在已登录的论文全文页点击书签即可导入。";
+    });
+  }
+
+  window.addEventListener("message", async (event) => {
+    const payload = event.data || {};
+    if (payload.type !== "SM_IMPORT_TEXT" || !payload.text) return;
+    await receiveAuthenticatedImport(payload);
+  });
+}
+
+function buildImportBookmarklet() {
+  const targetOrigin = window.location.origin;
+  const targetUrl = `${targetOrigin}${window.location.pathname}#manual`;
+  const source = `(function(){var s=(window.getSelection&&String(window.getSelection()))||'';var t=s.trim()||((document.body&&document.body.innerText)||document.documentElement.innerText||'');var w=window.open('${targetUrl}','_blank');var p={type:'SM_IMPORT_TEXT',title:document.title,url:location.href,text:t.slice(0,900000)};setTimeout(function(){try{w.postMessage(p,'${targetOrigin}')}catch(e){alert('导入失败：'+e.message)}},1400);})();`;
+  return `javascript:${encodeURIComponent(source)}`;
+}
+
+async function receiveAuthenticatedImport(payload) {
+  switchView("manual");
+  const form = $("#paper-form");
+  if (!form.title.value && payload.title) form.title.value = payload.title;
+  if (!form.url.value && payload.url) form.url.value = payload.url;
+  form.fullTextImport.value = payload.text;
+  form.sourceTrace.value = appendTextNote(
+    form.sourceTrace.value,
+    `已登录浏览器页面导入：${payload.url || "未知 URL"}`
+  );
+  $("#extract-text-status").textContent = `已从当前登录页面导入 ${payload.text.length} 字符，正在抽取参数...`;
+  await extractTextToForm();
 }
 
 async function loadAll() {
