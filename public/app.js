@@ -7,6 +7,7 @@ const state = {
   ingestPollTimer: null,
   activeView: "ranking",
   sort: "gamma",
+  yearPreset: "all",
   includeLowValue: false,
   reviewFilter: "all",
   manualExtraction: null,
@@ -43,6 +44,10 @@ function bindTabs() {
   $("#sort-select").addEventListener("change", async (event) => {
     state.sort = event.target.value;
     await Promise.all([loadPapers(), loadRankingOutput()]);
+  });
+  $("#year-filter-select").addEventListener("change", async (event) => {
+    state.yearPreset = event.target.value;
+    await Promise.all([loadPapers(), loadRankingOutput(), loadDiagnostics()]);
   });
 
   $("#refresh-btn").addEventListener("click", loadAll);
@@ -181,20 +186,21 @@ async function loadAll() {
 
 async function loadPapers() {
   const lowValueFlag = state.includeLowValue ? "&includeLowValue=1" : "";
-  state.papers = await api(`/api/papers?sort=${encodeURIComponent(state.sort)}${lowValueFlag}`);
+  state.papers = await api(`/api/papers?sort=${encodeURIComponent(state.sort)}${lowValueFlag}${yearQuery("&")}`);
   renderRanking();
   renderCandidates();
   renderChart();
 }
 
 async function loadDiagnostics() {
-  const lowValueFlag = state.includeLowValue ? "?includeLowValue=1" : "";
-  state.diagnostics = await api(`/api/diagnostics${lowValueFlag}`);
+  const lowValueParam = state.includeLowValue ? "includeLowValue=1" : "";
+  const query = [lowValueParam, yearQuery("").replace(/^\?/, "")].filter(Boolean).join("&");
+  state.diagnostics = await api(`/api/diagnostics${query ? `?${query}` : ""}`);
   renderDiagnostics();
 }
 
 async function loadRankingOutput() {
-  state.rankingOutput = await api(`/api/rankings?sort=${encodeURIComponent(state.sort)}`);
+  state.rankingOutput = await api(`/api/rankings?sort=${encodeURIComponent(state.sort)}${yearQuery("&")}`);
   renderRankingOutput();
 }
 
@@ -1183,6 +1189,11 @@ function formToSettings(form) {
       .map((line) => line.trim())
       .filter(Boolean)
   };
+}
+
+function yearQuery(prefix = "?") {
+  if (!state.yearPreset || state.yearPreset === "all") return "";
+  return `${prefix}yearPreset=${encodeURIComponent(state.yearPreset)}`;
 }
 
 async function api(url, options = {}) {

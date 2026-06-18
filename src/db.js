@@ -160,23 +160,25 @@ export async function getState() {
     ...DEFAULT_STATE,
     ...state,
     queries,
-    lookbackDays: Number(process.env.INGEST_LOOKBACK_DAYS || state.lookbackDays || DEFAULT_STATE.lookbackDays),
-    maxPerQuery: Number(process.env.INGEST_MAX_PER_QUERY || state.maxPerQuery || DEFAULT_STATE.maxPerQuery),
+    lookbackDays: numberSetting(state.lookbackDays, "INGEST_LOOKBACK_DAYS", DEFAULT_STATE.lookbackDays),
+    maxPerQuery: numberSetting(state.maxPerQuery, "INGEST_MAX_PER_QUERY", DEFAULT_STATE.maxPerQuery),
     fullTextEnabled:
       process.env.FULLTEXT_ENABLED === undefined
         ? Boolean(state.fullTextEnabled ?? DEFAULT_STATE.fullTextEnabled)
         : process.env.FULLTEXT_ENABLED !== "false",
-    fullTextMaxPerRun: Number(
-      process.env.FULLTEXT_MAX_PER_RUN || state.fullTextMaxPerRun || DEFAULT_STATE.fullTextMaxPerRun
-    ),
-    ingestIntervalHours: Number(
-      process.env.INGEST_INTERVAL_HOURS || state.ingestIntervalHours || DEFAULT_STATE.ingestIntervalHours
-    ),
+    fullTextMaxPerRun: numberSetting(state.fullTextMaxPerRun, "FULLTEXT_MAX_PER_RUN", DEFAULT_STATE.fullTextMaxPerRun),
+    ingestIntervalHours: numberSetting(state.ingestIntervalHours, "INGEST_INTERVAL_HOURS", DEFAULT_STATE.ingestIntervalHours),
     autoIngestEnabled:
       process.env.AUTO_INGEST_ENABLED === undefined
         ? Boolean(state.autoIngestEnabled ?? DEFAULT_STATE.autoIngestEnabled)
         : process.env.AUTO_INGEST_ENABLED !== "false"
   };
+}
+
+function numberSetting(savedValue, envName, fallback) {
+  const value = savedValue === undefined || savedValue === null || savedValue === "" ? process.env[envName] : savedValue;
+  const number = Number(value ?? fallback);
+  return Number.isFinite(number) ? number : fallback;
 }
 
 function mergeQueries(savedQueries = [], defaultQueries = []) {

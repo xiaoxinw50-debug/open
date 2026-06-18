@@ -30,9 +30,11 @@ app.get("/api/papers", async (req, res, next) => {
     const status = req.query.status?.toString();
     const sort = req.query.sort?.toString() || "gamma";
     const includeLowValue = req.query.includeLowValue === "1" || req.query.includeLowValue === "true";
+    const yearFilter = parseYearFilter(req.query);
     const papers = await listPapers();
     const visible = includeLowValue ? papers : papers.filter((paper) => !isLowValueAutoCandidate(paper));
-    const filtered = status ? visible.filter((paper) => paper.status === status) : visible;
+    const yearFiltered = filterByYear(visible, yearFilter);
+    const filtered = status ? yearFiltered.filter((paper) => paper.status === status) : yearFiltered;
     res.json(sortPapers(filtered, sort));
   } catch (error) {
     next(error);
@@ -241,9 +243,11 @@ app.get("/api/stats", async (_req, res, next) => {
 app.get("/api/diagnostics", async (req, res, next) => {
   try {
     const includeLowValue = req.query.includeLowValue === "1" || req.query.includeLowValue === "true";
+    const yearFilter = parseYearFilter(req.query);
     const allPapers = await listPapers();
-    const hidden = allPapers.filter(isLowValueAutoCandidate);
-    const papers = includeLowValue ? allPapers : allPapers.filter((paper) => !isLowValueAutoCandidate(paper));
+    const yearFilteredPapers = filterByYear(allPapers, yearFilter);
+    const hidden = yearFilteredPapers.filter(isLowValueAutoCandidate);
+    const papers = includeLowValue ? yearFilteredPapers : yearFilteredPapers.filter((paper) => !isLowValueAutoCandidate(paper));
     const strict = papers.filter((paper) => paper.metrics.gammaMode === "strict");
     const estimated = papers.filter((paper) => paper.metrics.gammaMode === "estimated");
     const missing = papers.filter((paper) => paper.metrics.gammaMode === "missing");
@@ -258,7 +262,9 @@ app.get("/api/diagnostics", async (req, res, next) => {
     res.json({
       generatedAt: new Date().toISOString(),
       includeLowValue,
-      totalStored: allPapers.length,
+      yearFilter,
+      totalStored: yearFilteredPapers.length,
+      totalStoredAllYears: allPapers.length,
       visible: papers.length,
       hiddenLowValue: hidden.length,
       modeCounts: {
@@ -302,26 +308,30 @@ app.get("/api/rankings", async (req, res, next) => {
   try {
     const sort = req.query.sort?.toString() || "gamma";
     const include = req.query.include?.toString() || "rankable";
+    const yearFilter = parseYearFilter(req.query);
     const papers = await listPapers();
-    const visiblePapers = papers.filter((paper) => !isLowValueAutoCandidate(paper));
+    const yearFilteredPapers = filterByYear(papers, yearFilter);
+    const visiblePapers = yearFilteredPapers.filter((paper) => !isLowValueAutoCandidate(paper));
     const filtered =
       include === "all"
-        ? papers
+        ? yearFilteredPapers
         : include === "strict"
-          ? papers.filter((paper) => paper.metrics.canCalculateGamma)
-          : papers.filter((paper) => paper.metrics.gammaMode !== "missing");
+          ? yearFilteredPapers.filter((paper) => paper.metrics.canCalculateGamma)
+          : yearFilteredPapers.filter((paper) => paper.metrics.gammaMode !== "missing");
     const rows = sortPapers(filtered, sort).map(toRankingRow);
 
     res.json({
       generatedAt: new Date().toISOString(),
       sort,
       include,
-      totalPapers: papers.length,
+      yearFilter,
+      totalPapers: yearFilteredPapers.length,
+      totalStoredPapers: papers.length,
       returned: rows.length,
-      calculated: papers.filter((paper) => paper.metrics.canCalculateGamma).length,
-      estimable: papers.filter((paper) => paper.metrics.gammaMode === "estimated").length,
+      calculated: yearFilteredPapers.filter((paper) => paper.metrics.canCalculateGamma).length,
+      estimable: yearFilteredPapers.filter((paper) => paper.metrics.gammaMode === "estimated").length,
       needsReview: visiblePapers.filter((paper) => paper.metrics.gammaMode === "missing").length,
-      hiddenLowValue: papers.length - visiblePapers.length,
+      hiddenLowValue: yearFilteredPapers.length - visiblePapers.length,
       rows: rows.map((row, index) => ({ rank: index + 1, ...row }))
     });
   } catch (error) {
@@ -474,6 +484,34 @@ function sortPapers(papers, sort) {
     if (ag === null) return 1;
     if (bg === null) return -1;
     return bg - ag;
+  });
+}
+
+function parseYearFilter(query = {}) {
+  const currentYear = new Date().getFullYear();
+  const preset = query.yearPreset?.toString() || "all";
+  const fromYear = numericOrNull(query.fromYear);
+  const toYear = numericOrNull(query.toYear);
+  if (preset === "recent3") {
+    return { preset, fromYear: currentYear - 3, toYear: currentYear };
+  }
+  return {
+    preset,
+    fromYear: fromYear === null ? null : fromYear,
+    toYear: toYear === null ? null : toYear
+  };
+}
+
+function filterByYear(papers, filter = {}) {
+  const from = filter.fromYear;
+  const to = filter.toYear;
+  if (from === null && to === null) return papers;
+  return papers.filter((paper) => {
+    const year = Number(paper.year);
+    if (!Number.isFinite(year)) return false;
+    if (from !== null && year < from) return false;
+    if (to !== null && year > to) return false;
+    return true;
   });
 }
 

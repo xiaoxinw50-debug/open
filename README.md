@@ -60,6 +60,8 @@ AUTO_INGEST_SCHEDULE=false npm start
 
 检索日志会显示完整过程：原始抓取条数、重复跳过条数、相关命中条数、开放全文读取篇数、全文补充参数篇数、入库/更新条数、可直接计算条数和待补参数条数。需要注意的是，Nature、IEEE 等数据库经常只开放标题和摘要，不开放完整器件表格；如果关键数值只在付费 PDF、图片或不可机器读取的表格中，网站会先把论文放入候选库，而不会编造参数。
 
+网页中的检索设置优先于部署环境变量。环境变量只作为初始默认值使用，避免 Render 上旧的 `INGEST_LOOKBACK_DAYS` 把页面里保存的近三年检索设置覆盖掉。排序页还提供“全部年份/近三年”筛选；图表、表格、JSON 和 CSV 输出会使用同一时间口径。
+
 PDF 解析目前做成可选能力：如果运行环境安装了 `pdf-parse`，系统会尝试解析开放 PDF；如果未安装，会在溯源中记录“PDF detected; optional pdf-parse parser is not installed”。这不是数据抓取失败，而是为了避免大型 PDF 解析包在 Render 构建中长时间解包，影响网站部署稳定性。系统会优先读取开放 HTML，并自动追踪页面里的 supplement、supporting information、extended data 和 PDF 链接。
 
 自动检索默认只保留至少抽取到一个公式字段的候选论文。明显偏向存储器、传感、光电、KPFM 或综述/展望而缺少逻辑 FET benchmark 信息的结果会被过滤；看似相关但完全没有 `Ion`、`Rc`、`VDS`、`SS` 或开关比的条目会计入“无公式参数跳过”，不再塞进候选库。
