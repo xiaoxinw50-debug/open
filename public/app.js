@@ -9,7 +9,15 @@ const state = {
   sort: "gamma",
   includeLowValue: false,
   reviewFilter: "all",
-  manualExtraction: null
+  manualExtraction: null,
+  digitizer: {
+    image: null,
+    mode: "origin",
+    origin: null,
+    max: null,
+    points: [],
+    scale: 1
+  }
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -77,6 +85,14 @@ function bindForms() {
   $("#extract-text-btn").addEventListener("click", extractTextToForm);
   $("#open-paper-login-btn").addEventListener("click", openPaperLoginFromForm);
   $("#copy-bookmarklet-btn").addEventListener("click", copyBookmarkletScript);
+  $("#run-ocr-btn").addEventListener("click", runOcrImport);
+  $("#chart-image-input").addEventListener("change", loadDigitizerImage);
+  $("#chart-canvas").addEventListener("click", handleDigitizerCanvasClick);
+  $("#clear-digitizer-btn").addEventListener("click", clearDigitizer);
+  $("#copy-digitizer-csv-btn").addEventListener("click", copyDigitizerCsv);
+  $$("[data-digitizer-mode]").forEach((button) => {
+    button.addEventListener("click", () => setDigitizerMode(button.dataset.digitizerMode));
+  });
 
   $("#ingest-form").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -90,6 +106,7 @@ function bindForms() {
   $("#run-ingest-btn").addEventListener("click", runIngest);
   $("#login-search-nature").addEventListener("click", () => openLoginSearch("nature"));
   $("#login-search-ieee").addEventListener("click", () => openLoginSearch("ieee"));
+  $("#login-search-cnki").addEventListener("click", () => openLoginSearch("cnki"));
   $("#login-search-all").addEventListener("click", runLoginAssistedSearch);
 }
 
@@ -213,7 +230,7 @@ async function runLoginAssistedSearch() {
   switchView("ingest");
   const opened = openLoginSearch("all");
   $("#login-search-status").textContent = opened
-    ? "已打开 Nature/IEEE 登录检索页，并开始站内自动检索。登录后打开全文，再点书签栏“导入到 Γ₂D”。"
+    ? "已打开 Nature/IEEE/知网登录检索页，并开始站内自动检索。登录后打开全文，再点书签栏“导入到 Γ₂D”。"
     : "请先填写登录检索关键词或上方检索关键词。";
   if (opened) await runIngest();
 }
@@ -227,6 +244,7 @@ function openLoginSearch(target) {
   const urls = publisherSearchUrls(query);
   if (target === "nature" || target === "all") window.open(urls.nature, "_blank", "noopener,noreferrer");
   if (target === "ieee" || target === "all") window.open(urls.ieee, "_blank", "noopener,noreferrer");
+  if (target === "cnki" || target === "all") window.open(urls.cnki, "_blank", "noopener,noreferrer");
   $("#login-search-status").textContent = `已跳转登录搜索：${query}`;
   return true;
 }
@@ -245,7 +263,8 @@ function publisherSearchUrls(query) {
   const encoded = encodeURIComponent(query);
   return {
     nature: `https://www.nature.com/search?q=${encoded}`,
-    ieee: `https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=${encoded}`
+    ieee: `https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=${encoded}`,
+    cnki: `https://kns.cnki.net/kns8/defaultresult/index?kw=${encoded}`
   };
 }
 
@@ -913,6 +932,221 @@ async function extractTextToForm(options = {}) {
     $("#extract-text-status").textContent = "已导入全文，但未抽到可用字段；待导入状态已保留。请选中图注/表格参数段后再次点击书签导入。";
     renderPendingImportCard();
   }
+}
+
+async function runOcrImport() {
+  const input = $("#ocr-image-input");
+  const status = $("#ocr-status");
+  const file = input.files?.[0];
+  if (!file) {
+    status.textContent = "请先选择一张截图。";
+    return;
+  }
+  if (file.size > 8 * 1024 * 1024) {
+    status.textContent = "图片过大：请裁剪到参数表格、图注或局部正文后再上传。";
+    return;
+  }
+  status.textContent = "正在 OCR 识别，首次加载模型可能需要几十秒...";
+  try {
+    const imageDataUrl = await fileToDataUrl(file);
+    const result = await api("/api/ocr-image", {
+      method: "POST",
+      body: JSON.stringify({ imageDataUrl, filename: file.name })
+    });
+    const form = $("#paper-form");
+    const header = `\n\n[OCR截图导入：${file.name}]\n`;
+    form.fullTextImport.value = `${form.fullTextImport.value.trim()}${header}${result.text}`.trim();
+    form.sourceTrace.value = appendTextNote(
+      form.sourceTrace.value,
+      `OCR 导入截图 ${file.name}，识别字符 ${result.textLength}`
+    );
+    status.textContent = `OCR 完成：识别 ${result.textLength} 个字符，正在尝试抽取参数...`;
+    await extractTextToForm();
+  } catch (error) {
+    status.textContent = `OCR 失败：${error.message}`;
+  }
+}
+
+function setDigitizerMode(mode) {
+  state.digitizer.mode = mode;
+  $$("[data-digitizer-mode]").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.digitizerMode === mode);
+  });
+  const labels = {
+    origin: "请点击图中左下坐标轴交点或已知最小坐标点。",
+    max: "请点击图中右上坐标轴交点或已知最大坐标点。",
+    point: "请点击需要读数的数据点。"
+  };
+  $("#digitizer-status").textContent = labels[mode] || "请选择取点模式。";
+}
+
+async function loadDigitizerImage(event) {
+  const file = event.currentTarget.files?.[0];
+  if (!file) return;
+  const dataUrl = await fileToDataUrl(file);
+  const image = new Image();
+  image.onload = () => {
+    state.digitizer.image = image;
+    state.digitizer.origin = null;
+    state.digitizer.max = null;
+    state.digitizer.points = [];
+    drawDigitizer();
+    setDigitizerMode("origin");
+    $("#digitizer-status").textContent = "图像已载入。先点击左下轴点。";
+    updateDigitizerOutput();
+  };
+  image.src = dataUrl;
+}
+
+function handleDigitizerCanvasClick(event) {
+  const canvas = $("#chart-canvas");
+  if (!state.digitizer.image) {
+    $("#digitizer-status").textContent = "请先上传图表截图。";
+    return;
+  }
+  const rect = canvas.getBoundingClientRect();
+  const point = {
+    x: (event.clientX - rect.left) * (canvas.width / rect.width),
+    y: (event.clientY - rect.top) * (canvas.height / rect.height)
+  };
+  if (state.digitizer.mode === "origin") {
+    state.digitizer.origin = point;
+    setDigitizerMode("max");
+  } else if (state.digitizer.mode === "max") {
+    state.digitizer.max = point;
+    setDigitizerMode("point");
+  } else {
+    const value = pixelToChartValue(point);
+    if (!value) {
+      $("#digitizer-status").textContent = "请先完成左下轴点和右上轴点标定。";
+      return;
+    }
+    state.digitizer.points.push({ ...point, ...value });
+    $("#digitizer-status").textContent = `已记录第 ${state.digitizer.points.length} 个点：x=${num(value.valueX)}, y=${num(value.valueY)}`;
+  }
+  drawDigitizer();
+  updateDigitizerOutput();
+}
+
+function pixelToChartValue(point) {
+  const { origin, max } = state.digitizer;
+  if (!origin || !max || origin.x === max.x || origin.y === max.y) return null;
+  const xMin = numberOrNull($("#chart-x-min").value);
+  const xMax = numberOrNull($("#chart-x-max").value);
+  const yMin = numberOrNull($("#chart-y-min").value);
+  const yMax = numberOrNull($("#chart-y-max").value);
+  if ([xMin, xMax, yMin, yMax].some((value) => value === null)) return null;
+  return {
+    valueX: xMin + ((point.x - origin.x) / (max.x - origin.x)) * (xMax - xMin),
+    valueY: yMin + ((origin.y - point.y) / (origin.y - max.y)) * (yMax - yMin)
+  };
+}
+
+function drawDigitizer() {
+  const canvas = $("#chart-canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#fffdfc";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const image = state.digitizer.image;
+  if (!image) {
+    ctx.fillStyle = "#76696a";
+    ctx.font = "700 18px Helvetica Neue, sans-serif";
+    ctx.fillText("上传图表截图后在这里标定坐标并取点", 28, 46);
+    return;
+  }
+  const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
+  const width = image.width * scale;
+  const height = image.height * scale;
+  const offsetX = (canvas.width - width) / 2;
+  const offsetY = (canvas.height - height) / 2;
+  state.digitizer.scale = scale;
+  ctx.drawImage(image, offsetX, offsetY, width, height);
+  drawMarker(ctx, state.digitizer.origin, "#276c47", "O");
+  drawMarker(ctx, state.digitizer.max, "#1865b2", "M");
+  state.digitizer.points.forEach((point, index) => drawMarker(ctx, point, "#9e1117", String(index + 1)));
+  if (state.digitizer.origin && state.digitizer.max) {
+    ctx.save();
+    ctx.strokeStyle = "rgba(158,17,23,0.72)";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([7, 5]);
+    ctx.strokeRect(
+      state.digitizer.origin.x,
+      state.digitizer.max.y,
+      state.digitizer.max.x - state.digitizer.origin.x,
+      state.digitizer.origin.y - state.digitizer.max.y
+    );
+    ctx.restore();
+  }
+}
+
+function drawMarker(ctx, point, color, label) {
+  if (!point) return;
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(point.x, point.y, 8, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "800 11px Helvetica Neue, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(label, point.x, point.y + 0.5);
+  ctx.restore();
+}
+
+function clearDigitizer() {
+  state.digitizer.origin = null;
+  state.digitizer.max = null;
+  state.digitizer.points = [];
+  setDigitizerMode("origin");
+  drawDigitizer();
+  updateDigitizerOutput();
+}
+
+async function copyDigitizerCsv() {
+  const csv = digitizerCsv();
+  await copyText(csv);
+  const status = $("#digitizer-status");
+  status.textContent = state.digitizer.points.length
+    ? "取点 CSV 已复制。请把原图来源、坐标范围和取点目的写入数据溯源。"
+    : "尚无数据点，已复制表头。";
+}
+
+function updateDigitizerOutput() {
+  $("#digitizer-output").textContent = digitizerCsv();
+}
+
+function digitizerCsv() {
+  const rows = ["point,x,y,pixelX,pixelY"];
+  state.digitizer.points.forEach((point, index) => {
+    rows.push([
+      index + 1,
+      cleanNumber(point.valueX),
+      cleanNumber(point.valueY),
+      cleanNumber(point.x),
+      cleanNumber(point.y)
+    ].join(","));
+  });
+  return rows.join("\n");
+}
+
+function cleanNumber(value) {
+  if (!Number.isFinite(Number(value))) return "";
+  const text = Number(value).toPrecision(6);
+  return text.includes(".") ? text.replace(/0+$/g, "").replace(/\.$/, "") : text;
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error || new Error("file read failed"));
+    reader.readAsDataURL(file);
+  });
 }
 
 async function savePaperFromForm(form) {

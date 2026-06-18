@@ -1048,6 +1048,110 @@ tbody tr:hover {
   line-height: 1.65;
 }
 
+.assist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.assist-card,
+.chart-digitizer {
+  border: 1px solid rgba(158, 17, 23, 0.15);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.assist-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.assist-card h4,
+.chart-digitizer h4 {
+  margin: 0 0 5px;
+  color: #241818;
+  font-size: 1rem;
+}
+
+.assist-card p,
+.chart-digitizer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.chart-digitizer {
+  display: grid;
+  gap: 14px;
+}
+
+.digitizer-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+.digitizer-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.digitizer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.digitizer-actions button.is-active {
+  background: #211717;
+  border-color: #211717;
+  color: white;
+}
+
+.digitizer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.55fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+#chart-canvas {
+  width: 100%;
+  min-height: 320px;
+  border: 1px solid #edcfca;
+  border-radius: 16px;
+  background: #fffdfc;
+  cursor: crosshair;
+}
+
+.digitizer-output {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 8px;
+}
+
+.digitizer-output strong {
+  color: #241818;
+}
+
+.digitizer-output pre {
+  min-height: 260px;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  border: 1px solid #edcfca;
+  border-radius: 14px;
+  background: #201717;
+  color: #fff7ec;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
 .bookmarklet-card {
   display: flex;
   align-items: center;
@@ -1421,9 +1525,19 @@ tbody tr:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .assist-grid,
+  .digitizer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .digitizer-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .progress-detail,
   .progress-head,
-  .diagnostics-head {
+  .diagnostics-head,
+  .digitizer-head {
     flex-direction: column;
   }
 }
@@ -1461,7 +1575,8 @@ tbody tr:hover {
   .preview-grid,
   .progress-grid,
   .diagnostics-grid,
-  .diagnostics-body {
+  .diagnostics-body,
+  .digitizer-controls {
     grid-template-columns: 1fr;
   }
 

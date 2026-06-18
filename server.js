@@ -1,4 +1,8 @@
 import express from "express";
+import crypto from "node:crypto";
+import { spawn } from "node:child_process";
+import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { calculatePaper, withMetrics } from "./src/calculator.js";
@@ -11,7 +15,7 @@ const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT || 5177);
 
 const app = express();
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json({ limit: "12mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 let ingestRunning = false;
@@ -126,6 +130,32 @@ app.post("/api/extract-text", (req, res) => {
     fieldCount: extractedFieldCountForApi(extraction.params),
     textLength: text.length
   });
+});
+
+app.post("/api/ocr-image", async (req, res, next) => {
+  try {
+    const imageDataUrl = String(req.body?.imageDataUrl || "");
+    const filename = String(req.body?.filename || "uploaded image");
+    const image = imageFromDataUrl(imageDataUrl);
+    if (!image) {
+      return res.status(400).json({ error: "请上传 PNG/JPEG/WebP/GIF 截图" });
+    }
+    if (image.buffer.length > 8 * 1024 * 1024) {
+      return res.status(413).json({ error: "图片过大，请裁剪后再上传" });
+    }
+    const text = await recognizeImageText(image.buffer, image.mime);
+    if (text.length < 3) {
+      return res.status(422).json({ error: "OCR 未识别出有效文字，请换更清晰或更局部的截图" });
+    }
+    res.json({
+      filename,
+      mime: image.mime,
+      text,
+      textLength: text.length
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.get("/api/state", async (_req, res, next) => {
@@ -300,8 +330,9 @@ app.get("/api/rankings", async (req, res, next) => {
 });
 
 app.use((error, _req, res, _next) => {
-  console.error(error);
-  res.status(500).json({ error: error.message || "internal server error" });
+  const status = Number(error.statusCode || error.status || 500);
+  if (status >= 500) console.error(error);
+  res.status(status).json({ error: error.message || "internal server error" });
 });
 
 app.listen(PORT, "0.0.0.0", () => {
@@ -476,6 +507,71 @@ function numericOrNull(value) {
   if (value === "" || value === null || value === undefined) return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function imageFromDataUrl(value) {
+  const match = /^data:(image\/(?:png|jpeg|jpg|webp|gif));base64,([a-z0-9+/=\s]+)$/i.exec(value);
+  if (!match) return null;
+  return {
+    mime: match[1].replace("image/jpg", "image/jpeg"),
+    buffer: Buffer.from(match[2].replace(/\s+/g, ""), "base64")
+  };
+}
+
+async function recognizeImageText(buffer, mime) {
+  const ext = mime.includes("jpeg") ? "jpg" : mime.split("/")[1] || "png";
+  const tempPath = path.join(os.tmpdir(), `switch-margin-ocr-${crypto.randomUUID()}.${ext}`);
+  await fs.writeFile(tempPath, buffer);
+  try {
+    return await runOcrWorker(tempPath);
+  } finally {
+    await fs.rm(tempPath, { force: true }).catch(() => {});
+  }
+}
+
+function runOcrWorker(imagePath) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [path.join(__dirname, "scripts", "ocr-worker.mjs"), imagePath], {
+      stdio: ["ignore", "pipe", "pipe"]
+    });
+    let stdout = "";
+    let stderr = "";
+    const timeout = setTimeout(() => {
+      child.kill("SIGKILL");
+      const error = new Error("OCR 超时：请裁剪为更小、更清晰的参数区域");
+      error.statusCode = 504;
+      reject(error);
+    }, Number(process.env.OCR_TIMEOUT_MS || 90000));
+
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk.toString();
+    });
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString();
+    });
+    child.on("error", (error) => {
+      clearTimeout(timeout);
+      reject(error);
+    });
+    child.on("close", (code) => {
+      clearTimeout(timeout);
+      if (code !== 0) {
+        const reason = /libpng|read image|Error attempting/i.test(stderr)
+          ? "图片无法识别或格式损坏，请裁剪为清晰 PNG/JPEG 后重试"
+          : stderr.trim().split("\n")[0] || `worker exited with ${code}`;
+        const error = new Error(`OCR 解析失败：${reason}`);
+        error.statusCode = 422;
+        reject(error);
+        return;
+      }
+      try {
+        const parsed = JSON.parse(stdout);
+        resolve(String(parsed.text || "").trim());
+      } catch (error) {
+        reject(new Error(`OCR 输出无法解析：${error.message}`));
+      }
+    });
+  });
 }
 
 function extractedFieldCountForApi(params = {}) {

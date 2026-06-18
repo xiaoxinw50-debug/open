@@ -209,6 +209,55 @@
               </div>
             </div>
             <textarea name="fullTextImport" rows="7" placeholder="粘贴相关正文、图注、表格文字或补充材料文本。建议包含参数附近的上下文，而不只是一个孤立数字。"></textarea>
+            <div class="assist-grid">
+              <div class="assist-card">
+                <div>
+                  <h4>OCR 辅助导入</h4>
+                  <p>上传裁剪后的表格、图注或参数段截图。识别文本会追加到上方文本框，再走同一套字段抽取和证据记录。</p>
+                </div>
+                <input id="ocr-image-input" type="file" accept="image/*" />
+                <div class="form-actions">
+                  <button type="button" id="run-ocr-btn" class="secondary">识别截图文字</button>
+                  <span id="ocr-status" class="inline-status">建议只上传参数附近截图</span>
+                </div>
+              </div>
+              <div class="assist-card">
+                <div>
+                  <h4>图表取点说明</h4>
+                  <p>对转移曲线、输出曲线或柱状图，请优先裁剪坐标轴清晰区域。标定坐标后取点，系统输出可复核的 CSV。</p>
+                </div>
+                <input id="chart-image-input" type="file" accept="image/*" />
+              </div>
+            </div>
+            <div class="chart-digitizer" id="chart-digitizer">
+              <div class="digitizer-head">
+                <div>
+                  <h4>半自动图表解析</h4>
+                  <p>步骤：设定坐标范围，依次点击左下角轴点、右上角轴点，再点击需要读数的数据点。</p>
+                </div>
+                <span id="digitizer-status" class="inline-status">尚未载入图像</span>
+              </div>
+              <div class="digitizer-controls">
+                <label>x 最小值 <input id="chart-x-min" type="number" step="any" value="0" /></label>
+                <label>x 最大值 <input id="chart-x-max" type="number" step="any" value="1" /></label>
+                <label>y 最小值 <input id="chart-y-min" type="number" step="any" value="0" /></label>
+                <label>y 最大值 <input id="chart-y-max" type="number" step="any" value="1" /></label>
+              </div>
+              <div class="digitizer-actions">
+                <button type="button" class="secondary" data-digitizer-mode="origin">点击左下轴点</button>
+                <button type="button" class="secondary" data-digitizer-mode="max">点击右上轴点</button>
+                <button type="button" data-digitizer-mode="point">点击数据点</button>
+                <button type="button" id="clear-digitizer-btn" class="ghost">清空取点</button>
+                <button type="button" id="copy-digitizer-csv-btn" class="secondary">复制取点 CSV</button>
+              </div>
+              <div class="digitizer-layout">
+                <canvas id="chart-canvas" width="960" height="520" aria-label="图表取点画布"></canvas>
+                <div class="digitizer-output">
+                  <strong>取点结果</strong>
+                  <pre id="digitizer-output">point,x,y,pixelX,pixelY</pre>
+                </div>
+              </div>
+            </div>
             <div class="form-actions">
               <button type="button" id="extract-text-btn" class="secondary">从文本抽取并回填参数</button>
               <span id="extract-text-status" class="inline-status">尚未导入文本</span>
@@ -257,6 +306,7 @@
           <div class="login-search-actions">
             <button type="button" id="login-search-nature" class="secondary">跳转 Nature 登录搜索</button>
             <button type="button" id="login-search-ieee" class="secondary">跳转 IEEE 登录搜索</button>
+            <button type="button" id="login-search-cnki" class="secondary">跳转知网检索</button>
             <button type="button" id="login-search-all">打开登录搜索并启动自动检索</button>
           </div>
           <span id="login-search-status" class="inline-status">登录页打开后，在出版商页面完成登录和筛选。</span>
