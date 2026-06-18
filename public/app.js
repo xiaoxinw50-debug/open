@@ -76,6 +76,7 @@ function bindForms() {
 
   $("#extract-text-btn").addEventListener("click", extractTextToForm);
   $("#open-paper-login-btn").addEventListener("click", openPaperLoginFromForm);
+  $("#copy-bookmarklet-btn").addEventListener("click", copyBookmarkletScript);
 
   $("#ingest-form").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -114,6 +115,12 @@ function buildImportBookmarklet() {
   const targetUrl = `${targetOrigin}${window.location.pathname}#manual`;
   const source = `(function(){var s=(window.getSelection&&String(window.getSelection()))||'';var t=s.trim()||((document.body&&document.body.innerText)||document.documentElement.innerText||'');var w=window.open('${targetUrl}','_blank');var p={type:'SM_IMPORT_TEXT',title:document.title,url:location.href,text:t.slice(0,900000)};setTimeout(function(){try{w.postMessage(p,'${targetOrigin}')}catch(e){alert('导入失败：'+e.message)}},1400);})();`;
   return `javascript:${encodeURIComponent(source)}`;
+}
+
+async function copyBookmarkletScript() {
+  const text = buildImportBookmarklet();
+  await copyText(text);
+  $("#extract-text-status").textContent = "已复制书签脚本。新建浏览器书签，把网址粘贴为这段脚本即可。";
 }
 
 async function receiveAuthenticatedImport(payload) {
@@ -390,6 +397,7 @@ function renderPendingImportCard() {
     target.innerHTML = "";
     return;
   }
+  const next = nextLoginImportCandidate(pending.id);
   target.innerHTML = `
     <div>
       <strong>正在等待登录导入</strong>
@@ -397,9 +405,19 @@ function renderPendingImportCard() {
     </div>
     <div class="pending-import-actions">
       <a class="row-action-link primary" href="${escapeAttr(pending.url || "#")}" target="_blank" rel="noreferrer">继续打开原文</a>
+      ${next ? `<button class="secondary" data-next-pending-import>跳过并处理下一篇</button>` : ""}
       <button class="ghost" data-cancel-pending-import>取消</button>
     </div>
   `;
+}
+
+function nextLoginImportCandidate(excludeId = "") {
+  return state.papers
+    .filter((paper) => paper.id !== excludeId)
+    .filter((paper) => paper.metrics?.gammaMode !== "strict")
+    .filter((paper) => paperAccessUrl(paper))
+    .slice()
+    .sort(reviewSort)[0] || null;
 }
 
 function reviewModeCell(paper) {
@@ -754,6 +772,16 @@ async function handleRowAction(event) {
     clearPendingImport();
     renderPendingImportCard();
     $("#extract-text-status").textContent = "已取消待登录导入。";
+    return;
+  }
+
+  const nextPendingButton = event.target.closest("[data-next-pending-import]");
+  if (nextPendingButton) {
+    const current = getPendingImport();
+    const next = nextLoginImportCandidate(current?.id || "");
+    clearPendingImport();
+    renderPendingImportCard();
+    if (next) startPendingLoginImport(next);
   }
 }
 
