@@ -798,6 +798,51 @@ select:focus {
   padding: 18px;
 }
 
+.draft-map-panel {
+  padding: 18px 26px 26px;
+}
+
+.draft-map-figure {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #fafafa;
+  text-align: center;
+}
+
+.draft-map-figure img {
+  display: block;
+  width: min(100%, 1120px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.draft-note-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.draft-note-grid article {
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.draft-note-grid strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--blue);
+}
+
+.draft-note-grid p {
+  margin: 0;
+  color: #333;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
 .framework-diagram {
   color: #111;
   font-family: var(--font-serif);
@@ -1253,8 +1298,21 @@ select:focus {
   .mind-map,
   .mind-branches,
   .evidence-matrix,
-  .network-grid {
+  .network-grid,
+  .draft-note-grid {
     grid-template-columns: 1fr;
+  }
+
+  .draft-map-panel {
+    padding: 12px;
+  }
+
+  .draft-map-figure {
+    padding: 8px;
+  }
+
+  .draft-map-figure img {
+    width: 100%;
   }
 
   .paragraph-list {
