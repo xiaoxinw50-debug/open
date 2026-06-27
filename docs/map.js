@@ -134,6 +134,39 @@ const frameworkRoutes = {
   后摩尔平台意义: { section: "s33" }
 };
 
+const mindNodeRoles = {
+  s1: {
+    stage: "提出问题",
+    role: "从硅基缩放压力和后摩尔需求出发，说明为什么需要重新讨论二维半导体。",
+    focus: "问题起点"
+  },
+  s6: {
+    stage: "建立评价",
+    role: "把薄沟道、合适带隙和范德瓦耳斯界面等本征优势，转化为可讨论的器件指标与边界。",
+    focus: "优势与边界"
+  },
+  s12: {
+    stage: "解释瓶颈",
+    role: "把短沟道、接触、栅介质、极性和加工放回物理机制中，解释为什么单点突破还不够。",
+    focus: "机制约束"
+  },
+  s19: {
+    stage: "判断路径",
+    role: "比较先进逻辑、单片三维、柔性与感知等路线，判断二维半导体更可能先在哪里体现价值。",
+    focus: "应用路线"
+  },
+  s24: {
+    stage: "收束挑战",
+    role: "把工程化问题落到 n/p 配对、晶圆一致性、可靠性、热管理和 CMOS 兼容等可检验条件。",
+    focus: "验证口径"
+  },
+  s30: {
+    stage: "形成判断",
+    role: "从单器件纪录回到技术平台判断，给出阶段推进路线和后摩尔平台意义。",
+    focus: "全文结论"
+  }
+};
+
 if (!data) {
   document.body.innerHTML = "<main class='empty-state'>缺少 data/paper-data.js，请先运行 python3 scripts/build_paper_data.py。</main>";
 } else {
@@ -249,25 +282,52 @@ function renderFrameworkArrow() {
 
 function renderMindMap() {
   const map = data.argumentMap || { center: "", nodes: [] };
+  const nodes = map.nodes || [];
+  const flow = nodes
+    .map((node, index) => {
+      const role = mindNodeRoles[node.id] || {};
+      return `
+        <a class="mind-flow-step" href="./index.html?section=${escapeAttr(node.id)}">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${escapeHtml(role.focus || compactSectionLabel(node.label))}</strong>
+        </a>
+      `;
+    })
+    .join('<i class="mind-flow-arrow" aria-hidden="true"></i>');
   $("#mind-map").innerHTML = `
-    <article class="center-thesis">
-      <strong>中心论点</strong>
-      <p>${escapeHtml(map.center || "论文主线")}</p>
-    </article>
+    <section class="mind-thesis-row">
+      <article class="center-thesis">
+        <strong>中心论点</strong>
+        <p>${escapeHtml(map.center || "论文主线")}</p>
+        <div class="thesis-tags">
+          <span>本征优势</span>
+          <span>器件边界</span>
+          <span>工艺验证</span>
+          <span>系统价值</span>
+        </div>
+      </article>
+      <div class="mind-flow" aria-label="论文论证路径">${flow}</div>
+    </section>
     <div class="mind-branches">
-      ${(map.nodes || []).map(renderMindNode).join("")}
+      ${nodes.map(renderMindNode).join("")}
     </div>
   `;
 }
 
 function renderMindNode(node) {
+  const role = mindNodeRoles[node.id] || {};
   const children = (node.children || [])
-    .map((child) => `<a href="./index.html?section=${escapeAttr(child.id)}">${escapeHtml(child.label)}</a>`)
+    .map((child) => `<a href="./index.html?section=${escapeAttr(child.id)}">${escapeHtml(compactSectionLabel(child.label))}</a>`)
     .join("");
   return `
     <article class="mind-node">
-      <a class="mind-main-link" href="./index.html?section=${escapeAttr(node.id)}">${escapeHtml(node.label)}</a>
+      <a class="mind-main-link" href="./index.html?section=${escapeAttr(node.id)}">
+        <span class="mind-stage">${escapeHtml(role.stage || "章节")}</span>
+        <strong>${escapeHtml(node.label)}</strong>
+      </a>
+      <p class="mind-role">${escapeHtml(role.role || "本章承担论文论证链中的一个环节。")}</p>
       <div class="child-chips">${children}</div>
+      <span class="mind-citation-count">${node.citationCount || 0} 个引用关联</span>
     </article>
   `;
 }
@@ -452,6 +512,10 @@ function downloadJson(payload, filename) {
 function compactRef(text) {
   const cleaned = String(text || "").replace(/\s*DOI:\s*10\..*$/i, "").trim();
   return cleaned.length > 96 ? cleaned.slice(0, 96) + "..." : cleaned;
+}
+
+function compactSectionLabel(label) {
+  return String(label || "").replace(/^\d+(?:\.\d+)?\s*/, "").trim();
 }
 
 function escapeHtml(value) {
