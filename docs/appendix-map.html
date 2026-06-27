@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>公式附录思维导图 | 开关裕量因子</title>
+    <link rel="stylesheet" href="./styles.css?v=20260627-appendix-map" />
+  </head>
+  <body>
+    <header class="site-hero">
+      <nav class="topbar" aria-label="页面导航">
+        <div class="brand">
+          <span class="brand-mark">Γ</span>
+          <div>
+            <strong>公式附录思维导图</strong>
+            <small>switch margin factor map</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <a class="plain-link" href="./index.html?v=20260627-appendix-map">返回论文正文</a>
+          <a class="plain-link" href="./map.html?v=20260627-appendix-map">当前主线导图</a>
+          <a class="plain-link" href="./draft-map.html?v=20260627-appendix-map">初稿导图</a>
+          <button class="ghost-button" id="toggle-appendix-edit" type="button">编辑导图</button>
+          <button class="ghost-button" id="export-appendix-edits" type="button">导出导图数据</button>
+          <button class="ghost-button" id="import-appendix-edits" type="button">导入导图数据</button>
+          <input id="import-appendix-edits-file" type="file" accept="application/json,.json" hidden />
+          <button class="ghost-button danger-button" id="reset-appendix-map" type="button">恢复默认</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="map-shell appendix-shell">
+      <section class="map-page">
+        <section class="map-panel appendix-hero-panel">
+          <div class="appendix-hero-grid">
+            <div class="appendix-hero-copy">
+              <p class="eyebrow">补充材料 S1 / 方法附录</p>
+              <h1>二维半导体逻辑器件开关裕量因子</h1>
+              <p>
+                这页把公式附录从长文本改成可点击的论证图：先说明为什么单看开态电流、接触电阻或 SS 会失真，再把它们放回同一供电预算中，最后用公开数据判断哪些样本可以严格计算、哪些只能保留为待补参数。
+              </p>
+              <div class="appendix-hero-links">
+                <a class="plain-link" href="./index.html?section=s11">跳转正文 2.5 评价口径</a>
+                <a class="plain-link" href="./index.html?item=p322">跳转附录 A 数据溯源</a>
+              </div>
+            </div>
+            <article class="appendix-formula-card" aria-label="开关裕量因子公式">
+              <span class="formula-kicker">中心定义</span>
+              <div class="formula-line">
+                <span class="formula-symbol">Γ<sub>2D</sub></span>
+                <span class="formula-eq">=</span>
+                <span class="formula-fraction">
+                  <span>V<sub>DS</sub> − I<sub>on</sub>R<sub>c,eff</sub></span>
+                  <span>SS · log<sub>10</sub>(I<sub>on</sub>/I<sub>off</sub>)</span>
+                </span>
+              </div>
+              <p>
+                分子表示扣除接触压降后的有效漏源电压余量；分母表示从关态推到开态所需的栅压代价。计算时 SS 用 V/dec，I<sub>on</sub> 与 R<sub>c,eff</sub> 要换算到接触压降为 V 的统一单位。
+              </p>
+              <p class="formula-warning">
+                R<sub>c,eff</sub> 必须说明是源漏总等效还是单侧接触电阻；若原文只给单侧值，应先换算后再计算。
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>公式附录行文思维导图</span>
+            <small id="appendix-edit-status">只读模式 · 点击节点跳转正文或数据位置</small>
+          </div>
+          <div id="appendix-map" class="appendix-map"></div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>数据验证结构</span>
+            <small>严格计算、估算排序与待补参数分开显示</small>
+          </div>
+          <div id="appendix-data-panel" class="appendix-data-panel"></div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>适用边界与最低报告清单</span>
+            <small>防止把辅助判读量误写成工业标准</small>
+          </div>
+          <div id="appendix-boundary-panel" class="appendix-boundary-panel"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./data/paper-data.js?v=20260627-appendix-map"></script>
+    <script src="./appendix-map.js?v=20260627-appendix-map"></script>
+  </body>
+</html>
