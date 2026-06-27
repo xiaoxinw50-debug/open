@@ -6,7 +6,7 @@
 
 仓库的 `docs/` 目录放置《后摩尔时代的二维半导体电子技术》交互可视化静态网站，包含论文正文、参考文献联动、图片、表格、思维导图和可编辑框架图。
 
-推送到 `main` 后，`.github/workflows/pages.yml` 会把 `docs/` 部署到 GitHub Pages。部署完成后的访问地址通常为：
+当前已将 `docs/` 的静态站点内容发布到 `gh-pages` 分支。公开访问地址为：
 
 ```text
 https://xiaoxinw50-debug.github.io/open/
