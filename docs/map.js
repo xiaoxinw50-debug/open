@@ -1,5 +1,5 @@
 const data = window.PAPER_DATA || null;
-const FRAMEWORK_EDIT_KEY = "paperViz.frameworkEdits.v1";
+const FRAMEWORK_EDIT_KEY = "paperViz.frameworkEdits.v2";
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -16,14 +16,14 @@ const frameworkStages = [
     phase: "建立基础",
     chapter: "第二章",
     sectionId: "s6",
-    core: "材料基础、器件指标与评价口径",
-    nodes: ["材料谱系", "器件结构", "关键指标"],
+    core: "材料基础、本征优势与器件评价",
+    nodes: ["材料谱系", "本征优势与边界", "关键指标", "评价口径"],
     verticalGroups: [
-      { title: "材料", items: ["带隙", "厚度", "迁移率", "稳定性"] },
+      { title: "优势", items: ["薄沟道", "带隙", "范德瓦耳斯界面", "稳定性"] },
       { title: "器件", items: ["开态电流", "关态漏电", "接触电阻", "亚阈值摆幅"] },
       { title: "口径", items: ["偏压", "尺寸", "统计", "良率"] }
     ],
-    note: "先说明评价对象，再说明哪些数字可以比较、哪些数字必须回到测试条件。"
+    note: "先说明二维半导体的本征优势来自哪里，再说明这些优势在接触、介质、加工和统计验证中会遇到哪些边界。"
   },
   {
     phase: "分析问题",
@@ -79,10 +79,13 @@ const frameworkRoutes = {
   二维材料兴起: { section: "s4" },
   论文对象与主线: { section: "s5" },
   材料谱系: { section: "s7" },
-  器件结构: { section: "s8" },
+  本征优势与边界: { section: "s9" },
   关键指标: { section: "s10" },
+  评价口径: { section: "s11" },
+  优势: { section: "s9" },
+  薄沟道: { section: "s9" },
   带隙: { section: "s7" },
-  厚度: { section: "s7" },
+  范德瓦耳斯界面: { section: "s9" },
   迁移率: { section: "s7" },
   稳定性: { theme: "dielectric" },
   开态电流: { theme: "evaluation" },

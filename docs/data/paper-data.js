@@ -2,7 +2,7 @@ window.PAPER_DATA = {
   "meta": {
     "title": "后摩尔时代的二维半导体电子技术：进展、评价与挑战",
     "sourceFile": "/Users/xuyingxin/Desktop/二维半导体技术/后摩尔时代二维半导体电子技术_本征优势衔接优化版.docx",
-    "generatedAt": "2026-06-27T10:25:25.501616+00:00",
+    "generatedAt": "2026-06-27T10:43:47.963349+00:00",
     "paragraphCount": 327,
     "referenceCount": 66,
     "citedReferenceCount": 66,
@@ -7892,7 +7892,7 @@ window.PAPER_DATA = {
     }
   ],
   "argumentMap": {
-    "center": "二维半导体的价值不只在材料很薄，而在沟道优势能否经过接触、介质、互补器件、晶圆制造和系统验证连续保留下来。",
+    "center": "二维半导体的价值来自薄沟道、合适带隙和范德瓦耳斯界面等本征优势，但这些优势只有在接触、介质、互补器件、晶圆制造和系统验证中连续保留下来，才可能转化为后摩尔电子技术平台。",
     "nodes": [
       {
         "id": "s1",
