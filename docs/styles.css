@@ -130,6 +130,22 @@ code {
   background: #ececec;
 }
 
+.calc-link {
+  border-color: var(--blue);
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.calc-link::after {
+  content: "↗";
+  margin-left: 5px;
+  font-size: 0.82em;
+}
+
+.calc-link:hover {
+  background: #eaf1f7;
+}
+
 .danger-button {
   border-color: #c7b3b3;
   color: #7b1e1e;
