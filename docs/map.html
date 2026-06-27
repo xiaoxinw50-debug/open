@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>论文思维导图与逻辑结构</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-hero">
+      <nav class="topbar" aria-label="页面导航">
+        <div class="brand">
+          <span class="brand-mark">2D</span>
+          <div>
+            <strong>论文思维导图与逻辑结构</strong>
+            <small>argument map and evidence structure</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <a class="plain-link" href="./assets/research-framework-diagram.jpg" target="_blank" rel="noreferrer">下载原始框架图</a>
+          <button class="ghost-button" id="toggle-framework-edit" type="button">编辑框架图</button>
+          <button class="ghost-button" id="export-framework-edits" type="button">导出框架图数据</button>
+          <button class="ghost-button" id="import-framework-edits" type="button">导入框架图数据</button>
+          <input id="import-framework-edits-file" type="file" accept="application/json,.json" hidden />
+          <button class="ghost-button danger-button" id="reset-framework" type="button">恢复框架图</button>
+          <a class="plain-link" href="./index.html">返回论文正文</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="map-shell">
+      <section class="map-page">
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>论文研究框架图</span>
+            <small id="framework-edit-status">只读模式 · 点击节点跳转正文</small>
+          </div>
+          <div id="framework-diagram" class="framework-diagram"></div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>论文主线思维导图</span>
+            <small>从中心论点到各章证据链</small>
+          </div>
+          <div id="mind-map" class="mind-map"></div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>逻辑结构</span>
+            <small>章节层级与论证功能</small>
+          </div>
+          <div id="logic-outline" class="logic-outline"></div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>证据矩阵</span>
+            <small>论文核心问题对应的段落和文献数量</small>
+          </div>
+          <div id="evidence-matrix" class="evidence-matrix"></div>
+        </section>
+
+        <section class="map-panel">
+          <div class="panel-title">
+            <span>引用网络</span>
+            <small>高频文献与主题连接</small>
+          </div>
+          <div id="citation-network" class="citation-network"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./data/paper-data.js"></script>
+    <script src="./map.js"></script>
+  </body>
+</html>

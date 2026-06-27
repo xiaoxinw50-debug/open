@@ -2,6 +2,29 @@
 
 这个网站用于整理二维半导体逻辑器件论文，计算开关裕量因子并排序。
 
+## 论文可视化 GitHub Pages
+
+仓库的 `docs/` 目录放置《后摩尔时代的二维半导体电子技术》交互可视化静态网站，包含论文正文、参考文献联动、图片、表格、思维导图和可编辑框架图。
+
+推送到 `main` 后，`.github/workflows/pages.yml` 会把 `docs/` 部署到 GitHub Pages。部署完成后的访问地址通常为：
+
+```text
+https://xiaoxinw50-debug.github.io/open/
+```
+
+本地预览：
+
+```bash
+cd docs
+python3 -m http.server 5177
+```
+
+然后打开：
+
+```text
+http://127.0.0.1:5177/
+```
+
 ## 公式口径
 
 核心指标采用补充材料 S1 的器件层辅助定义：
