@@ -16,7 +16,7 @@ from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE = ROOT.parent
-DEFAULT_DOCX = WORKSPACE / "后摩尔时代二维半导体电子技术_行文逻辑优化版.docx"
+DEFAULT_DOCX = WORKSPACE / "后摩尔时代二维半导体电子技术_本征优势衔接优化版.docx"
 OUTPUT = ROOT / "data" / "paper-data.js"
 SOURCE_DIR = WORKSPACE / "近期IEEE_Nature补充_20260612" / "papers"
 MEDIA_OUTPUT_DIR = ROOT / "assets" / "docx-media"

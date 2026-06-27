@@ -1194,6 +1194,61 @@ select:focus {
     flex-direction: column;
   }
 
+  .brand,
+  .topbar-actions,
+  .paper-intro > div,
+  .paper-meta-line,
+  .content-stack,
+  .reading-panel {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ghost-button,
+  .plain-link {
+    width: 100%;
+    padding: 0 6px;
+    white-space: normal;
+  }
+
+  .paper-intro h1 {
+    font-size: 1.08rem;
+    overflow-wrap: anywhere;
+  }
+
+  .paper-meta-line {
+    gap: 8px;
+  }
+
+  .paper-meta-line > span,
+  .panel-title > * {
+    min-width: 0;
+  }
+
+  .source-note {
+    display: block;
+    flex-basis: 100%;
+    width: 100%;
+    word-break: break-all;
+  }
+
+  .panel-title {
+    flex-wrap: wrap;
+  }
+
+  .panel-title small {
+    overflow-wrap: anywhere;
+  }
+
+  .app-shell {
+    margin-top: 10px;
+  }
+
   .hero-tools,
   .mind-map,
   .mind-branches,
@@ -1203,10 +1258,11 @@ select:focus {
   }
 
   .paragraph-list {
-    padding: 32px 22px 40px;
+    padding: 32px 16px 40px;
   }
 
   .paragraph-text {
     font-size: 15.5px;
+    text-align: left;
   }
 }
