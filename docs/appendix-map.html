@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>公式附录思维导图 | 开关裕量因子</title>
-    <link rel="stylesheet" href="./styles.css?v=20260627-calculator-link" />
+    <link rel="stylesheet" href="./styles.css?v=20260627-formula-page-polish" />
   </head>
   <body>
     <header class="site-hero">
@@ -17,10 +17,10 @@
           </div>
         </div>
         <div class="topbar-actions">
-          <a class="plain-link" href="./index.html?v=20260627-calculator-link">返回论文正文</a>
-          <a class="plain-link" href="./map.html?v=20260627-calculator-link">当前主线导图</a>
+          <a class="plain-link" href="./index.html?v=20260627-formula-page-polish">返回论文正文</a>
+          <a class="plain-link" href="./map.html?v=20260627-formula-page-polish">当前主线导图</a>
           <a class="plain-link calc-link" href="https://switch-margin-site.onrender.com/" target="_blank" rel="noreferrer">计算 Γ₂D</a>
-          <a class="plain-link" href="./draft-map.html?v=20260627-calculator-link">初稿导图</a>
+          <a class="plain-link" href="./draft-map.html?v=20260627-formula-page-polish">初稿导图</a>
           <button class="ghost-button" id="toggle-appendix-edit" type="button">编辑导图</button>
           <button class="ghost-button" id="export-appendix-edits" type="button">导出导图数据</button>
           <button class="ghost-button" id="import-appendix-edits" type="button">导入导图数据</button>
@@ -38,8 +38,13 @@
               <p class="eyebrow">补充材料 S1 / 方法附录</p>
               <h1>二维半导体逻辑器件开关裕量因子</h1>
               <p>
-                这页把公式附录从长文本改成可点击的论证图：先说明为什么单看开态电流、接触电阻或 SS 会失真，再把它们放回同一供电预算中，最后用公开数据判断哪些样本可以严格计算、哪些只能保留为待补参数。
+                这页专门解释开关裕量因子的来龙去脉。它不把器件压缩成一个绝对分数，而是问一个更具体的问题：扣除接触损耗后，剩下的漏源电压是否足以支付栅控开关所需的电压代价。
               </p>
+              <div class="appendix-method-strip" aria-label="公式使用流程">
+                <span><b>1</b> 核对原文参数</span>
+                <span><b>2</b> 计算电压裕量</span>
+                <span><b>3</b> 标注缺失字段</span>
+              </div>
               <div class="appendix-hero-links">
                 <a class="plain-link" href="./index.html?section=s11">跳转正文 2.5 评价口径</a>
                 <a class="plain-link" href="./index.html?item=p322">跳转附录 A 数据溯源</a>
@@ -59,6 +64,10 @@
               <p>
                 分子表示扣除接触压降后的有效漏源电压余量；分母表示从关态推到开态所需的栅压代价。计算时 SS 用 V/dec，I<sub>on</sub> 与 R<sub>c,eff</sub> 要换算到接触压降为 V 的统一单位。
               </p>
+              <div class="formula-meaning-grid">
+                <span><b>Γ₂D &gt; 1</b> 说明电压余量相对充足</span>
+                <span><b>Γ₂D &lt; 1</b> 提示接触或栅控仍在吃掉裕量</span>
+              </div>
               <p class="formula-warning">
                 R<sub>c,eff</sub> 必须说明是源漏总等效还是单侧接触电阻；若原文只给单侧值，应先换算后再计算。
               </p>
@@ -66,9 +75,33 @@
           </div>
         </section>
 
+        <section class="map-panel formula-reading-panel">
+          <div class="panel-title">
+            <span>公式读法</span>
+            <small>先看电压预算，再看数据口径</small>
+          </div>
+          <div class="formula-reading-grid">
+            <article>
+              <span>分子</span>
+              <strong>剩余驱动电压</strong>
+              <p>漏源电压不是全部落在沟道上，接触会先消耗一部分。分子关心的是扣除接触压降后，器件还剩多少有效驱动。</p>
+            </article>
+            <article>
+              <span>分母</span>
+              <strong>栅压开关代价</strong>
+              <p>SS 表示电流变化一个数量级所需的栅压。乘以开关比对数后，就得到完成这一开关窗口需要的栅压代价。</p>
+            </article>
+            <article>
+              <span>输出</span>
+              <strong>辅助判读尺度</strong>
+              <p>Γ₂D 只回答驱动、接触和栅控是否协调，不替代可靠性、统计分布、迟滞、热管理和电路验证。</p>
+            </article>
+          </div>
+        </section>
+
         <section class="map-panel">
           <div class="panel-title">
-            <span>公式附录行文思维导图</span>
+            <span>论证路径</span>
             <small id="appendix-edit-status">只读模式 · 点击节点跳转正文或数据位置</small>
           </div>
           <div id="appendix-map" class="appendix-map"></div>
@@ -92,7 +125,7 @@
       </section>
     </main>
 
-    <script src="./data/paper-data.js?v=20260627-calculator-link"></script>
-    <script src="./appendix-map.js?v=20260627-calculator-link"></script>
+    <script src="./data/paper-data.js?v=20260627-formula-page-polish"></script>
+    <script src="./appendix-map.js?v=20260627-formula-page-polish"></script>
   </body>
 </html>

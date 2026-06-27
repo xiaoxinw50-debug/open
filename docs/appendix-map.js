@@ -79,9 +79,9 @@ const appendixDefaultMap = {
 };
 
 const appendixStats = [
-  { label: "严格计算", value: "9", note: "六类核心字段完整，可计算 Γ₂D。" },
-  { label: "估算排序", value: "6", note: "至少一个字段或口径不足，只能作为线索。" },
-  { label: "待补参数", value: "20", note: "缺少核心字段，不给正式 Γ₂D 排名。" }
+  { label: "严格计算", value: "9", note: "六类核心字段完整，可进入正式 Γ₂D 排序。", tone: "strict" },
+  { label: "估算排序", value: "6", note: "至少一个字段或口径不足，只能作为核对线索。", tone: "estimated" },
+  { label: "待补参数", value: "20", note: "缺少核心字段，不给正式 Γ₂D 排名。", tone: "missing" }
 ];
 
 const appendixTopSamples = [
@@ -163,7 +163,10 @@ function renderAppendixMap() {
         <span>中心判断</span>
         ${renderEditableText("p", appendixState.map.thesis, "thesis", "appendix-thesis-text")}
       </div>
-      <a class="appendix-thesis-link" href="./index.html?section=s11">正文评价口径</a>
+      <div class="appendix-thesis-actions">
+        <a class="appendix-thesis-link" href="./index.html?section=s11">正文评价口径</a>
+        <a class="appendix-thesis-link" href="https://switch-margin-site.onrender.com/" target="_blank" rel="noreferrer">在线计算</a>
+      </div>
     </section>
     <div class="appendix-stage-stack">
       ${stages.map((stage, index) => `${renderAppendixStage(stage, index)}${index < stages.length - 1 ? '<div class="appendix-down-arrow" aria-hidden="true"></div>' : ""}`).join("")}
@@ -211,7 +214,7 @@ function renderAppendixDataPanel() {
   const stats = appendixStats
     .map(
       (stat) => `
-        <article class="appendix-stat">
+        <article class="appendix-stat ${escapeAttr(stat.tone)}">
           <b>${escapeHtml(stat.value)}</b>
           <strong>${escapeHtml(stat.label)}</strong>
           <p>${escapeHtml(stat.note)}</p>
@@ -234,6 +237,25 @@ function renderAppendixDataPanel() {
     .join("");
   $("#appendix-data-panel").innerHTML = `
     <div class="appendix-stat-grid">${stats}</div>
+    <div class="appendix-evidence-flow">
+      <article>
+        <span>完整字段</span>
+        <strong>进入正式排序</strong>
+        <p>开态电流、接触电阻、接触口径、漏源电压、SS 与开关比同时可追溯。</p>
+      </article>
+      <i aria-hidden="true"></i>
+      <article>
+        <span>字段不足</span>
+        <strong>保留为核对线索</strong>
+        <p>只显示已有参数、缺失字段和人工复核优先级，不制造看似精确的排名。</p>
+      </article>
+      <i aria-hidden="true"></i>
+      <article>
+        <span>缺失集中</span>
+        <strong>反推报告规范</strong>
+        <p>不能计算本身也有意义，它说明当前文献仍缺少统一、可复核的数据报告口径。</p>
+      </article>
+    </div>
     <div class="appendix-data-note">
       <strong>读法</strong>
       <p>排序只展示严格计算样本中的代表项。估算样本和待补参数样本不应混入正式排名，它们的作用是提示哪些文献还需要回到原文图表、补充信息或作者数据中继续核对。</p>
