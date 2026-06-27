@@ -1555,6 +1555,146 @@ select:focus {
   line-height: 1.75;
 }
 
+.formula-protocol-panel {
+  background:
+    linear-gradient(90deg, rgba(31, 78, 121, 0.07), rgba(255, 255, 255, 0) 42%),
+    #fff;
+}
+
+.formula-protocol-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 16px;
+  min-width: 0;
+}
+
+.formula-chain-card,
+.formula-input-card {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  border: 1px solid #aeb8c2;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.formula-chain-card {
+  border-left: 5px solid #111;
+}
+
+.formula-input-card {
+  border-left: 5px solid var(--blue);
+}
+
+.formula-card-label {
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.formula-chain-card ol {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: formula-step;
+}
+
+.formula-chain-card li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+  border-bottom: 1px solid #d8e0e7;
+  padding: 8px 0 8px 34px;
+  counter-increment: formula-step;
+}
+
+.formula-chain-card li::before {
+  content: counter(formula-step);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: #111;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 0.78rem;
+}
+
+.formula-chain-card li:last-child {
+  border-bottom: 0;
+}
+
+.formula-chain-card b {
+  color: #111;
+  font-size: 0.94rem;
+}
+
+.formula-chain-card em {
+  min-width: 0;
+  color: #111;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.02rem;
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+.formula-chain-card p {
+  margin: 0;
+  border-left: 3px solid #8b1e1e;
+  padding: 9px 11px;
+  background: #fff8f6;
+  color: #3a2a24;
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  line-height: 1.72;
+}
+
+.formula-input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.formula-input-grid span {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid #c7d2dc;
+  padding: 10px 11px;
+  background: #f8fafc;
+}
+
+.formula-input-grid b {
+  color: #111;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+}
+
+.formula-input-grid small {
+  color: #444;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.formula-protocol-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+
 .appendix-map {
   display: grid;
   gap: 14px;
@@ -2069,6 +2209,8 @@ select:focus {
   .appendix-thesis-actions,
   .formula-reading-grid,
   .formula-meaning-grid,
+  .formula-protocol-grid,
+  .formula-input-grid,
   .mind-thesis-row,
   .mind-map,
   .mind-branches,
@@ -2137,6 +2279,17 @@ select:focus {
   .formula-reading-grid article {
     min-height: auto;
     padding: 16px;
+  }
+
+  .formula-chain-card,
+  .formula-input-card {
+    padding: 15px;
+  }
+
+  .formula-chain-card li {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding-left: 32px;
   }
 
   .appendix-evidence-flow {

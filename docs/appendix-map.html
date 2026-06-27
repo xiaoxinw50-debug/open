@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>公式附录思维导图 | 开关裕量因子</title>
-    <link rel="stylesheet" href="./styles.css?v=20260627-formula-page-polish" />
+    <link rel="stylesheet" href="./styles.css?v=20260627-formula-protocol" />
   </head>
   <body>
     <header class="site-hero">
@@ -17,10 +17,10 @@
           </div>
         </div>
         <div class="topbar-actions">
-          <a class="plain-link" href="./index.html?v=20260627-formula-page-polish">返回论文正文</a>
-          <a class="plain-link" href="./map.html?v=20260627-formula-page-polish">当前主线导图</a>
+          <a class="plain-link" href="./index.html?v=20260627-formula-protocol">返回论文正文</a>
+          <a class="plain-link" href="./map.html?v=20260627-formula-protocol">当前主线导图</a>
           <a class="plain-link calc-link" href="https://switch-margin-site.onrender.com/" target="_blank" rel="noreferrer">计算 Γ₂D</a>
-          <a class="plain-link" href="./draft-map.html?v=20260627-formula-page-polish">初稿导图</a>
+          <a class="plain-link" href="./draft-map.html?v=20260627-formula-protocol">初稿导图</a>
           <button class="ghost-button" id="toggle-appendix-edit" type="button">编辑导图</button>
           <button class="ghost-button" id="export-appendix-edits" type="button">导出导图数据</button>
           <button class="ghost-button" id="import-appendix-edits" type="button">导入导图数据</button>
@@ -99,6 +99,40 @@
           </div>
         </section>
 
+        <section class="map-panel formula-protocol-panel">
+          <div class="panel-title">
+            <span>计算链条与参数口径</span>
+            <small>先统一单位，再判断能不能正式计算</small>
+          </div>
+          <div class="formula-protocol-grid">
+            <article class="formula-chain-card">
+              <span class="formula-card-label">四步计算</span>
+              <ol>
+                <li><b>接触压降</b><em>V<sub>contact</sub> = I<sub>on</sub>R<sub>c,eff</sub></em></li>
+                <li><b>剩余驱动</b><em>V<sub>drive</sub> = V<sub>DS</sub> − V<sub>contact</sub></em></li>
+                <li><b>开关代价</b><em>V<sub>gate</sub> = SS · log<sub>10</sub>(I<sub>on</sub>/I<sub>off</sub>)</em></li>
+                <li><b>裕量因子</b><em>Γ<sub>2D</sub> = V<sub>drive</sub>/V<sub>gate</sub></em></li>
+              </ol>
+              <p>如果 V<sub>drive</sub> 已经小于或接近 0，说明接触消耗过大，此时不应再把 Γ<sub>2D</sub> 解读为正向优势。</p>
+            </article>
+            <article class="formula-input-card">
+              <span class="formula-card-label">输入清单</span>
+              <div class="formula-input-grid">
+                <span><b>I<sub>on</sub></b><small>归一化电流，常用 μA/μm</small></span>
+                <span><b>R<sub>c,eff</sub></b><small>统一为可与 I<sub>on</sub> 相乘的 Ω·μm 口径</small></span>
+                <span><b>V<sub>DS</sub></b><small>必须对应同一器件或同一测试条件</small></span>
+                <span><b>SS</b><small>写明最小值、平均值或代表值</small></span>
+                <span><b>I<sub>on</sub>/I<sub>off</sub></b><small>明确开关窗口和提取方式</small></span>
+                <span><b>接触口径</b><small>单侧值需换算为源漏总等效</small></span>
+              </div>
+              <div class="formula-protocol-actions">
+                <a class="plain-link calc-link" href="https://switch-margin-site.onrender.com/" target="_blank" rel="noreferrer">打开计算器填入参数</a>
+                <a class="plain-link" href="./index.html?item=p322">查看附录数据溯源</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
         <section class="map-panel">
           <div class="panel-title">
             <span>论证路径</span>
@@ -125,7 +159,7 @@
       </section>
     </main>
 
-    <script src="./data/paper-data.js?v=20260627-formula-page-polish"></script>
-    <script src="./appendix-map.js?v=20260627-formula-page-polish"></script>
+    <script src="./data/paper-data.js?v=20260627-formula-protocol"></script>
+    <script src="./appendix-map.js?v=20260627-formula-protocol"></script>
   </body>
 </html>
