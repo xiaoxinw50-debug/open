@@ -1,11 +1,11 @@
 window.PAPER_DATA = {
   "meta": {
     "title": "后摩尔时代的二维半导体电子技术：进展、评价与挑战",
-    "sourceFile": "/Users/xuyingxin/Desktop/二维半导体技术/后摩尔时代二维半导体电子技术_路线图来源补充版.docx",
-    "generatedAt": "2026-06-28T08:04:46.212590+00:00",
-    "paragraphCount": 328,
-    "referenceCount": 70,
-    "citedReferenceCount": 70,
+    "sourceFile": "/Users/xuyingxin/Desktop/二维半导体技术/后摩尔时代二维半导体电子技术_本征优势衔接优化版.docx",
+    "generatedAt": "2026-06-28T12:16:36.945495+00:00",
+    "paragraphCount": 327,
+    "referenceCount": 66,
+    "citedReferenceCount": 66,
     "missingReferenceNumbers": []
   },
   "sections": [
@@ -112,10 +112,9 @@ window.PAPER_DATA = {
         "p41",
         "p42",
         "p43",
-        "p44",
-        "p45"
+        "p44"
       ],
-      "citationCount": 5
+      "citationCount": 1
     },
     {
       "id": "s6",
@@ -125,8 +124,8 @@ window.PAPER_DATA = {
       "level": 1,
       "parentId": "root",
       "itemIds": [
-        "p46",
-        "p47"
+        "p45",
+        "p46"
       ],
       "citationCount": 0
     },
@@ -138,14 +137,14 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s6",
       "itemIds": [
+        "p47",
         "p48",
         "p49",
         "p50",
         "p51",
         "p52",
         "p53",
-        "p54",
-        "p55"
+        "p54"
       ],
       "citationCount": 3
     },
@@ -157,11 +156,11 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s6",
       "itemIds": [
+        "p55",
         "p56",
         "p57",
         "p58",
-        "p59",
-        "p60"
+        "p59"
       ],
       "citationCount": 0
     },
@@ -173,12 +172,12 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s6",
       "itemIds": [
+        "p60",
         "p61",
         "p62",
         "p63",
         "p64",
-        "p65",
-        "p66"
+        "p65"
       ],
       "citationCount": 3
     },
@@ -190,6 +189,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s6",
       "itemIds": [
+        "p66",
         "p67",
         "p68",
         "p69",
@@ -199,8 +199,7 @@ window.PAPER_DATA = {
         "p73",
         "p74",
         "p75",
-        "p76",
-        "p77"
+        "p76"
       ],
       "citationCount": 9
     },
@@ -212,11 +211,11 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s6",
       "itemIds": [
+        "p77",
         "p78",
         "p79",
         "p80",
-        "p81",
-        "p82"
+        "p81"
       ],
       "citationCount": 0
     },
@@ -228,6 +227,7 @@ window.PAPER_DATA = {
       "level": 1,
       "parentId": "root",
       "itemIds": [
+        "p82",
         "p83",
         "p84",
         "p85",
@@ -237,8 +237,7 @@ window.PAPER_DATA = {
         "p89",
         "p90",
         "p91",
-        "p92",
-        "p93"
+        "p92"
       ],
       "citationCount": 17
     },
@@ -250,6 +249,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s12",
       "itemIds": [
+        "p93",
         "p94",
         "p95",
         "p96",
@@ -263,8 +263,7 @@ window.PAPER_DATA = {
         "p104",
         "p105",
         "p106",
-        "p107",
-        "p108"
+        "p107"
       ],
       "citationCount": 8
     },
@@ -276,6 +275,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s12",
       "itemIds": [
+        "p108",
         "p109",
         "p110",
         "p111",
@@ -289,8 +289,7 @@ window.PAPER_DATA = {
         "p119",
         "p120",
         "p121",
-        "p122",
-        "p123"
+        "p122"
       ],
       "citationCount": 7
     },
@@ -302,6 +301,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s12",
       "itemIds": [
+        "p123",
         "p124",
         "p125",
         "p126",
@@ -318,8 +318,7 @@ window.PAPER_DATA = {
         "p137",
         "p138",
         "p139",
-        "p140",
-        "p141"
+        "p140"
       ],
       "citationCount": 13
     },
@@ -331,6 +330,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s12",
       "itemIds": [
+        "p141",
         "p142",
         "p143",
         "p144",
@@ -346,8 +346,7 @@ window.PAPER_DATA = {
         "p154",
         "p155",
         "p156",
-        "p157",
-        "p158"
+        "p157"
       ],
       "citationCount": 10
     },
@@ -359,14 +358,14 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s12",
       "itemIds": [
+        "p158",
         "p159",
         "p160",
         "p161",
         "p162",
         "p163",
         "p164",
-        "p165",
-        "p166"
+        "p165"
       ],
       "citationCount": 4
     },
@@ -378,6 +377,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s12",
       "itemIds": [
+        "p166",
         "p167",
         "p168",
         "p169",
@@ -392,8 +392,7 @@ window.PAPER_DATA = {
         "p178",
         "p179",
         "p180",
-        "p181",
-        "p182"
+        "p181"
       ],
       "citationCount": 11
     },
@@ -405,8 +404,8 @@ window.PAPER_DATA = {
       "level": 1,
       "parentId": "root",
       "itemIds": [
-        "p183",
-        "p184"
+        "p182",
+        "p183"
       ],
       "citationCount": 0
     },
@@ -418,6 +417,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s19",
       "itemIds": [
+        "p184",
         "p185",
         "p186",
         "p187",
@@ -430,8 +430,7 @@ window.PAPER_DATA = {
         "p194",
         "p195",
         "p196",
-        "p197",
-        "p198"
+        "p197"
       ],
       "citationCount": 8
     },
@@ -443,6 +442,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s19",
       "itemIds": [
+        "p198",
         "p199",
         "p200",
         "p201",
@@ -457,8 +457,7 @@ window.PAPER_DATA = {
         "p210",
         "p211",
         "p212",
-        "p213",
-        "p214"
+        "p213"
       ],
       "citationCount": 7
     },
@@ -470,6 +469,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s19",
       "itemIds": [
+        "p214",
         "p215",
         "p216",
         "p217",
@@ -478,8 +478,7 @@ window.PAPER_DATA = {
         "p220",
         "p221",
         "p222",
-        "p223",
-        "p224"
+        "p223"
       ],
       "citationCount": 3
     },
@@ -491,6 +490,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s19",
       "itemIds": [
+        "p224",
         "p225",
         "p226",
         "p227",
@@ -504,8 +504,7 @@ window.PAPER_DATA = {
         "p235",
         "p236",
         "p237",
-        "p238",
-        "p239"
+        "p238"
       ],
       "citationCount": 7
     },
@@ -517,8 +516,8 @@ window.PAPER_DATA = {
       "level": 1,
       "parentId": "root",
       "itemIds": [
-        "p240",
-        "p241"
+        "p239",
+        "p240"
       ],
       "citationCount": 0
     },
@@ -530,6 +529,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s24",
       "itemIds": [
+        "p241",
         "p242",
         "p243",
         "p244",
@@ -543,8 +543,7 @@ window.PAPER_DATA = {
         "p252",
         "p253",
         "p254",
-        "p255",
-        "p256"
+        "p255"
       ],
       "citationCount": 12
     },
@@ -556,6 +555,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s24",
       "itemIds": [
+        "p256",
         "p257",
         "p258",
         "p259",
@@ -564,8 +564,7 @@ window.PAPER_DATA = {
         "p262",
         "p263",
         "p264",
-        "p265",
-        "p266"
+        "p265"
       ],
       "citationCount": 3
     },
@@ -577,14 +576,14 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s24",
       "itemIds": [
+        "p266",
         "p267",
         "p268",
         "p269",
         "p270",
         "p271",
         "p272",
-        "p273",
-        "p274"
+        "p273"
       ],
       "citationCount": 5
     },
@@ -596,6 +595,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s24",
       "itemIds": [
+        "p274",
         "p275",
         "p276",
         "p277",
@@ -603,8 +603,7 @@ window.PAPER_DATA = {
         "p279",
         "p280",
         "p281",
-        "p282",
-        "p283"
+        "p282"
       ],
       "citationCount": 4
     },
@@ -616,6 +615,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s24",
       "itemIds": [
+        "p283",
         "p284",
         "p285",
         "p286",
@@ -627,8 +627,7 @@ window.PAPER_DATA = {
         "p292",
         "p293",
         "p294",
-        "p295",
-        "p296"
+        "p295"
       ],
       "citationCount": 6
     },
@@ -640,7 +639,7 @@ window.PAPER_DATA = {
       "level": 1,
       "parentId": "root",
       "itemIds": [
-        "p297"
+        "p296"
       ],
       "citationCount": 0
     },
@@ -652,10 +651,10 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s30",
       "itemIds": [
+        "p297",
         "p298",
         "p299",
-        "p300",
-        "p301"
+        "p300"
       ],
       "citationCount": 8
     },
@@ -667,6 +666,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s30",
       "itemIds": [
+        "p301",
         "p302",
         "p303",
         "p304",
@@ -681,8 +681,7 @@ window.PAPER_DATA = {
         "p313",
         "p314",
         "p315",
-        "p316",
-        "p317"
+        "p316"
       ],
       "citationCount": 3
     },
@@ -694,6 +693,7 @@ window.PAPER_DATA = {
       "level": 2,
       "parentId": "s30",
       "itemIds": [
+        "p317",
         "p318",
         "p319",
         "p320",
@@ -703,8 +703,7 @@ window.PAPER_DATA = {
         "p324",
         "p325",
         "p326",
-        "p327",
-        "p328"
+        "p327"
       ],
       "citationCount": 13
     }
@@ -1057,12 +1056,12 @@ window.PAPER_DATA = {
       "type": "analysis",
       "sectionId": "s3",
       "sectionTitle": "1.2 硅基技术的物理极限与功耗墙",
-      "text": "在这一背景下，新型沟道材料重新受到重视。近年来的电子器件综述和观点文章反复强调，新材料的价值要放在极限微缩、低功耗和集成兼容之间权衡，而不是由某个单项指标是否超过硅来决定[5-7]。二维半导体之所以被频繁讨论，正是因为其原子级厚度、适中带隙和潜在低温集成能力分别对应了这组需求。",
+      "text": "在这一背景下，新型沟道材料重新受到重视。近年来的电子器件综述和观点文章反复强调，新材料的价值要放在极限微缩、低功耗和集成兼容之间权衡，而不是由某个单项指标是否超过硅来决定[1-3]。二维半导体之所以被频繁讨论，正是因为其原子级厚度、适中带隙和潜在低温集成能力分别对应了这组需求。",
       "preview": "在这一背景下，新型沟道材料重新受到重视。近年来的电子器件综述和观点文...",
       "citations": [
-        5,
-        6,
-        7
+        1,
+        2,
+        3
       ],
       "topics": [
         "scaling"
@@ -1099,11 +1098,11 @@ window.PAPER_DATA = {
       "type": "analysis",
       "sectionId": "s4",
       "sectionTitle": "1.3 二维半导体的兴起：从石墨烯到 TMDs",
-      "text": "石墨烯之后，MoS₂、WS₂、WSe₂、InSe 等材料逐渐进入逻辑器件研究。这个转向不是简单扩展材料种类，而是由开关需求推动的。零带隙石墨烯迁移率高，但关态电流不容易压低；TMDs 和部分主族层状半导体同时具有原子级厚度和 eV 量级带隙，因此更容易被放进后摩尔逻辑沟道的讨论中[8-9]。",
+      "text": "石墨烯之后，MoS₂、WS₂、WSe₂、InSe 等材料逐渐进入逻辑器件研究。这个转向不是简单扩展材料种类，而是由开关需求推动的。零带隙石墨烯迁移率高，但关态电流不容易压低；TMDs 和部分主族层状半导体同时具有原子级厚度和 eV 量级带隙，因此更容易被放进后摩尔逻辑沟道的讨论中[4-5]。",
       "preview": "石墨烯之后，MoS₂、WS₂、WSe₂、InSe 等材料逐渐进入逻辑...",
       "citations": [
-        8,
-        9
+        4,
+        5
       ],
       "topics": [
         "polarity"
@@ -1178,10 +1177,10 @@ window.PAPER_DATA = {
       "type": "figure-table",
       "sectionId": "s4",
       "sectionTitle": "1.3 二维半导体的兴起：从石墨烯到 TMDs",
-      "text": "图 1 二维材料家族的扩展与研究分布[9]。(a) 主族二维材料及其主要应用方向分布；(b) 2004 年以来新型单元素二维材料的实验实现时间轴。这组信息表明，二维材料研究已由单一材料扩展为多材料家族。 来源：文献[9]。",
+      "text": "图 1 二维材料家族的扩展与研究分布[5]。(a) 主族二维材料及其主要应用方向分布；(b) 2004 年以来新型单元素二维材料的实验实现时间轴。这组信息表明，二维材料研究已由单一材料扩展为多材料家族。 来源：文献[5]。",
       "preview": "图 1 二维材料家族的扩展与研究分布。(a) 主族二维材料及其主要应...",
       "citations": [
-        9
+        5
       ],
       "topics": [],
       "captionKind": "figure"
@@ -1205,8 +1204,8 @@ window.PAPER_DATA = {
       "type": "synthesis",
       "sectionId": "s5",
       "sectionTitle": "1.4 二维半导体在后摩尔路线中的位置",
-      "text": "放到后摩尔路线中看，二维半导体会同时碰到 More Moore、More than Moore 和 Beyond CMOS 三类问题。More Moore 关心晶体管还能不能缩小并保持能效；More than Moore 关心传感、存储、光电和三维堆叠怎样并入芯片；Beyond CMOS 则关心是否存在不同于传统开关逻辑的器件思路。二维半导体未必同时解决三类问题，但它在每一类问题中都有可以检验的切入点。",
-      "preview": "放到后摩尔路线中看，二维半导体会同时碰到 More Moore、Mo...",
+      "text": "放到后摩尔路线中看，二维半导体会同时碰到 more Moore、more than Moore 和 beyond CMOS 三类问题。more Moore 关心晶体管还能不能缩小并保持能效；more than Moore 关心传感、存储、光电和三维堆叠怎样并入芯片；beyond CMOS 则关心是否存在不同于传统开关逻辑的器件思路。二维半导体未必同时解决三类问题，但它在每一类问题中都有可以检验的切入点。",
+      "preview": "放到后摩尔路线中看，二维半导体会同时碰到 more Moore、mo...",
       "citations": [],
       "topics": [
         "polarity",
@@ -1220,32 +1219,8 @@ window.PAPER_DATA = {
       "type": "synthesis",
       "sectionId": "s5",
       "sectionTitle": "1.4 二维半导体在后摩尔路线中的位置",
-      "text": "这里使用的 More Moore、More than Moore 和 Beyond CMOS，并非本文临时归纳的三个口号，而是半导体路线图形成的技术坐标。Moore 一词源于 Moore 1965 年关于集成电路元件数增长的判断；随后 ITRS/IRDS 将延续 CMOS 微缩的工作称为 More Moore，将射频、传感、功率、MEMS、异质集成等不完全依赖晶体管缩小的功能扩展归入 More than Moore，并在 Emerging Research Devices / Beyond CMOS 章节中讨论新状态变量和新开关机制[1-4]。把二维半导体放在这一坐标中讨论，可以避免把它简单写成硅沟道替代物：它既要接受先进逻辑微缩的检验，也可能先在后道集成、传感和异质功能层中体现价值。",
-      "preview": "这里使用的 More Moore、More than Moore 和...",
-      "citations": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "topics": [
-        "scaling",
-        "contact",
-        "polarity",
-        "circuit",
-        "m3d",
-        "sensing"
-      ]
-    },
-    {
-      "id": "p37",
-      "rawIndex": 37,
-      "kind": "paragraph",
-      "type": "synthesis",
-      "sectionId": "s5",
-      "sectionTitle": "1.4 二维半导体在后摩尔路线中的位置",
-      "text": "二维半导体与这三个方向都有关系。面向 More Moore，原子级厚度有助于强化栅控并压制短沟道效应；面向 More than Moore，层状结构和潜在低温制造能力适合单片三维集成、柔性电子和异质系统堆叠；面向 Beyond CMOS，异质结构、界面极化和能带工程又提供了新的器件设计空间。二维半导体并不只对应一条技术路线，它的作用需要放到不同应用场景中分别检验。",
-      "preview": "二维半导体与这三个方向都有关系。面向 More Moore，原子级厚...",
+      "text": "二维半导体与这三个方向都有关系。面向 more Moore，原子级厚度有助于强化栅控并压制短沟道效应；面向 more than Moore，层状结构和潜在低温制造能力适合单片三维集成、柔性电子和异质系统堆叠；面向 beyond CMOS，异质结构、界面极化和能带工程又提供了新的器件设计空间。二维半导体并不只对应一条技术路线，它的作用需要放到不同应用场景中分别检验。",
+      "preview": "二维半导体与这三个方向都有关系。面向 more Moore，原子级厚...",
       "citations": [],
       "topics": [
         "scaling",
@@ -1255,8 +1230,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p38",
-      "rawIndex": 38,
+      "id": "p37",
+      "rawIndex": 37,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s5",
@@ -1269,8 +1244,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p39",
-      "rawIndex": 39,
+      "id": "p38",
+      "rawIndex": 38,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s5",
@@ -1287,8 +1262,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p40",
-      "rawIndex": 40,
+      "id": "p39",
+      "rawIndex": 39,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s5",
@@ -1301,8 +1276,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p41",
-      "rawIndex": 41,
+      "id": "p40",
+      "rawIndex": 40,
       "kind": "image",
       "type": "image",
       "sectionId": "s5",
@@ -1320,16 +1295,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p42",
-      "rawIndex": 42,
+      "id": "p41",
+      "rawIndex": 41,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s5",
       "sectionTitle": "1.4 二维半导体在后摩尔路线中的位置",
-      "text": "图 2 二维半导体的结构、电学特性与集成愿景[8]。(a) 不同半导体材料的载流子饱和速度与带隙关系；(b) 典型二维场效应晶体管结构；(c) 单层 MoS₂ 晶体管的代表性转移特性；(d) 二维材料与硅基电路单片三维集成的概念示意。该图将材料潜力、器件结构与集成愿景放入同一图景。 来源：文献[8]。",
+      "text": "图 2 二维半导体的结构、电学特性与集成愿景[4]。(a) 不同半导体材料的载流子饱和速度与带隙关系；(b) 典型二维场效应晶体管结构；(c) 单层 MoS₂ 晶体管的代表性转移特性；(d) 二维材料与硅基电路单片三维集成的概念示意。该图将材料潜力、器件结构与集成愿景放入同一图景。 来源：文献[4]。",
       "preview": "图 2 二维半导体的结构、电学特性与集成愿景。(a) 不同半导体材料...",
       "citations": [
-        8
+        4
       ],
       "topics": [
         "circuit",
@@ -1338,8 +1313,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p43",
-      "rawIndex": 43,
+      "id": "p42",
+      "rawIndex": 42,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s5",
@@ -1353,8 +1328,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p44",
-      "rawIndex": 44,
+      "id": "p43",
+      "rawIndex": 43,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s5",
@@ -1366,8 +1341,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p45",
-      "rawIndex": 45,
+      "id": "p44",
+      "rawIndex": 44,
       "kind": "table",
       "type": "table",
       "sectionId": "s5",
@@ -1411,8 +1386,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p46",
-      "rawIndex": 46,
+      "id": "p45",
+      "rawIndex": 45,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s6",
@@ -1423,8 +1398,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p47",
-      "rawIndex": 47,
+      "id": "p46",
+      "rawIndex": 46,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s6",
@@ -1438,8 +1413,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p48",
-      "rawIndex": 48,
+      "id": "p47",
+      "rawIndex": 47,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s7",
@@ -1450,8 +1425,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p49",
-      "rawIndex": 49,
+      "id": "p48",
+      "rawIndex": 48,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s7",
@@ -1464,25 +1439,25 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p50",
-      "rawIndex": 50,
+      "id": "p49",
+      "rawIndex": 49,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s7",
       "sectionTitle": "2.1 材料体系与物理特征",
-      "text": "TMDs 能成为二维逻辑器件的主线材料，首先是因为厚度和带隙落在一个比较有用的区间。单层 MoS₂、WS₂ 或 WSe₂ 通常只有约 0.6-0.8 nm 厚，带隙多在 1.0-2.0 eV[8-9]。这使栅极更容易控制整个沟道，同时又能保留开关所需的关断能力。",
+      "text": "TMDs 能成为二维逻辑器件的主线材料，首先是因为厚度和带隙落在一个比较有用的区间。单层 MoS₂、WS₂ 或 WSe₂ 通常只有约 0.6-0.8 nm 厚，带隙多在 1.0-2.0 eV[4-5]。这使栅极更容易控制整个沟道，同时又能保留开关所需的关断能力。",
       "preview": "TMDs 能成为二维逻辑器件的主线材料，首先是因为厚度和带隙落在一个...",
       "citations": [
-        8,
-        9
+        4,
+        5
       ],
       "topics": [
         "polarity"
       ]
     },
     {
-      "id": "p51",
-      "rawIndex": 51,
+      "id": "p50",
+      "rawIndex": 50,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s7",
@@ -1496,16 +1471,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p52",
-      "rawIndex": 52,
+      "id": "p51",
+      "rawIndex": 51,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s7",
       "sectionTitle": "2.1 材料体系与物理特征",
-      "text": "目前进入电子器件研究的二维半导体，大致可以按用途来理解。MoS₂、WS₂、WSe₂ 等 TMDs 的工艺积累最多，常被用来讨论逻辑晶体管和 CMOS 兼容路线。InSe、Bi₂O₂Se 等材料更常出现在高迁移率、高跨导或准弹道输运研究中。黑磷和若干主族二维材料在空穴输运、各向异性电学方面有优势，但环境稳定性和大面积制备仍是主要限制[9]。因此，二维半导体更像一个材料库，而不是某一种固定沟道材料。",
+      "text": "目前进入电子器件研究的二维半导体，大致可以按用途来理解。MoS₂、WS₂、WSe₂ 等 TMDs 的工艺积累最多，常被用来讨论逻辑晶体管和 CMOS 兼容路线。InSe、Bi₂O₂Se 等材料更常出现在高迁移率、高跨导或准弹道输运研究中。黑磷和若干主族二维材料在空穴输运、各向异性电学方面有优势，但环境稳定性和大面积制备仍是主要限制[5]。因此，二维半导体更像一个材料库，而不是某一种固定沟道材料。",
       "preview": "目前进入电子器件研究的二维半导体，大致可以按用途来理解。MoS₂、W...",
       "citations": [
-        9
+        5
       ],
       "topics": [
         "polarity",
@@ -1513,8 +1488,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p53",
-      "rawIndex": 53,
+      "id": "p52",
+      "rawIndex": 52,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s7",
@@ -1525,8 +1500,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p54",
-      "rawIndex": 54,
+      "id": "p53",
+      "rawIndex": 53,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s7",
@@ -1539,8 +1514,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p55",
-      "rawIndex": 55,
+      "id": "p54",
+      "rawIndex": 54,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s7",
@@ -1555,8 +1530,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p56",
-      "rawIndex": 56,
+      "id": "p55",
+      "rawIndex": 55,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s8",
@@ -1567,8 +1542,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p57",
-      "rawIndex": 57,
+      "id": "p56",
+      "rawIndex": 56,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s8",
@@ -1584,8 +1559,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p58",
-      "rawIndex": 58,
+      "id": "p57",
+      "rawIndex": 57,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s8",
@@ -1599,8 +1574,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p59",
-      "rawIndex": 59,
+      "id": "p58",
+      "rawIndex": 58,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s8",
@@ -1616,8 +1591,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p60",
-      "rawIndex": 60,
+      "id": "p59",
+      "rawIndex": 59,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s8",
@@ -1631,8 +1606,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p61",
-      "rawIndex": 61,
+      "id": "p60",
+      "rawIndex": 60,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s9",
@@ -1643,32 +1618,32 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p62",
-      "rawIndex": 62,
+      "id": "p61",
+      "rawIndex": 61,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s9",
       "sectionTitle": "2.3 二维半导体的本征优势与边界",
-      "text": "二维半导体的本征优势首先来自三个方面：原子级薄沟道、可用于开关的带隙，以及层状范德瓦耳斯界面。面向 More Moore，原子级薄沟道有利于在 10 nm 及以下沟道长度中保持较小亚阈值摆幅和较低漏致势垒降低[8,10]；部分二维半导体还具有较高热速度和饱和速度，为大电流输出和高频工作留下空间[8,11]。但这些优势最终要落到器件上：沟道缩短以后，栅控、电流输出和能耗能否一起守住。",
+      "text": "二维半导体的本征优势首先来自三个方面：原子级薄沟道、可用于开关的带隙，以及层状范德瓦耳斯界面。面向 more Moore，原子级薄沟道有利于在 10 nm 及以下沟道长度中保持较小亚阈值摆幅和较低漏致势垒降低[4,6]；部分二维半导体还具有较高热速度和饱和速度，为大电流输出和高频工作留下空间[4,7]。但这些优势最终要落到器件上：沟道缩短以后，栅控、电流输出和能耗能否一起守住。",
       "preview": "二维半导体的本征优势首先来自三个方面：原子级薄沟道、可用于开关的带隙...",
       "citations": [
-        8,
-        10,
-        11
+        4,
+        6,
+        7
       ],
       "topics": [
         "scaling"
       ]
     },
     {
-      "id": "p63",
-      "rawIndex": 63,
+      "id": "p62",
+      "rawIndex": 62,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s9",
       "sectionTitle": "2.3 二维半导体的本征优势与边界",
-      "text": "在 More than Moore 方向上，二维半导体的优势更多体现于系统集成与功能扩展。其层状结构和潜在低温制造能力有利于单片三维集成、柔性透明电子、传感器以及异质功能堆叠等方向的发展。与传统体半导体相比，二维材料更容易放到不同衬底、不同材料和不同功能模块之间，也更适合承担超薄功能层或后道集成层的角色。",
-      "preview": "在 More than Moore 方向上，二维半导体的优势更多体现...",
+      "text": "在 more than Moore 方向上，二维半导体的优势更多体现于系统集成与功能扩展。其层状结构和潜在低温制造能力有利于单片三维集成、柔性透明电子、传感器以及异质功能堆叠等方向的发展。与传统体半导体相比，二维材料更容易放到不同衬底、不同材料和不同功能模块之间，也更适合承担超薄功能层或后道集成层的角色。",
+      "preview": "在 more than Moore 方向上，二维半导体的优势更多体现...",
       "citations": [],
       "topics": [
         "wafer",
@@ -1677,14 +1652,14 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p64",
-      "rawIndex": 64,
+      "id": "p63",
+      "rawIndex": 63,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s9",
       "sectionTitle": "2.3 二维半导体的本征优势与边界",
-      "text": "在 Beyond CMOS 方向上，二维半导体虽然并不直接对应某一种全新的开关机理，但其异质结、界面极化、电荷转移和可重构能带结构为新型器件设计提供了丰富空间。特别是在低功耗器件、神经形态器件和感存算一体化器件方面，二维半导体体现出的并非单一性能优势，而是更强的结构可设计性。也正因如此，二维半导体的意义不仅在于延续现有逻辑路线，还在于为新器件和新系统结构提供材料基础。",
-      "preview": "在 Beyond CMOS 方向上，二维半导体虽然并不直接对应某一种...",
+      "text": "在 beyond CMOS 方向上，二维半导体虽然并不直接对应某一种全新的开关机理，但其异质结、界面极化、电荷转移和可重构能带结构为新型器件设计提供了丰富空间。特别是在低功耗器件、神经形态器件和感存算一体化器件方面，二维半导体体现出的并非单一性能优势，而是更强的结构可设计性。也正因如此，二维半导体的意义不仅在于延续现有逻辑路线，还在于为新器件和新系统结构提供材料基础。",
+      "preview": "在 beyond CMOS 方向上，二维半导体虽然并不直接对应某一种...",
       "citations": [],
       "topics": [
         "polarity",
@@ -1692,8 +1667,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p65",
-      "rawIndex": 65,
+      "id": "p64",
+      "rawIndex": 64,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s9",
@@ -1709,8 +1684,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p66",
-      "rawIndex": 66,
+      "id": "p65",
+      "rawIndex": 65,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s9",
@@ -1725,8 +1700,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p67",
-      "rawIndex": 67,
+      "id": "p66",
+      "rawIndex": 66,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s10",
@@ -1737,8 +1712,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p68",
-      "rawIndex": 68,
+      "id": "p67",
+      "rawIndex": 67,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s10",
@@ -1752,8 +1727,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p69",
-      "rawIndex": 69,
+      "id": "p68",
+      "rawIndex": 68,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s10",
@@ -1769,21 +1744,21 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p70",
-      "rawIndex": 70,
+      "id": "p69",
+      "rawIndex": 69,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s10",
       "sectionTitle": "2.4 关键指标对标",
-      "text": "从已有数据看，二维半导体已经呈现出强项与短板并存的结构。对于 n 型器件，不同代表性工作已分别报告 mA·μm⁻¹ 量级开态电流[11,16-17]、42 Ω·μm 的低接触电阻[15]，以及较低亚阈值摆幅[16,29,57]。这些数字并非同一器件在同一测试口径下同时取得的完整组合，不能直接拼成一个“理想器件”；它们更适合说明 n 型二维器件已经进入可与先进硅节点进行指标比较的阶段。",
+      "text": "从已有数据看，二维半导体已经呈现出强项与短板并存的结构。对于 n 型器件，不同代表性工作已分别报告 mA·μm⁻¹ 量级开态电流[7,12-13]、42 Ω·μm 的低接触电阻[11]，以及较低亚阈值摆幅[12,25,53]。这些数字并非同一器件在同一测试口径下同时取得的完整组合，不能直接拼成一个“理想器件”；它们更适合说明 n 型二维器件已经进入可与先进硅节点进行指标比较的阶段。",
       "preview": "从已有数据看，二维半导体已经呈现出强项与短板并存的结构。对于 n 型...",
       "citations": [
+        7,
         11,
-        15,
-        16,
-        17,
-        29,
-        57
+        12,
+        13,
+        25,
+        53
       ],
       "topics": [
         "scaling",
@@ -1792,17 +1767,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p71",
-      "rawIndex": 71,
+      "id": "p70",
+      "rawIndex": 70,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s10",
       "sectionTitle": "2.4 关键指标对标",
-      "text": "相比之下，p 型路线过去长期受低阻空穴接触限制，开态电流、跨导和阈值稳定性都更难与 n 型器件配平。2025—2026 年的 WSe₂ 和 MoTe₂ p 型结果已经明显缩小了这一差距，尤其单层 WSe₂ 器件开始同时报告短沟道高电流、较低接触电阻和较大的开关比[12-13]。更准确的判断是：p 型器件正在追赶，但二维 CMOS 仍需证明 n 型和 p 型器件能在同一工艺、同一供电窗口和相近统计分布中稳定配对。",
+      "text": "相比之下，p 型路线过去长期受低阻空穴接触限制，开态电流、跨导和阈值稳定性都更难与 n 型器件配平。2025—2026 年的 WSe₂ 和 MoTe₂ p 型结果已经明显缩小了这一差距，尤其单层 WSe₂ 器件开始同时报告短沟道高电流、较低接触电阻和较大的开关比[8-9]。更准确的判断是：p 型器件正在追赶，但二维 CMOS 仍需证明 n 型和 p 型器件能在同一工艺、同一供电窗口和相近统计分布中稳定配对。",
       "preview": "相比之下，p 型路线过去长期受低阻空穴接触限制，开态电流、跨导和阈值...",
       "citations": [
-        12,
-        13
+        8,
+        9
       ],
       "topics": [
         "evaluation",
@@ -1812,8 +1787,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p72",
-      "rawIndex": 72,
+      "id": "p71",
+      "rawIndex": 71,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s10",
@@ -1827,8 +1802,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p73",
-      "rawIndex": 73,
+      "id": "p72",
+      "rawIndex": 72,
       "kind": "image",
       "type": "image",
       "sectionId": "s10",
@@ -1846,16 +1821,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p74",
-      "rawIndex": 74,
+      "id": "p73",
+      "rawIndex": 73,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s10",
       "sectionTitle": "2.4 关键指标对标",
-      "text": "图 3 不同二维接触路线的代表性转移特性与接触基准[5]。(a-d) In、Bi、Sb 和 Pt/WSe₂ 等接触路线的代表性转移特性与界面信息；(e) 不同接触策略在接触电阻-二维载流子密度坐标中的相对位置。这一基准图景显示，二维接触工程已进入可横向比较的阶段。 来源：文献[5]。",
+      "text": "图 3 不同二维接触路线的代表性转移特性与接触基准[1]。(a-d) In、Bi、Sb 和 Pt/WSe₂ 等接触路线的代表性转移特性与界面信息；(e) 不同接触策略在接触电阻-二维载流子密度坐标中的相对位置。这一基准图景显示，二维接触工程已进入可横向比较的阶段。 来源：文献[1]。",
       "preview": "图 3 不同二维接触路线的代表性转移特性与接触基准。(a-d) In...",
       "citations": [
-        5
+        1
       ],
       "topics": [
         "contact",
@@ -1864,8 +1839,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p75",
-      "rawIndex": 75,
+      "id": "p74",
+      "rawIndex": 74,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s10",
@@ -1882,8 +1857,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p76",
-      "rawIndex": 76,
+      "id": "p75",
+      "rawIndex": 75,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s10",
@@ -1898,8 +1873,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p77",
-      "rawIndex": 77,
+      "id": "p76",
+      "rawIndex": 76,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s10",
@@ -1915,8 +1890,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p78",
-      "rawIndex": 78,
+      "id": "p77",
+      "rawIndex": 77,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s11",
@@ -1929,8 +1904,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p79",
-      "rawIndex": 79,
+      "id": "p78",
+      "rawIndex": 78,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s11",
@@ -1945,8 +1920,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p80",
-      "rawIndex": 80,
+      "id": "p79",
+      "rawIndex": 79,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s11",
@@ -1964,8 +1939,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p81",
-      "rawIndex": 81,
+      "id": "p80",
+      "rawIndex": 80,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s11",
@@ -1980,8 +1955,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p82",
-      "rawIndex": 82,
+      "id": "p81",
+      "rawIndex": 81,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s11",
@@ -1996,8 +1971,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p83",
-      "rawIndex": 83,
+      "id": "p82",
+      "rawIndex": 82,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s12",
@@ -2008,8 +1983,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p84",
-      "rawIndex": 84,
+      "id": "p83",
+      "rawIndex": 83,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s12",
@@ -2025,8 +2000,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p85",
-      "rawIndex": 85,
+      "id": "p84",
+      "rawIndex": 84,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s12",
@@ -2043,8 +2018,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p86",
-      "rawIndex": 86,
+      "id": "p85",
+      "rawIndex": 85,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s12",
@@ -2056,8 +2031,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p87",
-      "rawIndex": 87,
+      "id": "p86",
+      "rawIndex": 86,
       "kind": "table",
       "type": "table",
       "sectionId": "s12",
@@ -2111,8 +2086,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p88",
-      "rawIndex": 88,
+      "id": "p87",
+      "rawIndex": 87,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s12",
@@ -2125,8 +2100,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p89",
-      "rawIndex": 89,
+      "id": "p88",
+      "rawIndex": 88,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s12",
@@ -2138,8 +2113,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p90",
-      "rawIndex": 90,
+      "id": "p89",
+      "rawIndex": 89,
       "kind": "table",
       "type": "table",
       "sectionId": "s12",
@@ -2220,8 +2195,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p91",
-      "rawIndex": 91,
+      "id": "p90",
+      "rawIndex": 90,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s12",
@@ -2236,25 +2211,49 @@ window.PAPER_DATA = {
       ]
     },
     {
+      "id": "p91",
+      "rawIndex": 91,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s12",
+      "sectionTitle": "3 基础问题与关键进展",
+      "text": "这些机制可以在后文代表性实验中找到对应证据。接触部分主要对应费米能级钉扎、金属诱导态和接触区相变等问题，无损范德瓦耳斯接触、Y 掺杂 InSe 和 Sb 接触 MoS₂ 等工作分别给出了解决路径[10-13]。介质部分则对应界面偶极、氧空位、栅漏电、阈值调节和范德瓦耳斯间隙带来的低介电串联层问题[14-19]。",
+      "preview": "这些机制可以在后文代表性实验中找到对应证据。接触部分主要对应费米能级...",
+      "citations": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "topics": [
+        "contact",
+        "dielectric",
+        "polarity"
+      ]
+    },
+    {
       "id": "p92",
       "rawIndex": 92,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s12",
       "sectionTitle": "3 基础问题与关键进展",
-      "text": "这些机制可以在后文代表性实验中找到对应证据。接触部分主要对应费米能级钉扎、金属诱导态和接触区相变等问题，无损范德瓦耳斯接触、Y 掺杂 InSe 和 Sb 接触 MoS₂ 等工作分别给出了解决路径[14-17]。介质部分则对应界面偶极、氧空位、栅漏电、阈值调节和范德瓦耳斯间隙带来的低介电串联层问题[18-23]。",
-      "preview": "这些机制可以在后文代表性实验中找到对应证据。接触部分主要对应费米能级...",
+      "text": "极性调控与可靠性问题更多体现在 p 型掺杂、接触稳定、迟滞和阈值漂移上。WSe₂ 表面电荷转移、氯化溶剂掺杂、氧辅助修复和层状金属接触等工作说明，p 型器件的重点已从能否开启，转到低阻接触、低迟滞和统计一致性能否同时成立[8-9,20-22]；迟滞标准化测试和 TCAD 映射工作则把可靠性讨论从曲线现象推进到缺陷动力学分析[23-24]。",
+      "preview": "极性调控与可靠性问题更多体现在 p 型掺杂、接触稳定、迟滞和阈值漂移...",
       "citations": [
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
+        8,
+        9,
         20,
         21,
         22,
-        23
+        23,
+        24
       ],
       "topics": [
         "contact",
@@ -2265,30 +2264,6 @@ window.PAPER_DATA = {
     {
       "id": "p93",
       "rawIndex": 93,
-      "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s12",
-      "sectionTitle": "3 基础问题与关键进展",
-      "text": "极性调控与可靠性问题更多体现在 p 型掺杂、接触稳定、迟滞和阈值漂移上。WSe₂ 表面电荷转移、氯化溶剂掺杂、氧辅助修复和层状金属接触等工作说明，p 型器件的重点已从能否开启，转到低阻接触、低迟滞和统计一致性能否同时成立[12-13,24-26]；迟滞标准化测试和 TCAD 映射工作则把可靠性讨论从曲线现象推进到缺陷动力学分析[27-28]。",
-      "preview": "极性调控与可靠性问题更多体现在 p 型掺杂、接触稳定、迟滞和阈值漂移...",
-      "citations": [
-        12,
-        13,
-        24,
-        25,
-        26,
-        27,
-        28
-      ],
-      "topics": [
-        "contact",
-        "dielectric",
-        "polarity"
-      ]
-    },
-    {
-      "id": "p94",
-      "rawIndex": 94,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s13",
@@ -2301,16 +2276,32 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p95",
-      "rawIndex": 95,
+      "id": "p94",
+      "rawIndex": 94,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s13",
       "sectionTitle": "3.1 沟道微缩",
-      "text": "二维半导体首先受到关注，是因为其超薄体特征能够在微缩过程中维持极强的静电调控能力。对晶体管而言，微缩的关键在于尺寸变小之后器件仍能被栅极稳定控制，避免出现严重漏电和阈值漂移。传统体材料在这一步骤上越来越困难，是因为沟道厚度和沟道长度同时压缩后，电场更容易从源漏端泄入沟道。二维沟道由于本身极薄，栅极电场更容易主导整个沟道体积，也就更适合讨论极限微缩。早期单层 MoS₂ 晶体管的实现已证明，这类材料在超薄尺度下仍可获得超过 10⁸ 的开关比和接近理想值的亚阈值摆幅[29]。",
+      "text": "二维半导体首先受到关注，是因为其超薄体特征能够在微缩过程中维持极强的静电调控能力。对晶体管而言，微缩的关键在于尺寸变小之后器件仍能被栅极稳定控制，避免出现严重漏电和阈值漂移。传统体材料在这一步骤上越来越困难，是因为沟道厚度和沟道长度同时压缩后，电场更容易从源漏端泄入沟道。二维沟道由于本身极薄，栅极电场更容易主导整个沟道体积，也就更适合讨论极限微缩。早期单层 MoS₂ 晶体管的实现已证明，这类材料在超薄尺度下仍可获得超过 10⁸ 的开关比和接近理想值的亚阈值摆幅[25]。",
       "preview": "二维半导体首先受到关注，是因为其超薄体特征能够在微缩过程中维持极强的...",
       "citations": [
-        29
+        25
+      ],
+      "topics": [
+        "scaling"
+      ]
+    },
+    {
+      "id": "p95",
+      "rawIndex": 95,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s13",
+      "sectionTitle": "3.1 沟道微缩",
+      "text": "此后，二维器件的研究重点逐步从能否工作转向能否继续缩小。Wu 等提出的基于石墨烯边缘栅极的侧墙晶体管，将物理栅长推进到 0.34 nm，从实验层面验证了二维沟道在极限栅控条件下仍具有可观开关特性[6]。这一结果并不意味着工业节点会直接走向原子级栅长，但它明确显示，二维材料在超短沟道控制上具有传统体材料难以企及的几何优势。其主要意义在于推进了二维沟道的物理极限边界，而不是给出可立即产业化的栅长方案。",
+      "preview": "此后，二维器件的研究重点逐步从能否工作转向能否继续缩小。Wu 等提出...",
+      "citations": [
+        6
       ],
       "topics": [
         "scaling"
@@ -2320,29 +2311,13 @@ window.PAPER_DATA = {
       "id": "p96",
       "rawIndex": 96,
       "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s13",
-      "sectionTitle": "3.1 沟道微缩",
-      "text": "此后，二维器件的研究重点逐步从能否工作转向能否继续缩小。Wu 等提出的基于石墨烯边缘栅极的侧墙晶体管，将物理栅长推进到 0.34 nm，从实验层面验证了二维沟道在极限栅控条件下仍具有可观开关特性[10]。这一结果并不意味着工业节点会直接走向原子级栅长，但它明确显示，二维材料在超短沟道控制上具有传统体材料难以企及的几何优势。其主要意义在于推进了二维沟道的物理极限边界，而不是给出可立即产业化的栅长方案。",
-      "preview": "此后，二维器件的研究重点逐步从能否工作转向能否继续缩小。Wu 等提出...",
-      "citations": [
-        10
-      ],
-      "topics": [
-        "scaling"
-      ]
-    },
-    {
-      "id": "p97",
-      "rawIndex": 97,
-      "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s13",
       "sectionTitle": "3.1 沟道微缩",
-      "text": "2025 年 Nature Electronics 文章表明，二维晶体管的讨论已经进入 1 nm 节点电子学问题[30]。这类新近研究并非重复二维材料足够薄这一结论，而是把问题推进到更现实的层面：沟道长度继续缩小的同时，接触长度、寄生电阻和栅堆栈也要同步缩放；否则器件即使在几何上足够先进，也难以在系统层面释放性能。极限微缩在当前阶段已经成为沟道、接触和栅介质共同构成的系统问题。",
+      "text": "2025 年 Nature Electronics 文章表明，二维晶体管的讨论已经进入 1 nm 节点电子学问题[26]。这类新近研究并非重复二维材料足够薄这一结论，而是把问题推进到更现实的层面：沟道长度继续缩小的同时，接触长度、寄生电阻和栅堆栈也要同步缩放；否则器件即使在几何上足够先进，也难以在系统层面释放性能。极限微缩在当前阶段已经成为沟道、接触和栅介质共同构成的系统问题。",
       "preview": "2025 年 Nature Electronics 文章表明，二维晶...",
       "citations": [
-        30
+        26
       ],
       "topics": [
         "scaling",
@@ -2351,8 +2326,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p98",
-      "rawIndex": 98,
+      "id": "p97",
+      "rawIndex": 97,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s13",
@@ -2365,8 +2340,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p99",
-      "rawIndex": 99,
+      "id": "p98",
+      "rawIndex": 98,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s13",
@@ -2380,24 +2355,24 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p100",
-      "rawIndex": 100,
+      "id": "p99",
+      "rawIndex": 99,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s13",
       "sectionTitle": "3.1 沟道微缩",
-      "text": "Jiang 等的 InSe 器件把问题推进到短沟道输运本身。该工作在 10 nm 沟道下报告 83% 的室温弹道输运比例；在 0.5 V 下，开态电流约为 0.7–1.2 mA·μm⁻¹，峰值跨导约 6 mS·μm⁻¹，最高饱和电流为 1.35 mA·μm⁻¹[11]。这些数字说明，材料缩短以后仍要保住载流子速度和接触注入，不能只比较低场迁移率。",
+      "text": "Jiang 等的 InSe 器件把问题推进到短沟道输运本身。该工作在 10 nm 沟道下报告 83% 的室温弹道输运比例；在 0.5 V 下，开态电流约为 0.7–1.2 mA·μm⁻¹，峰值跨导约 6 mS·μm⁻¹，最高饱和电流为 1.35 mA·μm⁻¹[7]。这些数字说明，材料缩短以后仍要保住载流子速度和接触注入，不能只比较低场迁移率。",
       "preview": "Jiang 等的 InSe 器件把问题推进到短沟道输运本身。该工作在...",
       "citations": [
-        11
+        7
       ],
       "topics": [
         "scaling"
       ]
     },
     {
-      "id": "p101",
-      "rawIndex": 101,
+      "id": "p100",
+      "rawIndex": 100,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s13",
@@ -2412,8 +2387,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p102",
-      "rawIndex": 102,
+      "id": "p101",
+      "rawIndex": 101,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s13",
@@ -2427,17 +2402,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p103",
-      "rawIndex": 103,
+      "id": "p102",
+      "rawIndex": 102,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s13",
       "sectionTitle": "3.1 沟道微缩",
-      "text": "2026 年 Nature Nanotechnology 报道的单层 TMD 纳米带晶体管，把问题推进到更接近 GAA/nanosheet 的尺度[31]。研究者用自上而下多重图形化和锚定接触制备 MoS₂、WS₂ 和 WSe₂ 纳米带器件，将沟道长度和宽度同时压到约 25–30 nm；在漏源电压 1 V 下，n 型 MoS₂、n 型 WS₂ 和 p 型 WSe₂ 的最高开态电流分别约为 560、420 和 130 μA·μm⁻¹。这个结果不只是栅长缩短了一步，还把边缘损伤、接触锚定、线宽分布和纳米带良率这些问题一起摆了出来，也呼应了近年关于二维晶体管缩放压力的评论[33]。二维沟道要进入先进逻辑，必须经得起这类图形化检验。",
+      "text": "2026 年 Nature Nanotechnology 报道的单层 TMD 纳米带晶体管，把问题推进到更接近 GAA/nanosheet 的尺度[27]。研究者用自上而下多重图形化和锚定接触制备 MoS₂、WS₂ 和 WSe₂ 纳米带器件，将沟道长度和宽度同时压到约 25–30 nm；在漏源电压 1 V 下，n 型 MoS₂、n 型 WS₂ 和 p 型 WSe₂ 的最高开态电流分别约为 560、420 和 130 μA·μm⁻¹。这个结果不只是栅长缩短了一步，还把边缘损伤、接触锚定、线宽分布和纳米带良率这些问题一起摆了出来，也呼应了近年关于二维晶体管缩放压力的评论[29]。二维沟道要进入先进逻辑，必须经得起这类图形化检验。",
       "preview": "2026 年 Nature Nanotechnology 报道的单层...",
       "citations": [
-        31,
-        33
+        27,
+        29
       ],
       "topics": [
         "evaluation",
@@ -2446,8 +2421,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p104",
-      "rawIndex": 104,
+      "id": "p103",
+      "rawIndex": 103,
       "kind": "image",
       "type": "image",
       "sectionId": "s13",
@@ -2465,16 +2440,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p105",
-      "rawIndex": 105,
+      "id": "p104",
+      "rawIndex": 104,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s13",
       "sectionTitle": "3.1 沟道微缩",
-      "text": "图 4 单层 TMD 纳米带晶体管的结构设计、沟道宽度缩放与多重图形化策略[31]。(a) 纳米带晶体管结构与沟道长度、沟道宽度定义；(b,c) 不同沟道宽度下的转移特性和开态/关态电流分布；(d,e) 单次图形化与多重图形化获得窄沟道纳米带的过程。这些结果提示，二维沟道进入 nanosheet/GAA 尺度后，沟道宽度和边缘图形化质量会与栅长一起决定器件可缩放性。 来源：文献[31]。",
+      "text": "图 4 单层 TMD 纳米带晶体管的结构设计、沟道宽度缩放与多重图形化策略[27]。(a) 纳米带晶体管结构与沟道长度、沟道宽度定义；(b,c) 不同沟道宽度下的转移特性和开态/关态电流分布；(d,e) 单次图形化与多重图形化获得窄沟道纳米带的过程。这些结果提示，二维沟道进入 nanosheet/GAA 尺度后，沟道宽度和边缘图形化质量会与栅长一起决定器件可缩放性。 来源：文献[27]。",
       "preview": "图 4 单层 TMD 纳米带晶体管的结构设计、沟道宽度缩放与多重图形...",
       "citations": [
-        31
+        27
       ],
       "topics": [
         "wafer"
@@ -2482,8 +2457,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p106",
-      "rawIndex": 106,
+      "id": "p105",
+      "rawIndex": 105,
       "kind": "image",
       "type": "image",
       "sectionId": "s13",
@@ -2501,16 +2476,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p107",
-      "rawIndex": 107,
+      "id": "p106",
+      "rawIndex": 106,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s13",
       "sectionTitle": "3.1 沟道微缩",
-      "text": "图 5 单层 TMD 纳米带晶体管的沟道长度、温度和宽度依赖输运特性[31]。(a) 不同沟道长度器件的转移特性；(b) 总电阻随沟道长度变化及接触电阻估计；(c) 低温与室温输运对比；(d) 更窄纳米带器件的转移特性。该图补充说明短沟道二维器件的评价必须同时考虑接触、电荷输运和纳米带宽度缩放。 来源：文献[31]。",
+      "text": "图 5 单层 TMD 纳米带晶体管的沟道长度、温度和宽度依赖输运特性[27]。(a) 不同沟道长度器件的转移特性；(b) 总电阻随沟道长度变化及接触电阻估计；(c) 低温与室温输运对比；(d) 更窄纳米带器件的转移特性。该图补充说明短沟道二维器件的评价必须同时考虑接触、电荷输运和纳米带宽度缩放。 来源：文献[27]。",
       "preview": "图 5 单层 TMD 纳米带晶体管的沟道长度、温度和宽度依赖输运特性...",
       "citations": [
-        31
+        27
       ],
       "topics": [
         "scaling",
@@ -2519,8 +2494,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p108",
-      "rawIndex": 108,
+      "id": "p107",
+      "rawIndex": 107,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s13",
@@ -2534,8 +2509,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p109",
-      "rawIndex": 109,
+      "id": "p108",
+      "rawIndex": 108,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s14",
@@ -2548,20 +2523,36 @@ window.PAPER_DATA = {
       ]
     },
     {
+      "id": "p109",
+      "rawIndex": 109,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s14",
+      "sectionTitle": "3.2 低阻接触",
+      "text": "在二维晶体管中，接触往往比沟道更早成为限制。二维表面虽然没有悬挂键，但金属蒸镀时的高能粒子仍会扰动表面原子，形成界面态，并把费米能级钉扎在不利位置。早期 MoS₂ 器件已经能显示较好栅控，却常被肖特基势垒和高接触电阻压低驱动电流[25,28]。后来人们逐渐认识到，简单换金属功函数并不能稳定解决这个问题，因为真正起作用的是原子尺度界面是否被损伤、是否形成低势垒注入路径[28]。",
+      "preview": "在二维晶体管中，接触往往比沟道更早成为限制。二维表面虽然没有悬挂键，...",
+      "citations": [
+        25,
+        28
+      ],
+      "topics": [
+        "scaling",
+        "contact"
+      ]
+    },
+    {
       "id": "p110",
       "rawIndex": 110,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
       "sectionTitle": "3.2 低阻接触",
-      "text": "在二维晶体管中，接触往往比沟道更早成为限制。二维表面虽然没有悬挂键，但金属蒸镀时的高能粒子仍会扰动表面原子，形成界面态，并把费米能级钉扎在不利位置。早期 MoS₂ 器件已经能显示较好栅控，却常被肖特基势垒和高接触电阻压低驱动电流[29,32]。后来人们逐渐认识到，简单换金属功函数并不能稳定解决这个问题，因为真正起作用的是原子尺度界面是否被损伤、是否形成低势垒注入路径[32]。",
-      "preview": "在二维晶体管中，接触往往比沟道更早成为限制。二维表面虽然没有悬挂键，...",
+      "text": "接触研究最初多从金属选择、退火和局部缺陷调节入手，但改善并不稳定。无损范德瓦耳斯接触出现后，研究重点转向界面本身。Liu 等用转移或温和集成方式制备电极，使单层 MoS₂ 接触电阻降至 200±70 Ω·μm，钉扎因子接近肖特基-莫特极限[10]。这说明严重钉扎并不是二维半导体不可避免的属性，蒸镀损伤和界面态才是需要首先控制的因素。",
+      "preview": "接触研究最初多从金属选择、退火和局部缺陷调节入手，但改善并不稳定。无...",
       "citations": [
-        29,
-        32
+        10
       ],
       "topics": [
-        "scaling",
         "contact"
       ]
     },
@@ -2572,27 +2563,11 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s14",
       "sectionTitle": "3.2 低阻接触",
-      "text": "接触研究最初多从金属选择、退火和局部缺陷调节入手，但改善并不稳定。无损范德瓦耳斯接触出现后，研究重点转向界面本身。Liu 等用转移或温和集成方式制备电极，使单层 MoS₂ 接触电阻降至 200±70 Ω·μm，钉扎因子接近肖特基-莫特极限[14]。这说明严重钉扎并不是二维半导体不可避免的属性，蒸镀损伤和界面态才是需要首先控制的因素。",
-      "preview": "接触研究最初多从金属选择、退火和局部缺陷调节入手，但改善并不稳定。无...",
-      "citations": [
-        14
-      ],
-      "topics": [
-        "contact"
-      ]
-    },
-    {
-      "id": "p112",
-      "rawIndex": 112,
-      "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s14",
-      "sectionTitle": "3.2 低阻接触",
-      "text": "第三阶段的重点不再是单纯修补界面，而是直接改造接触区本身。相变或重掺杂诱导的虚拟接触、半金属接触，都是这一思路的代表。Jiang 等在 InSe 中利用 Y 掺杂诱导局域相变，形成原子级连续的半金属-半导体同质接触，使接触电阻降至 62±6 Ω·μm，并在低电压下释放出接近弹道极限的驱动能力[11]。单层 MoS₂ 中的半金属 Sb 接触也给出了很强结果：接触电阻压低至 42 Ω·μm，脉冲条件下开态电流达到 1.54 mA·μm⁻¹[15]。这些工作改变了早期二维器件栅控好但电流低的印象。",
+      "text": "第三阶段的重点不再是单纯修补界面，而是直接改造接触区本身。相变或重掺杂诱导的虚拟接触、半金属接触，都是这一思路的代表。Jiang 等在 InSe 中利用 Y 掺杂诱导局域相变，形成原子级连续的半金属-半导体同质接触，使接触电阻降至 62±6 Ω·μm，并在低电压下释放出接近弹道极限的驱动能力[7]。单层 MoS₂ 中的半金属 Sb 接触也给出了很强结果：接触电阻压低至 42 Ω·μm，脉冲条件下开态电流达到 1.54 mA·μm⁻¹[11]。这些工作改变了早期二维器件栅控好但电流低的印象。",
       "preview": "第三阶段的重点不再是单纯修补界面，而是直接改造接触区本身。相变或重掺...",
       "citations": [
-        11,
-        15
+        7,
+        11
       ],
       "topics": [
         "scaling",
@@ -2601,8 +2576,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p113",
-      "rawIndex": 113,
+      "id": "p112",
+      "rawIndex": 112,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2615,24 +2590,24 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p114",
-      "rawIndex": 114,
+      "id": "p113",
+      "rawIndex": 113,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
       "sectionTitle": "3.2 低阻接触",
-      "text": "近期晶态 Sb 接触 MoS₂ 工作的重要性在于，它把低接触电阻放到了接触长度缩放条件下讨论。原始研究显示，器件在约 18 nm 接触长度下仍实现了约 98 Ω·μm 的接触电阻，并在 40 nm contacted gate pitch 器件中给出 0.85、0.95 和 1.08 mA·μm⁻¹ 的单层、双层和三层 MoS₂ 驱动电流[17]；文献中的阵列统计也支持该接触方案具有可重复性和稳定性。换言之，这项工作的重点不是刷新单个接触电阻数字，而是讨论低阻接触能否随器件尺寸一起缩小。",
+      "text": "近期晶态 Sb 接触 MoS₂ 工作的重要性在于，它把低接触电阻放到了接触长度缩放条件下讨论。原始研究显示，器件在约 18 nm 接触长度下仍实现了约 98 Ω·μm 的接触电阻，并在 40 nm contacted gate pitch 器件中给出 0.85、0.95 和 1.08 mA·μm⁻¹ 的单层、双层和三层 MoS₂ 驱动电流[13]；文献中的阵列统计也支持该接触方案具有可重复性和稳定性。换言之，这项工作的重点不是刷新单个接触电阻数字，而是讨论低阻接触能否随器件尺寸一起缩小。",
       "preview": "近期晶态 Sb 接触 MoS₂ 工作的重要性在于，它把低接触电阻放到...",
       "citations": [
-        17
+        13
       ],
       "topics": [
         "contact"
       ]
     },
     {
-      "id": "p115",
-      "rawIndex": 115,
+      "id": "p114",
+      "rawIndex": 114,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2645,8 +2620,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p116",
-      "rawIndex": 116,
+      "id": "p115",
+      "rawIndex": 115,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2661,8 +2636,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p117",
-      "rawIndex": 117,
+      "id": "p116",
+      "rawIndex": 116,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2676,8 +2651,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p118",
-      "rawIndex": 118,
+      "id": "p117",
+      "rawIndex": 117,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2692,8 +2667,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p119",
-      "rawIndex": 119,
+      "id": "p118",
+      "rawIndex": 118,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s14",
@@ -2708,8 +2683,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p120",
-      "rawIndex": 120,
+      "id": "p119",
+      "rawIndex": 119,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2725,8 +2700,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p121",
-      "rawIndex": 121,
+      "id": "p120",
+      "rawIndex": 120,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s14",
@@ -2737,8 +2712,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p122",
-      "rawIndex": 122,
+      "id": "p121",
+      "rawIndex": 121,
       "kind": "image",
       "type": "image",
       "sectionId": "s14",
@@ -2756,16 +2731,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p123",
-      "rawIndex": 123,
+      "id": "p122",
+      "rawIndex": 122,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s14",
       "sectionTitle": "3.2 低阻接触",
-      "text": "图 6 无损范德瓦耳斯—合金接触的代表性进展[14]。(a) 原子级清晰的接触界面与局域结构表征；(b) 极性可调的输运特性；(c) In 合金接触 WSe₂ 的接触电阻基准位置。该图强调低损伤界面对释放沟道本征输运的重要性。 来源：文献[14]。",
+      "text": "图 6 无损范德瓦耳斯—合金接触的代表性进展[10]。(a) 原子级清晰的接触界面与局域结构表征；(b) 极性可调的输运特性；(c) In 合金接触 WSe₂ 的接触电阻基准位置。该图强调低损伤界面对释放沟道本征输运的重要性。 来源：文献[10]。",
       "preview": "图 6 无损范德瓦耳斯—合金接触的代表性进展。(a) 原子级清晰的接...",
       "citations": [
-        14
+        10
       ],
       "topics": [
         "contact",
@@ -2774,8 +2749,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p124",
-      "rawIndex": 124,
+      "id": "p123",
+      "rawIndex": 123,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s15",
@@ -2788,8 +2763,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p125",
-      "rawIndex": 125,
+      "id": "p124",
+      "rawIndex": 124,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
@@ -2803,18 +2778,18 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p126",
-      "rawIndex": 126,
+      "id": "p125",
+      "rawIndex": 125,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "二维材料表面没有悬挂键，这有利于形成洁净界面，但也使常规 ALD 工艺难以均匀成核。若成核过程引入残余氢、氧空位或界面陷阱，器件就容易出现迟滞、阈值漂移和亚阈值摆幅恶化[8-9]。二维栅堆栈的发展不能等同于简单更换一种高 κ 材料，而要同时解决成核、钝化和热稳定问题。近期电子器件领域的观点文章也指出，掺杂、p 型接触和高介电常数介质已成为二维 TMD 电子学最紧迫的工艺问题，而这些问题在很大程度上共同受制于材料缺陷密度[5]。",
+      "text": "二维材料表面没有悬挂键，这有利于形成洁净界面，但也使常规 ALD 工艺难以均匀成核。若成核过程引入残余氢、氧空位或界面陷阱，器件就容易出现迟滞、阈值漂移和亚阈值摆幅恶化[4-5]。二维栅堆栈的发展不能等同于简单更换一种高 κ 材料，而要同时解决成核、钝化和热稳定问题。近期电子器件领域的观点文章也指出，掺杂、p 型接触和高介电常数介质已成为二维 TMD 电子学最紧迫的工艺问题，而这些问题在很大程度上共同受制于材料缺陷密度[1]。",
       "preview": "二维材料表面没有悬挂键，这有利于形成洁净界面，但也使常规 ALD 工...",
       "citations": [
-        5,
-        8,
-        9
+        1,
+        4,
+        5
       ],
       "topics": [
         "scaling",
@@ -2823,16 +2798,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p127",
-      "rawIndex": 127,
+      "id": "p126",
+      "rawIndex": 126,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "近期 Science 工作把另一个问题提了出来：二维界面即使缺陷少，也可能存在埃量级范德瓦耳斯间隙。这个低介电常数间隙会降低隧穿漏电，却也会以串联电容的形式削弱栅耦合，并提高金属—沟道接触电阻[23]。所以，无悬挂键表面并不自动等于理想界面。继续减小等效氧化层厚度时，除了选材料，还要控制原子层之间到底怎样贴合。",
+      "text": "近期 Science 工作把另一个问题提了出来：二维界面即使缺陷少，也可能存在埃量级范德瓦耳斯间隙。这个低介电常数间隙会降低隧穿漏电，却也会以串联电容的形式削弱栅耦合，并提高金属—沟道接触电阻[19]。所以，无悬挂键表面并不自动等于理想界面。继续减小等效氧化层厚度时，除了选材料，还要控制原子层之间到底怎样贴合。",
       "preview": "近期 Science 工作把另一个问题提了出来：二维界面即使缺陷少，...",
       "citations": [
-        23
+        19
       ],
       "topics": [
         "scaling",
@@ -2840,8 +2815,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p128",
-      "rawIndex": 128,
+      "id": "p127",
+      "rawIndex": 127,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s15",
@@ -2854,17 +2829,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p129",
-      "rawIndex": 129,
+      "id": "p128",
+      "rawIndex": 128,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "另一条线索是采用 h-BN、CaF₂ 等范德瓦耳斯介质或中间层钝化，减少界面态和迟滞。部分器件已报告约 61–63 mV·dec⁻¹ 的亚阈值摆幅[11,16]。因此，栅介质不再只是能否覆盖二维沟道的问题，而是能否同时给出薄介质、低缺陷和稳定栅控。",
+      "text": "另一条线索是采用 h-BN、CaF₂ 等范德瓦耳斯介质或中间层钝化，减少界面态和迟滞。部分器件已报告约 61–63 mV·dec⁻¹ 的亚阈值摆幅[7,12]。因此，栅介质不再只是能否覆盖二维沟道的问题，而是能否同时给出薄介质、低缺陷和稳定栅控。",
       "preview": "另一条线索是采用 h-BN、CaF₂ 等范德瓦耳斯介质或中间层钝化，...",
       "citations": [
-        11,
-        16
+        7,
+        12
       ],
       "topics": [
         "scaling",
@@ -2872,18 +2847,18 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p130",
-      "rawIndex": 130,
+      "id": "p129",
+      "rawIndex": 129,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "2024–2026 年的代表性结果使栅堆栈问题更接近实际器件。一类工作采用单晶金属氧化物顶栅，改善界面有序性、漏电和短沟道静电学表现；另一类工作把 CMOS 兼容顶栅做到 1 nm 量级甚至亚 5 Å 等效氧化层厚度[18-19,34]。这些结果说明，超薄高 κ 介质可以和制造约束放在一起讨论，但还需要继续检验漏电、迟滞和器件分布。",
+      "text": "2024–2026 年的代表性结果使栅堆栈问题更接近实际器件。一类工作采用单晶金属氧化物顶栅，改善界面有序性、漏电和短沟道静电学表现；另一类工作把 CMOS 兼容顶栅做到 1 nm 量级甚至亚 5 Å 等效氧化层厚度[14-15,30]。这些结果说明，超薄高 κ 介质可以和制造约束放在一起讨论，但还需要继续检验漏电、迟滞和器件分布。",
       "preview": "2024–2026 年的代表性结果使栅堆栈问题更接近实际器件。一类工...",
       "citations": [
-        18,
-        19,
-        34
+        14,
+        15,
+        30
       ],
       "topics": [
         "scaling",
@@ -2893,8 +2868,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p131",
-      "rawIndex": 131,
+      "id": "p130",
+      "rawIndex": 130,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s15",
@@ -2908,8 +2883,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p132",
-      "rawIndex": 132,
+      "id": "p131",
+      "rawIndex": 131,
       "kind": "image",
       "type": "image",
       "sectionId": "s15",
@@ -2927,16 +2902,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p133",
-      "rawIndex": 133,
+      "id": "p132",
+      "rawIndex": 132,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "图 7 高 κ 范德瓦耳斯介质集成与三维互补逻辑验证[22]。(a) HfO₂ 高 κ 介质集成示意；(b,c) HfO₂/MoS₂ 与 HfO₂/WSe₂ 栅堆栈的截面与界面表征；(d) 基于该介质路线的二维互补逻辑验证。该图用于说明介质研究不能只看等效氧化层厚度，还应同时检验界面质量、器件性能和逻辑可用性。来源：文献[22]。",
+      "text": "图 7 高 κ 范德瓦耳斯介质集成与三维互补逻辑验证[18]。(a) HfO₂ 高 κ 介质集成示意；(b,c) HfO₂/MoS₂ 与 HfO₂/WSe₂ 栅堆栈的截面与界面表征；(d) 基于该介质路线的二维互补逻辑验证。该图用于说明介质研究不能只看等效氧化层厚度，还应同时检验界面质量、器件性能和逻辑可用性。来源：文献[18]。",
       "preview": "图 7 高 κ 范德瓦耳斯介质集成与三维互补逻辑验证。(a) HfO...",
       "citations": [
-        22
+        18
       ],
       "topics": [
         "scaling",
@@ -2946,16 +2921,16 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p134",
-      "rawIndex": 134,
+      "id": "p133",
+      "rawIndex": 133,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "2026 年关于高 κ 范德瓦耳斯介质的工作，又把阈值电压问题讲得更清楚。二维晶体管中长期被忽视的阈值工程，已从经验调偏走到可编程调控：研究者利用双金属硫代磷酸盐介质，在单层 MoS₂ 和双层 WSe₂ 器件中实现非易失阈值调节，并在二维 CMOS 反相器中获得接近三个数量级的静态功耗下降，同时保持较高开关速度[20]。这样一来，栅介质不再只是界面质量问题，也直接影响功耗、阈值窗口和逻辑架构。",
+      "text": "2026 年关于高 κ 范德瓦耳斯介质的工作，又把阈值电压问题讲得更清楚。二维晶体管中长期被忽视的阈值工程，已从经验调偏走到可编程调控：研究者利用双金属硫代磷酸盐介质，在单层 MoS₂ 和双层 WSe₂ 器件中实现非易失阈值调节，并在二维 CMOS 反相器中获得接近三个数量级的静态功耗下降，同时保持较高开关速度[16]。这样一来，栅介质不再只是界面质量问题，也直接影响功耗、阈值窗口和逻辑架构。",
       "preview": "2026 年关于高 κ 范德瓦耳斯介质的工作，又把阈值电压问题讲得更...",
       "citations": [
-        20
+        16
       ],
       "topics": [
         "dielectric",
@@ -2964,8 +2939,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p135",
-      "rawIndex": 135,
+      "id": "p134",
+      "rawIndex": 134,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
@@ -2981,16 +2956,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p136",
-      "rawIndex": 136,
+      "id": "p135",
+      "rawIndex": 135,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "同样值得注意的是，2026 年 Nature Materials 报道的晶圆级单层介质集成工作，把高质量介质和高良率顶栅制造放在一起讨论[21]。该工作表明，超薄介质问题已经不只是能否获得理想界面，还包括这种界面能否在晶圆尺度上稳定服务于 n 型和 p 型顶栅器件。评价二维介质工程时，应同时看界面质量、阈值工程和制造一致性。",
+      "text": "同样值得注意的是，2026 年 Nature Materials 报道的晶圆级单层介质集成工作，把高质量介质和高良率顶栅制造放在一起讨论[17]。该工作表明，超薄介质问题已经不只是能否获得理想界面，还包括这种界面能否在晶圆尺度上稳定服务于 n 型和 p 型顶栅器件。评价二维介质工程时，应同时看界面质量、阈值工程和制造一致性。",
       "preview": "同样值得注意的是，2026 年 Nature Materials 报...",
       "citations": [
-        21
+        17
       ],
       "topics": [
         "evaluation",
@@ -2999,16 +2974,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p137",
-      "rawIndex": 137,
+      "id": "p136",
+      "rawIndex": 136,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
       "sectionTitle": "3.3 栅介质与界面",
-      "text": "IEEE Electron Device Letters 在 2026 年关于单层 WSe₂ 顶栅 p-MOSFET 的等效氧化层厚度缩放研究，也补充了同一判断[35]。该工作直接把 ZrOₓ/HfOₓ 叠层介质厚度缩放与 p 型器件表现联系起来，说明 p 型二维器件要进入互补逻辑，单靠接触或掺杂改善还不够，还必须在低等效氧化层厚度顶栅结构中同时控制漏电、陷阱和阈值稳定性。p 型器件的追赶已不能停留在背栅或特殊测试结构中的单管表现，而要回到更接近 CMOS 的顶栅堆栈中检验。",
+      "text": "IEEE Electron Device Letters 在 2026 年关于单层 WSe₂ 顶栅 p-MOSFET 的等效氧化层厚度缩放研究，也补充了同一判断[31]。该工作直接把 ZrOₓ/HfOₓ 叠层介质厚度缩放与 p 型器件表现联系起来，说明 p 型二维器件要进入互补逻辑，单靠接触或掺杂改善还不够，还必须在低等效氧化层厚度顶栅结构中同时控制漏电、陷阱和阈值稳定性。p 型器件的追赶已不能停留在背栅或特殊测试结构中的单管表现，而要回到更接近 CMOS 的顶栅堆栈中检验。",
       "preview": "IEEE Electron Device Letters 在 202...",
       "citations": [
-        35
+        31
       ],
       "topics": [
         "scaling",
@@ -3017,8 +2992,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p138",
-      "rawIndex": 138,
+      "id": "p137",
+      "rawIndex": 137,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s15",
@@ -3032,8 +3007,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p139",
-      "rawIndex": 139,
+      "id": "p138",
+      "rawIndex": 138,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
@@ -3047,8 +3022,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p140",
-      "rawIndex": 140,
+      "id": "p139",
+      "rawIndex": 139,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s15",
@@ -3062,8 +3037,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p141",
-      "rawIndex": 141,
+      "id": "p140",
+      "rawIndex": 140,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s15",
@@ -3077,8 +3052,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p142",
-      "rawIndex": 142,
+      "id": "p141",
+      "rawIndex": 141,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s16",
@@ -3091,8 +3066,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p143",
-      "rawIndex": 143,
+      "id": "p142",
+      "rawIndex": 142,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s16",
@@ -3105,16 +3080,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p144",
-      "rawIndex": 144,
+      "id": "p143",
+      "rawIndex": 143,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "目前的极性调控策略主要包括分子掺杂、电荷转移掺杂、界面夹层工程以及接触区局域相变等。其中，NO 分子对双层 WSe₂ 的气相电荷转移掺杂代表了较具工业兼容性的路线。相关研究表明，该方法可以在较低热预算下显著改善空穴注入，获得最高约 421 μA·μm⁻¹ 的开启电流、低至 1.3 kΩ·μm 的接触电阻和低至约 75 mV·dec⁻¹ 的亚阈值摆幅，同时在环境暴露和高温工作条件下保持较好稳定性[36]。这类工作的价值在于显示二维器件极性调控正从偶然的实验现象走向可设计的工艺模块。",
+      "text": "目前的极性调控策略主要包括分子掺杂、电荷转移掺杂、界面夹层工程以及接触区局域相变等。其中，NO 分子对双层 WSe₂ 的气相电荷转移掺杂代表了较具工业兼容性的路线。相关研究表明，该方法可以在较低热预算下显著改善空穴注入，获得最高约 421 μA·μm⁻¹ 的开启电流、低至 1.3 kΩ·μm 的接触电阻和低至约 75 mV·dec⁻¹ 的亚阈值摆幅，同时在环境暴露和高温工作条件下保持较好稳定性[32]。这类工作的价值在于显示二维器件极性调控正从偶然的实验现象走向可设计的工艺模块。",
       "preview": "目前的极性调控策略主要包括分子掺杂、电荷转移掺杂、界面夹层工程以及接...",
       "citations": [
-        36
+        32
       ],
       "topics": [
         "scaling",
@@ -3123,8 +3098,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p145",
-      "rawIndex": 145,
+      "id": "p144",
+      "rawIndex": 144,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
@@ -3137,8 +3112,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p146",
-      "rawIndex": 146,
+      "id": "p145",
+      "rawIndex": 145,
       "kind": "image",
       "type": "image",
       "sectionId": "s16",
@@ -3156,21 +3131,39 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p147",
-      "rawIndex": 147,
+      "id": "p146",
+      "rawIndex": 146,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "图 8 CHCl₃ 掺杂单层 WSe₂ 的光谱、界面构型与能带调控证据[25]。(a,b) 掺杂前后不同温度下的 PL 谱演化；(c,d) 两种吸附构型下的界面电荷分布、吸附能与势垒变化；(e) 掺杂后态密度与能带位置的调整。这些光谱和能带证据表明，p 型掺杂的关键已转向可解释的界面机制控制。 来源：文献[25]。",
+      "text": "图 8 CHCl₃ 掺杂单层 WSe₂ 的光谱、界面构型与能带调控证据[21]。(a,b) 掺杂前后不同温度下的 PL 谱演化；(c,d) 两种吸附构型下的界面电荷分布、吸附能与势垒变化；(e) 掺杂后态密度与能带位置的调整。这些光谱和能带证据表明，p 型掺杂的关键已转向可解释的界面机制控制。 来源：文献[21]。",
       "preview": "图 8 CHCl₃ 掺杂单层 WSe₂ 的光谱、界面构型与能带调控证...",
       "citations": [
-        25
+        21
       ],
       "topics": [
         "polarity"
       ],
       "captionKind": "figure"
+    },
+    {
+      "id": "p147",
+      "rawIndex": 147,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s16",
+      "sectionTitle": "3.4 掺杂与极性",
+      "text": "WSe₂ pFET 的近期论文提醒我们，p 型调控不能只看转移曲线是否右移或左移。表面电荷转移掺杂要控制均匀性、作用位置和处理温度，否则很难进入 VLSI 流程[20]。无损 p 型掺杂同样如此：空穴注入变好，如果换来界面破坏，后续互补工艺反而会更难[22]。",
+      "preview": "WSe₂ pFET 的近期论文提醒我们，p 型调控不能只看转移曲线是...",
+      "citations": [
+        20,
+        22
+      ],
+      "topics": [
+        "polarity",
+        "wafer"
+      ]
     },
     {
       "id": "p148",
@@ -3179,15 +3172,13 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "WSe₂ pFET 的近期论文提醒我们，p 型调控不能只看转移曲线是否右移或左移。表面电荷转移掺杂要控制均匀性、作用位置和处理温度，否则很难进入 VLSI 流程[24]。无损 p 型掺杂同样如此：空穴注入变好，如果换来界面破坏，后续互补工艺反而会更难[26]。",
-      "preview": "WSe₂ pFET 的近期论文提醒我们，p 型调控不能只看转移曲线是...",
+      "text": "与此同时，由 InSe 与 WSe₂ 构成的范德瓦耳斯异质晶体管中，漏压调控双极性的 IEEE EDL 结果表明，二维异质结的能带和极性仍有较大可设计空间[33]。不过，对主流 CMOS 来说，动态双极性并不能替代稳定的 n 型与 p 型配对；它更适合说明二维材料在可重构器件和特殊逻辑结构中仍有额外自由度。",
+      "preview": "与此同时，由 InSe 与 WSe₂ 构成的范德瓦耳斯异质晶体管中，...",
       "citations": [
-        24,
-        26
+        33
       ],
       "topics": [
-        "polarity",
-        "wafer"
+        "polarity"
       ]
     },
     {
@@ -3197,13 +3188,14 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "与此同时，由 InSe 与 WSe₂ 构成的范德瓦耳斯异质晶体管中，漏压调控双极性的 IEEE EDL 结果表明，二维异质结的能带和极性仍有较大可设计空间[37]。不过，对主流 CMOS 来说，动态双极性并不能替代稳定的 n 型与 p 型配对；它更适合说明二维材料在可重构器件和特殊逻辑结构中仍有额外自由度。",
-      "preview": "与此同时，由 InSe 与 WSe₂ 构成的范德瓦耳斯异质晶体管中，...",
+      "text": "国内也已有类似尝试。《物理学报》2025 年报道的一项 WSe₂ 工作，用一步退火和不同金属接触，在同一材料体系上制备了互补晶体管和反相器；器件在 2.5 V 下得到 23 的电压增益和 2.3 V 的总噪声容限[34]。这还不是先进 CMOS 水平，但说明较简单流程也能给出二维互补逻辑雏形。",
+      "preview": "国内也已有类似尝试。《物理学报》2025 年报道的一项 WSe₂ 工...",
       "citations": [
-        37
+        34
       ],
       "topics": [
-        "polarity"
+        "polarity",
+        "circuit"
       ]
     },
     {
@@ -3213,27 +3205,10 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "国内也已有类似尝试。《物理学报》2025 年报道的一项 WSe₂ 工作，用一步退火和不同金属接触，在同一材料体系上制备了互补晶体管和反相器；器件在 2.5 V 下得到 23 的电压增益和 2.3 V 的总噪声容限[38]。这还不是先进 CMOS 水平，但说明较简单流程也能给出二维互补逻辑雏形。",
-      "preview": "国内也已有类似尝试。《物理学报》2025 年报道的一项 WSe₂ 工...",
-      "citations": [
-        38
-      ],
-      "topics": [
-        "polarity",
-        "circuit"
-      ]
-    },
-    {
-      "id": "p151",
-      "rawIndex": 151,
-      "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s16",
-      "sectionTitle": "3.4 掺杂与极性",
-      "text": "另一个参照是 2024 年片上二维 CMOS 逻辑工作。它通过精确 p 型和 n 型掺杂构建互补逻辑[39]，说明极性调控若要走向 CMOS，必须同时考虑局域掺杂、图形化和线路验证。",
+      "text": "另一个参照是 2024 年片上二维 CMOS 逻辑工作。它通过精确 p 型和 n 型掺杂构建互补逻辑[35]，说明极性调控若要走向 CMOS，必须同时考虑局域掺杂、图形化和线路验证。",
       "preview": "另一个参照是 2024 年片上二维 CMOS 逻辑工作。它通过精确 ...",
       "citations": [
-        39
+        35
       ],
       "topics": [
         "polarity",
@@ -3241,8 +3216,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p152",
-      "rawIndex": 152,
+      "id": "p151",
+      "rawIndex": 151,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
@@ -3255,8 +3230,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p153",
-      "rawIndex": 153,
+      "id": "p152",
+      "rawIndex": 152,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
@@ -3271,8 +3246,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p154",
-      "rawIndex": 154,
+      "id": "p153",
+      "rawIndex": 153,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
@@ -3285,17 +3260,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p155",
-      "rawIndex": 155,
+      "id": "p154",
+      "rawIndex": 154,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "最新单层 WSe₂ pFET 说明，p 型器件在开态电流和接触电阻上已经明显追上来[12-13]。但二维 CMOS 的证明还需要更多条件。互补逻辑要看阈值电压、驱动能力、漏电、迟滞、顶栅介质、器件离散度和长期稳定性是否能一起收敛。只要这些参数还不能在同一流程下同时成立，单个 pFET 的突破就只是必要条件。p 型路线下一步要回答的是：它能不能和 n 型器件在同一供电、同一介质和相近尺寸下稳定配对。",
+      "text": "最新单层 WSe₂ pFET 说明，p 型器件在开态电流和接触电阻上已经明显追上来[8-9]。但二维 CMOS 的证明还需要更多条件。互补逻辑要看阈值电压、驱动能力、漏电、迟滞、顶栅介质、器件离散度和长期稳定性是否能一起收敛。只要这些参数还不能在同一流程下同时成立，单个 pFET 的突破就只是必要条件。p 型路线下一步要回答的是：它能不能和 n 型器件在同一供电、同一介质和相近尺寸下稳定配对。",
       "preview": "最新单层 WSe₂ pFET 说明，p 型器件在开态电流和接触电阻上...",
       "citations": [
-        12,
-        13
+        8,
+        9
       ],
       "topics": [
         "contact",
@@ -3304,8 +3279,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p156",
-      "rawIndex": 156,
+      "id": "p155",
+      "rawIndex": 155,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s16",
@@ -3319,8 +3294,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p157",
-      "rawIndex": 157,
+      "id": "p156",
+      "rawIndex": 156,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s16",
@@ -3333,16 +3308,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p158",
-      "rawIndex": 158,
+      "id": "p157",
+      "rawIndex": 157,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s16",
       "sectionTitle": "3.4 掺杂与极性",
-      "text": "p 型路线已经开始从单个器件验证走向中等规模集成验证。基于 p 型二维半导体 MoTe₂ 的最新工作实现了 4 英寸尺度较均匀的 2H-MoTe₂ 薄膜，并做出了百管量级集成电路和 140 晶体管全加器[40]。文献同时给出了约 10⁵ 的开关比和约 7 cm²·V⁻¹·s⁻¹ 的迁移率等代表性指标。这组数据尚不能说明 p 型二维器件已经追平先进硅 PMOS，但它把 p 型二维器件从单管可工作推进到具有一定可集成性的层次，说明 p 型路线开始具备进入电路验证的基础。",
+      "text": "p 型路线已经开始从单个器件验证走向中等规模集成验证。基于 p 型二维半导体 MoTe₂ 的最新工作实现了 4 英寸尺度较均匀的 2H-MoTe₂ 薄膜，并做出了百管量级集成电路和 140 晶体管全加器[36]。文献同时给出了约 10⁵ 的开关比和约 7 cm²·V⁻¹·s⁻¹ 的迁移率等代表性指标。这组数据尚不能说明 p 型二维器件已经追平先进硅 PMOS，但它把 p 型二维器件从单管可工作推进到具有一定可集成性的层次，说明 p 型路线开始具备进入电路验证的基础。",
       "preview": "p 型路线已经开始从单个器件验证走向中等规模集成验证。基于 p 型二...",
       "citations": [
-        40
+        36
       ],
       "topics": [
         "polarity",
@@ -3350,8 +3325,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p159",
-      "rawIndex": 159,
+      "id": "p158",
+      "rawIndex": 158,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s17",
@@ -3364,16 +3339,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p160",
-      "rawIndex": 160,
+      "id": "p159",
+      "rawIndex": 159,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s17",
       "sectionTitle": "3.5 图形化、边缘与刻蚀损伤",
-      "text": "二维半导体进入电子制造流程，必须被稳定地图形化为纳米尺度沟道、隔离区和接触窗口。问题在于，这类材料厚度极薄，传统等离子体刻蚀极易造成边缘缺陷、硫空位和界面态升高。早期基于反应离子刻蚀和感应耦合等离子体（reactive ion etching and inductively coupled plasma, RIE and ICP）的加工研究虽然证明了二维材料可以被标准半导体工艺图形化，但同时也显示，工艺损伤会显著抬高接触电阻、降低迁移率，并使器件在深亚微米尺度下迅速受接触主导[41]。",
+      "text": "二维半导体进入电子制造流程，必须被稳定地图形化为纳米尺度沟道、隔离区和接触窗口。问题在于，这类材料厚度极薄，传统等离子体刻蚀极易造成边缘缺陷、硫空位和界面态升高。早期基于反应离子刻蚀和感应耦合等离子体（reactive ion etching and inductively coupled plasma, RIE and ICP）的加工研究虽然证明了二维材料可以被标准半导体工艺图形化，但同时也显示，工艺损伤会显著抬高接触电阻、降低迁移率，并使器件在深亚微米尺度下迅速受接触主导[37]。",
       "preview": "二维半导体进入电子制造流程，必须被稳定地图形化为纳米尺度沟道、隔离区...",
       "citations": [
-        41
+        37
       ],
       "topics": [
         "contact",
@@ -3381,25 +3356,25 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p161",
-      "rawIndex": 161,
+      "id": "p160",
+      "rawIndex": 160,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s17",
       "sectionTitle": "3.5 图形化、边缘与刻蚀损伤",
-      "text": "二维材料刻蚀的难点在于，既要精确定义图形边界，又要避免沟道损伤。现有路线大致有三类：一是降低传统等离子体损伤，二是采用 XeF₂ 等温和气相刻蚀，三是发展原子层刻蚀和软等离子体工艺[42-43]。",
+      "text": "二维材料刻蚀的难点在于，既要精确定义图形边界，又要避免沟道损伤。现有路线大致有三类：一是降低传统等离子体损伤，二是采用 XeF₂ 等温和气相刻蚀，三是发展原子层刻蚀和软等离子体工艺[38-39]。",
       "preview": "二维材料刻蚀的难点在于，既要精确定义图形边界，又要避免沟道损伤。现有...",
       "citations": [
-        42,
-        43
+        38,
+        39
       ],
       "topics": [
         "wafer"
       ]
     },
     {
-      "id": "p162",
-      "rawIndex": 162,
+      "id": "p161",
+      "rawIndex": 161,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s17",
@@ -3412,8 +3387,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p163",
-      "rawIndex": 163,
+      "id": "p162",
+      "rawIndex": 162,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s17",
@@ -3426,8 +3401,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p164",
-      "rawIndex": 164,
+      "id": "p163",
+      "rawIndex": 163,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s17",
@@ -3440,8 +3415,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p165",
-      "rawIndex": 165,
+      "id": "p164",
+      "rawIndex": 164,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s17",
@@ -3455,16 +3430,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p166",
-      "rawIndex": 166,
+      "id": "p165",
+      "rawIndex": 165,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s17",
       "sectionTitle": "3.5 图形化、边缘与刻蚀损伤",
-      "text": "前文图 4 和图 5 也可以从图形化角度阅读。该工作采用锚定接触和多重图形化，把沟道长度和宽度同时压到约 25—30 nm，并用 TEPL 和 TEM 等纳米表征确认边缘退化不明显；在 1 V 漏源偏压下，n 型 MoS₂、n 型 WS₂ 和 p 型 WSe₂ 纳米带分别达到最高约 560、420 和 130 μA·μm⁻¹ 的开态电流[31]。因此，本节沿用图 4 和图 5 作为图形化证据，重点讨论边缘质量、接触锚定和线宽分布能否共同支撑纳米带器件的电流、关断和良率。",
+      "text": "前文图 4 和图 5 也可以从图形化角度阅读。该工作采用锚定接触和多重图形化，把沟道长度和宽度同时压到约 25—30 nm，并用 TEPL 和 TEM 等纳米表征确认边缘退化不明显；在 1 V 漏源偏压下，n 型 MoS₂、n 型 WS₂ 和 p 型 WSe₂ 纳米带分别达到最高约 560、420 和 130 μA·μm⁻¹ 的开态电流[27]。因此，本节沿用图 4 和图 5 作为图形化证据，重点讨论边缘质量、接触锚定和线宽分布能否共同支撑纳米带器件的电流、关断和良率。",
       "preview": "前文图 4 和图 5 也可以从图形化角度阅读。该工作采用锚定接触和多...",
       "citations": [
-        31
+        27
       ],
       "topics": [
         "evaluation",
@@ -3473,8 +3448,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p167",
-      "rawIndex": 167,
+      "id": "p166",
+      "rawIndex": 166,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s18",
@@ -3487,8 +3462,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p168",
-      "rawIndex": 168,
+      "id": "p167",
+      "rawIndex": 167,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s18",
@@ -3502,8 +3477,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p169",
-      "rawIndex": 169,
+      "id": "p168",
+      "rawIndex": 168,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s18",
@@ -3517,8 +3492,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p170",
-      "rawIndex": 170,
+      "id": "p169",
+      "rawIndex": 169,
       "kind": "image",
       "type": "image",
       "sectionId": "s18",
@@ -3536,21 +3511,38 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p171",
-      "rawIndex": 171,
+      "id": "p170",
+      "rawIndex": 170,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "图 9 Se 介导晶圆级干转移及其器件验证[44]。(a) Se 中间层辅助的二维半导体干转移工艺；(b) 晶圆级转移后薄膜完整性与均匀性表征；(c) 基于转移薄膜构建的器件与逻辑性能验证。图中强调，单片集成的关键在于以洁净、低损伤且工艺兼容的方式完成材料导入。 来源：文献[44]。",
+      "text": "图 9 Se 介导晶圆级干转移及其器件验证[40]。(a) Se 中间层辅助的二维半导体干转移工艺；(b) 晶圆级转移后薄膜完整性与均匀性表征；(c) 基于转移薄膜构建的器件与逻辑性能验证。图中强调，单片集成的关键在于以洁净、低损伤且工艺兼容的方式完成材料导入。 来源：文献[40]。",
       "preview": "图 9 Se 介导晶圆级干转移及其器件验证。(a) Se 中间层辅助...",
       "citations": [
-        44
+        40
       ],
       "topics": [
         "wafer"
       ],
       "captionKind": "figure"
+    },
+    {
+      "id": "p171",
+      "rawIndex": 171,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s18",
+      "sectionTitle": "3.6 晶圆级制备、转移与集成",
+      "text": "近两年更具标志性的进展，是晶圆级二维材料与金属电极的可靠范德瓦耳斯集成开始被直接证明。相关研究显示，在大面积二维材料平台上构建低损伤接触和较高良率互连已不再只是小尺寸样品中的物理演示，而是开始具备晶圆级工艺验证的意味[41]。这类工作之所以重要，在于它把过去常被分开讨论的材料转移、界面洁净度和接触稳定性，放进同一个制造流程中考察。",
+      "preview": "近两年更具标志性的进展，是晶圆级二维材料与金属电极的可靠范德瓦耳斯集...",
+      "citations": [
+        41
+      ],
+      "topics": [
+        "evaluation",
+        "wafer"
+      ]
     },
     {
       "id": "p172",
@@ -3559,36 +3551,19 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "近两年更具标志性的进展，是晶圆级二维材料与金属电极的可靠范德瓦耳斯集成开始被直接证明。相关研究显示，在大面积二维材料平台上构建低损伤接触和较高良率互连已不再只是小尺寸样品中的物理演示，而是开始具备晶圆级工艺验证的意味[45]。这类工作之所以重要，在于它把过去常被分开讨论的材料转移、界面洁净度和接触稳定性，放进同一个制造流程中考察。",
-      "preview": "近两年更具标志性的进展，是晶圆级二维材料与金属电极的可靠范德瓦耳斯集...",
+      "text": "近年的另一处变化，是二维半导体文献中开始出现类晶圆厂组织方式[42-43]。这类工作把材料生长、版图设计、器件制造、互连和测试评估放在反复迭代的流程中，而不是只展示若干单器件结果。由此可以看到，晶圆级集成的难点已经从做出高性能样品，进一步推进到能否在完整流程中压缩波动。二维半导体的竞争，也越来越接近整套流程能力的竞争。",
+      "preview": "近年的另一处变化，是二维半导体文献中开始出现类晶圆厂组织方式。这类工...",
       "citations": [
-        45
+        42,
+        43
       ],
       "topics": [
-        "evaluation",
         "wafer"
       ]
     },
     {
       "id": "p173",
       "rawIndex": 173,
-      "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s18",
-      "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "近年的另一处变化，是二维半导体文献中开始出现类晶圆厂组织方式[46-47]。这类工作把材料生长、版图设计、器件制造、互连和测试评估放在反复迭代的流程中，而不是只展示若干单器件结果。由此可以看到，晶圆级集成的难点已经从做出高性能样品，进一步推进到能否在完整流程中压缩波动。二维半导体的竞争，也越来越接近整套流程能力的竞争。",
-      "preview": "近年的另一处变化，是二维半导体文献中开始出现类晶圆厂组织方式。这类工...",
-      "citations": [
-        46,
-        47
-      ],
-      "topics": [
-        "wafer"
-      ]
-    },
-    {
-      "id": "p174",
-      "rawIndex": 174,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s18",
@@ -3603,25 +3578,25 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p175",
-      "rawIndex": 175,
+      "id": "p174",
+      "rawIndex": 174,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "这篇工作有分量的地方之一，在于它没有把多批次优化视为论文之外的背景劳动，而是把大约 130 批次迭代本身纳入技术贡献[46-47]。这反映出二维半导体研究正在形成更成熟的认识：对于面向集成的技术路线，关键不只是最后一次样品做得多好，还包括前面一百多次迭代能否逐步压缩波动、暴露短板并收敛出可重复流程。若没有批次级收敛能力，再亮眼的单次纪录也很难转化为可以被电路设计使用的芯片工艺。",
+      "text": "这篇工作有分量的地方之一，在于它没有把多批次优化视为论文之外的背景劳动，而是把大约 130 批次迭代本身纳入技术贡献[42-43]。这反映出二维半导体研究正在形成更成熟的认识：对于面向集成的技术路线，关键不只是最后一次样品做得多好，还包括前面一百多次迭代能否逐步压缩波动、暴露短板并收敛出可重复流程。若没有批次级收敛能力，再亮眼的单次纪录也很难转化为可以被电路设计使用的芯片工艺。",
       "preview": "这篇工作有分量的地方之一，在于它没有把多批次优化视为论文之外的背景劳...",
       "citations": [
-        46,
-        47
+        42,
+        43
       ],
       "topics": [
         "circuit"
       ]
     },
     {
-      "id": "p176",
-      "rawIndex": 176,
+      "id": "p175",
+      "rawIndex": 175,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s18",
@@ -3637,16 +3612,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p177",
-      "rawIndex": 177,
+      "id": "p176",
+      "rawIndex": 176,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "单片三维集成是晶圆级路线中的另一类问题。二维材料厚度小，部分制备和转移步骤有机会控制在较低热预算内，因此常被考虑放在已完成的硅电路上方[8]。",
+      "text": "单片三维集成是晶圆级路线中的另一类问题。二维材料厚度小，部分制备和转移步骤有机会控制在较低热预算内，因此常被考虑放在已完成的硅电路上方[4]。",
       "preview": "单片三维集成是晶圆级路线中的另一类问题。二维材料厚度小，部分制备和转...",
       "citations": [
-        8
+        4
       ],
       "topics": [
         "wafer",
@@ -3655,17 +3630,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p178",
-      "rawIndex": 178,
+      "id": "p177",
+      "rawIndex": 177,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "这个方向的关键不只是再做一个高性能晶体管，而是材料生长、转移、图形化、接触和互连能否接入标准硅流程[6-7]。因此，判断单片三维二维器件时，应优先看晶圆级一致性、多层对准和层间互连，而不是单个器件是否刷新某项指标。",
+      "text": "这个方向的关键不只是再做一个高性能晶体管，而是材料生长、转移、图形化、接触和互连能否接入标准硅流程[2-3]。因此，判断单片三维二维器件时，应优先看晶圆级一致性、多层对准和层间互连，而不是单个器件是否刷新某项指标。",
       "preview": "这个方向的关键不只是再做一个高性能晶体管，而是材料生长、转移、图形化...",
       "citations": [
-        6,
-        7
+        2,
+        3
       ],
       "topics": [
         "wafer",
@@ -3673,8 +3648,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p179",
-      "rawIndex": 179,
+      "id": "p178",
+      "rawIndex": 178,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s18",
@@ -3687,16 +3662,32 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p180",
-      "rawIndex": 180,
+      "id": "p179",
+      "rawIndex": 179,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "直接生长路线近年也出现了更具约束力的证据。Sakuma 等在 2026 年利用 MOCVD 于蓝宝石衬底上生长单层 MoS₂，使晶粒自对准合并；MoO₂Cl₂ 前驱体带来自限制生长，薄膜厚度自然停在单层。该工作还在 2 英寸尺度上给出较好的厚度均匀性和晶体质量[48]。这类结果把问题从能否得到大面积薄膜，推进到能否稳定控制晶向、晶界和层数。",
+      "text": "直接生长路线近年也出现了更具约束力的证据。Sakuma 等在 2026 年利用 MOCVD 于蓝宝石衬底上生长单层 MoS₂，使晶粒自对准合并；MoO₂Cl₂ 前驱体带来自限制生长，薄膜厚度自然停在单层。该工作还在 2 英寸尺度上给出较好的厚度均匀性和晶体质量[44]。这类结果把问题从能否得到大面积薄膜，推进到能否稳定控制晶向、晶界和层数。",
       "preview": "直接生长路线近年也出现了更具约束力的证据。Sakuma 等在 202...",
       "citations": [
-        48
+        44
+      ],
+      "topics": [
+        "wafer"
+      ]
+    },
+    {
+      "id": "p180",
+      "rawIndex": 180,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s18",
+      "sectionTitle": "3.6 晶圆级制备、转移与集成",
+      "text": "《物理学报》关于 CVD 精准制备二维异质结的综述对生长控制问题作了较系统的归纳[45]。前驱体、温度场、气体诱导和衬底工程分别影响横向或垂直异质结中的界面、组分和结晶质量。对晶圆级器件来说，大面积只是第一步；晶向、晶界、组分和器件目标能否匹配，才决定薄膜是否真正可用。",
+      "preview": "《物理学报》关于 CVD 精准制备二维异质结的综述对生长控制问题作了...",
+      "citations": [
+        45
       ],
       "topics": [
         "wafer"
@@ -3709,22 +3700,6 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s18",
       "sectionTitle": "3.6 晶圆级制备、转移与集成",
-      "text": "《物理学报》关于 CVD 精准制备二维异质结的综述对生长控制问题作了较系统的归纳[49]。前驱体、温度场、气体诱导和衬底工程分别影响横向或垂直异质结中的界面、组分和结晶质量。对晶圆级器件来说，大面积只是第一步；晶向、晶界、组分和器件目标能否匹配，才决定薄膜是否真正可用。",
-      "preview": "《物理学报》关于 CVD 精准制备二维异质结的综述对生长控制问题作了...",
-      "citations": [
-        49
-      ],
-      "topics": [
-        "wafer"
-      ]
-    },
-    {
-      "id": "p182",
-      "rawIndex": 182,
-      "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s18",
-      "sectionTitle": "3.6 晶圆级制备、转移与集成",
       "text": "这些进展说明，二维半导体在接触、介质、极性调控和图形化上已经积累了不少办法。问题在于，一旦进入晶圆级生长和集成，小缺陷会被放大：层数波动会变成阈值分布，转移残留会污染接触和介质界面，热预算也会限制后续处理。晶圆级制造不是把单个器件面积放大，而是检验材料、器件和工艺能否在同一片样品上同时站住。下面转入应用方向讨论。",
       "preview": "这些进展说明，二维半导体在接触、介质、极性调控和图形化上已经积累了不...",
       "citations": [],
@@ -3733,8 +3708,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p183",
-      "rawIndex": 183,
+      "id": "p182",
+      "rawIndex": 182,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s19",
@@ -3745,8 +3720,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p184",
-      "rawIndex": 184,
+      "id": "p183",
+      "rawIndex": 183,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s19",
@@ -3761,8 +3736,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p185",
-      "rawIndex": 185,
+      "id": "p184",
+      "rawIndex": 184,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s20",
@@ -3773,8 +3748,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p186",
-      "rawIndex": 186,
+      "id": "p185",
+      "rawIndex": 185,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s20",
@@ -3788,8 +3763,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p187",
-      "rawIndex": 187,
+      "id": "p186",
+      "rawIndex": 186,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s20",
@@ -3806,18 +3781,35 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p188",
-      "rawIndex": 188,
+      "id": "p187",
+      "rawIndex": 187,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s20",
       "sectionTitle": "4.1 先进逻辑",
-      "text": "二维半导体在从器件到功能芯片的跨越上也已出现标志性信号。2025 年报道的二维半导体 32 位 RISC-V 微处理器表明，二维器件研究已不再局限于单个晶体管或简单逻辑门，而是开始进入面向体系结构验证的功能级集成阶段[50]。尽管这类演示距离高性能通用处理器仍有显著距离，但其重要性在于，二维半导体正在获得与芯片系统可工作性直接相关的证据，而不只是停留在器件物理层面的可行性证明。",
+      "text": "二维半导体在从器件到功能芯片的跨越上也已出现标志性信号。2025 年报道的二维半导体 32 位 RISC-V 微处理器表明，二维器件研究已不再局限于单个晶体管或简单逻辑门，而是开始进入面向体系结构验证的功能级集成阶段[46]。尽管这类演示距离高性能通用处理器仍有显著距离，但其重要性在于，二维半导体正在获得与芯片系统可工作性直接相关的证据，而不只是停留在器件物理层面的可行性证明。",
       "preview": "二维半导体在从器件到功能芯片的跨越上也已出现标志性信号。2025 年...",
       "citations": [
-        50
+        46
       ],
       "topics": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "p188",
+      "rawIndex": 188,
+      "kind": "paragraph",
+      "type": "evidence",
+      "sectionId": "s20",
+      "sectionTitle": "4.1 先进逻辑",
+      "text": "同年报道的互补二维材料单指令集计算机也值得注意。该工作把 n 型 MoS₂ 与 p 型 WSe₂ 器件放入同一计算系统，并分别统计 1000 个 MoS₂ nFET 和 1000 个 WSe₂ pFET；电路在低于 3 V 的供电下实现最高 25 kHz 工作频率，二维 CMOS 反相器的单次开关能量可低至约 100 pJ[47]。这些数字并不表示它已经接近硅基处理器。它的价值在于把互补器件、离散性、基本电路和可运行系统放在一起检验。",
+      "preview": "同年报道的互补二维材料单指令集计算机也值得注意。该工作把 n 型 M...",
+      "citations": [
+        47
+      ],
+      "topics": [
+        "polarity",
         "circuit"
       ]
     },
@@ -3828,28 +3820,11 @@ window.PAPER_DATA = {
       "type": "evidence",
       "sectionId": "s20",
       "sectionTitle": "4.1 先进逻辑",
-      "text": "同年报道的互补二维材料单指令集计算机也值得注意。该工作把 n 型 MoS₂ 与 p 型 WSe₂ 器件放入同一计算系统，并分别统计 1000 个 MoS₂ nFET 和 1000 个 WSe₂ pFET；电路在低于 3 V 的供电下实现最高 25 kHz 工作频率，二维 CMOS 反相器的单次开关能量可低至约 100 pJ[51]。这些数字并不表示它已经接近硅基处理器。它的价值在于把互补器件、离散性、基本电路和可运行系统放在一起检验。",
-      "preview": "同年报道的互补二维材料单指令集计算机也值得注意。该工作把 n 型 M...",
-      "citations": [
-        51
-      ],
-      "topics": [
-        "polarity",
-        "circuit"
-      ]
-    },
-    {
-      "id": "p190",
-      "rawIndex": 190,
-      "kind": "paragraph",
-      "type": "evidence",
-      "sectionId": "s20",
-      "sectionTitle": "4.1 先进逻辑",
-      "text": "2026 年的类晶圆厂二维微处理器工作把这一思路做得更具体[46-47]。研究者经历约 130 批次迭代，把电路设计、版图、材料生长、转移、器件制造和测试放进同一流程，最终实现了全互连百管量级二维微处理器，并报告器件与模块层面的统计良率。这里最值得看的不是某一条转移曲线，而是器件、工艺和电路能不能在多次迭代后一起工作。",
+      "text": "2026 年的类晶圆厂二维微处理器工作把这一思路做得更具体[42-43]。研究者经历约 130 批次迭代，把电路设计、版图、材料生长、转移、器件制造和测试放进同一流程，最终实现了全互连百管量级二维微处理器，并报告器件与模块层面的统计良率。这里最值得看的不是某一条转移曲线，而是器件、工艺和电路能不能在多次迭代后一起工作。",
       "preview": "2026 年的类晶圆厂二维微处理器工作把这一思路做得更具体。研究者经...",
       "citations": [
-        46,
-        47
+        42,
+        43
       ],
       "topics": [
         "evaluation",
@@ -3858,16 +3833,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p191",
-      "rawIndex": 191,
+      "id": "p190",
+      "rawIndex": 190,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s20",
       "sectionTitle": "4.1 先进逻辑",
-      "text": "与此同时，近期 Nature Communications 还展示了一条不同于传统 CMOS 思路的二维逻辑架构路线。基于 bias-gated MoS₂ 晶体管的通用逻辑模块（generic logic block, GLB）只用 4 个器件便可完成多种可重构逻辑操作，并在更高一级功能实现中相较常规 CMOS 设计节省超过 60% 的晶体管数量[52]。这类结果提醒我们，二维半导体的系统价值未必只来自完整复制现有 CMOS，也可能来自器件特性与逻辑架构设计之间的重新匹配。",
+      "text": "与此同时，近期 Nature Communications 还展示了一条不同于传统 CMOS 思路的二维逻辑架构路线。基于 bias-gated MoS₂ 晶体管的通用逻辑模块（generic logic block, GLB）只用 4 个器件便可完成多种可重构逻辑操作，并在更高一级功能实现中相较常规 CMOS 设计节省超过 60% 的晶体管数量[48]。这类结果提醒我们，二维半导体的系统价值未必只来自完整复制现有 CMOS，也可能来自器件特性与逻辑架构设计之间的重新匹配。",
       "preview": "与此同时，近期 Nature Communications 还展示了...",
       "citations": [
-        52
+        48
       ],
       "topics": [
         "polarity",
@@ -3875,17 +3850,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p192",
-      "rawIndex": 192,
+      "id": "p191",
+      "rawIndex": 191,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s20",
       "sectionTitle": "4.1 先进逻辑",
-      "text": "文献中的具体数字更能说明这类工作的分量。相关工作报告了接近 100% 的晶体管良率、约 400 的平均反相器增益；在更高一级模块上，算术逻辑单元、控制单元和 D 锁存器的代表性良率分别约为 96.5%、79.5% 和 61.5%[46-47]。这些数据把验证对象从单器件和基本逻辑门，拉到了由许多晶体管组成的功能模块。",
+      "text": "文献中的具体数字更能说明这类工作的分量。相关工作报告了接近 100% 的晶体管良率、约 400 的平均反相器增益；在更高一级模块上，算术逻辑单元、控制单元和 D 锁存器的代表性良率分别约为 96.5%、79.5% 和 61.5%[42-43]。这些数据把验证对象从单器件和基本逻辑门，拉到了由许多晶体管组成的功能模块。",
       "preview": "文献中的具体数字更能说明这类工作的分量。相关工作报告了接近 100%...",
       "citations": [
-        46,
-        47
+        42,
+        43
       ],
       "topics": [
         "evaluation",
@@ -3893,8 +3868,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p193",
-      "rawIndex": 193,
+      "id": "p192",
+      "rawIndex": 192,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s20",
@@ -3907,8 +3882,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p194",
-      "rawIndex": 194,
+      "id": "p193",
+      "rawIndex": 193,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s20",
@@ -3923,8 +3898,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p195",
-      "rawIndex": 195,
+      "id": "p194",
+      "rawIndex": 194,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s20",
@@ -3937,8 +3912,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p196",
-      "rawIndex": 196,
+      "id": "p195",
+      "rawIndex": 195,
       "kind": "image",
       "type": "image",
       "sectionId": "s20",
@@ -3956,16 +3931,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p197",
-      "rawIndex": 197,
+      "id": "p196",
+      "rawIndex": 196,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s20",
       "sectionTitle": "4.1 先进逻辑",
-      "text": "图 10 二维微处理器中的设计—工艺—测试迭代路径[46]。(a) 传统线性研发流程与二维微处理器协同优化流程对比；(b) 基于搜索、制备和电学测试反馈的晶体管优化过程。阅读该图时，重点在于设计、材料转移、晶圆制造和测试之间形成闭环，而不是单个器件曲线本身。来源：文献[46]。",
+      "text": "图 10 二维微处理器中的设计—工艺—测试迭代路径[42]。(a) 传统线性研发流程与二维微处理器协同优化流程对比；(b) 基于搜索、制备和电学测试反馈的晶体管优化过程。阅读该图时，重点在于设计、材料转移、晶圆制造和测试之间形成闭环，而不是单个器件曲线本身。来源：文献[42]。",
       "preview": "图 10 二维微处理器中的设计—工艺—测试迭代路径。(a) 传统线性...",
       "citations": [
-        46
+        42
       ],
       "topics": [
         "wafer",
@@ -3974,8 +3949,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p198",
-      "rawIndex": 198,
+      "id": "p197",
+      "rawIndex": 197,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s20",
@@ -3988,8 +3963,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p199",
-      "rawIndex": 199,
+      "id": "p198",
+      "rawIndex": 198,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s21",
@@ -4002,8 +3977,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p200",
-      "rawIndex": 200,
+      "id": "p199",
+      "rawIndex": 199,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
@@ -4018,8 +3993,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p201",
-      "rawIndex": 201,
+      "id": "p200",
+      "rawIndex": 200,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s21",
@@ -4035,16 +4010,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p202",
-      "rawIndex": 202,
+      "id": "p201",
+      "rawIndex": 201,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s21",
       "sectionTitle": "4.2 单片三维集成",
-      "text": "这一路线已有实验例子。近期 Nature 论文把硅单片互补 FET 与转移印刷二维 FET 做成三维集成电路，证明二维器件可以作为后道功能层接入硅平台[53]。它没有证明二维器件全面优于硅，却给出了一个明确事实：当平面缩放受限时，二维层能为系统架构提供垂直扩展空间。",
+      "text": "这一路线已有实验例子。近期 Nature 论文把硅单片互补 FET 与转移印刷二维 FET 做成三维集成电路，证明二维器件可以作为后道功能层接入硅平台[49]。它没有证明二维器件全面优于硅，却给出了一个明确事实：当平面缩放受限时，二维层能为系统架构提供垂直扩展空间。",
       "preview": "这一路线已有实验例子。近期 Nature 论文把硅单片互补 FET ...",
       "citations": [
-        53
+        49
       ],
       "topics": [
         "polarity",
@@ -4053,16 +4028,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p203",
-      "rawIndex": 203,
+      "id": "p202",
+      "rawIndex": 202,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
       "sectionTitle": "4.2 单片三维集成",
-      "text": "低温后道集成也存在竞争者。2026 年 Nature 关于硅晶体管单片三维集成的工作显示，硅技术本身也在发展低温多层晶体管[54]。因此，二维半导体不能只强调薄和低温，还要在相同热预算、层间互连、良率和设计接口条件下证明自身收益。它在 M3D 中更现实的价值，可能来自超薄功能层、异质功能补充和更高垂直堆叠密度。",
+      "text": "低温后道集成也存在竞争者。2026 年 Nature 关于硅晶体管单片三维集成的工作显示，硅技术本身也在发展低温多层晶体管[50]。因此，二维半导体不能只强调薄和低温，还要在相同热预算、层间互连、良率和设计接口条件下证明自身收益。它在 M3D 中更现实的价值，可能来自超薄功能层、异质功能补充和更高垂直堆叠密度。",
       "preview": "低温后道集成也存在竞争者。2026 年 Nature 关于硅晶体管单...",
       "citations": [
-        54
+        50
       ],
       "topics": [
         "evaluation",
@@ -4070,8 +4045,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p204",
-      "rawIndex": 204,
+      "id": "p203",
+      "rawIndex": 203,
       "kind": "image",
       "type": "image",
       "sectionId": "s21",
@@ -4089,16 +4064,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p205",
-      "rawIndex": 205,
+      "id": "p204",
+      "rawIndex": 204,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s21",
       "sectionTitle": "4.2 单片三维集成",
-      "text": "图 11 硅晶体管单片三维集成的工艺路线与薄膜转移结果[54]。(a) 薄硅膜转移、释放和互连形成流程；(b,c) 转移薄膜及阵列形貌；(d,e) 表面粗糙度与厚度均匀性；(f,g) 多层截面与转移界面；(h,i) 应变分布。该图作为二维 M3D 的竞争参照。来源：文献[54]。",
+      "text": "图 11 硅晶体管单片三维集成的工艺路线与薄膜转移结果[50]。(a) 薄硅膜转移、释放和互连形成流程；(b,c) 转移薄膜及阵列形貌；(d,e) 表面粗糙度与厚度均匀性；(f,g) 多层截面与转移界面；(h,i) 应变分布。该图作为二维 M3D 的竞争参照。来源：文献[50]。",
       "preview": "图 11 硅晶体管单片三维集成的工艺路线与薄膜转移结果。(a) 薄硅...",
       "citations": [
-        54
+        50
       ],
       "topics": [
         "wafer",
@@ -4107,8 +4082,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p206",
-      "rawIndex": 206,
+      "id": "p205",
+      "rawIndex": 205,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s21",
@@ -4124,16 +4099,34 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p207",
-      "rawIndex": 207,
+      "id": "p206",
+      "rawIndex": 206,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
       "sectionTitle": "4.2 单片三维集成",
-      "text": "2025 年的另一个代表性进展，是基于二维半导体墨水的柔性单片三维互补电路[55]。该类工作把低温制备、柔性衬底和垂直堆叠放在同一平台内验证，说明二维半导体在后道热预算受限、系统形态要求可弯折和可堆叠的场景下，具有区别于传统刚性硅电子的潜力。单片三维集成在二维体系中不仅关乎更高密度，也关乎能否用低温工艺构建新的系统形态。",
+      "text": "2025 年的另一个代表性进展，是基于二维半导体墨水的柔性单片三维互补电路[51]。该类工作把低温制备、柔性衬底和垂直堆叠放在同一平台内验证，说明二维半导体在后道热预算受限、系统形态要求可弯折和可堆叠的场景下，具有区别于传统刚性硅电子的潜力。单片三维集成在二维体系中不仅关乎更高密度，也关乎能否用低温工艺构建新的系统形态。",
       "preview": "2025 年的另一个代表性进展，是基于二维半导体墨水的柔性单片三维互...",
       "citations": [
-        55
+        51
+      ],
+      "topics": [
+        "polarity",
+        "circuit",
+        "m3d"
+      ]
+    },
+    {
+      "id": "p207",
+      "rawIndex": 207,
+      "kind": "paragraph",
+      "type": "synthesis",
+      "sectionId": "s21",
+      "sectionTitle": "4.2 单片三维集成",
+      "text": "文献中的数字有助于看清这一路线的边界。该工作把整体工艺温度控制在 150 °C 以下，在刚性 SiO₂/Si 衬底上做出单片三维反相器，最高电压增益约 462；五级环形振荡器最高频率约 13.5 kHz。转到柔性器件后，环形振荡器最高频率约 6 kHz，弯折前后仍能输出逻辑信号[51]。这些数字还不能与先进硅逻辑直接比较，但它们证明二维互补逻辑可以在低温、柔性和垂直堆叠条件下工作。",
+      "preview": "文献中的数字有助于看清这一路线的边界。该工作把整体工艺温度控制在 1...",
+      "citations": [
+        51
       ],
       "topics": [
         "polarity",
@@ -4148,28 +4141,10 @@ window.PAPER_DATA = {
       "type": "synthesis",
       "sectionId": "s21",
       "sectionTitle": "4.2 单片三维集成",
-      "text": "文献中的数字有助于看清这一路线的边界。该工作把整体工艺温度控制在 150 °C 以下，在刚性 SiO₂/Si 衬底上做出单片三维反相器，最高电压增益约 462；五级环形振荡器最高频率约 13.5 kHz。转到柔性器件后，环形振荡器最高频率约 6 kHz，弯折前后仍能输出逻辑信号[55]。这些数字还不能与先进硅逻辑直接比较，但它们证明二维互补逻辑可以在低温、柔性和垂直堆叠条件下工作。",
-      "preview": "文献中的数字有助于看清这一路线的边界。该工作把整体工艺温度控制在 1...",
-      "citations": [
-        55
-      ],
-      "topics": [
-        "polarity",
-        "circuit",
-        "m3d"
-      ]
-    },
-    {
-      "id": "p209",
-      "rawIndex": 209,
-      "kind": "paragraph",
-      "type": "synthesis",
-      "sectionId": "s21",
-      "sectionTitle": "4.2 单片三维集成",
-      "text": "2025 年 Nature 论文中报道的二维 NOR flash 芯片，则从另一侧说明二维材料和 CMOS 平台可以通过模块化接口相连。该工作把二维 MoS₂ 存储单元与硅基 CMOS 控制电路结合，报道了 94.34% 的芯片良率、20 ns 级操作和 0.644 pJ 每比特能耗，并实现 5 MHz 时钟下的指令驱动运行[56]。这类结果和纯二维逻辑芯片不同，其重点不是替代全部硅晶体管，而是把二维器件作为功能模块接入成熟 CMOS 底座，因而更接近后摩尔异质集成的实际路线。",
+      "text": "2025 年 Nature 论文中报道的二维 NOR flash 芯片，则从另一侧说明二维材料和 CMOS 平台可以通过模块化接口相连。该工作把二维 MoS₂ 存储单元与硅基 CMOS 控制电路结合，报道了 94.34% 的芯片良率、20 ns 级操作和 0.644 pJ 每比特能耗，并实现 5 MHz 时钟下的指令驱动运行[52]。这类结果和纯二维逻辑芯片不同，其重点不是替代全部硅晶体管，而是把二维器件作为功能模块接入成熟 CMOS 底座，因而更接近后摩尔异质集成的实际路线。",
       "preview": "2025 年 Nature 论文中报道的二维 NOR flash 芯...",
       "citations": [
-        56
+        52
       ],
       "topics": [
         "evaluation",
@@ -4180,16 +4155,16 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p210",
-      "rawIndex": 210,
+      "id": "p209",
+      "rawIndex": 209,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
       "sectionTitle": "4.2 单片三维集成",
-      "text": "National Science Review 报道的 MoS₂ 环绕栅阵列工作更接近晶体管结构验证。作者用界面工程减轻介质沉积带来的掺杂和界面态，在 1 cm × 1 cm 样片上制备多沟道 MoS₂ GAA 阵列，并统计 112 个器件；平均开态电流密度为 227 μA·μm⁻¹，峰值超过 335 μA·μm⁻¹，最小亚阈值摆幅接近 60 mV·dec⁻¹[57]。这个结果强调，重复加工后沟道、介质和接触界面能否保持低损伤状态。",
+      "text": "National Science Review 报道的 MoS₂ 环绕栅阵列工作更接近晶体管结构验证。作者用界面工程减轻介质沉积带来的掺杂和界面态，在 1 cm × 1 cm 样片上制备多沟道 MoS₂ GAA 阵列，并统计 112 个器件；平均开态电流密度为 227 μA·μm⁻¹，峰值超过 335 μA·μm⁻¹，最小亚阈值摆幅接近 60 mV·dec⁻¹[53]。这个结果强调，重复加工后沟道、介质和接触界面能否保持低损伤状态。",
       "preview": "National Science Review 报道的 MoS₂ 环...",
       "citations": [
-        57
+        53
       ],
       "topics": [
         "scaling",
@@ -4197,8 +4172,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p211",
-      "rawIndex": 211,
+      "id": "p210",
+      "rawIndex": 210,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s21",
@@ -4214,8 +4189,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p212",
-      "rawIndex": 212,
+      "id": "p211",
+      "rawIndex": 211,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
@@ -4229,8 +4204,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p213",
-      "rawIndex": 213,
+      "id": "p212",
+      "rawIndex": 212,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
@@ -4247,8 +4222,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p214",
-      "rawIndex": 214,
+      "id": "p213",
+      "rawIndex": 213,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s21",
@@ -4261,8 +4236,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p215",
-      "rawIndex": 215,
+      "id": "p214",
+      "rawIndex": 214,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s22",
@@ -4273,24 +4248,24 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p216",
-      "rawIndex": 216,
+      "id": "p215",
+      "rawIndex": 215,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s22",
       "sectionTitle": "4.3 柔性与可穿戴电子",
-      "text": "柔性、透明与可穿戴电子首先关心轻薄、弯折、低温制造和多材料集成同时存在时的可用电子功能，而不是传统逻辑指标上的硅基对标。这个场景适合二维材料，既因为二维材料本身足够薄和足够软，也因为它天然要求器件性能与系统形态共同创新[9]。",
+      "text": "柔性、透明与可穿戴电子首先关心轻薄、弯折、低温制造和多材料集成同时存在时的可用电子功能，而不是传统逻辑指标上的硅基对标。这个场景适合二维材料，既因为二维材料本身足够薄和足够软，也因为它天然要求器件性能与系统形态共同创新[5]。",
       "preview": "柔性、透明与可穿戴电子首先关心轻薄、弯折、低温制造和多材料集成同时存...",
       "citations": [
-        9
+        5
       ],
       "topics": [
         "wafer"
       ]
     },
     {
-      "id": "p217",
-      "rawIndex": 217,
+      "id": "p216",
+      "rawIndex": 216,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s22",
@@ -4301,16 +4276,16 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p218",
-      "rawIndex": 218,
+      "id": "p217",
+      "rawIndex": 217,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s22",
       "sectionTitle": "4.3 柔性与可穿戴电子",
-      "text": "这一点在近期柔性单片三维互补电路研究中表现得尤为明显[55]。相较于传统先做出单个柔性晶体管、再讨论其应用的路径，该类工作已经开始把柔性、逻辑、三维堆叠和光电探测单元同时纳入同一演示系统。二维半导体在柔性电子中的竞争优势，不仅在于材料本身足够柔软，更在于它有望把柔性系统从单器件展示推进到小规模功能模块层面。",
+      "text": "这一点在近期柔性单片三维互补电路研究中表现得尤为明显[51]。相较于传统先做出单个柔性晶体管、再讨论其应用的路径，该类工作已经开始把柔性、逻辑、三维堆叠和光电探测单元同时纳入同一演示系统。二维半导体在柔性电子中的竞争优势，不仅在于材料本身足够柔软，更在于它有望把柔性系统从单器件展示推进到小规模功能模块层面。",
       "preview": "这一点在近期柔性单片三维互补电路研究中表现得尤为明显。相较于传统先做...",
       "citations": [
-        55
+        51
       ],
       "topics": [
         "polarity",
@@ -4320,8 +4295,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p219",
-      "rawIndex": 219,
+      "id": "p218",
+      "rawIndex": 218,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s22",
@@ -4335,8 +4310,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p220",
-      "rawIndex": 220,
+      "id": "p219",
+      "rawIndex": 219,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s22",
@@ -4347,8 +4322,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p221",
-      "rawIndex": 221,
+      "id": "p220",
+      "rawIndex": 220,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s22",
@@ -4361,8 +4336,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p222",
-      "rawIndex": 222,
+      "id": "p221",
+      "rawIndex": 221,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s22",
@@ -4376,8 +4351,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p223",
-      "rawIndex": 223,
+      "id": "p222",
+      "rawIndex": 222,
       "kind": "image",
       "type": "image",
       "sectionId": "s22",
@@ -4395,16 +4370,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p224",
-      "rawIndex": 224,
+      "id": "p223",
+      "rawIndex": 223,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s22",
       "sectionTitle": "4.3 柔性与可穿戴电子",
-      "text": "图 12 柔性单片三维互补电路的结构实现、系统演示与参数统计[55]。(a,b) 前驱体与单片三维 CMOS 结构；(c,d) 两英寸晶圆级电路与贴肤演示；(e,f) 截面结构与元素分布；(g-i) n 型与 p 型器件转移特性及亚阈值摆幅、开关比统计。该图将结构实现、系统演示与器件统计放入同一验证框架。 来源：文献[55]。",
+      "text": "图 12 柔性单片三维互补电路的结构实现、系统演示与参数统计[51]。(a,b) 前驱体与单片三维 CMOS 结构；(c,d) 两英寸晶圆级电路与贴肤演示；(e,f) 截面结构与元素分布；(g-i) n 型与 p 型器件转移特性及亚阈值摆幅、开关比统计。该图将结构实现、系统演示与器件统计放入同一验证框架。 来源：文献[51]。",
       "preview": "图 12 柔性单片三维互补电路的结构实现、系统演示与参数统计。(a,...",
       "citations": [
-        55
+        51
       ],
       "topics": [
         "scaling",
@@ -4416,8 +4391,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p225",
-      "rawIndex": 225,
+      "id": "p224",
+      "rawIndex": 224,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s23",
@@ -4430,8 +4405,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p226",
-      "rawIndex": 226,
+      "id": "p225",
+      "rawIndex": 225,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
@@ -4446,34 +4421,34 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p227",
-      "rawIndex": 227,
+      "id": "p226",
+      "rawIndex": 226,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
       "sectionTitle": "4.4 传感、光电与感知融合",
-      "text": "对后摩尔时代电子技术而言，这类应用突破了传统计算芯片只负责后端处理的边界，使二维材料有机会参与从传感、前端处理到局部计算的一体化系统构建。2026 年 Nature Materials 综述对集成感知的讨论表明，二维材料在这一方向上的价值既体现为高灵敏，也体现为能否在传感—处理一体化系统中承担桥接角色[58]。二维集成感知考验的是器件、界面和局部处理功能能否组织到同一前端链路中。",
+      "text": "对后摩尔时代电子技术而言，这类应用突破了传统计算芯片只负责后端处理的边界，使二维材料有机会参与从传感、前端处理到局部计算的一体化系统构建。2026 年 Nature Materials 综述对集成感知的讨论表明，二维材料在这一方向上的价值既体现为高灵敏，也体现为能否在传感—处理一体化系统中承担桥接角色[54]。二维集成感知考验的是器件、界面和局部处理功能能否组织到同一前端链路中。",
       "preview": "对后摩尔时代电子技术而言，这类应用突破了传统计算芯片只负责后端处理的...",
       "citations": [
-        58
+        54
       ],
       "topics": [
         "sensing"
       ]
     },
     {
-      "id": "p228",
-      "rawIndex": 228,
+      "id": "p227",
+      "rawIndex": 227,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
       "sectionTitle": "4.4 传感、光电与感知融合",
-      "text": "这部分可以同几篇《物理学报》专题论文对照阅读。人工视觉综述把可调带隙、光电转换和异质集成同三维感知、信息融合联系起来[59]；双极性光电探测器综述讨论电场、波长、偏振和入射功率怎样调节正负光电流[60]；传感器内计算综述则把二维光电器件放到图像预处理和卷积运算前端[61]。这些文章说明，二维材料在感知方向的价值不只在灵敏度，还在于它可能改变感知信号进入计算链路的方式。",
+      "text": "这部分可以同几篇《物理学报》专题论文对照阅读。人工视觉综述把可调带隙、光电转换和异质集成同三维感知、信息融合联系起来[55]；双极性光电探测器综述讨论电场、波长、偏振和入射功率怎样调节正负光电流[56]；传感器内计算综述则把二维光电器件放到图像预处理和卷积运算前端[57]。这些文章说明，二维材料在感知方向的价值不只在灵敏度，还在于它可能改变感知信号进入计算链路的方式。",
       "preview": "这部分可以同几篇《物理学报》专题论文对照阅读。人工视觉综述把可调带隙...",
       "citations": [
-        59,
-        60,
-        61
+        55,
+        56,
+        57
       ],
       "topics": [
         "m3d",
@@ -4481,8 +4456,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p229",
-      "rawIndex": 229,
+      "id": "p228",
+      "rawIndex": 228,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
@@ -4495,8 +4470,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p230",
-      "rawIndex": 230,
+      "id": "p229",
+      "rawIndex": 229,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
@@ -4509,30 +4484,30 @@ window.PAPER_DATA = {
       ]
     },
     {
+      "id": "p230",
+      "rawIndex": 230,
+      "kind": "paragraph",
+      "type": "analysis",
+      "sectionId": "s23",
+      "sectionTitle": "4.4 传感、光电与感知融合",
+      "text": "二维材料还开始接入硅光和片上光子平台。近期 IEEE 工作把 MoS₂ 薄膜集成到硅光波导偏振器中，获得约 21 dB 偏振相关损耗和超过 100 nm 的工作带宽[58]。这个例子说明，二维材料可以通过材料叠层为片上光子器件引入新的调制自由度。它的后摩尔意义不只在晶体管缩放，也可能体现在电子、光子和感知功能的接口处。",
+      "preview": "二维材料还开始接入硅光和片上光子平台。近期 IEEE 工作把 MoS...",
+      "citations": [
+        58
+      ],
+      "topics": []
+    },
+    {
       "id": "p231",
       "rawIndex": 231,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
       "sectionTitle": "4.4 传感、光电与感知融合",
-      "text": "二维材料还开始接入硅光和片上光子平台。近期 IEEE 工作把 MoS₂ 薄膜集成到硅光波导偏振器中，获得约 21 dB 偏振相关损耗和超过 100 nm 的工作带宽[62]。这个例子说明，二维材料可以通过材料叠层为片上光子器件引入新的调制自由度。它的后摩尔意义不只在晶体管缩放，也可能体现在电子、光子和感知功能的接口处。",
-      "preview": "二维材料还开始接入硅光和片上光子平台。近期 IEEE 工作把 MoS...",
-      "citations": [
-        62
-      ],
-      "topics": []
-    },
-    {
-      "id": "p232",
-      "rawIndex": 232,
-      "kind": "paragraph",
-      "type": "analysis",
-      "sectionId": "s23",
-      "sectionTitle": "4.4 传感、光电与感知融合",
-      "text": "近期 Nature Electronics 关于氧化物干法转移的工作，也值得放入柔性与感知融合的讨论中。该研究利用 Al₂O₃ 高 κ 中间层，把 4 英寸单晶 MoS₂ 薄膜无聚合物、无溶剂污染地转移到柔性衬底上，器件阵列仍能达到 117 cm²·V⁻¹·s⁻¹ 的最高迁移率、68.8 mV·dec⁻¹ 的亚阈值摆幅和 10¹² 的开关比，并进一步驱动柔性触觉传感阵列完成实时触觉映射[63]。由此可见，柔性二维电子的关键不只是材料能弯曲，而是转移、介质、阵列和前端应用能否同时保持干净界面和可用电学性能。",
+      "text": "近期 Nature Electronics 关于氧化物干法转移的工作，也值得放入柔性与感知融合的讨论中。该研究利用 Al₂O₃ 高 κ 中间层，把 4 英寸单晶 MoS₂ 薄膜无聚合物、无溶剂污染地转移到柔性衬底上，器件阵列仍能达到 117 cm²·V⁻¹·s⁻¹ 的最高迁移率、68.8 mV·dec⁻¹ 的亚阈值摆幅和 10¹² 的开关比，并进一步驱动柔性触觉传感阵列完成实时触觉映射[59]。由此可见，柔性二维电子的关键不只是材料能弯曲，而是转移、介质、阵列和前端应用能否同时保持干净界面和可用电学性能。",
       "preview": "近期 Nature Electronics 关于氧化物干法转移的工作...",
       "citations": [
-        63
+        59
       ],
       "topics": [
         "scaling",
@@ -4541,8 +4516,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p233",
-      "rawIndex": 233,
+      "id": "p232",
+      "rawIndex": 232,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
@@ -4555,8 +4530,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p234",
-      "rawIndex": 234,
+      "id": "p233",
+      "rawIndex": 233,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s23",
@@ -4569,8 +4544,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p235",
-      "rawIndex": 235,
+      "id": "p234",
+      "rawIndex": 234,
       "kind": "image",
       "type": "image",
       "sectionId": "s23",
@@ -4588,16 +4563,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p236",
-      "rawIndex": 236,
+      "id": "p235",
+      "rawIndex": 235,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s23",
       "sectionTitle": "4.4 传感、光电与感知融合",
-      "text": "图 13 二维材料集成感知的系统图景[58]。(a) 传统电子输入路径中感知、存储与计算相对分离；(b) 面向光电输入的集成感知路径中，二维材料可在前端承担原位编码与多维耦合处理。图中突出的是二维材料在感知方向上的系统前端整合能力。 来源：文献[58]。",
+      "text": "图 13 二维材料集成感知的系统图景[54]。(a) 传统电子输入路径中感知、存储与计算相对分离；(b) 面向光电输入的集成感知路径中，二维材料可在前端承担原位编码与多维耦合处理。图中突出的是二维材料在感知方向上的系统前端整合能力。 来源：文献[54]。",
       "preview": "图 13 二维材料集成感知的系统图景。(a) 传统电子输入路径中感知...",
       "citations": [
-        58
+        54
       ],
       "topics": [
         "sensing"
@@ -4605,8 +4580,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p237",
-      "rawIndex": 237,
+      "id": "p236",
+      "rawIndex": 236,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s23",
@@ -4619,8 +4594,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p238",
-      "rawIndex": 238,
+      "id": "p237",
+      "rawIndex": 237,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s23",
@@ -4632,8 +4607,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p239",
-      "rawIndex": 239,
+      "id": "p238",
+      "rawIndex": 238,
       "kind": "table",
       "type": "table",
       "sectionId": "s23",
@@ -4683,8 +4658,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p240",
-      "rawIndex": 240,
+      "id": "p239",
+      "rawIndex": 239,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s24",
@@ -4695,8 +4670,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p241",
-      "rawIndex": 241,
+      "id": "p240",
+      "rawIndex": 240,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s24",
@@ -4712,8 +4687,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p242",
-      "rawIndex": 242,
+      "id": "p241",
+      "rawIndex": 241,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s25",
@@ -4726,8 +4701,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p243",
-      "rawIndex": 243,
+      "id": "p242",
+      "rawIndex": 242,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s25",
@@ -4743,19 +4718,19 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p244",
-      "rawIndex": 244,
+      "id": "p243",
+      "rawIndex": 243,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s25",
       "sectionTitle": "5.1 n 型与 p 型器件不对称",
-      "text": "MoTe₂ 中等规模 p 型集成电路和 WSe₂ 可控 p 型掺杂的结果说明，这一短板正在缩小[24,40]。2026 年 Nature Electronics 连续报道了两项 WSe₂ p 型进展。一项利用金属性层状 Nb₀.₃W₀.₇Se₂ 与 WSe₂ 形成二维层间接触，使单层和双层 WSe₂ 器件在 100 nm 沟道尺度下分别获得最高约 358 μA·μm⁻¹ 和 1.1 mA·μm⁻¹ 的开态电流，并在 1.3 nm 等效氧化层厚度条件下得到约 88 mV·dec⁻¹ 的亚阈值摆幅[12]。另一项通过氧辅助修复单层 WSe₂ 缺陷态，在 45 nm 沟道器件中实现约 1245 μA·μm⁻¹ 的开态电流、约 10⁹ 的开关比和约 560 Ω·μm 的室温接触电阻[13]。",
+      "text": "MoTe₂ 中等规模 p 型集成电路和 WSe₂ 可控 p 型掺杂的结果说明，这一短板正在缩小[20,36]。2026 年 Nature Electronics 连续报道了两项 WSe₂ p 型进展。一项利用金属性层状 Nb₀.₃W₀.₇Se₂ 与 WSe₂ 形成二维层间接触，使单层和双层 WSe₂ 器件在 100 nm 沟道尺度下分别获得最高约 358 μA·μm⁻¹ 和 1.1 mA·μm⁻¹ 的开态电流，并在 1.3 nm 等效氧化层厚度条件下得到约 88 mV·dec⁻¹ 的亚阈值摆幅[8]。另一项通过氧辅助修复单层 WSe₂ 缺陷态，在 45 nm 沟道器件中实现约 1245 μA·μm⁻¹ 的开态电流、约 10⁹ 的开关比和约 560 Ω·μm 的室温接触电阻[9]。",
       "preview": "MoTe₂ 中等规模 p 型集成电路和 WSe₂ 可控 p 型掺杂的...",
       "citations": [
-        12,
-        13,
-        24,
-        40
+        8,
+        9,
+        20,
+        36
       ],
       "topics": [
         "scaling",
@@ -4765,8 +4740,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p245",
-      "rawIndex": 245,
+      "id": "p244",
+      "rawIndex": 244,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s25",
@@ -4781,8 +4756,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p246",
-      "rawIndex": 246,
+      "id": "p245",
+      "rawIndex": 245,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s25",
@@ -4800,8 +4775,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p247",
-      "rawIndex": 247,
+      "id": "p246",
+      "rawIndex": 246,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s25",
@@ -4814,8 +4789,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p248",
-      "rawIndex": 248,
+      "id": "p247",
+      "rawIndex": 247,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s25",
@@ -4829,19 +4804,19 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p249",
-      "rawIndex": 249,
+      "id": "p248",
+      "rawIndex": 248,
       "kind": "table",
       "type": "table",
       "sectionId": "s25",
       "sectionTitle": "5.1 n 型与 p 型器件不对称",
-      "text": "维度 | n 型证据 | p 型证据 | 差距 | CMOS 配对要求\n驱动 | 1.22 mA·μm⁻¹（10 nm）[16]；596 μA·μm⁻¹（40 nm CGP）[17] | 1.245 mA·μm⁻¹（45 nm）[13]；1.1 mA·μm⁻¹（双层）[12] | 峰值接近，条件不同 | 同批次 n 型/p 型驱动电流比\n接触 | 约 69 Ω·μm[16]；18 nm 接触下约 98 Ω·μm[17] | 约 560 Ω·μm[13]；层状接触降低势垒[12] | p 型短接触仍需验证 | 短接触下保持低阻\n栅控 | 亚阈值摆幅约 67/83 mV·dec⁻¹[16]；40 nm CGP 约 99.5 mV·dec⁻¹[17] | 1.3 nm 等效氧化层厚度下亚阈值摆幅约 88 mV·dec⁻¹[12] | 同流程对照不足 | 阈值、漏电、迟滞和分布",
+      "text": "维度 | n 型证据 | p 型证据 | 差距 | CMOS 配对要求\n驱动 | 1.22 mA·μm⁻¹（10 nm）[12]；596 μA·μm⁻¹（40 nm CGP）[13] | 1.245 mA·μm⁻¹（45 nm）[9]；1.1 mA·μm⁻¹（双层）[8] | 峰值接近，条件不同 | 同批次 n 型/p 型驱动电流比\n接触 | 约 69 Ω·μm[12]；18 nm 接触下约 98 Ω·μm[13] | 约 560 Ω·μm[9]；层状接触降低势垒[8] | p 型短接触仍需验证 | 短接触下保持低阻\n栅控 | 亚阈值摆幅约 67/83 mV·dec⁻¹[12]；40 nm CGP 约 99.5 mV·dec⁻¹[13] | 1.3 nm 等效氧化层厚度下亚阈值摆幅约 88 mV·dec⁻¹[8] | 同流程对照不足 | 阈值、漏电、迟滞和分布",
       "preview": "维度 | n 型证据 | p 型证据 | 差距 | CMOS 配对要...",
       "citations": [
+        8,
+        9,
         12,
-        13,
-        16,
-        17
+        13
       ],
       "topics": [
         "scaling",
@@ -4858,30 +4833,30 @@ window.PAPER_DATA = {
         ],
         [
           "驱动",
-          "1.22 mA·μm⁻¹（10 nm）[16]；596 μA·μm⁻¹（40 nm CGP）[17]",
-          "1.245 mA·μm⁻¹（45 nm）[13]；1.1 mA·μm⁻¹（双层）[12]",
+          "1.22 mA·μm⁻¹（10 nm）[12]；596 μA·μm⁻¹（40 nm CGP）[13]",
+          "1.245 mA·μm⁻¹（45 nm）[9]；1.1 mA·μm⁻¹（双层）[8]",
           "峰值接近，条件不同",
           "同批次 n 型/p 型驱动电流比"
         ],
         [
           "接触",
-          "约 69 Ω·μm[16]；18 nm 接触下约 98 Ω·μm[17]",
-          "约 560 Ω·μm[13]；层状接触降低势垒[12]",
+          "约 69 Ω·μm[12]；18 nm 接触下约 98 Ω·μm[13]",
+          "约 560 Ω·μm[9]；层状接触降低势垒[8]",
           "p 型短接触仍需验证",
           "短接触下保持低阻"
         ],
         [
           "栅控",
-          "亚阈值摆幅约 67/83 mV·dec⁻¹[16]；40 nm CGP 约 99.5 mV·dec⁻¹[17]",
-          "1.3 nm 等效氧化层厚度下亚阈值摆幅约 88 mV·dec⁻¹[12]",
+          "亚阈值摆幅约 67/83 mV·dec⁻¹[12]；40 nm CGP 约 99.5 mV·dec⁻¹[13]",
+          "1.3 nm 等效氧化层厚度下亚阈值摆幅约 88 mV·dec⁻¹[8]",
           "同流程对照不足",
           "阈值、漏电、迟滞和分布"
         ]
       ]
     },
     {
-      "id": "p250",
-      "rawIndex": 250,
+      "id": "p249",
+      "rawIndex": 249,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s25",
@@ -4896,18 +4871,18 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p251",
-      "rawIndex": 251,
+      "id": "p250",
+      "rawIndex": 250,
       "kind": "table",
       "type": "table",
       "sectionId": "s25",
       "sectionTitle": "5.1 n 型与 p 型器件不对称",
-      "text": "维度 | n 型证据 | p 型证据 | 差距 | CMOS 配对要求\n统计 | 54 个接触器件[17]；短沟道分布[16] | 300 个 WSe₂ pFET[36]；新 pFET 仍需更多分布 | 统计深度不对称 | N、良率和离散度\n电路 | 多种逻辑与处理器演示 | 接触和掺杂短板正在补齐 | 单个 pFET 不能替代 CMOS 配对 | 增益、噪声容限和良率",
+      "text": "维度 | n 型证据 | p 型证据 | 差距 | CMOS 配对要求\n统计 | 54 个接触器件[13]；短沟道分布[12] | 300 个 WSe₂ pFET[32]；新 pFET 仍需更多分布 | 统计深度不对称 | N、良率和离散度\n电路 | 多种逻辑与处理器演示 | 接触和掺杂短板正在补齐 | 单个 pFET 不能替代 CMOS 配对 | 增益、噪声容限和良率",
       "preview": "维度 | n 型证据 | p 型证据 | 差距 | CMOS 配对要...",
       "citations": [
-        16,
-        17,
-        36
+        12,
+        13,
+        32
       ],
       "topics": [
         "evaluation",
@@ -4925,8 +4900,8 @@ window.PAPER_DATA = {
         ],
         [
           "统计",
-          "54 个接触器件[17]；短沟道分布[16]",
-          "300 个 WSe₂ pFET[36]；新 pFET 仍需更多分布",
+          "54 个接触器件[13]；短沟道分布[12]",
+          "300 个 WSe₂ pFET[32]；新 pFET 仍需更多分布",
           "统计深度不对称",
           "N、良率和离散度"
         ],
@@ -4940,8 +4915,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p252",
-      "rawIndex": 252,
+      "id": "p251",
+      "rawIndex": 251,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s25",
@@ -4957,8 +4932,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p253",
-      "rawIndex": 253,
+      "id": "p252",
+      "rawIndex": 252,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s25",
@@ -4973,8 +4948,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p254",
-      "rawIndex": 254,
+      "id": "p253",
+      "rawIndex": 253,
       "kind": "image",
       "type": "image",
       "sectionId": "s25",
@@ -4992,16 +4967,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p255",
-      "rawIndex": 255,
+      "id": "p254",
+      "rawIndex": 254,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s25",
       "sectionTitle": "5.1 n 型与 p 型器件不对称",
-      "text": "图 14 氧辅助修复单层 WSe₂ pFET 的性能与基准比较[13]。图中给出转移/输出曲线、迁移率与开关比、接触电阻和开态电流对标，说明 p 型二维器件已进入高电流、低接触电阻和短沟道可比较区间。 来源：文献[13]。",
+      "text": "图 14 氧辅助修复单层 WSe₂ pFET 的性能与基准比较[9]。图中给出转移/输出曲线、迁移率与开关比、接触电阻和开态电流对标，说明 p 型二维器件已进入高电流、低接触电阻和短沟道可比较区间。 来源：文献[9]。",
       "preview": "图 14 氧辅助修复单层 WSe₂ pFET 的性能与基准比较。图中...",
       "citations": [
-        13
+        9
       ],
       "topics": [
         "scaling",
@@ -5011,8 +4986,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p256",
-      "rawIndex": 256,
+      "id": "p255",
+      "rawIndex": 255,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s25",
@@ -5026,8 +5001,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p257",
-      "rawIndex": 257,
+      "id": "p256",
+      "rawIndex": 256,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s26",
@@ -5038,8 +5013,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p258",
-      "rawIndex": 258,
+      "id": "p257",
+      "rawIndex": 257,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s26",
@@ -5053,8 +5028,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p259",
-      "rawIndex": 259,
+      "id": "p258",
+      "rawIndex": 258,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s26",
@@ -5068,8 +5043,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p260",
-      "rawIndex": 260,
+      "id": "p259",
+      "rawIndex": 259,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s26",
@@ -5080,8 +5055,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p261",
-      "rawIndex": 261,
+      "id": "p260",
+      "rawIndex": 260,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s26",
@@ -5094,17 +5069,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p262",
-      "rawIndex": 262,
+      "id": "p261",
+      "rawIndex": 261,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s26",
       "sectionTitle": "5.2 接触、介质与加工损伤",
-      "text": "近年的高质量介质工作已经证明，单晶金属氧化物顶栅和接近 1 nm 等效氧化层厚度的 CMOS 兼容栅堆栈可以在二维晶体管中实现[18,34]。但介质做得出来，并不等于器件流程已经闭合。更难的是让这类栅堆栈与低损伤接触、图形化刻蚀和大面积制造同时相容。二维栅介质的难点，正在从找好材料转向把好材料放进整条工艺链。",
+      "text": "近年的高质量介质工作已经证明，单晶金属氧化物顶栅和接近 1 nm 等效氧化层厚度的 CMOS 兼容栅堆栈可以在二维晶体管中实现[14,30]。但介质做得出来，并不等于器件流程已经闭合。更难的是让这类栅堆栈与低损伤接触、图形化刻蚀和大面积制造同时相容。二维栅介质的难点，正在从找好材料转向把好材料放进整条工艺链。",
       "preview": "近年的高质量介质工作已经证明，单晶金属氧化物顶栅和接近 1 nm 等...",
       "citations": [
-        18,
-        34
+        14,
+        30
       ],
       "topics": [
         "scaling",
@@ -5114,8 +5089,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p263",
-      "rawIndex": 263,
+      "id": "p262",
+      "rawIndex": 262,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s26",
@@ -5128,8 +5103,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p264",
-      "rawIndex": 264,
+      "id": "p263",
+      "rawIndex": 263,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s26",
@@ -5142,8 +5117,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p265",
-      "rawIndex": 265,
+      "id": "p264",
+      "rawIndex": 264,
       "kind": "image",
       "type": "image",
       "sectionId": "s26",
@@ -5161,16 +5136,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p266",
-      "rawIndex": 266,
+      "id": "p265",
+      "rawIndex": 265,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s26",
       "sectionTitle": "5.2 接触、介质与加工损伤",
-      "text": "图 15 二维介质/界面缺陷对器件迟滞与输运退化的物理图景[5]。(a,d) 传统介质与二维沟道接触时的散射、偶极和电荷转移示意；(b,e) 陷阱态主导下的能带排列变化；(c,f) 由界面缺陷导致的迟滞、阈值漂移和迁移率下降示意。这组示意把接触、介质和加工损伤通过界面缺陷放大器件退化的路径联系起来。 来源：文献[5]。",
+      "text": "图 15 二维介质/界面缺陷对器件迟滞与输运退化的物理图景[1]。(a,d) 传统介质与二维沟道接触时的散射、偶极和电荷转移示意；(b,e) 陷阱态主导下的能带排列变化；(c,f) 由界面缺陷导致的迟滞、阈值漂移和迁移率下降示意。这组示意把接触、介质和加工损伤通过界面缺陷放大器件退化的路径联系起来。 来源：文献[1]。",
       "preview": "图 15 二维介质/界面缺陷对器件迟滞与输运退化的物理图景。(a,d...",
       "citations": [
-        5
+        1
       ],
       "topics": [
         "dielectric"
@@ -5178,8 +5153,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p267",
-      "rawIndex": 267,
+      "id": "p266",
+      "rawIndex": 266,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s27",
@@ -5192,8 +5167,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p268",
-      "rawIndex": 268,
+      "id": "p267",
+      "rawIndex": 267,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s27",
@@ -5209,8 +5184,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p269",
-      "rawIndex": 269,
+      "id": "p268",
+      "rawIndex": 268,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s27",
@@ -5224,19 +5199,19 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p270",
-      "rawIndex": 270,
+      "id": "p269",
+      "rawIndex": 269,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s27",
       "sectionTitle": "5.3 晶圆均匀性与制造一致性",
-      "text": "一致性问题已经在近期实验中显现出来。类晶圆厂微处理器工作经历约 130 批次迭代，并给出模块级良率统计[46-47]。晶体管、锁存器和控制单元逐级组合后，器件分布会被线路功能放大。4 英寸 MoTe₂ 薄膜和晶圆级范德瓦耳斯接触结果[40,45]说明大面积路线可行，但距离成熟产线仍有距离。",
+      "text": "一致性问题已经在近期实验中显现出来。类晶圆厂微处理器工作经历约 130 批次迭代，并给出模块级良率统计[42-43]。晶体管、锁存器和控制单元逐级组合后，器件分布会被线路功能放大。4 英寸 MoTe₂ 薄膜和晶圆级范德瓦耳斯接触结果[36,41]说明大面积路线可行，但距离成熟产线仍有距离。",
       "preview": "一致性问题已经在近期实验中显现出来。类晶圆厂微处理器工作经历约 13...",
       "citations": [
-        40,
-        45,
-        46,
-        47
+        36,
+        41,
+        42,
+        43
       ],
       "topics": [
         "evaluation",
@@ -5246,8 +5221,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p271",
-      "rawIndex": 271,
+      "id": "p270",
+      "rawIndex": 270,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s27",
@@ -5261,8 +5236,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p272",
-      "rawIndex": 272,
+      "id": "p271",
+      "rawIndex": 271,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s27",
@@ -5276,8 +5251,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p273",
-      "rawIndex": 273,
+      "id": "p272",
+      "rawIndex": 272,
       "kind": "image",
       "type": "image",
       "sectionId": "s27",
@@ -5295,16 +5270,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p274",
-      "rawIndex": 274,
+      "id": "p273",
+      "rawIndex": 273,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s27",
       "sectionTitle": "5.3 晶圆均匀性与制造一致性",
-      "text": "图 16 晶圆级单层介质集成中的统计一致性与失效边界[21]。(a,b) 单层介质堆栈的电容与等效厚度；(c) 不同 CET 下的漏电分布与器件良率；(d) 击穿场统计与工作/失效器件分布。这些统计结果把二维栅介质工程的关键问题指向晶圆尺度的一致性、良率和可靠性联合控制。 来源：文献[21]。",
+      "text": "图 16 晶圆级单层介质集成中的统计一致性与失效边界[17]。(a,b) 单层介质堆栈的电容与等效厚度；(c) 不同 CET 下的漏电分布与器件良率；(d) 击穿场统计与工作/失效器件分布。这些统计结果把二维栅介质工程的关键问题指向晶圆尺度的一致性、良率和可靠性联合控制。 来源：文献[17]。",
       "preview": "图 16 晶圆级单层介质集成中的统计一致性与失效边界。(a,b) 单...",
       "citations": [
-        21
+        17
       ],
       "topics": [
         "evaluation",
@@ -5314,8 +5289,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p275",
-      "rawIndex": 275,
+      "id": "p274",
+      "rawIndex": 274,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s28",
@@ -5326,25 +5301,25 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p276",
-      "rawIndex": 276,
+      "id": "p275",
+      "rawIndex": 275,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s28",
       "sectionTitle": "5.4 可靠性与热管理",
-      "text": "可靠性要回答的是二维器件在真实工作条件下能稳定多久。先进逻辑需要经历长期偏压、温度循环和大电流密度考验；如果这些条件下阈值、漏电或开态电流持续漂移，单项最好性能就很难进入系统。迟滞、阈值漂移、自热和环境敏感性不是孤立问题，而是稳定性在不同环节上的表现[8,64]。",
+      "text": "可靠性要回答的是二维器件在真实工作条件下能稳定多久。先进逻辑需要经历长期偏压、温度循环和大电流密度考验；如果这些条件下阈值、漏电或开态电流持续漂移，单项最好性能就很难进入系统。迟滞、阈值漂移、自热和环境敏感性不是孤立问题，而是稳定性在不同环节上的表现[4,60]。",
       "preview": "可靠性要回答的是二维器件在真实工作条件下能稳定多久。先进逻辑需要经历...",
       "citations": [
-        8,
-        64
+        4,
+        60
       ],
       "topics": [
         "dielectric"
       ]
     },
     {
-      "id": "p277",
-      "rawIndex": 277,
+      "id": "p276",
+      "rawIndex": 276,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s28",
@@ -5358,8 +5333,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p278",
-      "rawIndex": 278,
+      "id": "p277",
+      "rawIndex": 277,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s28",
@@ -5372,8 +5347,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p279",
-      "rawIndex": 279,
+      "id": "p278",
+      "rawIndex": 278,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s28",
@@ -5384,16 +5359,16 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p280",
-      "rawIndex": 280,
+      "id": "p279",
+      "rawIndex": 279,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s28",
       "sectionTitle": "5.4 可靠性与热管理",
-      "text": "可靠性研究还需要从简单报告迟滞大小，转向解释迟滞来源和演化路径。2026 年关于缩放 MoS₂ FET 迟滞动力学的工作利用 TCAD 建模提出统一映射方法，能够区分顺时针、逆时针以及两者转换等多种迟滞行为[28]。这类方法的价值在于，它把迟滞从曲线扫出来有多宽，推进到哪些陷阱和测量时间常数在起作用。对二维半导体而言，只有这种机理化、可复现的可靠性表征逐渐成熟，后续模型和电路裕量设计才有可靠依据。",
+      "text": "可靠性研究还需要从简单报告迟滞大小，转向解释迟滞来源和演化路径。2026 年关于缩放 MoS₂ FET 迟滞动力学的工作利用 TCAD 建模提出统一映射方法，能够区分顺时针、逆时针以及两者转换等多种迟滞行为[24]。这类方法的价值在于，它把迟滞从曲线扫出来有多宽，推进到哪些陷阱和测量时间常数在起作用。对二维半导体而言，只有这种机理化、可复现的可靠性表征逐渐成熟，后续模型和电路裕量设计才有可靠依据。",
       "preview": "可靠性研究还需要从简单报告迟滞大小，转向解释迟滞来源和演化路径。20...",
       "citations": [
-        28
+        24
       ],
       "topics": [
         "dielectric",
@@ -5401,8 +5376,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p281",
-      "rawIndex": 281,
+      "id": "p280",
+      "rawIndex": 280,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s28",
@@ -5415,8 +5390,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p282",
-      "rawIndex": 282,
+      "id": "p281",
+      "rawIndex": 281,
       "kind": "image",
       "type": "image",
       "sectionId": "s28",
@@ -5434,16 +5409,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p283",
-      "rawIndex": 283,
+      "id": "p282",
+      "rawIndex": 282,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s28",
       "sectionTitle": "5.4 可靠性与热管理",
-      "text": "图 17 二维晶体管迟滞与稳定性表征[27]。(a) 器件结构；(b) AFM 高度分布；(c) 迟滞窗口定义；(d) 不同频率下的迟滞曲线；(e) 迟滞宽度与厚度关系；(f) 归一化迟滞分布。该图给出统一测试窗口和统计分布。来源：文献[27]。",
+      "text": "图 17 二维晶体管迟滞与稳定性表征[23]。(a) 器件结构；(b) AFM 高度分布；(c) 迟滞窗口定义；(d) 不同频率下的迟滞曲线；(e) 迟滞宽度与厚度关系；(f) 归一化迟滞分布。该图给出统一测试窗口和统计分布。来源：文献[23]。",
       "preview": "图 17 二维晶体管迟滞与稳定性表征。(a) 器件结构；(b) AF...",
       "citations": [
-        27
+        23
       ],
       "topics": [
         "evaluation",
@@ -5452,8 +5427,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p284",
-      "rawIndex": 284,
+      "id": "p283",
+      "rawIndex": 283,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s29",
@@ -5466,8 +5441,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p285",
-      "rawIndex": 285,
+      "id": "p284",
+      "rawIndex": 284,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s29",
@@ -5483,8 +5458,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p286",
-      "rawIndex": 286,
+      "id": "p285",
+      "rawIndex": 285,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s29",
@@ -5497,24 +5472,24 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p287",
-      "rawIndex": 287,
+      "id": "p286",
+      "rawIndex": 286,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s29",
       "sectionTitle": "5.5 与 CMOS 平台的兼容性",
-      "text": "垂直器件进入标准单元后，评价重点会从单管曲线转向面积、布线和设计规则[65]。二维半导体同样需要接受这一层面的检验。若缺少可用模型、版图规则和 EDA 接口，器件指标再高也难以进入芯片设计。",
+      "text": "垂直器件进入标准单元后，评价重点会从单管曲线转向面积、布线和设计规则[61]。二维半导体同样需要接受这一层面的检验。若缺少可用模型、版图规则和 EDA 接口，器件指标再高也难以进入芯片设计。",
       "preview": "垂直器件进入标准单元后，评价重点会从单管曲线转向面积、布线和设计规则...",
       "citations": [
-        65
+        61
       ],
       "topics": [
         "circuit"
       ]
     },
     {
-      "id": "p288",
-      "rawIndex": 288,
+      "id": "p287",
+      "rawIndex": 287,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s29",
@@ -5528,17 +5503,17 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p289",
-      "rawIndex": 289,
+      "id": "p288",
+      "rawIndex": 288,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s29",
       "sectionTitle": "5.5 与 CMOS 平台的兼容性",
-      "text": "近期模型工作正好补上这一缺口。IEEE EDTM 2025 的二维半导体 FET 紧凑模型基于 BSIM-CMG 框架，把迁移率退化、速度饱和、亚阈值摆幅退化、短沟道效应和自热等非理想因素纳入电路仿真模型[66]。2026 年 Nanoscale Horizons 的 SPICE 兼容模型则把表面势、电荷陷阱和垂直场迁移率退化写入解析形式，并用 MoS₂ 反相器、SRAM、NAND 门和环振等实测电路验证[67]。这类工作不如单器件纪录醒目，却会直接影响二维器件能否被电路设计者采用。",
+      "text": "近期模型工作正好补上这一缺口。IEEE EDTM 2025 的二维半导体 FET 紧凑模型基于 BSIM-CMG 框架，把迁移率退化、速度饱和、亚阈值摆幅退化、短沟道效应和自热等非理想因素纳入电路仿真模型[62]。2026 年 Nanoscale Horizons 的 SPICE 兼容模型则把表面势、电荷陷阱和垂直场迁移率退化写入解析形式，并用 MoS₂ 反相器、SRAM、NAND 门和环振等实测电路验证[63]。这类工作不如单器件纪录醒目，却会直接影响二维器件能否被电路设计者采用。",
       "preview": "近期模型工作正好补上这一缺口。IEEE EDTM 2025 的二维半...",
       "citations": [
-        66,
-        67
+        62,
+        63
       ],
       "topics": [
         "scaling",
@@ -5546,32 +5521,32 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p290",
-      "rawIndex": 290,
+      "id": "p289",
+      "rawIndex": 289,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s29",
       "sectionTitle": "5.5 与 CMOS 平台的兼容性",
-      "text": "imec 的 300 mm 试验线工作把二维 FET 放到了接近产线的环境中。WS₂ 和 MoS₂ 器件不再只是单独制备和测试，而是经历材料生长或转移、清洗、栅堆栈、接触优化以及不同栅结构评估[68]。",
+      "text": "imec 的 300 mm 试验线工作把二维 FET 放到了接近产线的环境中。WS₂ 和 MoS₂ 器件不再只是单独制备和测试，而是经历材料生长或转移、清洗、栅堆栈、接触优化以及不同栅结构评估[64]。",
       "preview": "imec 的 300 mm 试验线工作把二维 FET 放到了接近产线...",
       "citations": [
-        68
+        64
       ],
       "topics": [
         "dielectric"
       ]
     },
     {
-      "id": "p291",
-      "rawIndex": 291,
+      "id": "p290",
+      "rawIndex": 290,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s29",
       "sectionTitle": "5.5 与 CMOS 平台的兼容性",
-      "text": "这项工作给出的数据具有参考价值：全局背栅单片 WS₂ 的 133 个器件全部工作，部分转移 WS₂ 流程良率达到 95%–99%。但在更复杂流程中，顶栅、刻蚀过冲、介质击穿和阈值漂移仍会影响良率[68]。",
+      "text": "这项工作给出的数据具有参考价值：全局背栅单片 WS₂ 的 133 个器件全部工作，部分转移 WS₂ 流程良率达到 95%–99%。但在更复杂流程中，顶栅、刻蚀过冲、介质击穿和阈值漂移仍会影响良率[64]。",
       "preview": "这项工作给出的数据具有参考价值：全局背栅单片 WS₂ 的 133 个...",
       "citations": [
-        68
+        64
       ],
       "topics": [
         "evaluation",
@@ -5580,8 +5555,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p292",
-      "rawIndex": 292,
+      "id": "p291",
+      "rawIndex": 291,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s29",
@@ -5595,8 +5570,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p293",
-      "rawIndex": 293,
+      "id": "p292",
+      "rawIndex": 292,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s29",
@@ -5611,8 +5586,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p294",
-      "rawIndex": 294,
+      "id": "p293",
+      "rawIndex": 293,
       "kind": "image",
       "type": "image",
       "sectionId": "s29",
@@ -5630,16 +5605,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p295",
-      "rawIndex": 295,
+      "id": "p294",
+      "rawIndex": 294,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s29",
       "sectionTitle": "5.5 与 CMOS 平台的兼容性",
-      "text": "图 18 面向后段兼容二维 CFET 与全二维单片三维集成的平台路线图[69]。(a) 从传统硅器件缩放到二维 CFET 与全二维单片三维系统的演进示意；(b) 面向后段兼容二维 CFET 和全二维 M3D 集成所需补齐的关键能力。阅读重点在于图中列出的材料合成、接触/界面工程、集成架构和功率路由四类能力，它们共同决定二维半导体能否与 CMOS 平台协同。来源：文献[69]。",
+      "text": "图 18 面向后段兼容二维 CFET 与全二维单片三维集成的平台路线图[65]。(a) 从传统硅器件缩放到二维 CFET 与全二维单片三维系统的演进示意；(b) 面向后段兼容二维 CFET 和全二维 M3D 集成所需补齐的关键能力。阅读重点在于图中列出的材料合成、接触/界面工程、集成架构和功率路由四类能力，它们共同决定二维半导体能否与 CMOS 平台协同。来源：文献[65]。",
       "preview": "图 18 面向后段兼容二维 CFET 与全二维单片三维集成的平台路线...",
       "citations": [
-        69
+        65
       ],
       "topics": [
         "polarity",
@@ -5648,8 +5623,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p296",
-      "rawIndex": 296,
+      "id": "p295",
+      "rawIndex": 295,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s29",
@@ -5663,8 +5638,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p297",
-      "rawIndex": 297,
+      "id": "p296",
+      "rawIndex": 296,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s30",
@@ -5675,8 +5650,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p298",
-      "rawIndex": 298,
+      "id": "p297",
+      "rawIndex": 297,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s31",
@@ -5687,8 +5662,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p299",
-      "rawIndex": 299,
+      "id": "p298",
+      "rawIndex": 298,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s31",
@@ -5704,23 +5679,23 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p300",
-      "rawIndex": 300,
+      "id": "p299",
+      "rawIndex": 299,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s31",
       "sectionTitle": "6.1 总体判断",
-      "text": "近三年文献已经把这个问题推得更具体。1 nm 节点讨论、可缩放接触、短沟道 p 型器件、二维微处理器、柔性单片三维互补电路和集成感知系统相继出现[17,24,30,40,46-47,55,58]。这些进展的共同意义，不在于刷新某一个单项纪录，而在于把材料、器件、工艺和系统放到同一条链条里检验。",
+      "text": "近三年文献已经把这个问题推得更具体。1 nm 节点讨论、可缩放接触、短沟道 p 型器件、二维微处理器、柔性单片三维互补电路和集成感知系统相继出现[13,20,26,36,42-43,51,54]。这些进展的共同意义，不在于刷新某一个单项纪录，而在于把材料、器件、工艺和系统放到同一条链条里检验。",
       "preview": "近三年文献已经把这个问题推得更具体。1 nm 节点讨论、可缩放接触、...",
       "citations": [
-        17,
-        24,
-        30,
-        40,
-        46,
-        47,
-        55,
-        58
+        13,
+        20,
+        26,
+        36,
+        42,
+        43,
+        51,
+        54
       ],
       "topics": [
         "scaling",
@@ -5731,8 +5706,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p301",
-      "rawIndex": 301,
+      "id": "p300",
+      "rawIndex": 300,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s31",
@@ -5747,8 +5722,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p302",
-      "rawIndex": 302,
+      "id": "p301",
+      "rawIndex": 301,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s32",
@@ -5759,8 +5734,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p303",
-      "rawIndex": 303,
+      "id": "p302",
+      "rawIndex": 302,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s32",
@@ -5778,8 +5753,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p304",
-      "rawIndex": 304,
+      "id": "p303",
+      "rawIndex": 303,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s32",
@@ -5795,8 +5770,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p305",
-      "rawIndex": 305,
+      "id": "p304",
+      "rawIndex": 304,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s32",
@@ -5811,8 +5786,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p306",
-      "rawIndex": 306,
+      "id": "p305",
+      "rawIndex": 305,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s32",
@@ -5828,8 +5803,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p307",
-      "rawIndex": 307,
+      "id": "p306",
+      "rawIndex": 306,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s32",
@@ -5843,8 +5818,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p308",
-      "rawIndex": 308,
+      "id": "p307",
+      "rawIndex": 307,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s32",
@@ -5856,8 +5831,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p309",
-      "rawIndex": 309,
+      "id": "p308",
+      "rawIndex": 308,
       "kind": "table",
       "type": "table",
       "sectionId": "s32",
@@ -5911,8 +5886,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p310",
-      "rawIndex": 310,
+      "id": "p309",
+      "rawIndex": 309,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s32",
@@ -5923,40 +5898,40 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p311",
-      "rawIndex": 311,
+      "id": "p310",
+      "rawIndex": 310,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s32",
       "sectionTitle": "6.2 路线图展望",
-      "text": "近期 Nature Communications 关于二维 CFET 的综述也支持这一判断。该文把二维电子学的近期目标概括为两条并行路线：面向后道兼容的二维 BEOL CFET，以及更长期的全二维单片三维系统；同时把材料生长、接触与界面工程、集成架构和功率路由列为需要共同解决的问题[69]。沿着这一路线看，二维半导体的重点已从单个器件性能扩展到材料、接触、互连和供电能否在同一三维逻辑结构中共同工作。",
+      "text": "近期 Nature Communications 关于二维 CFET 的综述也支持这一判断。该文把二维电子学的近期目标概括为两条并行路线：面向后道兼容的二维 BEOL CFET，以及更长期的全二维单片三维系统；同时把材料生长、接触与界面工程、集成架构和功率路由列为需要共同解决的问题[65]。沿着这一路线看，二维半导体的重点已从单个器件性能扩展到材料、接触、互连和供电能否在同一三维逻辑结构中共同工作。",
       "preview": "近期 Nature Communications 关于二维 CFET...",
       "citations": [
-        69
+        65
       ],
       "topics": [
         "m3d"
       ]
     },
     {
-      "id": "p312",
-      "rawIndex": 312,
+      "id": "p311",
+      "rawIndex": 311,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s32",
       "sectionTitle": "6.2 路线图展望",
-      "text": "《物理学报》2026 年关于二维材料集成与应用的特邀综述也给出相近判断：讨论重心正在从二维材料的单项本征性质，推进到基础功能器件、逻辑电路模块与三维集成链条。中文物理与器件社区的关注点也在从材料本身，转向器件和集成结果能否经得起连续验证[70]。",
+      "text": "《物理学报》2026 年关于二维材料集成与应用的特邀综述也给出相近判断：讨论重心正在从二维材料的单项本征性质，推进到基础功能器件、逻辑电路模块与三维集成链条。中文物理与器件社区的关注点也在从材料本身，转向器件和集成结果能否经得起连续验证[66]。",
       "preview": "《物理学报》2026 年关于二维材料集成与应用的特邀综述也给出相近判...",
       "citations": [
-        70
+        66
       ],
       "topics": [
         "circuit"
       ]
     },
     {
-      "id": "p313",
-      "rawIndex": 313,
+      "id": "p312",
+      "rawIndex": 312,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s32",
@@ -5970,8 +5945,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p314",
-      "rawIndex": 314,
+      "id": "p313",
+      "rawIndex": 313,
       "kind": "image",
       "type": "image",
       "sectionId": "s32",
@@ -5989,16 +5964,16 @@ window.PAPER_DATA = {
       }
     },
     {
-      "id": "p315",
-      "rawIndex": 315,
+      "id": "p314",
+      "rawIndex": 314,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s32",
       "sectionTitle": "6.2 路线图展望",
-      "text": "图 19 二维半导体可扩展生长与转移路线图[69]。图中比较直接生长、低温沉积和支撑层辅助转移等路线，并从可扩展性、后道兼容性、均匀性和生长温度等维度给出取舍。图中给出的路线比较强调，二维半导体走向后摩尔集成时，需要在材料质量、面积、温度预算和转移损伤之间取得平衡。 来源：文献[69]。",
+      "text": "图 19 二维半导体可扩展生长与转移路线图[65]。图中比较直接生长、低温沉积和支撑层辅助转移等路线，并从可扩展性、后道兼容性、均匀性和生长温度等维度给出取舍。图中给出的路线比较强调，二维半导体走向后摩尔集成时，需要在材料质量、面积、温度预算和转移损伤之间取得平衡。 来源：文献[65]。",
       "preview": "图 19 二维半导体可扩展生长与转移路线图。图中比较直接生长、低温沉...",
       "citations": [
-        69
+        65
       ],
       "topics": [
         "wafer",
@@ -6007,8 +5982,8 @@ window.PAPER_DATA = {
       "captionKind": "figure"
     },
     {
-      "id": "p316",
-      "rawIndex": 316,
+      "id": "p315",
+      "rawIndex": 315,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s32",
@@ -6020,8 +5995,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p317",
-      "rawIndex": 317,
+      "id": "p316",
+      "rawIndex": 316,
       "kind": "table",
       "type": "table",
       "sectionId": "s32",
@@ -6065,8 +6040,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p318",
-      "rawIndex": 318,
+      "id": "p317",
+      "rawIndex": 317,
       "kind": "paragraph",
       "type": "heading",
       "sectionId": "s33",
@@ -6077,8 +6052,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p319",
-      "rawIndex": 319,
+      "id": "p318",
+      "rawIndex": 318,
       "kind": "paragraph",
       "type": "evidence",
       "sectionId": "s33",
@@ -6091,8 +6066,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p320",
-      "rawIndex": 320,
+      "id": "p319",
+      "rawIndex": 319,
       "kind": "paragraph",
       "type": "synthesis",
       "sectionId": "s33",
@@ -6108,8 +6083,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p321",
-      "rawIndex": 321,
+      "id": "p320",
+      "rawIndex": 320,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s33",
@@ -6120,8 +6095,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p322",
-      "rawIndex": 322,
+      "id": "p321",
+      "rawIndex": 321,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s33",
@@ -6132,8 +6107,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p323",
-      "rawIndex": 323,
+      "id": "p322",
+      "rawIndex": 322,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s33",
@@ -6144,8 +6119,8 @@ window.PAPER_DATA = {
       "topics": []
     },
     {
-      "id": "p324",
-      "rawIndex": 324,
+      "id": "p323",
+      "rawIndex": 323,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s33",
@@ -6157,28 +6132,28 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p325",
-      "rawIndex": 325,
+      "id": "p324",
+      "rawIndex": 324,
       "kind": "table",
       "type": "table",
       "sectionId": "s33",
       "sectionTitle": "6.3 结论",
-      "text": "数据项 | 采用值 | 原文位置 | 测试或提取口径 | 使用边界\nn 型 MoS₂ 驱动电流 | 1.22 mA·μm⁻¹；10 nm | 文献[16]图 4；正文器件性能段 | 漏源电压 0.7 V；峰值或代表器件口径，非统计平均值 | 只支撑 n 型高驱动能力；同文统计值需另按原文口径引用\nn 型 MoS₂ 接触电阻 | 约 69 Ω·μm | 文献[16]扩展数据图 6；方法中 TLM 提取说明 | TLM 提取；表中按原文接触电阻定义引用 | 不同文献可能采用单侧或总接触定义，严格比较需回到方法部分\n晶态 Sb 接触缩放 | 18 nm 接触下约 98 Ω·μm；40 nm CGP 样本平均开态电流约 596.2 μA·μm⁻¹、亚阈值摆幅约 99.5 mV·dec⁻¹ | 文献[17]图 3g、图 4、补充图 19；正文 CGP 统计段 | MBE Sb/MoS₂ 接触；CGP 阵列按原文统计口径引用 | 用于说明短接触长度下低阻接触的可缩放性，不作 n 型与 p 型 排名\np 型 WSe₂ 层状接触 | 双层器件开态电流约 1.1 mA·μm⁻¹；1.3 nm 等效氧化层厚度下 亚阈值摆幅约 88 mV·dec⁻¹ | 文献[12]摘要、图 2；正文器件结构与测试条件段 | Nb₀.₃W₀.₇Se₂ 接触 WSe₂；按原文沟道、介质和偏压条件引用 | 说明 p 型接触进入可比较区间，但不是同批次 CMOS 配对证据\n氧辅助 WSe₂ pFET | 开态电流约 1.245 mA·μm⁻¹；接触电阻约 560 Ω·μm；开关比约 10⁹ | 文献[13]摘要、图 5；正文性能与接触电阻段 | 45 nm 单层 WSe₂ pFET；氧辅助缺陷修复；接触电阻按原文 TLM/基准图引用 | 需保留偏压和器件结构条件，不能与低电压 CMOS 结果直接横比\nNO 掺杂 WSe₂ 统计 | 开态电流约 421 μA·μm⁻¹；接触电阻约 1.3 kΩ·μm；亚阈值摆幅约 75 mV·dec⁻¹；开关比大于 10⁷；样本数 300 | 文献[36]摘要、图 1、图 3、补充图 7；统计测试段 | MOCVD 双层 WSe₂ pFET；NO 处理后按原文统计和 TLM 口径引用 | 统计披露较充分，但与最新短沟道单层 pFET 不是同一测试口径\n二维 RISC-V 微处理器 | 32 位 RISC-V 微处理器；二维晶体管与标准单元库共同验证 | 文献[50]摘要；处理器架构、标准单元库与系统演示图 | 系统级功能演示口径；不等同于硅处理器性能对标 | 用于说明二维器件已进入体系结构验证，但不能推出高性能计算成熟\n互补二维 OISC | 1000 个 MoS₂ nFET 与 1000 个 WSe₂ pFET 统计；小于 3 V 下最高约 25 kHz；开关能量约 100 pJ | 文献[51]器件统计、反相器与系统演示图 | 同一系统内的 n 型与 p 型 统计与功能演示口径 | 用于支持互补二维器件开始进入可运行计算系统，不与先进硅性能横比\n类晶圆厂二维微处理器 | 约 130 批次迭代；全互连百管量级二维微处理器；模块良率分层报告 | 文献[46]流程图、器件统计与模块演示图；文献[47]评论 | 按原文批次优化和模块级统计口径引用 | 用于说明评价对象从单管曲线转向工艺迭代和模块良率\n柔性单片三维互补电路 | 工艺温度低于 150 °C；刚性衬底反相器增益约 462；五级环振最高约 13.5 kHz；柔性环振约 6 kHz | 文献[55]摘要；器件、电路与柔性演示图 | 低温、柔性和垂直堆叠共同约束下的系统演示口径 | 用于说明柔性 M3D 是差异化应用场景，不与先进硅逻辑直接竞争\n二维 flash 芯片 | 芯片良率 94.34%；20 ns 级操作；能耗 0.644 pJ·bit⁻¹；5 MHz 指令驱动运行 | 文献[56]摘要；芯片架构、存储单元与系统测试图 | 二维 MoS₂ 存储单元与硅 CMOS 控制电路集成口径 | 用于说明二维器件可作为功能模块接入 CMOS 底座\nMoS₂ GAA 阵列 | 1 cm × 1 cm 样片；112 个器件统计；平均开态电流约 227 μA·μm⁻¹，峰值超过 335 μA·μm⁻¹；最小亚阈值摆幅接近 60 mV·dec⁻¹ | 文献[57]摘要；阵列统计与器件性能图 | 大面积 GAA 阵列与界面工程后统计口径 | 用于说明三维集成要同时看阵列、界面和统计，不只看单个器件\n300 mm 试验线评估 | WS₂/MoS₂ FET 在 300 mm pilot line 中集成和电学评估 | 文献[68]摘要；工艺流程与电学评估部分 | 试验线流程口径；具体器件性能需按原文测试条件解读 | 用于说明制造兼容性开始进入试验线层面的公开评估",
+      "text": "数据项 | 采用值 | 原文位置 | 测试或提取口径 | 使用边界\nn 型 MoS₂ 驱动电流 | 1.22 mA·μm⁻¹；10 nm | 文献[12]图 4；正文器件性能段 | 漏源电压 0.7 V；峰值或代表器件口径，非统计平均值 | 只支撑 n 型高驱动能力；同文统计值需另按原文口径引用\nn 型 MoS₂ 接触电阻 | 约 69 Ω·μm | 文献[12]扩展数据图 6；方法中 TLM 提取说明 | TLM 提取；表中按原文接触电阻定义引用 | 不同文献可能采用单侧或总接触定义，严格比较需回到方法部分\n晶态 Sb 接触缩放 | 18 nm 接触下约 98 Ω·μm；40 nm CGP 样本平均开态电流约 596.2 μA·μm⁻¹、亚阈值摆幅约 99.5 mV·dec⁻¹ | 文献[13]图 3g、图 4、补充图 19；正文 CGP 统计段 | MBE Sb/MoS₂ 接触；CGP 阵列按原文统计口径引用 | 用于说明短接触长度下低阻接触的可缩放性，不作 n 型与 p 型 排名\np 型 WSe₂ 层状接触 | 双层器件开态电流约 1.1 mA·μm⁻¹；1.3 nm 等效氧化层厚度下 亚阈值摆幅约 88 mV·dec⁻¹ | 文献[8]摘要、图 2；正文器件结构与测试条件段 | Nb₀.₃W₀.₇Se₂ 接触 WSe₂；按原文沟道、介质和偏压条件引用 | 说明 p 型接触进入可比较区间，但不是同批次 CMOS 配对证据\n氧辅助 WSe₂ pFET | 开态电流约 1.245 mA·μm⁻¹；接触电阻约 560 Ω·μm；开关比约 10⁹ | 文献[9]摘要、图 5；正文性能与接触电阻段 | 45 nm 单层 WSe₂ pFET；氧辅助缺陷修复；接触电阻按原文 TLM/基准图引用 | 需保留偏压和器件结构条件，不能与低电压 CMOS 结果直接横比\nNO 掺杂 WSe₂ 统计 | 开态电流约 421 μA·μm⁻¹；接触电阻约 1.3 kΩ·μm；亚阈值摆幅约 75 mV·dec⁻¹；开关比大于 10⁷；样本数 300 | 文献[32]摘要、图 1、图 3、补充图 7；统计测试段 | MOCVD 双层 WSe₂ pFET；NO 处理后按原文统计和 TLM 口径引用 | 统计披露较充分，但与最新短沟道单层 pFET 不是同一测试口径\n二维 RISC-V 微处理器 | 32 位 RISC-V 微处理器；二维晶体管与标准单元库共同验证 | 文献[46]摘要；处理器架构、标准单元库与系统演示图 | 系统级功能演示口径；不等同于硅处理器性能对标 | 用于说明二维器件已进入体系结构验证，但不能推出高性能计算成熟\n互补二维 OISC | 1000 个 MoS₂ nFET 与 1000 个 WSe₂ pFET 统计；小于 3 V 下最高约 25 kHz；开关能量约 100 pJ | 文献[47]器件统计、反相器与系统演示图 | 同一系统内的 n 型与 p 型 统计与功能演示口径 | 用于支持互补二维器件开始进入可运行计算系统，不与先进硅性能横比\n类晶圆厂二维微处理器 | 约 130 批次迭代；全互连百管量级二维微处理器；模块良率分层报告 | 文献[42]流程图、器件统计与模块演示图；文献[43]评论 | 按原文批次优化和模块级统计口径引用 | 用于说明评价对象从单管曲线转向工艺迭代和模块良率\n柔性单片三维互补电路 | 工艺温度低于 150 °C；刚性衬底反相器增益约 462；五级环振最高约 13.5 kHz；柔性环振约 6 kHz | 文献[51]摘要；器件、电路与柔性演示图 | 低温、柔性和垂直堆叠共同约束下的系统演示口径 | 用于说明柔性 M3D 是差异化应用场景，不与先进硅逻辑直接竞争\n二维 flash 芯片 | 芯片良率 94.34%；20 ns 级操作；能耗 0.644 pJ·bit⁻¹；5 MHz 指令驱动运行 | 文献[52]摘要；芯片架构、存储单元与系统测试图 | 二维 MoS₂ 存储单元与硅 CMOS 控制电路集成口径 | 用于说明二维器件可作为功能模块接入 CMOS 底座\nMoS₂ GAA 阵列 | 1 cm × 1 cm 样片；112 个器件统计；平均开态电流约 227 μA·μm⁻¹，峰值超过 335 μA·μm⁻¹；最小亚阈值摆幅接近 60 mV·dec⁻¹ | 文献[53]摘要；阵列统计与器件性能图 | 大面积 GAA 阵列与界面工程后统计口径 | 用于说明三维集成要同时看阵列、界面和统计，不只看单个器件\n300 mm 试验线评估 | WS₂/MoS₂ FET 在 300 mm pilot line 中集成和电学评估 | 文献[64]摘要；工艺流程与电学评估部分 | 试验线流程口径；具体器件性能需按原文测试条件解读 | 用于说明制造兼容性开始进入试验线层面的公开评估",
       "preview": "数据项 | 采用值 | 原文位置 | 测试或提取口径 | 使用边界\n...",
       "citations": [
+        8,
+        9,
         12,
         13,
-        16,
-        17,
-        36,
+        32,
+        42,
+        43,
         46,
         47,
-        50,
         51,
-        55,
-        56,
-        57,
-        68
+        52,
+        53,
+        64
       ],
       "topics": [
         "evaluation",
@@ -6201,99 +6176,99 @@ window.PAPER_DATA = {
         [
           "n 型 MoS₂ 驱动电流",
           "1.22 mA·μm⁻¹；10 nm",
-          "文献[16]图 4；正文器件性能段",
+          "文献[12]图 4；正文器件性能段",
           "漏源电压 0.7 V；峰值或代表器件口径，非统计平均值",
           "只支撑 n 型高驱动能力；同文统计值需另按原文口径引用"
         ],
         [
           "n 型 MoS₂ 接触电阻",
           "约 69 Ω·μm",
-          "文献[16]扩展数据图 6；方法中 TLM 提取说明",
+          "文献[12]扩展数据图 6；方法中 TLM 提取说明",
           "TLM 提取；表中按原文接触电阻定义引用",
           "不同文献可能采用单侧或总接触定义，严格比较需回到方法部分"
         ],
         [
           "晶态 Sb 接触缩放",
           "18 nm 接触下约 98 Ω·μm；40 nm CGP 样本平均开态电流约 596.2 μA·μm⁻¹、亚阈值摆幅约 99.5 mV·dec⁻¹",
-          "文献[17]图 3g、图 4、补充图 19；正文 CGP 统计段",
+          "文献[13]图 3g、图 4、补充图 19；正文 CGP 统计段",
           "MBE Sb/MoS₂ 接触；CGP 阵列按原文统计口径引用",
           "用于说明短接触长度下低阻接触的可缩放性，不作 n 型与 p 型 排名"
         ],
         [
           "p 型 WSe₂ 层状接触",
           "双层器件开态电流约 1.1 mA·μm⁻¹；1.3 nm 等效氧化层厚度下 亚阈值摆幅约 88 mV·dec⁻¹",
-          "文献[12]摘要、图 2；正文器件结构与测试条件段",
+          "文献[8]摘要、图 2；正文器件结构与测试条件段",
           "Nb₀.₃W₀.₇Se₂ 接触 WSe₂；按原文沟道、介质和偏压条件引用",
           "说明 p 型接触进入可比较区间，但不是同批次 CMOS 配对证据"
         ],
         [
           "氧辅助 WSe₂ pFET",
           "开态电流约 1.245 mA·μm⁻¹；接触电阻约 560 Ω·μm；开关比约 10⁹",
-          "文献[13]摘要、图 5；正文性能与接触电阻段",
+          "文献[9]摘要、图 5；正文性能与接触电阻段",
           "45 nm 单层 WSe₂ pFET；氧辅助缺陷修复；接触电阻按原文 TLM/基准图引用",
           "需保留偏压和器件结构条件，不能与低电压 CMOS 结果直接横比"
         ],
         [
           "NO 掺杂 WSe₂ 统计",
           "开态电流约 421 μA·μm⁻¹；接触电阻约 1.3 kΩ·μm；亚阈值摆幅约 75 mV·dec⁻¹；开关比大于 10⁷；样本数 300",
-          "文献[36]摘要、图 1、图 3、补充图 7；统计测试段",
+          "文献[32]摘要、图 1、图 3、补充图 7；统计测试段",
           "MOCVD 双层 WSe₂ pFET；NO 处理后按原文统计和 TLM 口径引用",
           "统计披露较充分，但与最新短沟道单层 pFET 不是同一测试口径"
         ],
         [
           "二维 RISC-V 微处理器",
           "32 位 RISC-V 微处理器；二维晶体管与标准单元库共同验证",
-          "文献[50]摘要；处理器架构、标准单元库与系统演示图",
+          "文献[46]摘要；处理器架构、标准单元库与系统演示图",
           "系统级功能演示口径；不等同于硅处理器性能对标",
           "用于说明二维器件已进入体系结构验证，但不能推出高性能计算成熟"
         ],
         [
           "互补二维 OISC",
           "1000 个 MoS₂ nFET 与 1000 个 WSe₂ pFET 统计；小于 3 V 下最高约 25 kHz；开关能量约 100 pJ",
-          "文献[51]器件统计、反相器与系统演示图",
+          "文献[47]器件统计、反相器与系统演示图",
           "同一系统内的 n 型与 p 型 统计与功能演示口径",
           "用于支持互补二维器件开始进入可运行计算系统，不与先进硅性能横比"
         ],
         [
           "类晶圆厂二维微处理器",
           "约 130 批次迭代；全互连百管量级二维微处理器；模块良率分层报告",
-          "文献[46]流程图、器件统计与模块演示图；文献[47]评论",
+          "文献[42]流程图、器件统计与模块演示图；文献[43]评论",
           "按原文批次优化和模块级统计口径引用",
           "用于说明评价对象从单管曲线转向工艺迭代和模块良率"
         ],
         [
           "柔性单片三维互补电路",
           "工艺温度低于 150 °C；刚性衬底反相器增益约 462；五级环振最高约 13.5 kHz；柔性环振约 6 kHz",
-          "文献[55]摘要；器件、电路与柔性演示图",
+          "文献[51]摘要；器件、电路与柔性演示图",
           "低温、柔性和垂直堆叠共同约束下的系统演示口径",
           "用于说明柔性 M3D 是差异化应用场景，不与先进硅逻辑直接竞争"
         ],
         [
           "二维 flash 芯片",
           "芯片良率 94.34%；20 ns 级操作；能耗 0.644 pJ·bit⁻¹；5 MHz 指令驱动运行",
-          "文献[56]摘要；芯片架构、存储单元与系统测试图",
+          "文献[52]摘要；芯片架构、存储单元与系统测试图",
           "二维 MoS₂ 存储单元与硅 CMOS 控制电路集成口径",
           "用于说明二维器件可作为功能模块接入 CMOS 底座"
         ],
         [
           "MoS₂ GAA 阵列",
           "1 cm × 1 cm 样片；112 个器件统计；平均开态电流约 227 μA·μm⁻¹，峰值超过 335 μA·μm⁻¹；最小亚阈值摆幅接近 60 mV·dec⁻¹",
-          "文献[57]摘要；阵列统计与器件性能图",
+          "文献[53]摘要；阵列统计与器件性能图",
           "大面积 GAA 阵列与界面工程后统计口径",
           "用于说明三维集成要同时看阵列、界面和统计，不只看单个器件"
         ],
         [
           "300 mm 试验线评估",
           "WS₂/MoS₂ FET 在 300 mm pilot line 中集成和电学评估",
-          "文献[68]摘要；工艺流程与电学评估部分",
+          "文献[64]摘要；工艺流程与电学评估部分",
           "试验线流程口径；具体器件性能需按原文测试条件解读",
           "用于说明制造兼容性开始进入试验线层面的公开评估"
         ]
       ]
     },
     {
-      "id": "p326",
-      "rawIndex": 326,
+      "id": "p325",
+      "rawIndex": 325,
       "kind": "paragraph",
       "type": "figure-table",
       "sectionId": "s33",
@@ -6305,8 +6280,8 @@ window.PAPER_DATA = {
       "captionKind": "table"
     },
     {
-      "id": "p327",
-      "rawIndex": 327,
+      "id": "p326",
+      "rawIndex": 326,
       "kind": "table",
       "type": "table",
       "sectionId": "s33",
@@ -6351,8 +6326,8 @@ window.PAPER_DATA = {
       ]
     },
     {
-      "id": "p328",
-      "rawIndex": 328,
+      "id": "p327",
+      "rawIndex": 327,
       "kind": "paragraph",
       "type": "analysis",
       "sectionId": "s33",
@@ -6366,105 +6341,61 @@ window.PAPER_DATA = {
   "references": [
     {
       "number": 1,
-      "text": "Moore G E. Cramming more components onto integrated circuits[J]. Electronics, 1965, 38(8): 114-117.",
-      "doi": "",
-      "year": 1965,
-      "journal": "Electronics",
-      "usedBy": [
-        "p36"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 2,
-      "text": "International Technology Roadmap for Semiconductors. More-than-Moore White Paper[R/OL]. 2010[2026-06-28]. https://www.itrs2.org/uploads/4/9/7/7/49775221/irc-itrs-mtm-v2_3.pdf.",
-      "doi": "",
-      "year": 2026,
-      "journal": "",
-      "usedBy": [
-        "p36"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 3,
-      "text": "IEEE. International Roadmap for Devices and Systems 2022 Edition: Executive Summary[R/OL]. 2022[2026-06-28]. https://irds.ieee.org/images/files/pdf/2022/2022IRDS_ES.pdf.",
-      "doi": "",
-      "year": 2022,
-      "journal": "",
-      "usedBy": [
-        "p36"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 4,
-      "text": "International Technology Roadmap for Semiconductors. 2015 ITRS 2.0: Beyond CMOS[R/OL]. 2015[2026-06-28]. https://www.semiconductors.org/wp-content/uploads/2018/06/6_2015-ITRS-2.0-Beyond-CMOS.pdf.",
-      "doi": "",
-      "year": 2018,
-      "journal": "",
-      "usedBy": [
-        "p36"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 5,
       "text": "Wang Y, Sarkar S, Yan H, et al. Critical challenges in the development of electronics based on two-dimensional transition metal dichalcogenides[J]. Nature Electronics, 2024, 7: 638-645. DOI: 10.1038/s41928-024-01210-3.",
       "doi": "10.1038/s41928-024-01210-3",
       "year": 2024,
       "journal": "Nature Electronics",
       "usedBy": [
         "p25",
-        "p74",
-        "p126",
-        "p266"
+        "p73",
+        "p125",
+        "p265"
       ],
       "usageCount": 4
     },
     {
-      "number": 6,
+      "number": 2,
       "text": "Wang S, Liu X, Xu M, et al. Two-dimensional devices and integration towards the silicon lines[J]. Nature Materials, 2022, 21: 1225-1239. DOI: 10.1038/s41563-022-01383-2.",
       "doi": "10.1038/s41563-022-01383-2",
       "year": 2022,
       "journal": "Nature Materials",
       "usedBy": [
         "p25",
-        "p178"
+        "p177"
       ],
       "usageCount": 2
     },
     {
-      "number": 7,
+      "number": 3,
       "text": "Zeng S, Liu C, Zhou P. Transistor engineering based on 2D materials in the post-silicon era[J]. Nature Reviews Electrical Engineering, 2024, 1: 335-348. DOI: 10.1038/s44287-024-00045-6.",
       "doi": "10.1038/s44287-024-00045-6",
       "year": 2024,
       "journal": "Nature Reviews Electrical Engineering",
       "usedBy": [
         "p25",
-        "p178"
+        "p177"
       ],
       "usageCount": 2
     },
     {
-      "number": 8,
+      "number": 4,
       "text": "Das S, Sebastian A, Pop E, et al. Transistors based on two-dimensional materials for future integrated circuits[J]. Nature Electronics, 2021, 4: 786-799. DOI: 10.1038/s41928-021-00670-1.",
       "doi": "10.1038/s41928-021-00670-1",
       "year": 2021,
       "journal": "Nature Electronics",
       "usedBy": [
         "p28",
-        "p42",
-        "p50",
-        "p62",
-        "p126",
-        "p177",
-        "p276"
+        "p41",
+        "p49",
+        "p61",
+        "p125",
+        "p176",
+        "p275"
       ],
       "usageCount": 7
     },
     {
-      "number": 9,
+      "number": 5,
       "text": "Islam M A, Khan S, Mim J J, et al. Recent advances of 2D materials in semiconductor application: A review[J]. Advanced Sensor and Energy Materials, 2025, 4(4): 100161. DOI: 10.1016/j.asems.2025.100161.",
       "doi": "10.1016/j.asems.2025.100161",
       "year": 2025,
@@ -6472,304 +6403,304 @@ window.PAPER_DATA = {
       "usedBy": [
         "p28",
         "p33",
-        "p50",
-        "p52",
-        "p126",
-        "p216"
+        "p49",
+        "p51",
+        "p125",
+        "p215"
       ],
       "usageCount": 6
     },
     {
-      "number": 10,
+      "number": 6,
       "text": "Wu F, Tian H, Shen Y, et al. Vertical MoS₂ transistors with sub-1-nm gate lengths[J]. Nature, 2022, 603: 259-264. DOI: 10.1038/s41586-021-04323-3.",
       "doi": "10.1038/s41586-021-04323-3",
       "year": 2022,
       "journal": "Nature",
       "usedBy": [
-        "p62",
-        "p96"
+        "p61",
+        "p95"
       ],
       "usageCount": 2
     },
     {
-      "number": 11,
+      "number": 7,
       "text": "Jiang J, Xu L, Qiu C, et al. Ballistic two-dimensional InSe transistors[J]. Nature, 2023, 616: 470-475. DOI: 10.1038/s41586-023-05819-w.",
       "doi": "10.1038/s41586-023-05819-w",
       "year": 2023,
       "journal": "Nature",
       "usedBy": [
-        "p62",
-        "p70",
-        "p100",
-        "p112",
-        "p129"
+        "p61",
+        "p69",
+        "p99",
+        "p111",
+        "p128"
       ],
       "usageCount": 5
     },
     {
-      "number": 12,
+      "number": 8,
       "text": "Sun Z, Afzalian A, Wu P, et al. Low-resistance contacts for p-type monolayer tungsten diselenide transistors using metallic layered Nb₀.₃W₀.₇Se₂[J]. Nature Electronics, 2026, 9(4): 358-366. DOI: 10.1038/s41928-026-01568-6.",
       "doi": "10.1038/s41928-026-01568-6",
       "year": 2026,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p71",
-        "p93",
-        "p155",
-        "p244",
-        "p249",
-        "p325"
+        "p70",
+        "p92",
+        "p154",
+        "p243",
+        "p248",
+        "p324"
       ],
       "usageCount": 6
     },
     {
-      "number": 13,
+      "number": 9,
       "text": "Sun L, Gao T, Li X, et al. High-performance p-type monolayer tungsten diselenide transistors[J/OL]. Nature Electronics, 2026. DOI: 10.1038/s41928-026-01637-w.",
       "doi": "10.1038/s41928-026-01637-w",
       "year": 2026,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p71",
-        "p93",
-        "p155",
-        "p244",
-        "p249",
-        "p255",
-        "p325"
+        "p70",
+        "p92",
+        "p154",
+        "p243",
+        "p248",
+        "p254",
+        "p324"
       ],
       "usageCount": 7
     },
     {
-      "number": 14,
+      "number": 10,
       "text": "Liu Y, Guo J, Zhu E, et al. Approaching the Schottky-Mott limit in van der Waals metal-semiconductor junctions[J]. Nature, 2018, 557: 696-700. DOI: 10.1038/s41586-018-0129-8.",
       "doi": "10.1038/s41586-018-0129-8",
       "year": 2018,
       "journal": "Nature",
       "usedBy": [
-        "p92",
-        "p111",
-        "p123"
+        "p91",
+        "p110",
+        "p122"
       ],
       "usageCount": 3
     },
     {
-      "number": 15,
+      "number": 11,
       "text": "Li W S, Gong X S, Yu Z H, et al. Approaching the quantum limit in two-dimensional semiconductor contacts[J]. Nature, 2023, 613: 274-279. DOI: 10.1038/s41586-022-05431-4.",
       "doi": "10.1038/s41586-022-05431-4",
       "year": 2023,
       "journal": "Nature",
       "usedBy": [
-        "p70",
-        "p92",
-        "p112"
+        "p69",
+        "p91",
+        "p111"
       ],
       "usageCount": 3
     },
     {
-      "number": 16,
+      "number": 12,
       "text": "Jiang J, Xu L, Du L, et al. Yttrium-doping-induced metallization of molybdenum disulfide for ohmic contacts in two-dimensional transistors[J]. Nature Electronics, 2024, 7: 545-556. DOI: 10.1038/s41928-024-01176-2.",
       "doi": "10.1038/s41928-024-01176-2",
       "year": 2024,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p70",
-        "p92",
-        "p129",
-        "p249",
-        "p251",
-        "p325"
+        "p69",
+        "p91",
+        "p128",
+        "p248",
+        "p250",
+        "p324"
       ],
       "usageCount": 6
     },
     {
-      "number": 17,
+      "number": 13,
       "text": "Du M, Li W, Xiong G, et al. Scaled crystalline antimony ohmic contacts for two-dimensional transistors[J]. Nature Electronics, 2025, 8: 1191-1200. DOI: 10.1038/s41928-025-01500-4.",
       "doi": "10.1038/s41928-025-01500-4",
       "year": 2025,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p70",
-        "p92",
-        "p114",
-        "p249",
-        "p251",
-        "p300",
-        "p325"
+        "p69",
+        "p91",
+        "p113",
+        "p248",
+        "p250",
+        "p299",
+        "p324"
       ],
       "usageCount": 7
     },
     {
-      "number": 18,
+      "number": 14,
       "text": "Zeng D, Zhang Z, Xue Z, et al. Single-crystalline metal-oxide dielectrics for top-gate 2D transistors[J]. Nature, 2024, 632: 788-794. DOI: 10.1038/s41586-024-07786-2.",
       "doi": "10.1038/s41586-024-07786-2",
       "year": 2024,
       "journal": "Nature",
       "usedBy": [
-        "p92",
-        "p130",
-        "p262"
+        "p91",
+        "p129",
+        "p261"
       ],
       "usageCount": 3
     },
     {
-      "number": 19,
+      "number": 15,
       "text": "Zhang S, Wang W, Lu S, et al. Wafer-scale high-κ HfO₂ dielectric films with sub-5-Å equivalent oxide thickness for 2D MoS₂ transistors[J]. Nature Communications, 2026, 17: 1888. DOI: 10.1038/s41467-026-68584-0.",
       "doi": "10.1038/s41467-026-68584-0",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p92",
-        "p130"
+        "p91",
+        "p129"
       ],
       "usageCount": 2
     },
     {
-      "number": 20,
+      "number": 16,
       "text": "Sen D, Ravichandran H, Imam S, et al. van der Waals dielectrics for threshold engineering in two-dimensional field effect transistors[J]. Nature Communications, 2026, 17: 2840. DOI: 10.1038/s41467-026-69089-6.",
       "doi": "10.1038/s41467-026-69089-6",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p92",
-        "p134"
-      ],
-      "usageCount": 2
-    },
-    {
-      "number": 21,
-      "text": "Shen Z, Wu H, Liu C, et al. Wafer-scale monolayer dielectric integration on atomically thin semiconductors[J]. Nature Materials, 2026, 25: 199-206. DOI: 10.1038/s41563-025-02445-x.",
-      "doi": "10.1038/s41563-025-02445-x",
-      "year": 2026,
-      "journal": "Nature Materials",
-      "usedBy": [
-        "p92",
-        "p136",
-        "p274"
-      ],
-      "usageCount": 3
-    },
-    {
-      "number": 22,
-      "text": "Kang T, Park J, Lee S Y, et al. High-κ dielectric van der Waals integration on 2D semiconductors for three-dimensional complementary logic systems[J]. Nature Communications, 2025, 16: 11648. DOI: 10.1038/s41467-025-66770-0.",
-      "doi": "10.1038/s41467-025-66770-0",
-      "year": 2025,
-      "journal": "Nature Communications",
-      "usedBy": [
-        "p92",
+        "p91",
         "p133"
       ],
       "usageCount": 2
     },
     {
-      "number": 23,
+      "number": 17,
+      "text": "Shen Z, Wu H, Liu C, et al. Wafer-scale monolayer dielectric integration on atomically thin semiconductors[J]. Nature Materials, 2026, 25: 199-206. DOI: 10.1038/s41563-025-02445-x.",
+      "doi": "10.1038/s41563-025-02445-x",
+      "year": 2026,
+      "journal": "Nature Materials",
+      "usedBy": [
+        "p91",
+        "p135",
+        "p273"
+      ],
+      "usageCount": 3
+    },
+    {
+      "number": 18,
+      "text": "Kang T, Park J, Lee S Y, et al. High-κ dielectric van der Waals integration on 2D semiconductors for three-dimensional complementary logic systems[J]. Nature Communications, 2025, 16: 11648. DOI: 10.1038/s41467-025-66770-0.",
+      "doi": "10.1038/s41467-025-66770-0",
+      "year": 2025,
+      "journal": "Nature Communications",
+      "usedBy": [
+        "p91",
+        "p132"
+      ],
+      "usageCount": 2
+    },
+    {
+      "number": 19,
       "text": "Pourfath M, Grasser T. Device-scaling constraints imposed by the van der Waals gap formed in two-dimensional materials[J]. Science, 2026, 392(6800): eaeb2271. DOI: 10.1126/science.aeb2271.",
       "doi": "10.1126/science.aeb2271",
       "year": 2026,
       "journal": "Science",
       "usedBy": [
-        "p92",
-        "p127"
+        "p91",
+        "p126"
       ],
       "usageCount": 2
     },
     {
-      "number": 24,
+      "number": 20,
       "text": "Ngo T D, Wu X, Banerjee K, et al. Controllable p-type doping of 2D WSe₂ pFET by engineered surface charge transfer doping with metal co-seeding[J]. IEEE Electron Device Letters, 2025, 46(12): 2365-2368. DOI: 10.1109/LED.2025.3615652.",
       "doi": "10.1109/LED.2025.3615652",
       "year": 2025,
       "journal": "IEEE Electron Device Letters",
       "usedBy": [
-        "p93",
-        "p148",
-        "p244",
-        "p300"
+        "p92",
+        "p147",
+        "p243",
+        "p299"
       ],
       "usageCount": 4
     },
     {
-      "number": 25,
+      "number": 21,
       "text": "Hoang L, Bennett R K A, Hoang A T, et al. Low resistance p-type contacts to monolayer WSe₂ through chlorinated solvent doping[J]. Nature Communications, 2026, 17: 718. DOI: 10.1038/s41467-025-65604-3.",
       "doi": "10.1038/s41467-025-65604-3",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p93",
-        "p147"
+        "p92",
+        "p146"
       ],
       "usageCount": 2
     },
     {
-      "number": 26,
+      "number": 22,
       "text": "Xu G H, Chen S, Liu Y Y. A general and non-destructive p-type doping strategy toward 2-D complementary technology[J]. IEEE Electron Device Letters, 2026, 47(5): 1029-1032. DOI: 10.1109/LED.2026.3673340.",
       "doi": "10.1109/LED.2026.3673340",
       "year": 2026,
       "journal": "IEEE Electron Device Letters",
       "usedBy": [
-        "p93",
-        "p148"
+        "p92",
+        "p147"
       ],
       "usageCount": 2
     },
     {
-      "number": 27,
+      "number": 23,
       "text": "Karl A, Verdianu A, Waldhoer D, et al. A standardized approach to characterize hysteresis in 2D-materials-based transistors for stability benchmarking and performance projection[J]. Nature Communications, 2026, 17: 171. DOI: 10.1038/s41467-025-66210-z.",
       "doi": "10.1038/s41467-025-66210-z",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p93",
-        "p283"
+        "p92",
+        "p282"
       ],
       "usageCount": 2
     },
     {
-      "number": 28,
+      "number": 24,
       "text": "Lv Y Z, Wu Y H, Cai H H, et al. Mapping diverse hysteresis dynamics in scaled MoS₂ FETs using the universal method derived from TCAD modeling[J]. npj 2D Materials and Applications, 2026, 10: 35. DOI: 10.1038/s41699-026-00671-8.",
       "doi": "10.1038/s41699-026-00671-8",
       "year": 2026,
       "journal": "npj 2D Materials and Applications",
       "usedBy": [
-        "p93",
-        "p280"
+        "p92",
+        "p279"
       ],
       "usageCount": 2
     },
     {
-      "number": 29,
+      "number": 25,
       "text": "Radisavljevic B, Radenovic A, Brivio J, et al. Single-layer MoS₂ transistors[J]. Nature Nanotechnology, 2011, 6: 147-150. DOI: 10.1038/nnano.2011.90.",
       "doi": "10.1038/nnano.2011.90",
       "year": 2011,
       "journal": "Nature Nanotechnology",
       "usedBy": [
-        "p70",
-        "p95",
-        "p110"
+        "p69",
+        "p94",
+        "p109"
       ],
       "usageCount": 3
     },
     {
-      "number": 30,
+      "number": 26,
       "text": "Zeng W, Han S T, Zhou Y. Towards 1-nm-node electronics with two-dimensional transistors[J]. Nature Electronics, 2025, 8: 1138-1139. DOI: 10.1038/s41928-025-01501-3.",
       "doi": "10.1038/s41928-025-01501-3",
       "year": 2025,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p97",
-        "p300"
+        "p96",
+        "p299"
       ],
       "usageCount": 2
     },
     {
-      "number": 31,
+      "number": 27,
       "text": "Peña T, Persson A E O, Krayev A, et al. Scaling nanoribbon transistors with monolayer transition metal dichalcogenides[J/OL]. Nature Nanotechnology, 2026. DOI: 10.1038/s41565-026-02161-w.",
       "doi": "10.1038/s41565-026-02161-w",
       "year": 2026,
       "journal": "Nature Nanotechnology",
       "usedBy": [
-        "p103",
-        "p105",
-        "p107",
-        "p166"
+        "p102",
+        "p104",
+        "p106",
+        "p165"
       ],
       "usageCount": 4,
       "localSource": {
@@ -7142,278 +7073,278 @@ window.PAPER_DATA = {
       }
     },
     {
-      "number": 32,
+      "number": 28,
       "text": "McDonnell S, Addou R, Buie C, et al. Defect-dominated doping and contact resistance in MoS₂[J]. ACS Nano, 2014, 8(3): 2880-2888. DOI: 10.1021/nn500044q.",
       "doi": "10.1021/nn500044q",
       "year": 2014,
       "journal": "ACS Nano",
       "usedBy": [
-        "p110"
+        "p109"
       ],
       "usageCount": 1
     },
     {
-      "number": 33,
+      "number": 29,
       "text": "Thomas S. 2D transistors feel the squeeze[J]. Nature Electronics, 2024, 7(7): 517. DOI: 10.1038/s41928-024-01225-w.",
       "doi": "10.1038/s41928-024-01225-w",
       "year": 2024,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p103"
+        "p102"
       ],
       "usageCount": 1
     },
     {
-      "number": 34,
+      "number": 30,
       "text": "Ko J S, Shearer A B, Lee S, et al. Achieving 1-nm-scale equivalent oxide thickness top-gate dielectric on monolayer transition metal dichalcogenide transistors with CMOS-friendly approaches[J]. IEEE Transactions on Electron Devices, 2025, 72(3): 1514-1519. DOI: 10.1109/TED.2024.3466112.",
       "doi": "10.1109/TED.2024.3466112",
       "year": 2024,
       "journal": "IEEE Transactions on Electron Devices",
       "usedBy": [
-        "p130",
-        "p262"
+        "p129",
+        "p261"
       ],
       "usageCount": 2
     },
     {
-      "number": 35,
+      "number": 31,
       "text": "Hsu Y W, Lin Y T, Chiang N E, et al. Impacts of EOT scaling of ZrOₓ/HfOₓ dielectric on monolayer WSe₂ top-gate p-MOSFETs[J]. IEEE Electron Device Letters, 2026, 47(3): 637-640. DOI: 10.1109/LED.2026.3657560.",
       "doi": "10.1109/LED.2026.3657560",
       "year": 2026,
       "journal": "IEEE Electron Device Letters",
       "usedBy": [
-        "p137"
+        "p136"
       ],
       "usageCount": 1
     },
     {
-      "number": 36,
+      "number": 32,
       "text": "Ghosh S, Sadaf M U K, Graves A R, et al. High-performance p-type bilayer WSe₂ field effect transistors by nitric oxide doping[J]. Nature Communications, 2025, 16: 5649. DOI: 10.1038/s41467-025-59684-4.",
       "doi": "10.1038/s41467-025-59684-4",
       "year": 2025,
       "journal": "Nature Communications",
       "usedBy": [
-        "p144",
-        "p251",
-        "p325"
+        "p143",
+        "p250",
+        "p324"
       ],
       "usageCount": 3
     },
     {
-      "number": 37,
+      "number": 33,
       "text": "Wu H, Ye Z, Tang J, et al. Drain voltage-controlled ambipolarity in a van der Waals InSe/WSe₂ transistor[J]. IEEE Electron Device Letters, 2026, 47(2): 391-394. DOI: 10.1109/LED.2025.3644866.",
       "doi": "10.1109/LED.2025.3644866",
       "year": 2025,
       "journal": "IEEE Electron Device Letters",
+      "usedBy": [
+        "p148"
+      ],
+      "usageCount": 1
+    },
+    {
+      "number": 34,
+      "text": "崔馨雨, 单俊杰, 孙肖瑜, 等. 一步退火工艺构建 WSe₂ 互补晶体管[J]. 物理学报, 2025, 74(17): 178501. DOI: 10.7498/aps.74.20250648.",
+      "doi": "10.7498/aps.74.20250648",
+      "year": 2025,
+      "journal": "物理学报",
       "usedBy": [
         "p149"
       ],
       "usageCount": 1
     },
     {
-      "number": 38,
-      "text": "崔馨雨, 单俊杰, 孙肖瑜, 等. 一步退火工艺构建 WSe₂ 互补晶体管[J]. 物理学报, 2025, 74(17): 178501. DOI: 10.7498/aps.74.20250648.",
-      "doi": "10.7498/aps.74.20250648",
-      "year": 2025,
-      "journal": "物理学报",
+      "number": 35,
+      "text": "Pan Y, Lin Y, Yang J, et al. Chip-scale complementary metal-oxide-semiconductor logic based on precise p- and n-type doping in two-dimensional semiconductors[J]. Nature Communications, 2024, 15: 8422. DOI: 10.1038/s41467-024-54050-2.",
+      "doi": "10.1038/s41467-024-54050-2",
+      "year": 2024,
+      "journal": "Nature Communications",
       "usedBy": [
         "p150"
       ],
       "usageCount": 1
     },
     {
-      "number": 39,
-      "text": "Pan Y, Lin Y, Yang J, et al. Chip-scale complementary metal-oxide-semiconductor logic based on precise p- and n-type doping in two-dimensional semiconductors[J]. Nature Communications, 2024, 15: 8422. DOI: 10.1038/s41467-024-54050-2.",
-      "doi": "10.1038/s41467-024-54050-2",
-      "year": 2024,
-      "journal": "Nature Communications",
-      "usedBy": [
-        "p151"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 40,
+      "number": 36,
       "text": "Wang H, Luo Z, Zheng B, et al. Medium-scale integrated circuits based on p-type 2D semiconducting MoTe₂[J]. Nature Communications, 2026, 17: 4320. DOI: 10.1038/s41467-026-70992-1.",
       "doi": "10.1038/s41467-026-70992-1",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p158",
-        "p244",
-        "p270",
-        "p300"
+        "p157",
+        "p243",
+        "p269",
+        "p299"
       ],
       "usageCount": 4
     },
     {
-      "number": 41,
+      "number": 37,
       "text": "Liu H, Neal A T, Ye P D. Channel length scaling of MoS₂ MOSFETs[J]. ACS Nano, 2012, 6(10): 8563-8569. DOI: 10.1021/nn303513c.",
       "doi": "10.1021/nn303513c",
       "year": 2012,
       "journal": "ACS Nano",
+      "usedBy": [
+        "p159"
+      ],
+      "usageCount": 1
+    },
+    {
+      "number": 38,
+      "text": "Lin T, Kang B, Jeon M, et al. Controlled layer-by-layer etching of MoS₂[J]. ACS Applied Materials & Interfaces, 2015, 7(29): 15892-15897. DOI: 10.1021/acsami.5b03491.",
+      "doi": "10.1021/acsami.5b03491",
+      "year": 2015,
+      "journal": "ACS Applied Materials & Interfaces",
       "usedBy": [
         "p160"
       ],
       "usageCount": 1
     },
     {
-      "number": 42,
-      "text": "Lin T, Kang B, Jeon M, et al. Controlled layer-by-layer etching of MoS₂[J]. ACS Applied Materials & Interfaces, 2015, 7(29): 15892-15897. DOI: 10.1021/acsami.5b03491.",
-      "doi": "10.1021/acsami.5b03491",
-      "year": 2015,
-      "journal": "ACS Applied Materials & Interfaces",
-      "usedBy": [
-        "p161"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 43,
+      "number": 39,
       "text": "Xiao S, Xiao P, Zhang X, et al. Atomic-layer soft plasma etching of MoS₂[J]. Scientific Reports, 2016, 6: 19945. DOI: 10.1038/srep19945.",
       "doi": "10.1038/srep19945",
       "year": 2016,
       "journal": "Scientific Reports",
       "usedBy": [
-        "p161"
+        "p160"
       ],
       "usageCount": 1
     },
     {
-      "number": 44,
+      "number": 40,
       "text": "Zhang X, Zhou L, Wang S, et al. Se-mediated dry transfer of wafer-scale 2D semiconductors for advanced electronics[J]. Nature Communications, 2025, 16: 4468. DOI: 10.1038/s41467-025-59803-1.",
       "doi": "10.1038/s41467-025-59803-1",
       "year": 2025,
       "journal": "Nature Communications",
       "usedBy": [
-        "p171"
+        "p170"
       ],
       "usageCount": 1
     },
     {
-      "number": 45,
+      "number": 41,
       "text": "Zhang X, Huang C, Li Z, et al. Reliable wafer-scale integration of two-dimensional materials and metal electrodes with van der Waals contacts[J]. Nature Communications, 2024, 15: 4619. DOI: 10.1038/s41467-024-49058-7.",
       "doi": "10.1038/s41467-024-49058-7",
       "year": 2024,
       "journal": "Nature Communications",
       "usedBy": [
-        "p172",
-        "p270"
+        "p171",
+        "p269"
       ],
       "usageCount": 2
     },
     {
-      "number": 46,
+      "number": 42,
       "text": "Guo Y, Zhang P, Liu Y, et al. A towards-foundry strategy for creating fully interconnected two-dimensional microprocessors[J]. Nature Electronics, 2026, 9: 159-169. DOI: 10.1038/s41928-026-01573-9.",
       "doi": "10.1038/s41928-026-01573-9",
       "year": 2026,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p173",
-        "p175",
-        "p190",
-        "p192",
-        "p197",
-        "p270",
-        "p300",
-        "p325"
+        "p172",
+        "p174",
+        "p189",
+        "p191",
+        "p196",
+        "p269",
+        "p299",
+        "p324"
       ],
       "usageCount": 8
     },
     {
-      "number": 47,
+      "number": 43,
       "text": "Li X, Lanza M. Building two-dimensional microprocessors with a foundry-inspired strategy[J]. Nature Electronics, 2026, 9: 123-124. DOI: 10.1038/s41928-026-01567-7.",
       "doi": "10.1038/s41928-026-01567-7",
       "year": 2026,
       "journal": "Nature Electronics",
       "usedBy": [
-        "p173",
-        "p175",
-        "p190",
-        "p192",
-        "p270",
-        "p300",
-        "p325"
+        "p172",
+        "p174",
+        "p189",
+        "p191",
+        "p269",
+        "p299",
+        "p324"
       ],
       "usageCount": 7
     },
     {
-      "number": 48,
+      "number": 44,
       "text": "Sakuma Y, Atsumi K, Hiroto T, et al. Self-aligned and self-limiting van der Waals epitaxy of monolayer MoS₂ for scalable 2D electronics[J]. Nature Communications, 2026, 17: 602. DOI: 10.1038/s41467-026-68320-8.",
       "doi": "10.1038/s41467-026-68320-8",
       "year": 2026,
       "journal": "Nature Communications",
+      "usedBy": [
+        "p179"
+      ],
+      "usageCount": 1
+    },
+    {
+      "number": 45,
+      "text": "郝玉龙, 彭奥林, 张世伟, 等. 化学气相沉积法精准制备二维异质结: 现状与展望[J]. 物理学报, 2025, 74(22): 228101. DOI: 10.7498/aps.74.20251305.",
+      "doi": "10.7498/aps.74.20251305",
+      "year": 2025,
+      "journal": "物理学报",
       "usedBy": [
         "p180"
       ],
       "usageCount": 1
     },
     {
-      "number": 49,
-      "text": "郝玉龙, 彭奥林, 张世伟, 等. 化学气相沉积法精准制备二维异质结: 现状与展望[J]. 物理学报, 2025, 74(22): 228101. DOI: 10.7498/aps.74.20251305.",
-      "doi": "10.7498/aps.74.20251305",
-      "year": 2025,
-      "journal": "物理学报",
-      "usedBy": [
-        "p181"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 50,
+      "number": 46,
       "text": "Ao M, Zhou X, Kong X, et al. A RISC-V 32-bit microprocessor based on two-dimensional semiconductors[J]. Nature, 2025, 640: 654-661. DOI: 10.1038/s41586-025-08759-9.",
       "doi": "10.1038/s41586-025-08759-9",
       "year": 2025,
       "journal": "Nature",
       "usedBy": [
-        "p188",
-        "p325"
+        "p187",
+        "p324"
       ],
       "usageCount": 2
     },
     {
-      "number": 51,
+      "number": 47,
       "text": "Ghosh S, Zheng Y, Rafiq M, et al. A complementary two-dimensional material-based one instruction set computer[J]. Nature, 2025, 642: 327-335. DOI: 10.1038/s41586-025-08963-7.",
       "doi": "10.1038/s41586-025-08963-7",
       "year": 2025,
       "journal": "Nature",
       "usedBy": [
-        "p189",
-        "p325"
+        "p188",
+        "p324"
       ],
       "usageCount": 2
     },
     {
-      "number": 52,
+      "number": 48,
       "text": "Wei X, Chen Z, Chen K, et al. Generic logic block based on bias-gated 2D MoS₂ transistors[J]. Nature Communications, 2026, 17: 3998. DOI: 10.1038/s41467-026-70712-9.",
       "doi": "10.1038/s41467-026-70712-9",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p191"
+        "p190"
       ],
       "usageCount": 1
     },
     {
-      "number": 53,
+      "number": 49,
       "text": "Jayachandran D, Grönland T A, Schmitz M, et al. A three-dimensional integrated circuit using silicon monolithic complementary FETs and transfer-printed 2D material FETs[J]. Nature, 2024, 625: 276-281. DOI: 10.1038/s41586-023-06860-5.",
       "doi": "10.1038/s41586-023-06860-5",
       "year": 2024,
       "journal": "Nature",
       "usedBy": [
-        "p202"
+        "p201"
       ],
       "usageCount": 1
     },
     {
-      "number": 54,
+      "number": 50,
       "text": "Lam B, Yu Y M, Nam H, et al. Monolithic three-dimensional integration of silicon transistors[J/OL]. Nature, 2026. DOI: 10.1038/s41586-026-10496-6.",
       "doi": "10.1038/s41586-026-10496-6",
       "year": 2026,
       "journal": "Nature",
       "usedBy": [
-        "p203",
-        "p205"
+        "p202",
+        "p204"
       ],
       "usageCount": 2,
       "localSource": {
@@ -7770,192 +7701,192 @@ window.PAPER_DATA = {
       }
     },
     {
-      "number": 55,
+      "number": 51,
       "text": "Zou T, Heo S, Reo Y, et al. Flexible monolithic 3D complementary circuits based on 2D semiconductor inks[J]. Nature Communications, 2025, 16: 11347. DOI: 10.1038/s41467-025-66419-y.",
       "doi": "10.1038/s41467-025-66419-y",
       "year": 2025,
       "journal": "Nature Communications",
       "usedBy": [
+        "p206",
         "p207",
-        "p208",
-        "p218",
-        "p224",
-        "p300",
-        "p325"
+        "p217",
+        "p223",
+        "p299",
+        "p324"
       ],
       "usageCount": 6
     },
     {
-      "number": 56,
+      "number": 52,
       "text": "Liu C, Jiang Y, Shen B, et al. A full-featured 2D flash chip enabled by system integration[J]. Nature, 2025, 646: 1081-1088. DOI: 10.1038/s41586-025-09621-8.",
       "doi": "10.1038/s41586-025-09621-8",
       "year": 2025,
       "journal": "Nature",
       "usedBy": [
-        "p209",
-        "p325"
+        "p208",
+        "p324"
       ],
       "usageCount": 2
     },
     {
-      "number": 57,
+      "number": 53,
       "text": "Chen C, Chen K, Zhao H, et al. Large-scale gate-all-around MoS₂ transistor array through lossless monolithic 3D integration[J]. National Science Review, 2026, 13(6): nwaf539. DOI: 10.1093/nsr/nwaf539.",
       "doi": "10.1093/nsr/nwaf539",
       "year": 2026,
       "journal": "National Science Review",
       "usedBy": [
-        "p70",
-        "p210",
-        "p325"
+        "p69",
+        "p209",
+        "p324"
       ],
       "usageCount": 3
     },
     {
-      "number": 58,
+      "number": 54,
       "text": "Xu H, Xu Z, Ren Q, et al. Two-dimensional materials for integrated sensing[J/OL]. Nature Materials, 2026. DOI: 10.1038/s41563-026-02551-4.",
       "doi": "10.1038/s41563-026-02551-4",
       "year": 2026,
       "journal": "Nature Materials",
       "usedBy": [
-        "p227",
-        "p236",
-        "p300"
+        "p226",
+        "p235",
+        "p299"
       ],
       "usageCount": 3
     },
     {
-      "number": 59,
+      "number": 55,
       "text": "闻雨, 韩素婷, 周晔. 二维材料与人工视觉系统的多维融合: 前沿突破与范式革新[J]. 物理学报, 2025, 74(17): 178502. DOI: 10.7498/aps.74.20250703.",
       "doi": "10.7498/aps.74.20250703",
       "year": 2025,
       "journal": "物理学报",
       "usedBy": [
-        "p228"
+        "p227"
       ],
       "usageCount": 1
     },
     {
-      "number": 60,
+      "number": 56,
       "text": "韩嘉悦, 王军. 二维材料光电探测器的双极性响应与应用[J]. 物理学报, 2026, 75(8): 080704. DOI: 10.7498/aps.75.20251589.",
       "doi": "10.7498/aps.75.20251589",
       "year": 2026,
       "journal": "物理学报",
       "usedBy": [
-        "p228"
+        "p227"
       ],
       "usageCount": 1
     },
     {
-      "number": 61,
+      "number": 57,
       "text": "石旗, 田茂鑫, 杨权, 等. 基于二维材料光电器件的传感器内计算与应用进展[J]. 物理学报, 2025, 74(22): 228501. DOI: 10.7498/aps.74.20251093.",
       "doi": "10.7498/aps.74.20251093",
       "year": 2025,
       "journal": "物理学报",
       "usedBy": [
-        "p228"
+        "p227"
       ],
       "usageCount": 1
     },
     {
-      "number": 62,
+      "number": 58,
       "text": "Hu J, Wu J, Luo Z, et al. Silicon Photonic Waveguide Polarizers Integrated With 2D MoS₂ Films[J]. IEEE Journal of Selected Topics in Quantum Electronics, 2026, 32(2): 6100111. DOI: 10.1109/JSTQE.2025.3610438.",
       "doi": "10.1109/JSTQE.2025.3610438",
       "year": 2025,
       "journal": "IEEE Journal of Selected Topics in Quantum Electronics",
+      "usedBy": [
+        "p230"
+      ],
+      "usageCount": 1
+    },
+    {
+      "number": 59,
+      "text": "Xu X, Chen Y, Shen J, et al. Wafer-scale integration of single-crystalline molybdenum disulfide for flexible electronics using oxide dry transfer[J]. Nature Electronics, 2026, 9(5): 497-506. DOI: 10.1038/s41928-026-01598-0.",
+      "doi": "10.1038/s41928-026-01598-0",
+      "year": 2026,
+      "journal": "Nature Electronics",
       "usedBy": [
         "p231"
       ],
       "usageCount": 1
     },
     {
-      "number": 63,
-      "text": "Xu X, Chen Y, Shen J, et al. Wafer-scale integration of single-crystalline molybdenum disulfide for flexible electronics using oxide dry transfer[J]. Nature Electronics, 2026, 9(5): 497-506. DOI: 10.1038/s41928-026-01598-0.",
-      "doi": "10.1038/s41928-026-01598-0",
-      "year": 2026,
-      "journal": "Nature Electronics",
-      "usedBy": [
-        "p232"
-      ],
-      "usageCount": 1
-    },
-    {
-      "number": 64,
+      "number": 60,
       "text": "Smithe K K H, English C D, Suryavanshi S V, et al. High-field transport and velocity saturation in synthetic monolayer MoS₂[J]. Nano Letters, 2018, 18: 4516-4522. DOI: 10.1021/acs.nanolett.8b01692.",
       "doi": "10.1021/acs.nanolett.8b01692",
       "year": 2018,
       "journal": "Nano Letters",
       "usedBy": [
-        "p276"
+        "p275"
       ],
       "usageCount": 1
     },
     {
-      "number": 65,
+      "number": 61,
       "text": "Cheng C K, Ho C T, Lee D, et al. Monolithic 3D Semiconductor Footprint Scaling Exploration Based on VFET Standard Cell Layout Methodology, Design Flow, and EDA Platform[J]. IEEE Access, 2022, 10: 65971-65981. DOI: 10.1109/ACCESS.2022.3184008.",
       "doi": "10.1109/ACCESS.2022.3184008",
       "year": 2022,
       "journal": "IEEE Access",
       "usedBy": [
-        "p287"
+        "p286"
       ],
       "usageCount": 1
     },
     {
-      "number": 66,
+      "number": 62,
       "text": "Chen J H, Pampori A, Tung C T, et al. A BSIM compact model of two-dimensional semiconductor field effect transistors[C]// 2025 IEEE Electron Devices Technology and Manufacturing Conference (EDTM). Piscataway: IEEE, 2025: 1-3. DOI: 10.1109/EDTM61175.2025.11040344.",
       "doi": "10.1109/EDTM61175.2025.11040344",
       "year": 2025,
       "journal": "2025 IEEE Electron Devices Technology and Manufacturing Conference (EDTM). Piscataway: IEEE",
       "usedBy": [
-        "p289"
+        "p288"
       ],
       "usageCount": 1
     },
     {
-      "number": 67,
+      "number": 63,
       "text": "Lee D, Jang J, Han J, et al. Physics-based compact model for 2D TMD FETs with full-range validation from single device to circuit[J]. Nanoscale Horizons, 2026, 11: 289-298. DOI: 10.1039/D5NH00341E.",
       "doi": "10.1039/D5NH00341E",
       "year": 2026,
       "journal": "Nanoscale Horizons",
       "usedBy": [
-        "p289"
+        "p288"
       ],
       "usageCount": 1
     },
     {
-      "number": 68,
+      "number": 64,
       "text": "Schram T, Smets Q, Opdebeeck A, et al. Integration and electrical evaluation of WS₂ and MoS₂ FETs in a 300 mm pilot line[J]. Discover Electronics, 2026, 3: 15. DOI: 10.1007/s44291-026-00164-4.",
       "doi": "10.1007/s44291-026-00164-4",
       "year": 2026,
       "journal": "Discover Electronics",
       "usedBy": [
+        "p289",
         "p290",
-        "p291",
-        "p325"
+        "p324"
       ],
       "usageCount": 3
     },
     {
-      "number": 69,
+      "number": 65,
       "text": "Islam M M, Cho Y, Sen A, et al. Challenges and prospects of 2D electronics for future monolithic complementary field-effect transistors[J]. Nature Communications, 2026, 17: 3586. DOI: 10.1038/s41467-026-71986-9.",
       "doi": "10.1038/s41467-026-71986-9",
       "year": 2026,
       "journal": "Nature Communications",
       "usedBy": [
-        "p295",
-        "p311",
-        "p315"
+        "p294",
+        "p310",
+        "p314"
       ],
       "usageCount": 3
     },
     {
-      "number": 70,
+      "number": 66,
       "text": "杨高琛, 马辰龙, 徐浪浪, 等. 基于二维材料的集成与应用[J]. 物理学报, 2026, 75(1): 010810. DOI: 10.7498/aps.75.20251386.",
       "doi": "10.7498/aps.75.20251386",
       "year": 2026,
       "journal": "物理学报",
       "usedBy": [
-        "p312"
+        "p311"
       ],
       "usageCount": 1
     }
@@ -7986,7 +7917,7 @@ window.PAPER_DATA = {
           {
             "id": "s5",
             "label": "1.4 二维半导体在后摩尔路线中的位置",
-            "citationCount": 5
+            "citationCount": 1
           }
         ]
       },
@@ -8160,85 +8091,85 @@ window.PAPER_DATA = {
       ],
       "itemIds": [
         "p7",
-        "p39",
-        "p57",
-        "p71",
-        "p75",
+        "p38",
+        "p56",
+        "p70",
+        "p74",
+        "p77",
         "p78",
         "p79",
-        "p80",
-        "p82",
-        "p85",
-        "p90",
-        "p103",
-        "p116",
-        "p136",
+        "p81",
+        "p84",
+        "p89",
+        "p102",
+        "p115",
+        "p135",
+        "p164",
         "p165",
-        "p166",
-        "p172",
-        "p176",
-        "p187",
-        "p190",
-        "p192",
-        "p203",
-        "p209",
-        "p213",
-        "p241",
-        "p246",
+        "p171",
+        "p175",
+        "p186",
+        "p189",
+        "p191",
+        "p202",
+        "p208",
+        "p212",
+        "p240",
+        "p245",
+        "p250",
         "p251",
-        "p252",
-        "p268",
+        "p267",
+        "p269",
         "p270",
         "p271",
-        "p272",
-        "p274",
-        "p277",
-        "p283",
-        "p285",
-        "p288",
+        "p273",
+        "p276",
+        "p282",
+        "p284",
+        "p287",
+        "p290",
         "p291",
         "p292",
-        "p293",
+        "p302",
         "p303",
-        "p304",
-        "p306",
-        "p309",
-        "p317",
-        "p325"
+        "p305",
+        "p308",
+        "p316",
+        "p324"
       ],
       "paragraphCount": 46,
       "citationNumbers": [
+        8,
+        9,
         12,
         13,
-        16,
         17,
-        21,
+        23,
         27,
-        31,
-        33,
+        29,
+        32,
         36,
-        40,
-        45,
+        41,
+        42,
+        43,
         46,
         47,
         50,
         51,
-        54,
-        55,
-        56,
-        57,
-        68
+        52,
+        53,
+        64
       ],
       "referenceCount": 20,
       "topReferences": [
-        46,
+        42,
+        9,
         13,
-        17,
-        47,
+        43,
+        8,
         12,
-        16,
-        55,
-        31
+        51,
+        27
       ]
     },
     {
@@ -8266,22 +8197,22 @@ window.PAPER_DATA = {
         "p25",
         "p30",
         "p36",
-        "p37",
-        "p45",
-        "p47",
-        "p49",
+        "p44",
+        "p46",
+        "p48",
+        "p56",
         "p57",
-        "p58",
-        "p60",
-        "p62",
+        "p59",
+        "p61",
+        "p67",
         "p68",
         "p69",
         "p70",
-        "p71",
-        "p77",
-        "p79",
-        "p85",
-        "p90",
+        "p76",
+        "p78",
+        "p84",
+        "p89",
+        "p93",
         "p94",
         "p95",
         "p96",
@@ -8290,53 +8221,52 @@ window.PAPER_DATA = {
         "p99",
         "p100",
         "p101",
-        "p102",
+        "p106",
         "p107",
-        "p108",
-        "p110",
-        "p112",
-        "p118",
+        "p109",
+        "p111",
+        "p117",
+        "p124",
         "p125",
         "p126",
-        "p127",
+        "p128",
         "p129",
-        "p130",
-        "p133",
-        "p135",
+        "p132",
+        "p134",
+        "p136",
         "p137",
-        "p138",
-        "p141",
-        "p144",
-        "p184",
+        "p140",
+        "p143",
+        "p183",
+        "p185",
         "p186",
-        "p187",
-        "p194",
-        "p210",
-        "p224",
-        "p232",
-        "p239",
+        "p193",
+        "p209",
+        "p223",
+        "p231",
+        "p238",
+        "p242",
         "p243",
         "p244",
         "p245",
-        "p246",
-        "p249",
+        "p248",
+        "p250",
         "p251",
         "p252",
-        "p253",
-        "p255",
-        "p262",
-        "p278",
-        "p289",
+        "p254",
+        "p261",
+        "p277",
+        "p288",
+        "p298",
         "p299",
         "p300",
-        "p301",
-        "p306",
-        "p309",
-        "p317",
-        "p320",
-        "p325"
+        "p305",
+        "p308",
+        "p316",
+        "p319",
+        "p324"
       ],
-      "paragraphCount": 79,
+      "paragraphCount": 78,
       "citationNumbers": [
         1,
         2,
@@ -8347,49 +8277,45 @@ window.PAPER_DATA = {
         7,
         8,
         9,
-        10,
         11,
         12,
         13,
+        14,
         15,
-        16,
-        17,
         18,
         19,
-        22,
-        23,
-        24,
-        29,
+        20,
+        25,
+        26,
+        27,
+        28,
         30,
         31,
         32,
-        34,
-        35,
         36,
-        40,
+        42,
+        43,
         46,
         47,
-        50,
         51,
-        55,
-        56,
-        57,
-        58,
+        52,
+        53,
+        54,
+        59,
+        62,
         63,
-        66,
-        67,
-        68
+        64
       ],
-      "referenceCount": 41,
+      "referenceCount": 37,
       "topReferences": [
-        46,
-        8,
-        13,
-        17,
-        47,
+        42,
+        4,
         9,
-        12,
-        16
+        13,
+        43,
+        5,
+        8,
+        12
       ]
     },
     {
@@ -8411,26 +8337,26 @@ window.PAPER_DATA = {
         "p6",
         "p7",
         "p13",
-        "p36",
-        "p39",
-        "p47",
+        "p38",
+        "p46",
+        "p56",
         "p57",
-        "p58",
-        "p65",
-        "p68",
+        "p64",
+        "p67",
+        "p69",
         "p70",
         "p71",
-        "p72",
-        "p74",
+        "p73",
+        "p78",
         "p79",
         "p80",
-        "p81",
-        "p90",
+        "p89",
+        "p91",
         "p92",
-        "p93",
-        "p97",
-        "p101",
-        "p107",
+        "p96",
+        "p100",
+        "p106",
+        "p108",
         "p109",
         "p110",
         "p111",
@@ -8442,35 +8368,34 @@ window.PAPER_DATA = {
         "p117",
         "p118",
         "p119",
-        "p120",
-        "p123",
-        "p127",
-        "p144",
-        "p153",
-        "p155",
-        "p160",
-        "p187",
+        "p122",
+        "p126",
+        "p143",
+        "p152",
+        "p154",
+        "p159",
+        "p186",
+        "p242",
         "p243",
-        "p244",
-        "p246",
+        "p245",
+        "p251",
         "p252",
-        "p253",
-        "p255",
-        "p271",
-        "p293",
-        "p304",
-        "p306",
-        "p309",
-        "p325",
-        "p327"
+        "p254",
+        "p270",
+        "p292",
+        "p303",
+        "p305",
+        "p308",
+        "p324",
+        "p326"
       ],
-      "paragraphCount": 56,
+      "paragraphCount": 55,
       "citationNumbers": [
         1,
-        2,
-        3,
-        4,
-        5,
+        7,
+        8,
+        9,
+        10,
         11,
         12,
         13,
@@ -8489,32 +8414,28 @@ window.PAPER_DATA = {
         26,
         27,
         28,
-        29,
-        30,
-        31,
         32,
         36,
-        40,
-        41,
+        37,
+        42,
+        43,
         46,
         47,
-        50,
         51,
-        55,
-        56,
-        57,
-        68
+        52,
+        53,
+        64
       ],
-      "referenceCount": 38,
+      "referenceCount": 34,
       "topReferences": [
-        46,
+        42,
+        9,
         13,
-        17,
-        47,
+        43,
+        8,
         12,
-        16,
-        55,
-        11
+        51,
+        7
       ]
     },
     {
@@ -8534,74 +8455,78 @@ window.PAPER_DATA = {
       "itemIds": [
         "p6",
         "p9",
-        "p39",
-        "p45",
-        "p51",
-        "p57",
-        "p59",
-        "p69",
-        "p75",
+        "p38",
+        "p44",
+        "p50",
+        "p56",
+        "p58",
+        "p68",
+        "p74",
+        "p79",
         "p80",
-        "p81",
+        "p89",
         "p90",
         "p91",
         "p92",
-        "p93",
-        "p97",
-        "p99",
+        "p96",
+        "p98",
+        "p100",
         "p101",
-        "p102",
-        "p119",
+        "p118",
+        "p123",
         "p124",
         "p125",
-        "p126",
+        "p127",
         "p128",
         "p129",
         "p130",
-        "p131",
+        "p132",
         "p133",
         "p134",
-        "p135",
+        "p136",
         "p137",
         "p138",
         "p139",
         "p140",
-        "p141",
-        "p155",
-        "p174",
+        "p154",
+        "p173",
+        "p185",
         "p186",
-        "p187",
-        "p213",
-        "p241",
-        "p243",
+        "p212",
+        "p240",
+        "p242",
+        "p244",
         "p245",
-        "p246",
-        "p249",
+        "p248",
+        "p257",
         "p258",
-        "p259",
-        "p262",
-        "p264",
-        "p266",
-        "p268",
-        "p272",
-        "p274",
+        "p261",
+        "p263",
+        "p265",
+        "p267",
+        "p271",
+        "p273",
+        "p275",
         "p276",
-        "p277",
+        "p279",
         "p280",
-        "p281",
-        "p283",
+        "p282",
+        "p289",
         "p290",
-        "p291",
-        "p299",
-        "p303",
-        "p309",
-        "p320"
+        "p298",
+        "p302",
+        "p308",
+        "p319"
       ],
       "paragraphCount": 64,
       "citationNumbers": [
+        1,
+        4,
         5,
+        7,
         8,
         9,
+        10,
         11,
         12,
         13,
@@ -8616,26 +8541,22 @@ window.PAPER_DATA = {
         22,
         23,
         24,
-        25,
         26,
-        27,
-        28,
         30,
-        34,
-        35,
-        64,
-        68
+        31,
+        60,
+        64
       ],
       "referenceCount": 26,
       "topReferences": [
-        8,
-        13,
-        17,
+        4,
         9,
+        13,
+        5,
+        8,
         12,
-        16,
-        11,
-        5
+        7,
+        1
       ]
     },
     {
@@ -8664,50 +8585,50 @@ window.PAPER_DATA = {
         "p31",
         "p35",
         "p36",
-        "p37",
-        "p39",
-        "p43",
-        "p45",
-        "p50",
-        "p52",
-        "p55",
-        "p59",
+        "p38",
+        "p42",
+        "p44",
+        "p49",
+        "p51",
+        "p54",
+        "p58",
+        "p63",
         "p64",
-        "p65",
+        "p68",
         "p69",
         "p70",
         "p71",
-        "p72",
+        "p73",
         "p74",
         "p75",
-        "p76",
+        "p79",
         "p80",
-        "p81",
+        "p83",
         "p84",
-        "p85",
-        "p87",
+        "p86",
+        "p89",
         "p90",
         "p91",
         "p92",
-        "p93",
-        "p103",
-        "p112",
-        "p116",
-        "p118",
-        "p120",
-        "p123",
-        "p126",
+        "p102",
+        "p111",
+        "p115",
+        "p117",
+        "p119",
+        "p122",
+        "p125",
+        "p129",
         "p130",
-        "p131",
+        "p132",
         "p133",
         "p134",
         "p135",
         "p136",
-        "p137",
+        "p141",
         "p142",
         "p143",
         "p144",
-        "p145",
+        "p146",
         "p147",
         "p148",
         "p149",
@@ -8719,25 +8640,25 @@ window.PAPER_DATA = {
         "p155",
         "p156",
         "p157",
-        "p158",
-        "p166",
-        "p176",
-        "p187",
-        "p189",
-        "p191",
+        "p165",
+        "p175",
+        "p186",
+        "p188",
+        "p190",
+        "p199",
         "p200",
         "p201",
-        "p202",
+        "p205",
         "p206",
         "p207",
         "p208",
         "p209",
-        "p210",
-        "p218",
-        "p222",
-        "p224",
-        "p226",
-        "p239",
+        "p217",
+        "p221",
+        "p223",
+        "p225",
+        "p238",
+        "p240",
         "p241",
         "p242",
         "p243",
@@ -8750,37 +8671,36 @@ window.PAPER_DATA = {
         "p250",
         "p251",
         "p252",
-        "p253",
+        "p254",
         "p255",
-        "p256",
-        "p262",
-        "p268",
-        "p270",
+        "p261",
+        "p267",
+        "p269",
+        "p283",
         "p284",
-        "p285",
-        "p293",
-        "p295",
+        "p292",
+        "p294",
+        "p298",
         "p299",
         "p300",
-        "p301",
+        "p302",
         "p303",
         "p304",
-        "p305",
-        "p307",
-        "p309",
-        "p317",
-        "p320",
-        "p325"
+        "p306",
+        "p308",
+        "p316",
+        "p319",
+        "p324"
       ],
-      "paragraphCount": 117,
+      "paragraphCount": 116,
       "citationNumbers": [
         1,
-        2,
-        3,
         4,
         5,
+        7,
         8,
         9,
+        10,
         11,
         12,
         13,
@@ -8798,42 +8718,38 @@ window.PAPER_DATA = {
         25,
         26,
         27,
-        28,
         29,
         30,
         31,
+        32,
         33,
         34,
         35,
         36,
-        37,
-        38,
-        39,
-        40,
-        45,
+        41,
+        42,
+        43,
         46,
         47,
-        50,
+        48,
+        49,
         51,
         52,
         53,
-        55,
-        56,
-        57,
-        58,
-        68,
-        69
+        54,
+        64,
+        65
       ],
-      "referenceCount": 49,
+      "referenceCount": 45,
       "topReferences": [
-        46,
-        8,
-        13,
-        17,
-        47,
+        42,
+        4,
         9,
-        12,
-        16
+        13,
+        43,
+        5,
+        8,
+        12
       ]
     },
     {
@@ -8862,40 +8778,41 @@ window.PAPER_DATA = {
         "p19",
         "p20",
         "p23",
-        "p37",
-        "p39",
-        "p45",
+        "p36",
+        "p38",
+        "p44",
+        "p50",
         "p51",
-        "p52",
+        "p53",
         "p54",
-        "p55",
-        "p60",
-        "p63",
+        "p59",
+        "p62",
+        "p64",
         "p65",
-        "p66",
-        "p69",
+        "p68",
+        "p74",
         "p75",
         "p76",
-        "p77",
-        "p80",
-        "p82",
+        "p79",
+        "p81",
+        "p83",
         "p84",
-        "p85",
+        "p86",
         "p87",
-        "p88",
+        "p89",
         "p90",
-        "p91",
-        "p103",
-        "p105",
-        "p108",
+        "p102",
+        "p104",
+        "p107",
+        "p118",
         "p119",
-        "p120",
-        "p130",
-        "p136",
+        "p129",
+        "p135",
+        "p138",
         "p139",
-        "p140",
-        "p148",
-        "p151",
+        "p147",
+        "p150",
+        "p158",
         "p159",
         "p160",
         "p161",
@@ -8906,77 +8823,80 @@ window.PAPER_DATA = {
         "p166",
         "p167",
         "p168",
-        "p169",
+        "p170",
         "p171",
         "p172",
         "p173",
-        "p174",
+        "p175",
         "p176",
         "p177",
         "p178",
         "p179",
         "p180",
         "p181",
-        "p182",
-        "p190",
-        "p194",
-        "p197",
+        "p189",
+        "p193",
+        "p196",
+        "p204",
         "p205",
-        "p206",
-        "p211",
-        "p213",
-        "p216",
-        "p219",
-        "p224",
-        "p226",
+        "p210",
+        "p212",
+        "p215",
+        "p218",
+        "p223",
+        "p225",
+        "p231",
         "p232",
-        "p233",
-        "p239",
-        "p241",
+        "p238",
+        "p240",
+        "p257",
         "p258",
-        "p259",
+        "p260",
         "p261",
         "p262",
-        "p263",
+        "p266",
         "p267",
         "p268",
         "p269",
-        "p270",
-        "p274",
-        "p285",
+        "p273",
+        "p284",
+        "p290",
         "p291",
-        "p292",
-        "p296",
-        "p299",
-        "p301",
-        "p303",
+        "p295",
+        "p298",
+        "p300",
+        "p302",
+        "p305",
         "p306",
-        "p307",
-        "p313",
-        "p315",
-        "p317",
-        "p319",
-        "p325"
+        "p312",
+        "p314",
+        "p316",
+        "p318",
+        "p324"
       ],
       "paragraphCount": 103,
       "citationNumbers": [
-        6,
-        7,
+        2,
+        3,
+        4,
+        5,
         8,
         9,
         12,
         13,
-        16,
+        14,
+        15,
         17,
-        18,
-        19,
-        21,
-        24,
-        26,
-        31,
-        33,
-        34,
+        20,
+        22,
+        27,
+        29,
+        30,
+        32,
+        35,
         36,
+        37,
+        38,
         39,
         40,
         41,
@@ -8986,28 +8906,24 @@ window.PAPER_DATA = {
         45,
         46,
         47,
-        48,
-        49,
         50,
         51,
-        54,
-        55,
-        56,
-        57,
-        63,
-        68,
-        69
+        52,
+        53,
+        59,
+        64,
+        65
       ],
       "referenceCount": 37,
       "topReferences": [
-        46,
-        8,
-        13,
-        17,
-        47,
+        42,
+        4,
         9,
-        12,
-        16
+        13,
+        43,
+        5,
+        8,
+        12
       ]
     },
     {
@@ -9030,32 +8946,32 @@ window.PAPER_DATA = {
         "p19",
         "p24",
         "p29",
-        "p36",
-        "p38",
-        "p42",
-        "p59",
-        "p66",
+        "p37",
+        "p41",
+        "p58",
+        "p65",
+        "p75",
         "p76",
-        "p77",
-        "p80",
-        "p82",
+        "p79",
+        "p81",
+        "p83",
         "p84",
-        "p85",
-        "p87",
-        "p90",
-        "p117",
-        "p120",
+        "p86",
+        "p89",
+        "p116",
+        "p119",
+        "p133",
         "p134",
-        "p135",
-        "p150",
-        "p153",
-        "p156",
-        "p158",
-        "p169",
+        "p149",
+        "p152",
+        "p155",
+        "p157",
+        "p168",
+        "p173",
         "p174",
         "p175",
         "p176",
-        "p177",
+        "p187",
         "p188",
         "p189",
         "p190",
@@ -9063,91 +8979,86 @@ window.PAPER_DATA = {
         "p192",
         "p193",
         "p194",
-        "p195",
+        "p196",
         "p197",
-        "p198",
+        "p199",
         "p200",
         "p201",
-        "p202",
+        "p205",
         "p206",
         "p207",
         "p208",
-        "p209",
+        "p210",
         "p211",
         "p212",
-        "p213",
-        "p218",
-        "p221",
-        "p224",
-        "p237",
-        "p239",
-        "p244",
-        "p246",
+        "p217",
+        "p220",
+        "p223",
+        "p236",
+        "p238",
+        "p243",
+        "p245",
+        "p249",
         "p250",
-        "p251",
-        "p256",
+        "p255",
+        "p268",
         "p269",
-        "p270",
-        "p280",
+        "p279",
+        "p284",
         "p285",
         "p286",
         "p287",
         "p288",
-        "p289",
-        "p296",
-        "p300",
-        "p303",
-        "p305",
-        "p312",
-        "p317",
-        "p320",
-        "p325"
+        "p295",
+        "p299",
+        "p302",
+        "p304",
+        "p311",
+        "p316",
+        "p319",
+        "p324"
       ],
-      "paragraphCount": 78,
+      "paragraphCount": 77,
       "citationNumbers": [
-        1,
-        2,
-        3,
         4,
         8,
+        9,
         12,
         13,
         16,
-        17,
         20,
         24,
-        28,
-        30,
+        26,
+        32,
+        34,
         36,
-        38,
-        40,
-        45,
+        41,
+        42,
+        43,
         46,
         47,
-        50,
+        48,
+        49,
         51,
         52,
         53,
-        55,
-        56,
-        57,
-        58,
-        65,
-        66,
-        67,
-        68,
-        70
+        54,
+        61,
+        62,
+        63,
+        64,
+        66
       ],
-      "referenceCount": 32,
+      "referenceCount": 28,
       "topReferences": [
-        46,
-        8,
+        42,
+        4,
+        9,
         13,
-        17,
-        47,
+        43,
+        8,
         12,
-        16,
-        55
+        51
       ]
     },
     {
@@ -9171,96 +9082,91 @@ window.PAPER_DATA = {
         "p24",
         "p30",
         "p36",
-        "p37",
-        "p40",
+        "p39",
+        "p41",
         "p42",
-        "p43",
-        "p45",
-        "p59",
-        "p63",
+        "p44",
+        "p58",
+        "p62",
+        "p64",
         "p65",
-        "p66",
-        "p75",
-        "p77",
-        "p84",
-        "p87",
-        "p168",
+        "p74",
+        "p76",
+        "p83",
+        "p86",
+        "p167",
+        "p176",
         "p177",
-        "p178",
-        "p184",
+        "p183",
+        "p198",
         "p199",
         "p200",
         "p201",
         "p202",
-        "p203",
+        "p204",
         "p205",
         "p206",
         "p207",
         "p208",
-        "p209",
+        "p210",
         "p211",
         "p212",
         "p213",
-        "p214",
-        "p218",
-        "p222",
-        "p224",
-        "p228",
-        "p239",
-        "p295",
-        "p300",
+        "p217",
+        "p221",
+        "p223",
+        "p227",
+        "p238",
+        "p294",
+        "p299",
+        "p302",
         "p303",
         "p304",
-        "p305",
-        "p311",
-        "p313",
-        "p315",
-        "p317",
-        "p325"
+        "p310",
+        "p312",
+        "p314",
+        "p316",
+        "p324"
       ],
-      "paragraphCount": 52,
+      "paragraphCount": 51,
       "citationNumbers": [
-        1,
         2,
         3,
         4,
-        6,
-        7,
         8,
+        9,
         12,
         13,
-        16,
-        17,
-        24,
-        30,
+        20,
+        26,
+        32,
         36,
-        40,
+        42,
+        43,
         46,
         47,
+        49,
         50,
         51,
+        52,
         53,
         54,
         55,
         56,
         57,
-        58,
-        59,
-        60,
-        61,
-        68,
-        69
+        64,
+        65
       ],
-      "referenceCount": 30,
+      "referenceCount": 26,
       "topReferences": [
-        46,
-        8,
+        42,
+        4,
+        9,
         13,
-        17,
-        47,
+        43,
+        8,
         12,
-        16,
-        55
+        51
       ]
     },
     {
@@ -9279,67 +9185,62 @@ window.PAPER_DATA = {
       ],
       "itemIds": [
         "p35",
-        "p36",
-        "p55",
+        "p54",
+        "p62",
         "p63",
-        "p64",
-        "p184",
-        "p201",
-        "p209",
-        "p211",
+        "p183",
+        "p200",
+        "p208",
+        "p210",
+        "p217",
         "p218",
-        "p219",
+        "p224",
         "p225",
         "p226",
         "p227",
         "p228",
         "p229",
-        "p230",
-        "p232",
-        "p234",
-        "p236",
-        "p239",
-        "p300",
-        "p325"
+        "p231",
+        "p233",
+        "p235",
+        "p238",
+        "p299",
+        "p324"
       ],
-      "paragraphCount": 23,
+      "paragraphCount": 22,
       "citationNumbers": [
-        1,
-        2,
-        3,
-        4,
+        8,
+        9,
         12,
         13,
-        16,
-        17,
-        24,
-        30,
+        20,
+        26,
+        32,
         36,
-        40,
+        42,
+        43,
         46,
         47,
-        50,
         51,
+        52,
+        53,
+        54,
         55,
         56,
         57,
-        58,
         59,
-        60,
-        61,
-        63,
-        68
+        64
       ],
-      "referenceCount": 25,
+      "referenceCount": 21,
       "topReferences": [
-        46,
+        42,
+        9,
         13,
-        17,
-        47,
+        43,
+        8,
         12,
-        16,
-        55,
-        24
+        51,
+        20
       ]
     }
   ]
